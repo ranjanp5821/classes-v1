@@ -24,7 +24,7 @@ function scrollToSection(href, offset = 64) {
   }
 }
 
-export default function Navbar() {
+export default function Navbar({ onOpenAuth }) {
   const [menuOpen, setMenuOpen]   = useState(false);
   const [scrolled, setScrolled]   = useState(false);
   const [activeSection, setActiveSection] = useState(null);
@@ -93,7 +93,22 @@ export default function Navbar() {
       e.preventDefault();
       scrollToSection(firstSectionHref);
       setMenuOpen(false);
+      return;
     }
+    // No role selected yet → open the sign-up role picker.
+    openAuth("signup")(e);
+  };
+
+  /* ── auth modal: open + role pick ──────────────────────────── */
+  const openAuth = (mode) => (e) => {
+    e.preventDefault();
+    // Align the popup's right edge to the clicked button's right edge.
+    const rect = e.currentTarget.getBoundingClientRect();
+    onOpenAuth?.(mode, {
+      right: window.innerWidth - rect.right,
+      top: rect.bottom + 8,
+    });
+    setMenuOpen(false);
   };
 
   /* ── logo click: reset to the default Navbar + Hero ────────── */
@@ -164,6 +179,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           <a
             href="#"
+            onClick={openAuth("signin")}
             className="px-4 py-2 text-[14.5px] font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 rounded-lg transition-all duration-150"
           >
             {secondaryCta}
@@ -229,6 +245,7 @@ export default function Navbar() {
             <div className="mt-3 flex flex-col gap-2">
               <a
                 href="#"
+                onClick={openAuth("signin")}
                 className="py-2.5 px-3 text-[15px] font-medium text-neutral-700 border border-neutral-200 rounded-lg text-center hover:bg-neutral-50 transition-colors"
               >
                 {secondaryCta}

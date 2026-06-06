@@ -1,14 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import AuthModal from "../components/AuthModal";
 import InstitutePage from "./InstitutePage";
 import StudentPage from "./StudentPage";
 import TeacherPage from "./TeacherPage";
 import { useRole } from "../hooks/useRole";
 
 export default function LandingPage() {
-  const { activeRoleId } = useRole();
+  const { activeRoleId, selectRole } = useRole();
   const roleSectionRef = useRef(null);
+
+  // Auth popup ({ mode, pos }) lives here so the page content behind it
+  // (navbar + hero + sections) can be blurred while the popup stays sharp.
+  const [authModal, setAuthModal] = useState(null);
 
   // The Hero stays the same for every role. Only the Navbar (driven by
   // RoleContext) and the role-specific sections below the Hero change.
@@ -41,15 +46,38 @@ export default function LandingPage() {
 
   // Only lock scroll on the role-selection screen (no role picked yet)
   const lockScroll = !activeRoleId;
+  const authOpen = authModal !== null;
+
+  const handleAuthRoleSelect = (roleId) => {
+    selectRole(roleId);
+    setAuthModal(null);
+  };
 
   return (
     <div
       className="bg-white min-h-screen"
       style={lockScroll ? { height: "100vh", overflow: "hidden" } : {}}
     >
-      <Navbar />
-      <Hero />
-      <div ref={roleSectionRef}>{renderRoleSections()}</div>
+      {/* Page content — blurred while the auth popup is open */}
+      <div
+        className="transition-[filter] duration-200"
+        style={authOpen ? { filter: "blur(4px)" } : undefined}
+        aria-hidden={authOpen}
+      >
+        <Navbar onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />
+        <Hero />
+        <div ref={roleSectionRef}>{renderRoleSections()}</div>
+      </div>
+
+      {/* Sign In / Sign Up role picker — stays sharp above the blurred page */}
+      <AuthModal
+        open={authOpen}
+        mode={authModal?.mode ?? "signin"}
+        position={authModal?.pos ?? null}
+        initialRoleId={activeRoleId}
+        onClose={() => setAuthModal(null)}
+        onSelectRole={handleAuthRoleSelect}
+      />
     </div>
   );
 }
