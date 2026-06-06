@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Local secrets — keep the Anam API key out of version control
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
