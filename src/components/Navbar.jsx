@@ -6,8 +6,8 @@ import { useRole } from "../hooks/useRole";
 const DEFAULT_LINKS = [
   { label: "Products", href: "#" },
   { label: "Features", href: "#" },
-  { label: "About",    href: "#" },
-  { label: "Contact",  href: "#" },
+  { label: "About", href: "#" },
+  { label: "Contact", href: "#" },
 ];
 
 /**
@@ -25,8 +25,8 @@ function scrollToSection(href, offset = 64) {
 }
 
 export default function Navbar({ onOpenAuth }) {
-  const [menuOpen, setMenuOpen]   = useState(false);
-  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
 
   const { activeRoleConfig, clearRole } = useRole();
@@ -41,7 +41,7 @@ export default function Navbar({ onOpenAuth }) {
   }, []);
 
   /* ── scroll-spy: track which section is in view ────────────── */
-  const links      = activeRoleConfig?.navbar?.links ?? DEFAULT_LINKS;
+  const links = activeRoleConfig?.navbar?.links ?? DEFAULT_LINKS;
 
   useEffect(() => {
     if (!hasRoleNav) { setActiveSection(null); return; }
@@ -50,7 +50,7 @@ export default function Navbar({ onOpenAuth }) {
       .map((l) => l.href)
       .filter((h) => h && h !== "#")
       .map((h) => h.replace("#", ""));
-    const observers  = [];
+    const observers = [];
 
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
@@ -67,10 +67,10 @@ export default function Navbar({ onOpenAuth }) {
     return () => observers.forEach((o) => o.disconnect());
   }, [hasRoleNav, links]);
 
-  const primaryCta = activeRoleConfig?.navbar?.primaryCta  ?? "Sign Up";
+  const primaryCta = activeRoleConfig?.navbar?.primaryCta ?? "Sign Up";
   const secondaryCta = activeRoleConfig?.navbar?.secondaryCta ?? "Sign In";
-  const accent     = activeRoleConfig?.accent;
-  const gradient   = activeRoleConfig?.accentGradient;
+  const accent = activeRoleConfig?.accent;
+  const gradient = activeRoleConfig?.accentGradient;
 
   /* ── which label matches activeSection ─────────────────────── */
   const activeLinkLabel = hasRoleNav
@@ -123,9 +123,8 @@ export default function Navbar({ onOpenAuth }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "shadow-sm" : ""
-      } bg-white/95 backdrop-blur-sm border-b border-neutral-100`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "shadow-sm" : ""
+        } bg-white/95 backdrop-blur-sm border-b border-neutral-100`}
     >
       <nav className="max-w-5xl mx-auto px-8 h-16 flex items-center justify-between">
 
@@ -139,7 +138,7 @@ export default function Navbar({ onOpenAuth }) {
           <img
             src="/assets/classess_logo.png"
             alt="Classess logo"
-            className="h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            className="h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
           />
         </a>
 
@@ -152,11 +151,10 @@ export default function Navbar({ onOpenAuth }) {
                 <a
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className={`relative px-4 py-2 text-[14.5px] font-semibold rounded-md transition-all duration-150 block ${
-                    isActive
+                  className={`relative px-4 py-2 text-[14.5px] font-semibold rounded-md transition-all duration-150 block ${isActive
                       ? "bg-neutral-50"
                       : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-50"
-                  }`}
+                    }`}
                   style={isActive && accent ? { color: accent } : {}}
                 >
                   {link.label}
@@ -187,11 +185,10 @@ export default function Navbar({ onOpenAuth }) {
           <a
             href={hasRoleNav ? firstSectionHref : "#"}
             onClick={handleCtaClick}
-            className={`px-4 py-2 text-[14.5px] font-semibold rounded-lg transition-all duration-150 shadow-sm ${
-              activeRoleConfig
+            className={`px-4 py-2 text-[14.5px] font-semibold rounded-lg transition-all duration-150 shadow-sm ${activeRoleConfig
                 ? "text-white hover:opacity-90 active:scale-95"
                 : "bg-neutral-900 text-white hover:bg-neutral-800 active:bg-neutral-950"
-            }`}
+              }`}
             style={gradient ? { background: gradient } : {}}
           >
             {primaryCta}
@@ -230,11 +227,10 @@ export default function Navbar({ onOpenAuth }) {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className={`py-2.5 px-3 text-[15px] font-semibold rounded-lg transition-colors ${
-                    isActive
+                  className={`py-2.5 px-3 text-[15px] font-semibold rounded-lg transition-colors ${isActive
                       ? "bg-neutral-50"
                       : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
-                  }`}
+                    }`}
                   style={isActive && accent ? { color: accent } : {}}
                 >
                   {link.label}
@@ -253,11 +249,10 @@ export default function Navbar({ onOpenAuth }) {
               <a
                 href={hasRoleNav ? firstSectionHref : "#"}
                 onClick={handleCtaClick}
-                className={`py-2.5 px-3 text-[15px] font-semibold rounded-lg text-center transition-colors ${
-                  activeRoleConfig
+                className={`py-2.5 px-3 text-[15px] font-semibold rounded-lg text-center transition-colors ${activeRoleConfig
                     ? "text-white hover:opacity-90"
                     : "bg-neutral-900 text-white hover:bg-neutral-800"
-                }`}
+                  }`}
                 style={gradient ? { background: gradient } : {}}
               >
                 {primaryCta}
