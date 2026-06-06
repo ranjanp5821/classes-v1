@@ -1,0 +1,98 @@
+/**
+ * Hero.jsx — Role Selection View (Default Landing Screen)
+ *
+ * Shown when no role has been selected yet.
+ * Connects to RoleContext: calls selectRole() on card click,
+ * which triggers the global state change and page re-render.
+ */
+
+import { motion } from "framer-motion";
+import RoleCards from "./RoleCards";
+import { useRole } from "../hooks/useRole";
+
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { delay, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+});
+
+export default function Hero() {
+  // Commit the role globally so the Navbar and downstream sections update,
+  // while this same Hero stays pinned at the top of the page.
+  const { activeRoleId, selectRole } = useRole();
+
+  return (
+    <section
+      id="hero"
+      className="relative flex flex-col items-center text-center px-6 overflow-hidden"
+      style={{
+        height: "calc(100vh - 64px)",
+        maxHeight: "calc(100vh - 64px)",
+        paddingTop: "4.8rem",
+        paddingBottom: "1.2rem",
+      }}
+      aria-labelledby="hero-headline"
+    >
+      {/* Subtle radial tint */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, #eef2ff 0%, transparent 70%)",
+        }}
+      />
+
+      {/* Headline */}
+      <motion.h1
+        id="hero-headline"
+        variants={fadeUp(0.2)}
+        initial="hidden"
+        animate="visible"
+        className="mt-auto font-display text-[clamp(2.4rem,6vw,4.2rem)] font-bold tracking-tight text-neutral-900 leading-[1.05] max-w-[860px] mx-auto"
+      >
+        One Platform. Multiple Curricula.{" "}
+        <span
+          style={{
+            background: "linear-gradient(135deg, #6366f1, #0ea5e9)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          Boundless Learning.
+        </span>
+      </motion.h1>
+
+      {/* Subheadline */}
+      <motion.p
+        variants={fadeUp(0.3)}
+        initial="hidden"
+        animate="visible"
+        className="mt-5 text-[clamp(1.05rem,2.2vw,1.35rem)] text-neutral-500 max-w-[560px] mx-auto leading-relaxed"
+      >
+        One unified platform for institutes, students, and teachers — built to
+        simplify education and amplify outcomes.
+      </motion.p>
+
+      {/* Role selection label */}
+      <motion.div
+        variants={fadeUp(0.4)}
+        initial="hidden"
+        animate="visible"
+        className="mt-auto mb-2 flex flex-col items-center gap-1.5"
+      >
+        <p className="text-[10.5px] uppercase tracking-widest text-neutral-400 font-semibold">
+          Choose your role to begin
+        </p>
+        <div className="w-8 h-px bg-neutral-200" />
+      </motion.div>
+
+      {/* Role Cards — onSelect dispatches to global context */}
+      <RoleCards selectedRole={activeRoleId} onSelect={selectRole} />
+    </section>
+  );
+}
