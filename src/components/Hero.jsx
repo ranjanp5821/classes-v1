@@ -27,13 +27,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col items-center text-center px-6 overflow-hidden"
-      style={{
-        height: "calc(100vh - 64px)",
-        maxHeight: "calc(100vh - 64px)",
-        paddingTop: "4.8rem",
-        paddingBottom: "1.2rem",
-      }}
+      className="relative flex flex-col items-center text-center px-6 pt-24 pb-8 gap-6 md:gap-0 md:overflow-hidden md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] md:pt-[4.8rem] md:pb-5"
       aria-labelledby="hero-headline"
     >
       {/* Subtle radial tint */}

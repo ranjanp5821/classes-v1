@@ -25,7 +25,7 @@ const cardVariants = {
 export default function RoleCards({ selectedRole, onSelect }) {
   return (
     <div
-      className="grid grid-cols-3 gap-5 w-full max-w-[920px] mx-auto"
+      className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 w-full max-w-[920px] mx-auto"
       role="group"
       aria-label="Select your role to get started"
     >

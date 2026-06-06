@@ -56,8 +56,9 @@ export default function LandingPage() {
 
   return (
     <div
-      className="bg-white min-h-screen"
-      style={lockScroll ? { height: "100vh", overflow: "hidden" } : {}}
+      className={`bg-white min-h-screen ${
+        lockScroll ? "md:h-screen md:overflow-hidden" : ""
+      }`}
     >
       {/* Page content — blurred while the auth popup is open */}
       <div
