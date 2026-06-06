@@ -13,21 +13,32 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowLeft } from "lucide-react";
 import { ROLES_LIST, ROLES_CONFIG } from "../config/roles";
 
+// Neutral brand theme used by the role-less sign-in form.
+const DEFAULT_ACCENT = "#6366f1";
+const DEFAULT_GRADIENT = "linear-gradient(135deg, #6366f1, #0ea5e9)";
+
 export default function AuthModal({ open, mode = "signin", position = null, initialRoleId = null, onClose, onSelectRole }) {
   const [step, setStep] = useState("role");     // "role" | "form"
   const [roleId, setRoleId] = useState(null);
   const [authMode, setAuthMode] = useState(mode); // "signin" | "signup"
+  const [fromPicker, setFromPicker] = useState(false); // reached form via role picker?
   const [prevOpen, setPrevOpen] = useState(open);
 
-  // Reset each time the popup (re)opens, syncing the mode. If a role is
-  // already active, skip the picker and open straight to its form.
+  // Reset each time the popup (re)opens, syncing the mode.
+  //  - role already active → straight to that role's form
+  //  - Sign In → straight to a generic login form (no role step)
+  //  - Sign Up → role picker first
   // Adjusting state during render is React's recommended pattern here.
   if (open !== prevOpen) {
     setPrevOpen(open);
     if (open) {
       setAuthMode(mode);
+      setFromPicker(false);
       if (initialRoleId) {
         setRoleId(initialRoleId);
+        setStep("form");
+      } else if (mode === "signin") {
+        setRoleId(null);
         setStep("form");
       } else {
         setRoleId(null);
@@ -38,6 +49,8 @@ export default function AuthModal({ open, mode = "signin", position = null, init
 
   const role = roleId ? ROLES_CONFIG[roleId] : null;
   const isSignup = authMode === "signup";
+  const accent = role?.accent ?? DEFAULT_ACCENT;
+  const gradient = role?.accentGradient ?? DEFAULT_GRADIENT;
 
   // Pin the dialog's right edge to the clicked button's right edge.
   const dialogStyle = {
@@ -49,11 +62,27 @@ export default function AuthModal({ open, mode = "signin", position = null, init
   const pickRole = (id) => {
     setRoleId(id);
     setStep("form");
+    setFromPicker(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // With a role → enter that role's view; generic sign-in → just close.
     if (roleId) onSelectRole(roleId);
+    else onClose();
+  };
+
+  // Bottom toggle between sign in / sign up.
+  const toggleMode = () => {
+    if (isSignup) {
+      setAuthMode("signin");
+    } else if (roleId) {
+      setAuthMode("signup");
+    } else {
+      // Generic sign-in → sign up keeps its role-picker flow.
+      setAuthMode("signup");
+      setStep("role");
+    }
   };
 
   return (
@@ -157,7 +186,7 @@ export default function AuthModal({ open, mode = "signin", position = null, init
                   exit={{ opacity: 0, x: 12 }}
                   transition={{ duration: 0.18 }}
                 >
-                  {!initialRoleId && (
+                  {fromPicker && (
                     <button
                       onClick={() => setStep("role")}
                       className="inline-flex items-center gap-1 text-[13px] font-medium text-neutral-500 hover:text-neutral-800 transition-colors"
@@ -166,19 +195,23 @@ export default function AuthModal({ open, mode = "signin", position = null, init
                     </button>
                   )}
 
-                  <div className="mt-3 flex items-center gap-1.5">
-                    <span
-                      className="text-[10.5px] uppercase tracking-widest font-semibold"
-                      style={{ color: role?.accent }}
-                    >
-                      {role?.card.eyebrow}
-                    </span>
-                  </div>
+                  {role && (
+                    <div className="mt-3 flex items-center gap-1.5">
+                      <span
+                        className="text-[10.5px] uppercase tracking-widest font-semibold"
+                        style={{ color: accent }}
+                      >
+                        {role.card.eyebrow}
+                      </span>
+                    </div>
+                  )}
                   <h2 className="mt-0.5 font-display text-xl font-bold tracking-tight text-neutral-900">
                     {isSignup ? "Create your account" : "Welcome back"}
                   </h2>
                   <p className="mt-1 text-sm text-neutral-500">
-                    {isSignup ? "Sign up" : "Sign in"} as a {role?.shortLabel.toLowerCase()}
+                    {role
+                      ? `${isSignup ? "Sign up" : "Sign in"} as a ${role.shortLabel.toLowerCase()}`
+                      : "Sign in to your Classess account"}
                   </p>
 
                   <form className="mt-5 flex flex-col gap-3" onSubmit={handleSubmit}>
@@ -187,26 +220,26 @@ export default function AuthModal({ open, mode = "signin", position = null, init
                         label="Full name"
                         type="text"
                         placeholder="Jane Doe"
-                        accent={role?.accent}
+                        accent={accent}
                       />
                     )}
                     <Field
                       label="Email"
                       type="email"
                       placeholder="you@example.com"
-                      accent={role?.accent}
+                      accent={accent}
                     />
                     <Field
                       label="Password"
                       type="password"
                       placeholder="••••••••"
-                      accent={role?.accent}
+                      accent={accent}
                     />
 
                     <button
                       type="submit"
                       className="mt-2 w-full py-2.5 rounded-lg text-[14.5px] font-semibold text-white shadow-sm transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
-                      style={{ background: role?.accentGradient }}
+                      style={{ background: gradient }}
                     >
                       {isSignup ? "Create account" : "Sign in"}
                     </button>
@@ -215,9 +248,9 @@ export default function AuthModal({ open, mode = "signin", position = null, init
                   <p className="mt-4 text-center text-[13px] text-neutral-500">
                     {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
                     <button
-                      onClick={() => setAuthMode(isSignup ? "signin" : "signup")}
+                      onClick={toggleMode}
                       className="font-semibold hover:underline"
-                      style={{ color: role?.accent }}
+                      style={{ color: accent }}
                     >
                       {isSignup ? "Sign in" : "Sign up"}
                     </button>
