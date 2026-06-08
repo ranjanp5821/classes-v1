@@ -17,7 +17,7 @@
  *   9. Frequently Asked Q's    (#faq)
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -825,11 +825,310 @@ function FaqSection() {
 }
 
 /* ════════════════════════════════════════════════════════════════════
+   0. STUDENT FEATURES OVERVIEW  (always first)
+   ════════════════════════════════════════════════════════════════════ */
+
+// Featured card = index 0 (2 cols × 2 rows on desktop).
+// Wide card     = index 7 (2 cols on desktop).
+const OVERVIEW_FEATURES = [
+  {
+    icon: Target,
+    label: "Your Learning Path",
+    desc: "A personalised daily plan built around your subjects, level, and goals — so you always know exactly what to study next and never waste time guessing.",
+    anchor: "#student-hero",
+  },
+  {
+    icon: Sparkles,
+    label: "Real Transformation",
+    desc: "See how Classess reshapes the way you study from day one.",
+    anchor: "#how-it-helps",
+  },
+  {
+    icon: Lightbulb,
+    label: "Concept Understanding",
+    desc: "Master any topic with clear, step-by-step explanations.",
+    anchor: "#concepts",
+  },
+  {
+    icon: PencilRuler,
+    label: "Purposeful Practice",
+    desc: "Targeted exercises that build real, lasting skills.",
+    anchor: "#practice",
+  },
+  {
+    icon: GraduationCap,
+    label: "Exam Preparation",
+    desc: "Spot gaps early and walk into every exam fully prepared.",
+    anchor: "#exam-prep",
+  },
+  {
+    icon: BarChart3,
+    label: "Progress Tracking",
+    desc: "Rich insights that show exactly how far you've come.",
+    anchor: "#progress",
+  },
+  {
+    icon: Brain,
+    label: "AI Tutor",
+    desc: "Instant, personalised help — available anytime, anywhere.",
+    anchor: "#ai-tutor",
+  },
+  {
+    icon: MessageCircle,
+    label: "FAQs",
+    desc: "Every question about learning with Classess, answered clearly.",
+    anchor: "#faq",
+  },
+];
+
+function scrollTo(anchor) {
+  const el = document.querySelector(anchor);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 72;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+}
+
+const VIDYA_OVERVIEW_MESSAGE =
+  "Here's everything inside your student experience on Classess! " +
+  "You can see features like your personalised learning path, concept understanding, " +
+  "purposeful practice, exam preparation, progress tracking, and your AI tutor. " +
+  "If you'd like me to take you to any specific feature, just tell me — I'll take you right there!";
+
+function StudentOverviewSection() {
+  useEffect(() => {
+    const el = document.getElementById("student-overview");
+    if (!el) return;
+    let fired = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !fired) {
+          fired = true;
+          window.dispatchEvent(
+            new CustomEvent("vidya:section-entered", {
+              detail: { message: VIDYA_OVERVIEW_MESSAGE },
+            })
+          );
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      id="student-overview"
+      className="w-full py-16 sm:py-20 relative overflow-hidden bg-white"
+      style={{
+        backgroundImage: `radial-gradient(ellipse 75% 50% at 50% -5%, ${ACCENT}12 0%, transparent 65%)`,
+      }}
+    >
+      {/* Subtle dot-grid */}
+      <div
+        className="absolute inset-0 opacity-[0.028]"
+        style={{
+          backgroundImage: `radial-gradient(circle, ${ACCENT} 1px, transparent 1px)`,
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      <div className="relative max-w-5xl mx-auto px-6 sm:px-8">
+
+        {/* ── Header ─────────────────────────────────────────────────── */}
+        <motion.div {...fadeUp} className="text-center mb-10">
+          <div className="flex items-center justify-center gap-2 mb-5 flex-wrap">
+            <span
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10.5px] font-black uppercase tracking-[0.18em] border"
+              style={{ color: ACCENT, background: `${ACCENT}10`, borderColor: `${ACCENT}25` }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
+              Classess Student
+            </span>
+            <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[10.5px] font-semibold text-neutral-400 border border-neutral-200 bg-neutral-50">
+              8 Features · 1 Platform
+            </span>
+          </div>
+
+          <h2 className="font-display font-bold text-neutral-900 tracking-tight leading-[1.08] text-[clamp(1.9rem,4.2vw,3rem)]">
+            Everything inside your{" "}
+            <span
+              style={{
+                background: GRADIENT,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              student experience.
+            </span>
+          </h2>
+
+          <p className="mt-4 text-[15px] text-neutral-400 max-w-[440px] mx-auto leading-relaxed">
+            Everything revolves around <span className="font-semibold text-neutral-500">you</span>.
+            Tap any orbiting feature to jump straight to it — or hover to pause and explore.
+          </p>
+        </motion.div>
+
+        {/* Keyframes for the orbital system (defined once, scoped by name). */}
+        <style>{`
+          @keyframes orbitSpin    { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
+          @keyframes orbitSpinRev { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }
+          @keyframes corePulse    { 0% { transform: scale(1); opacity: .45; } 80% { opacity: 0; } 100% { transform: scale(2.3); opacity: 0; } }
+          @keyframes coreFloat    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+          @media (prefers-reduced-motion: reduce) {
+            .orbit-rotor, .orbit-rotor * { animation: none !important; }
+          }
+        `}</style>
+
+        {/* ── Orbital system (desktop / tablet) ──────────────────────── */}
+        <motion.div
+          {...fadeUp}
+          className="hidden sm:flex justify-center"
+        >
+          <div
+            className="group relative"
+            style={{ width: "min(560px, 82vw)", aspectRatio: "1 / 1" }}
+          >
+            {/* Decorative orbit rings */}
+            <div
+              className="absolute inset-0 rounded-full border border-dashed"
+              style={{ borderColor: `${ACCENT}33` }}
+            />
+            <div
+              className="absolute rounded-full border"
+              style={{ inset: "16%", borderColor: `${ACCENT}1f` }}
+            />
+            <div
+              className="absolute rounded-full"
+              style={{ inset: "30%", border: `1px solid ${ACCENT}14` }}
+            />
+
+            {/* Rotating ring of feature "planets" — pauses on hover.
+                Each node is placed with trig as a % of the orbit box, so the
+                radius scales with the container (no fixed-pixel breakage). */}
+            <div className="orbit-rotor absolute inset-0 [animation:orbitSpin_50s_linear_infinite] group-hover:[animation-play-state:paused]">
+              {OVERVIEW_FEATURES.map(({ icon: Icon, label, anchor }, i) => {
+                const RADIUS = 44; // % of half-box — sits on the outer ring
+                const theta  = (i / OVERVIEW_FEATURES.length) * 2 * Math.PI - Math.PI / 2;
+                const x = 50 + RADIUS * Math.cos(theta);
+                const y = 50 + RADIUS * Math.sin(theta);
+                return (
+                  <div
+                    key={anchor}
+                    className="absolute"
+                    style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }}
+                  >
+                    {/* Counter-spin keeps the content upright while the ring turns. */}
+                    <button
+                      onClick={() => scrollTo(anchor)}
+                      title={label}
+                      className="orbit-node block [animation:orbitSpinRev_50s_linear_infinite] group-hover:[animation-play-state:paused] focus:outline-none"
+                    >
+                      <div className="group/node flex flex-col items-center gap-2 w-[108px]">
+                        {/* Icon disc */}
+                        <span
+                          className="relative flex items-center justify-center w-[58px] h-[58px] rounded-full bg-white border border-neutral-200 shadow-[0_6px_20px_rgba(14,165,233,0.14)] transition-all duration-200 group-hover/node:scale-[1.16] group-hover/node:-translate-y-0.5 group-hover/node:border-sky-300 group-hover/node:shadow-[0_12px_30px_rgba(14,165,233,0.32)]"
+                          style={{ color: ACCENT }}
+                        >
+                          <span
+                            className="absolute inset-0 rounded-full opacity-0 group-hover/node:opacity-100 transition-opacity duration-200"
+                            style={{ background: `${ACCENT}10` }}
+                          />
+                          <Icon size={22} className="relative" />
+                        </span>
+                        {/* Label chip */}
+                        <span className="px-2 py-1 rounded-lg text-[11px] font-bold text-neutral-600 text-center leading-tight bg-white/90 backdrop-blur-sm transition-colors duration-200 group-hover/node:text-sky-600">
+                          {label}
+                        </span>
+                      </div>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* ── Center core: "Student" ──────────────────────────────── */}
+            {/* Outer wrapper centers the core (translate). The float animation
+                lives on the inner wrapper so it doesn't override the centering
+                transform — keeping the disc + halos perfectly in the middle. */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <div className="relative w-[150px] h-[150px] [animation:coreFloat_5s_ease-in-out_infinite]">
+                {/* Pulsing halo rings — centered on the disc */}
+                <span
+                  className="absolute inset-0 rounded-full [animation:corePulse_3.4s_ease-out_infinite]"
+                  style={{ background: `${ACCENT}30` }}
+                />
+                <span
+                  className="absolute inset-0 rounded-full [animation:corePulse_3.4s_ease-out_infinite_1.7s]"
+                  style={{ background: `${ACCENT}22` }}
+                />
+                {/* Core disc */}
+                <div
+                  className="relative flex flex-col items-center justify-center w-full h-full rounded-full text-white shadow-[0_18px_50px_rgba(14,165,233,0.45)]"
+                  style={{ background: GRADIENT }}
+                >
+                  <GraduationCap size={26} className="mb-1 opacity-90" />
+                  <span className="font-display font-black text-[22px] tracking-tight leading-none">
+                    Student
+                  </span>
+                  <span className="mt-1.5 text-[9.5px] font-bold uppercase tracking-[0.22em] text-white/70">
+                    8 features
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Mobile fallback: clean list (no orbit on small screens) ── */}
+        <div className="sm:hidden grid grid-cols-1 gap-2.5">
+          {OVERVIEW_FEATURES.map(({ icon: Icon, label, desc, anchor }, i) => (
+            <motion.button
+              key={anchor}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.38, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+              onClick={() => scrollTo(anchor)}
+              className="group flex items-center gap-3.5 p-3.5 rounded-2xl border border-neutral-100 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-left transition-all duration-200 active:scale-[0.98] hover:border-sky-200"
+            >
+              <span
+                className="flex items-center justify-center w-11 h-11 rounded-xl shrink-0"
+                style={{ background: `${ACCENT}12`, color: ACCENT }}
+              >
+                <Icon size={20} />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[14px] font-bold text-neutral-900 leading-snug">{label}</span>
+                <span className="block text-[12px] text-neutral-400 leading-snug truncate">{desc}</span>
+              </span>
+              <ArrowRight size={15} className="shrink-0 text-neutral-300 group-hover:text-sky-400 transition-colors" />
+            </motion.button>
+          ))}
+        </div>
+
+        {/* ── Divider ───────────────────────────────────────────────── */}
+        <div className="mt-12 flex items-center gap-4">
+          <div className="flex-1 h-px bg-neutral-100" />
+          <span className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-neutral-300">
+            Scroll to explore each feature
+          </span>
+          <div className="flex-1 h-px bg-neutral-100" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════════
    PAGE ASSEMBLY
    ════════════════════════════════════════════════════════════════════ */
 export default function StudentHome() {
   return (
     <div className="w-full bg-white">
+      <StudentOverviewSection />
       <StudentHeroSection />
       <TransformationSection />
       <ConceptSection />

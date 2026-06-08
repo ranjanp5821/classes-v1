@@ -26,20 +26,30 @@ export default function LandingPage() {
     return null;
   };
 
-  // When a role is picked, reveal roughly the top 50% of the downstream
-  // section by scrolling its midpoint to the bottom edge of the viewport.
+  // When a role is picked, scroll into the downstream section.
+  // For the student role we land directly on the orbital "features overview"
+  // animation (#student-overview); other roles reveal ~50% of their section.
   useEffect(() => {
     if (!activeRoleId) return;
-    const el = roleSectionRef.current;
-    if (!el) return;
+    const NAVBAR_HEIGHT = 64;
 
-    // Wait a frame so the newly rendered section has its real height.
+    // Wait two frames so the newly rendered section has mounted + measured.
     const id = requestAnimationFrame(() => {
-      const rect = el.getBoundingClientRect();
-      const sectionTop = rect.top + window.scrollY;
-      // Scroll so half the section sits within the viewport.
-      const target = sectionTop - window.innerHeight * 0.5;
-      window.scrollTo({ top: Math.max(target, 0), behavior: "smooth" });
+      requestAnimationFrame(() => {
+        const overview = document.getElementById("student-overview");
+        if (activeRoleId === "student" && overview) {
+          // Land directly on the animation section, just below the navbar.
+          const top = overview.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
+          window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
+          return;
+        }
+
+        const el = roleSectionRef.current;
+        if (!el) return;
+        const sectionTop = el.getBoundingClientRect().top + window.scrollY;
+        const target = sectionTop - window.innerHeight * 0.5;
+        window.scrollTo({ top: Math.max(target, 0), behavior: "smooth" });
+      });
     });
 
     return () => cancelAnimationFrame(id);

@@ -12,7 +12,86 @@ const EVT_MSG_HISTORY        = "MESSAGE_HISTORY_UPDATED";
 
 
 // ─── Section navigation map ───────────────────────────────────────────────────
+// Student sub-sections are listed first so they win over the generic "student" card entry.
+// Keywords use multi-word phrases where possible to avoid false matches on common words.
 const SECTION_MAP = [
+  // ── Student sub-sections ─────────────────────────────────────────────────
+  {
+    id: "student-overview",
+    label: "Features Overview",
+    // Use full phrases only — bare "back" would match "take me back to concepts"
+    keywords: [
+      "go back", "back to main", "back to overview", "back to features",
+      "all features", "show all features", "feature overview", "features overview",
+      "main section", "show features", "start over",
+    ],
+  },
+  {
+    id: "student-hero",
+    label: "Learning Path",
+    keywords: [
+      "learning path", "my path", "personalised", "personalized",
+      "daily goal", "what to learn", "learning goal", "study plan",
+      "student hero",
+    ],
+  },
+  {
+    id: "how-it-helps",
+    label: "How It Helps",
+    keywords: [
+      "how it helps", "how it works", "transformation", "benefits",
+      "why classess", "what does it do",
+    ],
+  },
+  {
+    id: "concepts",
+    label: "Concept Understanding",
+    keywords: [
+      "concept", "concepts", "concept understanding",
+      "understand concepts", "explain concepts", "theory",
+    ],
+  },
+  {
+    id: "practice",
+    label: "Purposeful Practice",
+    keywords: [
+      "practice", "purposeful practice", "practice exercises",
+      "exercises", "drill", "drills",
+    ],
+  },
+  {
+    id: "exam-prep",
+    label: "Exam Preparation",
+    keywords: [
+      "exam", "exam prep", "exam preparation", "exams",
+      "test prep", "study for exam", "learning gaps", "syllabus",
+    ],
+  },
+  {
+    id: "progress",
+    label: "Progress Tracking",
+    keywords: [
+      "progress", "progress tracking", "my progress",
+      "how am i doing", "improvement", "insights", "stats",
+    ],
+  },
+  {
+    id: "ai-tutor",
+    label: "AI Tutor",
+    keywords: [
+      "ai tutor", "a.i. tutor", "artificial intelligence tutor",
+      "independent learning", "smart tutor", "ai assistant",
+    ],
+  },
+  {
+    id: "faq",
+    label: "FAQ",
+    keywords: [
+      "faq", "frequently asked", "common questions",
+      "frequently asked questions",
+    ],
+  },
+  // ── Landing-page sections ─────────────────────────────────────────────────
   {
     id: "products",
     label: "Products",
@@ -21,7 +100,7 @@ const SECTION_MAP = [
   {
     id: "features",
     label: "Features",
-    keywords: ["features", "feature", "what can it do", "capabilities"],
+    keywords: ["what can it do", "capabilities"],
   },
   {
     id: "about",
@@ -37,7 +116,7 @@ const SECTION_MAP = [
     id: "student",
     label: "Students",
     keywords: [
-      "student", "students", "learn", "course", "online course",
+      "student", "students", "online course",
       "i am a student", "for students",
     ],
   },
@@ -59,10 +138,17 @@ const SECTION_MAP = [
   },
 ];
 
+// IDs that live inside StudentHome and only exist in the DOM when the student page is open.
+const STUDENT_SUB_IDS = new Set([
+  "student-overview", "student-hero", "how-it-helps",
+  "concepts", "practice", "exam-prep", "progress", "ai-tutor", "faq",
+]);
+
 const NAV_TRIGGERS = [
   "show me", "take me", "go to", "navigate", "scroll to",
-  "where is", "find the", "open the", "visit", "check out",
+  "where is", "find the", "open", "visit", "check out",
   "i want to see", "i am a", "for students", "for tutors", "for colleges",
+  "go back", "back to",
 ];
 
 const ROLE_CARD_IDS  = new Set(["student", "tutor", "college"]);
@@ -81,21 +167,53 @@ function navigateToSection(transcript, client) {
 
   for (const section of SECTION_MAP) {
     if (section.keywords.some((kw) => lower.includes(kw))) {
+      // Role-card sections: click the card to open the page first.
       if (ROLE_CARD_IDS.has(section.id)) {
         document.getElementById(section.id)?.click();
       }
+
       const scrolled = scrollToId(section.id);
+
       if (scrolled) {
-        client.talk(`Sure! I've taken you to the ${section.label} section.`);
+        // Element found — scroll happened.
+        if (section.id === "student-overview") {
+          client.talk("Sure! Taking you back to the features overview.");
+        } else {
+          client.talk(`Sure! I've taken you to the ${section.label} section.`);
+        }
         return;
       }
+
+      // Element not in DOM yet — for student sub-sections, open the student page
+      // first, then scroll to the target after it has rendered.
+      if (STUDENT_SUB_IDS.has(section.id)) {
+        const studentCard = document.getElementById("student");
+        if (studentCard) {
+          studentCard.click(); // opens StudentPage
+          const targetId = section.id;
+          const label    = section.label;
+          client.talk(`Sure! Opening the student section and taking you to ${label}.`);
+          // Wait for the student page to mount before scrolling.
+          setTimeout(() => scrollToId(targetId), 1400);
+          return;
+        }
+      }
+
+      // Element genuinely missing — tell the user.
+      client.talk(
+        `I couldn't find the ${section.label} section right now. ` +
+        "Please make sure the student page is open and try again."
+      );
+      return;
     }
   }
 
   const hasNavIntent = NAV_TRIGGERS.some((t) => lower.includes(t));
   if (hasNavIntent) {
     client.talk(
-      "I can take you to Products, Features, About, Contact, or show sections for Students, Tutors, or Colleges. Which one would you like?"
+      "I can take you to Products, Features, About, or Contact. " +
+      "If you're in the student section I can also open Learning Path, Concept Understanding, " +
+      "Practice, Exam Preparation, Progress Tracking, or the AI Tutor. Which one would you like?"
     );
   }
 }
@@ -108,8 +226,28 @@ export default function VoiceAssistant() {
   const [error,     setError]     = useState(null);
   const [idleMedia, setIdleMedia] = useState(null);  // { videoUrl, imageUrl }
 
-  const clientRef      = useRef(null);
-  const lastUserMsgRef = useRef(null);
+  const clientRef         = useRef(null);
+  const lastUserMsgRef    = useRef(null);
+  const pendingMessageRef = useRef(null); // spoken by Vidya once session is live
+  const statusRef         = useRef(status);
+  useEffect(() => { statusRef.current = status; }, [status]);
+
+  // Listen for section-entered events fired by page sections.
+  // If live → speak immediately. If idle → queue the message and auto-start.
+  useEffect(() => {
+    const handler = (e) => {
+      const { message } = e.detail ?? {};
+      if (!message) return;
+      if (statusRef.current === "live" && clientRef.current) {
+        clientRef.current.talk(message);
+      } else if (statusRef.current === "idle") {
+        pendingMessageRef.current = message;
+        start();
+      }
+    };
+    window.addEventListener("vidya:section-entered", handler);
+    return () => window.removeEventListener("vidya:section-entered", handler);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fetch the avatar's idling video URL on mount (signed URL, fresh each load).
   useEffect(() => {
@@ -192,7 +330,15 @@ export default function VoiceAssistant() {
       const client = createClient(sessionToken);
       clientRef.current = client;
 
-      client.addListener(EVT_VIDEO_PLAY_STARTED, () => setStatus("live"));
+      client.addListener(EVT_VIDEO_PLAY_STARTED, () => {
+        setStatus("live");
+        if (pendingMessageRef.current) {
+          const msg = pendingMessageRef.current;
+          pendingMessageRef.current = null;
+          // Small delay so the avatar settles before speaking.
+          setTimeout(() => clientRef.current?.talk(msg), 800);
+        }
+      });
       client.addListener(EVT_CONNECTION_CLOSED,  () => stop());
 
       client.addListener(EVT_SESSION_READY, () => {
