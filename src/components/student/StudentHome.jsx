@@ -882,25 +882,8 @@ function ExamPrepSection() {
         </motion.div>
       </div>
 
-      {/* Study plan subsection */}
+      {/* Study plan subsection — weekly plan LEFT, copy RIGHT */}
       <div className="mt-16 grid lg:grid-cols-2 gap-12 items-stretch">
-        <motion.div {...fadeUp} className="flex flex-col">
-          <h3 className="font-display font-bold text-neutral-900 tracking-tight text-[clamp(1.4rem,2.6vw,1.9rem)] leading-snug">
-            Turn your examination date into a practical study plan.
-          </h3>
-          <Lead className="mt-4">
-            Add your examination date, subjects, syllabus, and available study time. Classess.com®
-            creates a preparation plan that balances learning, practice, revision, self-testing, and
-            weak-topic improvement.
-          </Lead>
-          <div className="mt-6">
-            <BenefitList items={planBenefits} />
-          </div>
-          <div className="mt-8">
-            <PrimaryButton icon={CalendarDays}>Create My Study Plan</PrimaryButton>
-          </div>
-        </motion.div>
-
         {/* Short weekly plan — Learn → Practise → Revise → Self-test */}
         <motion.div {...fadeUp} className="flex flex-col bg-white rounded-2xl border border-neutral-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-6">
           <div className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest text-neutral-400 mb-5">
@@ -923,6 +906,23 @@ function ExamPrepSection() {
                 </div>
               </div>
             ))}
+          </div>
+        </motion.div>
+
+        <motion.div {...fadeUp} className="flex flex-col">
+          <h3 className="font-display font-bold text-neutral-900 tracking-tight text-[clamp(1.4rem,2.6vw,1.9rem)] leading-snug">
+            Turn your examination date into a practical study plan.
+          </h3>
+          <Lead className="mt-4">
+            Add your examination date, subjects, syllabus, and available study time. Classess.com®
+            creates a preparation plan that balances learning, practice, revision, self-testing, and
+            weak-topic improvement.
+          </Lead>
+          <div className="mt-6">
+            <BenefitList items={planBenefits} />
+          </div>
+          <div className="mt-8">
+            <PrimaryButton icon={CalendarDays}>Create My Study Plan</PrimaryButton>
           </div>
         </motion.div>
       </div>
@@ -1487,19 +1487,6 @@ function StudentOverviewSection() {
 
         {/* ── Header ─────────────────────────────────────────────────── */}
         <motion.div {...fadeUp} className="text-center mb-10">
-          <div className="flex items-center justify-center gap-2 mb-5 flex-wrap">
-            <span
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10.5px] font-black uppercase tracking-[0.18em] border"
-              style={{ color: ACCENT, background: `${ACCENT}10`, borderColor: `${ACCENT}25` }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
-              Classess Student
-            </span>
-            <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-[10.5px] font-semibold text-neutral-400 border border-neutral-200 bg-neutral-50">
-              8 Features · 1 Platform
-            </span>
-          </div>
-
           <h2 className="font-display font-bold text-neutral-900 tracking-tight leading-[1.08] text-[clamp(1.9rem,4.2vw,3rem)]">
             Everything inside your{" "}
             <span

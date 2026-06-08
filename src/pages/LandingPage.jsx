@@ -29,24 +29,15 @@ export default function LandingPage() {
     return null;
   };
 
-  // When a role is picked, scroll into the downstream section.
-  // For the student role we land directly on the orbital "features overview"
-  // animation (#student-overview); other roles reveal ~50% of their section.
+  // When a role is picked, gently scroll just below the hero to reveal the
+  // start of the downstream section (~top half), so the user keeps scrolling
+  // naturally rather than being jumped deep into the page.
   useEffect(() => {
     if (!activeRoleId) return;
-    const NAVBAR_HEIGHT = 64;
 
     // Wait two frames so the newly rendered section has mounted + measured.
     const id = requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        const overview = document.getElementById("student-overview");
-        if (activeRoleId === "student" && overview) {
-          // Land directly on the animation section, just below the navbar.
-          const top = overview.getBoundingClientRect().top + window.scrollY - NAVBAR_HEIGHT;
-          window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
-          return;
-        }
-
         const el = roleSectionRef.current;
         if (!el) return;
         const sectionTop = el.getBoundingClientRect().top + window.scrollY;
