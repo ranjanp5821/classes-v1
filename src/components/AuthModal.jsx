@@ -52,12 +52,10 @@ export default function AuthModal({ open, mode = "signin", position = null, init
   const accent = role?.accent ?? DEFAULT_ACCENT;
   const gradient = role?.accentGradient ?? DEFAULT_GRADIENT;
 
-  // Pin the dialog's right edge to the clicked button's right edge.
-  const dialogStyle = {
-    transformOrigin: "top right",
-    right: position ? `${position.right}px` : "2rem",
-    top: position ? `${position.top}px` : "60px",
-  };
+  // Pin the dialog near the clicked button when a position is provided.
+  const dialogStyle = position
+    ? { transformOrigin: "top right", right: `${position.right}px`, top: `${position.top}px` }
+    : {};
 
   const pickRole = (id) => {
     setRoleId(id);
@@ -94,7 +92,7 @@ export default function AuthModal({ open, mode = "signin", position = null, init
       {open && (
         <motion.div
           key="auth-overlay"
-          className="fixed inset-0 z-[100]"
+          className={`fixed inset-0 z-[100]${!position ? " flex items-center justify-center" : ""}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -107,11 +105,11 @@ export default function AuthModal({ open, mode = "signin", position = null, init
             aria-hidden="true"
           />
 
-          {/* Dialog — right edge aligns to the clicked button, grows out of it */}
+          {/* Dialog — anchored to button when position given, centered otherwise */}
           <motion.div
             role="dialog"
             aria-modal="true"
-            className="fixed w-full max-w-sm bg-white rounded-2xl shadow-2xl p-7"
+            className={`${position ? "fixed" : "relative"} w-full max-w-sm bg-white rounded-2xl shadow-2xl p-7`}
             style={dialogStyle}
             initial={{ opacity: 0, scale: 0.4, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}

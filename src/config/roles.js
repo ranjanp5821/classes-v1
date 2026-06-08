@@ -74,7 +74,7 @@ export const ROLES_CONFIG = {
     image: "/assets/Student-img.png",
     card: {
       eyebrow: "Student",
-      title: "Any Course, Online",
+      title: "I am a Student",
       description: "Learn at your own pace and track progress in real time.",
     },
     accent: "#0ea5e9",

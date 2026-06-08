@@ -6,6 +6,7 @@ import VoiceAssistant from "../components/VoiceAssistant";
 import InstitutePage from "./InstitutePage";
 import StudentPage from "./StudentPage";
 import TeacherPage from "./TeacherPage";
+import { StudentHero } from "../components/student/StudentHome";
 import { useRole } from "../hooks/useRole";
 
 export default function LandingPage() {
@@ -16,12 +17,14 @@ export default function LandingPage() {
   // (navbar + hero + sections) can be blurred while the popup stays sharp.
   const [authModal, setAuthModal] = useState(null);
 
-  // The Hero stays the same for every role. Only the Navbar (driven by
-  // RoleContext) and the role-specific sections below the Hero change.
+  const renderHero = () => (
+    <Hero onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />
+  );
+
   const renderRoleSections = () => {
     if (!activeRoleId) return null;
     if (activeRoleId === "institute") return <InstitutePage hideHero />;
-    if (activeRoleId === "student") return <StudentPage />;
+    if (activeRoleId === "student") return <><StudentHero /><StudentPage /></>;
     if (activeRoleId === "teacher") return <TeacherPage />;
     return null;
   };
@@ -77,7 +80,7 @@ export default function LandingPage() {
         aria-hidden={authOpen}
       >
         <Navbar onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />
-        <Hero />
+        {renderHero()}
 
         {/* Anchor targets for avatar voice navigation & navbar links.
             Replace each div with a real content section as the site grows. */}

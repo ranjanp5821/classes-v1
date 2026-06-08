@@ -7,6 +7,7 @@
  */
 
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { ROLES_LIST } from "../config/roles";
 
 // Maps role.id → the section anchor id the voice assistant uses.
@@ -65,9 +66,14 @@ export default function RoleCards({ selectedRole, onSelect }) {
             >
               {role.card.eyebrow}
             </span>
-            <span className="mt-2 font-display text-[1.05rem] font-bold tracking-tight text-neutral-900 leading-snug">
-              {role.card.title}
-            </span>
+            <div className="mt-2 flex items-center justify-between w-full gap-2">
+              <span className="font-display text-[1.05rem] font-bold tracking-tight text-neutral-900 leading-snug">
+                {role.card.title}
+              </span>
+              <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full" style={{ background: role.accentLight, color: role.accent }}>
+                <ArrowRight size={14} />
+              </span>
+            </div>
             <span className="mt-2 text-[0.8rem] text-neutral-500 leading-relaxed">
               {role.card.description}
             </span>
