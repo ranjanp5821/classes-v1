@@ -68,6 +68,14 @@ export default function LandingPage() {
       >
         <Navbar onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />
         <Hero />
+
+        {/* Anchor targets for avatar voice navigation & navbar links.
+            Replace each div with a real content section as the site grows. */}
+        <div id="products" />
+        <div id="features" />
+        <div id="about"    />
+        <div id="contact"  />
+
         <div ref={roleSectionRef}>{renderRoleSections()}</div>
       </div>
 
