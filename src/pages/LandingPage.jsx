@@ -17,18 +17,14 @@ export default function LandingPage() {
   // (navbar + hero + sections) can be blurred while the popup stays sharp.
   const [authModal, setAuthModal] = useState(null);
 
-  // Student gets a dedicated hero (replacing the generic role-selection Hero);
-  // every other state keeps the shared Hero with the role-specific sections
-  // rendered below it.
-  const renderHero = () => {
-    if (activeRoleId === "student") return <StudentHero />;
-    return <Hero onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />;
-  };
+  const renderHero = () => (
+    <Hero onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />
+  );
 
   const renderRoleSections = () => {
     if (!activeRoleId) return null;
     if (activeRoleId === "institute") return <InstitutePage hideHero />;
-    if (activeRoleId === "student") return <StudentPage />;
+    if (activeRoleId === "student") return <><StudentHero /><StudentPage /></>;
     if (activeRoleId === "teacher") return <TeacherPage />;
     return null;
   };
@@ -37,13 +33,6 @@ export default function LandingPage() {
   // section by scrolling its midpoint to the bottom edge of the viewport.
   useEffect(() => {
     if (!activeRoleId) return;
-
-    // Student has its own hero at the top — land there instead of revealing
-    // the sections below.
-    if (activeRoleId === "student") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
 
     const el = roleSectionRef.current;
     if (!el) return;

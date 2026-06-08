@@ -21,8 +21,6 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { useRole } from "../../hooks/useRole";
-import RoleCards from "../RoleCards";
 import {
   ArrowRight,
   Play,
@@ -217,8 +215,6 @@ export function StudentHero() {
     { icon: GraduationCap, label: "Examination readiness", value: "68% syllabus covered" },
   ];
 
-  const { activeRoleId, selectRole } = useRole();
-
   return (
     <section
       id="student-hero"
@@ -287,16 +283,6 @@ export function StudentHero() {
         </motion.div>
         </div>
 
-        {/* Role switcher — keep role selection available on the hero */}
-        <div className="mt-8 sm:mt-10">
-          <div className="flex flex-col items-center gap-1.5 mb-4">
-            <p className="text-[10.5px] uppercase tracking-widest text-neutral-400 font-semibold">
-              Switch your role anytime
-            </p>
-            <div className="w-8 h-px bg-neutral-200" />
-          </div>
-          <RoleCards selectedRole={activeRoleId} onSelect={selectRole} />
-        </div>
       </div>
     </section>
   );
