@@ -6,6 +6,7 @@ import VoiceAssistant from "../components/VoiceAssistant";
 import InstitutePage from "./InstitutePage";
 import StudentPage from "./StudentPage";
 import TeacherPage from "./TeacherPage";
+import { StudentHero } from "../components/student/StudentHome";
 import { useRole } from "../hooks/useRole";
 
 export default function LandingPage() {
@@ -16,8 +17,14 @@ export default function LandingPage() {
   // (navbar + hero + sections) can be blurred while the popup stays sharp.
   const [authModal, setAuthModal] = useState(null);
 
-  // The Hero stays the same for every role. Only the Navbar (driven by
-  // RoleContext) and the role-specific sections below the Hero change.
+  // Student gets a dedicated hero (replacing the generic role-selection Hero);
+  // every other state keeps the shared Hero with the role-specific sections
+  // rendered below it.
+  const renderHero = () => {
+    if (activeRoleId === "student") return <StudentHero />;
+    return <Hero onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />;
+  };
+
   const renderRoleSections = () => {
     if (!activeRoleId) return null;
     if (activeRoleId === "institute") return <InstitutePage hideHero />;
@@ -30,6 +37,14 @@ export default function LandingPage() {
   // section by scrolling its midpoint to the bottom edge of the viewport.
   useEffect(() => {
     if (!activeRoleId) return;
+
+    // Student has its own hero at the top — land there instead of revealing
+    // the sections below.
+    if (activeRoleId === "student") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
     const el = roleSectionRef.current;
     if (!el) return;
 
@@ -67,7 +82,7 @@ export default function LandingPage() {
         aria-hidden={authOpen}
       >
         <Navbar onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />
-        <Hero />
+        {renderHero()}
         <div ref={roleSectionRef}>{renderRoleSections()}</div>
       </div>
 

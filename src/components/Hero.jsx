@@ -19,7 +19,7 @@ const fadeUp = (delay = 0) => ({
   },
 });
 
-export default function Hero() {
+export default function Hero({ onOpenAuth }) {
   // Commit the role globally so the Navbar and downstream sections update,
   // while this same Hero stays pinned at the top of the page.
   const { activeRoleId, selectRole } = useRole();
@@ -27,7 +27,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col items-center text-center px-6 pt-24 pb-8 gap-6 md:gap-0 md:overflow-hidden md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] md:pt-[4.8rem] md:pb-5"
+      className="relative flex flex-col items-center text-center px-6 pt-24 pb-10 gap-6 md:gap-0 md:min-h-[calc(100vh-64px)] md:pt-[4.8rem] md:pb-8"
       aria-labelledby="hero-headline"
     >
       {/* Subtle radial tint */}
@@ -71,6 +71,25 @@ export default function Hero() {
         One unified platform for institutes, students, and teachers — built to
         simplify education and amplify outcomes.
       </motion.p>
+
+      {/* CTA Buttons */}
+      <motion.div
+        variants={fadeUp(0.38)}
+        initial="hidden"
+        animate="visible"
+        className="mt-6 mb-6 flex flex-wrap items-center justify-center gap-3"
+      >
+        <button
+          onClick={() => onOpenAuth?.("signup", null)}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[14.5px] text-white bg-neutral-900 shadow-md transition-all duration-200 hover:bg-neutral-800 active:scale-95"
+        >
+          Get Started — Free
+        </button>
+        <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[14.5px] text-neutral-700 bg-white border border-neutral-200 shadow-sm transition-all duration-200 hover:bg-neutral-50 active:scale-95">
+          See It In Action
+          <span className="text-neutral-400">→</span>
+        </button>
+      </motion.div>
 
       {/* Role selection label */}
       <motion.div
