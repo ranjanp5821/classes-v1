@@ -84,13 +84,13 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "My Courses",  href: "#my-courses"  },
-        { label: "Assignments", href: "#assignments" },
-        { label: "Progress",    href: "#progress"    },
-        { label: "Library",     href: "#library"     },
-        { label: "Community",   href: "#community"   },
+        { label: "How It Helps",    href: "#how-it-helps" },
+        { label: "Learn Concepts",  href: "#concepts"     },
+        { label: "Practice",        href: "#practice"     },
+        { label: "Exam Prep",       href: "#exam-prep"    },
+        { label: "AI Tutor",        href: "#ai-tutor"     },
       ],
-      primaryCta: "Start Learning",
+      primaryCta: "Start Learning Free",
       secondaryCta: "Sign In",
     },
 
