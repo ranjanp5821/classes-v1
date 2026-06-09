@@ -16,6 +16,19 @@ export default defineConfig(({ mode }) => {
   }
 })
 
+/** Reads and JSON-parses a Node request body; returns {} on empty/invalid input. */
+function readJsonBody(req) {
+  return new Promise((resolve) => {
+    let data = ''
+    req.on('data', (chunk) => { data += chunk })
+    req.on('end', () => {
+      if (!data) return resolve({})
+      try { resolve(JSON.parse(data)) } catch { resolve({}) }
+    })
+    req.on('error', () => resolve({}))
+  })
+}
+
 /**
  * Dev-server middleware that exchanges the secret Anam API key for a
  * short-lived session token. The API key stays on the server and is never
@@ -74,6 +87,29 @@ function anamSessionToken(env) {
           return
         }
         try {
+          // Read the requested language ("en" | "hi") from the POST body.
+          const body = await readJsonBody(req)
+          const language = body?.language === 'hi' ? 'hi' : 'en'
+
+          // The voice is fixed for the whole session, so the starting language
+          // (from the toggle) picks it: a Hindi-capable voice for Hindi sessions
+          // (falls back to the default voice if ANAM_VOICE_ID_HI is unset). For
+          // the best auto-detect experience use a multilingual voice as the default.
+          const voiceId =
+            language === 'hi' ? (env.ANAM_VOICE_ID_HI || env.ANAM_VOICE_ID) : env.ANAM_VOICE_ID
+          // Transcription (speech-to-text) language is fixed for the session. This
+          // is what makes Anam actually *hear* Hindi — without it, Hindi speech is
+          // transcribed as broken English. Override the exact code via .env if needed.
+          const languageCode =
+            language === 'hi' ? (env.ANAM_LANGUAGE_CODE_HI || 'hi') : (env.ANAM_LANGUAGE_CODE_EN || 'en')
+          // Auto-detect: always reply in whatever language the user is speaking.
+          const languageInstruction =
+            ' [LANGUAGE] Detect the language the user is speaking and always reply in that same language. ' +
+            'If they speak Hindi, reply in natural conversational Hindi using Devanagari script; if English, reply in English; ' +
+            'otherwise mirror their language. Note the user often speaks Hindi written in Latin letters (Hinglish), ' +
+            'e.g. "mai ek student hu" or "mujhe practice dikhao" — treat that as Hindi and reply in Hindi. ' +
+            'Keep proper nouns like "Classess" and "Vidya" unchanged.'
+
           const upstream = await fetch('https://api.anam.ai/v1/auth/session-token', {
             method: 'POST',
             headers: {
@@ -85,12 +121,17 @@ function anamSessionToken(env) {
                 personaId: env.ANAM_PERSONA_ID,
                 name: 'Classess Assistant',
                 avatarId: env.ANAM_AVATAR_ID,
-                voiceId: env.ANAM_VOICE_ID,
+                voiceId,
+                languageCode,
                 ...(env.ANAM_LLM_ID ? { llmId: env.ANAM_LLM_ID } : {}),
                 systemPrompt:
-                  "[STYLE] Reply in natural speech without formatting. Add pauses using '...' and very occasionally a disfluency. " +
-                  '[PERSONALITY] You are the Classess voice assistant, a friendly guide for an education platform that serves students, tutors, and institutes. ' +
-                  'Help visitors understand the platform and choose their role.',
+                  "[IDENTITY] You are Vidya, a warm, friendly, genuinely caring human-like guide for Classess.com, an education platform for students, teachers, and institutions. You talk like a real person having a natural, relaxed conversation — encouraging, patient, and personable — never robotic, never listy, never scripted. " +
+                  "[STYLE] Speak in natural spoken language with no formatting or bullet points. Keep greetings, small talk, and navigation to one short, warm sentence. When the user asks you to explain something, or asks how Classess or a feature helps them, answer clearly in two to four short sentences. Vary your wording so you never sound repetitive; use warm, natural phrases like 'Great question', 'I'd love to help with that', or 'Let me show you'; add a gentle '...' pause occasionally. Be concise — never ramble. " +
+                  "[PERSONALISATION] Make every reply feel personal to THIS user. The app tells you who they are (a student, a teacher, or an institution) and what they are looking at — always tailor your answer to their role and goals, speak directly to them using 'you' and 'your', and frame everything around what matters to them. If you do not yet know who they are, warmly ask. " +
+                  "[HELPING] When the user asks how the website, Classess, or any feature helps them (for example 'how does this help me?', 'how will this feature help me?', or 'what can you do for me?'), never give a generic description. Answer personally and benefit-first: say what it does for them, why it matters for their goals, and give one quick concrete example — then warmly offer to show them. " +
+                  "[CONTEXT] The application injects live context about who the user is and what they have selected or are pointing at on the page. Whenever the user refers to 'this', 'it', 'this part', or 'this section', use that injected context to understand exactly what they mean and respond about that specific content. " +
+                  "[FLOW] The application opens pages and speaks the main greeting and section introductions itself. When the user tells you whether they are a student, a teacher, or an institution, acknowledge warmly in one short sentence. For navigation requests, acknowledge briefly — the app performs the actual navigation." +
+                  languageInstruction,
               },
             }),
           })

@@ -25,9 +25,13 @@
  *   INSTITUTION-HOME-M09  Subtle branded institutional animation (CTA background)
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ChevronRight, ArrowRight, Plus, Minus } from "lucide-react";
+import {
+  Check, ChevronRight, ArrowRight, Plus, Minus,
+  Layers, PencilRuler, GraduationCap, BarChart3, RefreshCw,
+  CheckCircle2, Sparkles, MessageCircle, Compass,
+} from "lucide-react";
 
 /* ── Theming ─────────────────────────────────────────────────────────────── */
 const ACCENT   = "#6366f1";
@@ -982,12 +986,242 @@ function FAQSection() {
 /* ════════════════════════════════════════════════════════════════════════════
    PAGE ASSEMBLY
    ════════════════════════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════════════════════
+   SECTION 0 — Institution Overview (orbital feature map)
+   Mirrors the student overview: feature "planets" orbit a glowing core; tapping
+   one scrolls to that section. Clean list fallback on mobile.
+   ════════════════════════════════════════════════════════════════════════════ */
+const INSTITUTE_OVERVIEW_FEATURES = [
+  { icon: Layers,        label: "Academic System",     anchor: "#academic-system",  desc: "One connected system across every class and department." },
+  { icon: PencilRuler,   label: "Teacher Capacity",    anchor: "#teacher-capacity", desc: "Lift teaching quality and consistency at scale." },
+  { icon: GraduationCap, label: "Student Learning",    anchor: "#student-learning", desc: "Early intervention that keeps every student on track." },
+  { icon: BarChart3,     label: "Measurable Outcomes", anchor: "#outcomes",         desc: "See real results, tailored to your institution type." },
+  { icon: RefreshCw,     label: "Integration",         anchor: "#implementation",   desc: "Fits your existing systems with a smooth rollout." },
+  { icon: CheckCircle2,  label: "Trust & Privacy",     anchor: "#trust",            desc: "Enterprise-grade governance, privacy, and control." },
+  { icon: Sparkles,      label: "Get Started",         anchor: "#get-started",      desc: "Bring Classess to your institution with confidence." },
+  { icon: MessageCircle, label: "FAQs",                anchor: "#faq",              desc: "Every question about adopting Classess, answered." },
+];
+
+function scrollTo(anchor) {
+  const el = document.querySelector(anchor);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 72;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+}
+
+const VIDYA_INSTITUTE_OVERVIEW_MESSAGE =
+  "Here's everything inside the Classess experience for your institution! " +
+  "You can explore your connected academic system, teacher capacity, student learning, " +
+  "measurable outcomes, integration, and trust and privacy. " +
+  "Just tell me any area and I'll take you right there!";
+
+function InstituteOverviewSection() {
+  useEffect(() => {
+    const el = document.getElementById("institute-overview");
+    if (!el) return;
+    let fired = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !fired) {
+          fired = true;
+          window.dispatchEvent(
+            new CustomEvent("vidya:section-entered", {
+              detail: { message: VIDYA_INSTITUTE_OVERVIEW_MESSAGE },
+            })
+          );
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      id="institute-overview"
+      className="w-full py-16 sm:py-20 relative overflow-hidden"
+      style={{
+        background: "var(--page)",
+        backgroundImage: `radial-gradient(ellipse 75% 50% at 50% -5%, #F1F2F5 0%, transparent 65%)`,
+      }}
+    >
+      {/* Subtle brand dot-grid */}
+      <div
+        className="absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #0E0E10 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
+      <div className="relative max-w-5xl mx-auto px-6 sm:px-8">
+
+        {/* ── Header ─────────────────────────────────────────────────── */}
+        <motion.div {...fadeUp} className="text-center mb-10">
+          <h2
+            className="font-serif font-medium leading-[1.05] text-[clamp(1.9rem,4.2vw,3rem)]"
+            style={{ letterSpacing: "-0.03em", color: "var(--ink)" }}
+          >
+            Everything inside your{" "}
+            <em
+              style={{
+                fontStyle: "italic",
+                background: GRADIENT,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              institution.
+            </em>
+          </h2>
+
+          <p className="mt-4 text-[15px] max-w-[460px] mx-auto leading-relaxed" style={{ color: "var(--ink-4)" }}>
+            One connected platform for your whole{" "}
+            <span className="font-medium" style={{ color: "var(--ink-3)" }}>institution</span> — teachers, students, and outcomes together.
+            Tap any orbiting area to jump straight to it, or hover to pause and explore.
+          </p>
+        </motion.div>
+
+        {/* Keyframes for the orbital system (defined once, scoped by name). */}
+        <style>{`
+          @keyframes orbitSpin    { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
+          @keyframes orbitSpinRev { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }
+          @keyframes corePulse    { 0% { transform: scale(1); opacity: .45; } 80% { opacity: 0; } 100% { transform: scale(2.3); opacity: 0; } }
+          @keyframes coreFloat    { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+          @media (prefers-reduced-motion: reduce) {
+            .orbit-rotor, .orbit-rotor * { animation: none !important; }
+          }
+        `}</style>
+
+        {/* ── Orbital system (desktop / tablet) ──────────────────────── */}
+        <motion.div {...fadeUp} className="hidden sm:flex justify-center">
+          <div className="group relative" style={{ width: "min(560px, 82vw)", aspectRatio: "1 / 1" }}>
+            {/* Decorative orbit rings */}
+            <div className="absolute inset-0 rounded-full border border-dashed" style={{ borderColor: `${ACCENT}33` }} />
+            <div className="absolute rounded-full border" style={{ inset: "16%", borderColor: `${ACCENT}1f` }} />
+            <div className="absolute rounded-full" style={{ inset: "30%", border: `1px solid ${ACCENT}14` }} />
+
+            {/* Rotating ring of feature "planets" — pauses on hover. */}
+            <div className="orbit-rotor absolute inset-0 [animation:orbitSpin_50s_linear_infinite] group-hover:[animation-play-state:paused]">
+              {INSTITUTE_OVERVIEW_FEATURES.map(({ icon: Icon, label, anchor }, i) => {
+                const RADIUS = 44;
+                const theta  = (i / INSTITUTE_OVERVIEW_FEATURES.length) * 2 * Math.PI - Math.PI / 2;
+                const x = 50 + RADIUS * Math.cos(theta);
+                const y = 50 + RADIUS * Math.sin(theta);
+                return (
+                  <div key={anchor} className="absolute" style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%, -50%)" }}>
+                    <button
+                      onClick={() => scrollTo(anchor)}
+                      title={label}
+                      className="orbit-node block [animation:orbitSpinRev_50s_linear_infinite] group-hover:[animation-play-state:paused] focus:outline-none"
+                    >
+                      <div className="group/node flex flex-col items-center gap-2 w-[108px]">
+                        <span
+                          className="relative flex items-center justify-center w-[58px] h-[58px] rounded-full transition-all duration-200 group-hover/node:scale-[1.16] group-hover/node:-translate-y-0.5"
+                          style={{
+                            background: "var(--page)",
+                            border: "1px solid var(--line)",
+                            boxShadow: `0 6px 20px color-mix(in srgb, ${ACCENT} 14%, transparent)`,
+                            color: ACCENT,
+                          }}
+                        >
+                          <span
+                            className="absolute inset-0 rounded-full opacity-0 group-hover/node:opacity-100 transition-opacity duration-200"
+                            style={{ background: `color-mix(in srgb, ${ACCENT} 10%, #fff)` }}
+                          />
+                          <Icon size={22} className="relative" />
+                        </span>
+                        <span
+                          className="px-2 py-1 rounded-[6px] font-mono text-[10px] font-semibold text-center leading-tight backdrop-blur-sm transition-colors duration-200"
+                          style={{ background: "rgba(255,255,255,0.9)", color: "var(--ink-3)" }}
+                        >
+                          {label}
+                        </span>
+                      </div>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* ── Center core: "Institute" ────────────────────────────── */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <div className="relative w-[150px] h-[150px] [animation:coreFloat_5s_ease-in-out_infinite]">
+                <span className="absolute inset-0 rounded-full [animation:corePulse_3.4s_ease-out_infinite]" style={{ background: `${ACCENT}30` }} />
+                <span className="absolute inset-0 rounded-full [animation:corePulse_3.4s_ease-out_infinite_1.7s]" style={{ background: `${ACCENT}22` }} />
+                <div
+                  className="relative flex flex-col items-center justify-center w-full h-full rounded-full text-white"
+                  style={{ background: GRADIENT, boxShadow: `0 18px 50px color-mix(in srgb, ${ACCENT} 45%, transparent)` }}
+                >
+                  <Compass size={26} className="mb-1 opacity-90" />
+                  <span className="font-serif font-medium text-[22px] leading-none" style={{ letterSpacing: "-0.02em" }}>
+                    Institute
+                  </span>
+                  <span className="mt-1.5 font-mono text-[9.5px] font-semibold uppercase tracking-[0.22em] text-white/70">
+                    8 areas
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Mobile fallback: clean list (no orbit on small screens) ── */}
+        <div className="sm:hidden grid grid-cols-1 gap-2.5">
+          {INSTITUTE_OVERVIEW_FEATURES.map(({ icon: Icon, label, desc, anchor }, i) => (
+            <motion.button
+              key={anchor}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.38, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+              onClick={() => scrollTo(anchor)}
+              className="group flex items-center gap-3.5 p-3.5 text-left transition-all duration-200 active:scale-[0.98]"
+              style={{
+                borderRadius: "var(--r)",
+                border: "1px solid var(--line)",
+                background: "var(--page)",
+                boxShadow: "0 2px 8px rgba(14,14,16,0.04)",
+              }}
+            >
+              <span
+                className="flex items-center justify-center w-11 h-11 rounded-[9px] shrink-0"
+                style={{ background: `color-mix(in srgb, ${ACCENT} 12%, #fff)`, color: ACCENT }}
+              >
+                <Icon size={20} />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[14px] font-medium leading-snug" style={{ color: "var(--ink)" }}>{label}</span>
+                <span className="block text-[12px] leading-snug truncate" style={{ color: "var(--ink-4)" }}>{desc}</span>
+              </span>
+              <ArrowRight size={15} className="shrink-0" style={{ color: "var(--line-2)" }} />
+            </motion.button>
+          ))}
+        </div>
+
+        {/* ── Divider ───────────────────────────────────────────────── */}
+        <div className="mt-12 flex items-center gap-4">
+          <div className="flex-1 h-px" style={{ background: "var(--line)" }} />
+          <span className="font-mono text-[10.5px] font-semibold uppercase tracking-[.2em]" style={{ color: "var(--ink-4)" }}>
+            Scroll to explore each area
+          </span>
+          <div className="flex-1 h-px" style={{ background: "var(--line)" }} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function InstituteHome() {
   const [selectedType, setSelectedType] = useState("independent");
 
   return (
     <div className="w-full" style={{ background: "var(--page)" }}>
       <HeroSection />
+      <InstituteOverviewSection />
       <InstitutionTypeSection selectedType={selectedType} setSelectedType={setSelectedType} />
       <ConnectedSystemSection />
       <TeacherCapacitySection />
