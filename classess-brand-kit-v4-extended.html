@@ -1,0 +1,1770 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classess — Brand Kit (next)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* IDENTITY — black + white only */
+  --ink:#0E0E10; --ink-2:#33343A; --ink-3:#6A6C75; --ink-4:#A6A8B0; --ink-invert:#FFFFFF;
+  --page:#FFFFFF; --paper:#FAFAFB; --mist:#F1F2F5; --line:#E7E8EC; --line-2:#D7D9E0;
+  /* DARK FOCUS SURFACE — for moments, not the whole UI */
+  --panel:#141418; --panel-2:#1D1E24; --panel-line:#2C2E37; --panel-ink:#ECEDF2; --panel-ink-2:#9FA2AD;
+  /* EXPRESSIVE PALETTE — free paint. No fixed meaning. Any color, anywhere. */
+  --magenta:#D6196F; --mint:#13B5A0; --mandarin:#F26A38; --azure:#2563EB; --mauve:#8E6FC4;
+  --grass:#1CA363; --silver:#9AA0AA; --violet:#6D4AE0; --gold:#DFA21F; --rose:#E0518A; --sky:#39A0DE; --lime:#82B23A;
+  /* type */
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace; --hand:'Caveat',cursive;
+  --r:14px; --r-sm:8px; --r-lg:20px;
+  --sh-sm:0 1px 3px rgba(14,14,16,.05),0 1px 2px rgba(14,14,16,.04);
+  --sh:0 10px 30px rgba(14,14,16,.07),0 2px 8px rgba(14,14,16,.05);
+  --sh-lg:0 30px 70px rgba(14,14,16,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--page);color:var(--ink);font-family:var(--sans);font-weight:450;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.kick{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ── HERO ── */
+.hero{padding:96px 0 64px;border-bottom:1px solid var(--line)}
+.wordmark{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:-.02em;color:var(--ink)}
+.wordmark .dot{color:var(--ink)}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:74px;line-height:.98;letter-spacing:-.035em;margin:30px 0 0;max-width:14ch}
+.hero h1 em{font-style:italic}
+.hero p{font-family:var(--serif);font-size:21px;line-height:1.5;color:var(--ink-2);max-width:54ch;margin-top:26px}
+.hero .strip{display:flex;gap:6px;margin-top:40px}
+.hero .strip i{height:6px;border-radius:6px;flex:1}
+
+/* ── SECTION ── */
+section{padding:74px 0;border-bottom:1px solid var(--line)}
+.s-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px}
+.s-head h2{font-family:var(--serif);font-weight:500;font-size:34px;letter-spacing:-.02em}
+.s-head .n{font-family:var(--mono);font-size:12px;color:var(--ink-4);font-weight:500}
+.lede{font-family:var(--serif);font-size:19px;color:var(--ink-2);max-width:60ch;margin-bottom:30px;line-height:1.55}
+.lede em{font-style:italic;color:var(--ink)}
+
+/* ── IDENTITY ── */
+.id-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.id-row{grid-template-columns:1fr}}
+.id-card{border-radius:var(--r);padding:48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+.id-card.light{background:var(--page)} .id-card.dark{background:var(--panel);border-color:var(--panel)}
+.id-card .wm-lg{font-family:var(--serif);font-weight:600;font-size:42px;letter-spacing:-.02em}
+.id-card.light .wm-lg{color:var(--ink)} .id-card.dark .wm-lg{color:var(--page)}
+.caption{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);margin-top:12px;text-align:center}
+
+/* ── COLOR ── */
+.pal{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+@media(max-width:760px){.pal{grid-template-columns:repeat(3,1fr)}}
+.sw{border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--line);background:var(--page)}
+.sw .chip{height:78px}
+.sw .meta{padding:9px 11px}
+.sw .nm{font-size:12.5px;font-weight:600;color:var(--ink)}
+.sw .hx{font-family:var(--mono);font-size:10.5px;color:var(--ink-4);margin-top:1px}
+.note{font-family:var(--hand);font-size:21px;color:var(--ink-2);margin-top:22px}
+
+/* ── TYPE ── */
+.type-row{padding:20px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:baseline}
+.type-row:first-of-type{border-top:none}
+.type-row .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);padding-top:6px}
+.t-display{font-family:var(--serif);font-weight:500;font-size:46px;letter-spacing:-.025em;line-height:1.05}
+.t-display em{font-style:italic}
+.t-body{font-family:var(--sans);font-size:17px;color:var(--ink-2);max-width:58ch}
+.t-mono{font-family:var(--mono);font-size:14px;color:var(--ink-2);letter-spacing:.02em}
+.t-hand{font-family:var(--hand);font-size:28px;color:var(--ink-2)}
+
+/* ── COMPONENTS ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.demo{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.demo h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);margin-bottom:18px;font-weight:600}
+.btn{font-family:var(--sans);font-weight:500;font-size:14px;padding:11px 20px;border-radius:var(--r-sm);border:1px solid var(--ink);background:var(--ink);color:var(--page);cursor:pointer;transition:.15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--sh-sm)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+.btn.paint{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;padding:5px 11px;border-radius:999px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.inp{width:100%;font-family:var(--sans);font-size:15px;padding:11px 14px;border:1px solid var(--line-2);border-radius:var(--r-sm);background:var(--page);color:var(--ink);outline:none}
+.inp:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(14,14,16,.06)}
+.card{background:var(--page);border:1px solid var(--line);border-radius:var(--r);padding:0;overflow:hidden;box-shadow:var(--sh-sm)}
+.card .top{height:5px}
+.card .body{padding:18px 20px}
+.card .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4)}
+.card h5{font-family:var(--serif);font-weight:500;font-size:21px;margin:8px 0 6px;letter-spacing:-.01em}
+.card p{font-size:14px;color:var(--ink-3)}
+
+/* DARK FOCUS PANEL — the signature "moment" surface */
+.panel{background:var(--panel);border:1px solid var(--panel-line);border-radius:var(--r);padding:24px;color:var(--panel-ink);position:relative;overflow:hidden}
+.panel .pk{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.code-line{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;padding:9px 13px;margin:7px 0;border-radius:8px;background:var(--panel-2);border:1px solid var(--panel-line);width:max-content;color:var(--panel-ink)}
+.code-line .tick{font-size:11px;font-weight:600}
+.code-line.lit{border-color:var(--paint);box-shadow:0 0 0 1px var(--paint),0 0 18px -4px var(--paint)}
+.code-line.lit .tick{color:var(--paint)}
+.ind1{margin-left:26px}.ind2{margin-left:52px}
+
+/* SAME STYLE ANY COLOR — magazine proof */
+.worlds{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.worlds{grid-template-columns:1fr 1fr}}
+.world{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--page);box-shadow:var(--sh-sm)}
+.world .ph{height:96px;display:flex;align-items:flex-end;padding:14px;position:relative}
+.world .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.35),transparent 60%);}
+.world .ph .tag{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#fff;font-weight:600;position:relative;z-index:1}
+.world .wb{padding:14px}
+.world .wb .kk{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.world .wb h6{font-family:var(--serif);font-weight:500;font-size:17px;margin:5px 0 4px;color:var(--ink);letter-spacing:-.01em}
+.world .wb p{font-size:12px;color:var(--ink-3);line-height:1.45}
+
+/* TOKENS */
+.tok{background:var(--panel);border-radius:var(--r);padding:24px 26px;font-family:var(--mono);font-size:12.5px;color:var(--panel-ink-2);line-height:1.9;overflow-x:auto}
+.tok .c{color:#7E8290}.tok .v{color:var(--panel-ink)}.tok .p{color:var(--magenta)}
+footer{padding:60px 0 90px;text-align:center}
+footer .wordmark{font-size:20px}
+footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-top:12px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero"><div class="wrap">
+  <div class="wordmark">Classess<span class="dot">.</span></div>
+  <h1>One <em>style.</em><br>Every colour.</h1>
+  <p>The brand isn't a colour — it's a way of making things. Black, white, and a typeface that never wavers hold it together. Colour runs free on top: any hue, any lesson, wherever it makes the work sing. The discipline lives in the craft, so the palette never has to.</p>
+  <div class="strip">
+    <i style="background:var(--magenta)"></i><i style="background:var(--mint)"></i><i style="background:var(--mandarin)"></i><i style="background:var(--azure)"></i><i style="background:var(--mauve)"></i><i style="background:var(--grass)"></i><i style="background:var(--gold)"></i><i style="background:var(--violet)"></i>
+  </div>
+</div></div>
+
+<!-- IDENTITY -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">01</span><h2>Identity</h2></div>
+  <p class="lede">The wordmark is <em>monochrome, always</em> — ink on white, or white on a dark moment. It never takes a colour. That restraint is exactly what lets everything around it be as colourful as it likes.</p>
+  <div class="id-row">
+    <div><div class="id-card light"><span class="wm-lg">Classess.</span></div><div class="caption">Ink on white · the default</div></div>
+    <div><div class="id-card dark"><span class="wm-lg">Classess.</span></div><div class="caption">White on focus-dark · for moments</div></div>
+  </div>
+</div></section>
+
+<!-- COLOR -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">02</span><h2>Colour</h2></div>
+  <p class="lede">A curated set of <em>expressive paint</em> — not a code. No colour means a subject; no colour is reserved. Pick what makes a given piece beautiful. The set is wide on purpose and cool-leaning to feel modern; mandarin and gold are the warm pops, used sparingly.</p>
+  <div class="pal">
+    <div class="sw"><div class="chip" style="background:var(--magenta)"></div><div class="meta"><div class="nm">Magenta</div><div class="hx">#D6196F</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--mint)"></div><div class="meta"><div class="nm">Mint</div><div class="hx">#13B5A0</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--azure)"></div><div class="meta"><div class="nm">Azure</div><div class="hx">#2563EB</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--mauve)"></div><div class="meta"><div class="nm">Mauve</div><div class="hx">#8E6FC4</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--violet)"></div><div class="meta"><div class="nm">Violet</div><div class="hx">#6D4AE0</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--grass)"></div><div class="meta"><div class="nm">Grass</div><div class="hx">#1CA363</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--mandarin)"></div><div class="meta"><div class="nm">Mandarin</div><div class="hx">#F26A38</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--gold)"></div><div class="meta"><div class="nm">Gold</div><div class="hx">#DFA21F</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--rose)"></div><div class="meta"><div class="nm">Rose</div><div class="hx">#E0518A</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--sky)"></div><div class="meta"><div class="nm">Sky</div><div class="hx">#39A0DE</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--lime)"></div><div class="meta"><div class="nm">Lime</div><div class="hx">#82B23A</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--silver)"></div><div class="meta"><div class="nm">Silver</div><div class="hx">#9AA0AA</div></div></div>
+  </div>
+  <div class="note">— used for energy, never for labelling. the rule is the style, not the swatch.</div>
+</div></section>
+
+<!-- TYPE -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">03</span><h2>Type</h2></div>
+  <p class="lede">The type system is the <em>real identity</em> — it never changes, which is what makes any colour safe around it. Fraunces for display, Inter for body, JetBrains Mono for labels and code, Caveat for the rare hand-note.</p>
+  <div class="type-row"><div class="lbl">Fraunces</div><div class="t-display">See the <em>scenario</em>, then solve.</div></div>
+  <div class="type-row"><div class="lbl">Inter</div><div class="t-body">Body copy is Inter — quiet, legible, never competing with the display. It carries explanation, instruction, and interface text across every screen at a comfortable reading weight.</div></div>
+  <div class="type-row"><div class="lbl">JetBrains Mono</div><div class="t-mono">CHEMISTRY · CLASS 11 · TITRATION &nbsp;//&nbsp; pH = 11.07</div></div>
+  <div class="type-row"><div class="lbl">Caveat</div><div class="t-hand">a margin note, used sparingly — like a teacher's pencil</div></div>
+</div></section>
+
+<!-- COMPONENTS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">04</span><h2>Core components</h2></div>
+  <p class="lede">Structure is monochrome; colour enters only as <em>intent</em> — a primary action, an accent edge, a lit state. Same components, swap the paint, nothing else moves.</p>
+  <div class="grid2">
+    <div class="demo"><h4>Buttons</h4><div class="btns">
+      <button class="btn">Primary</button>
+      <button class="btn ghost">Secondary</button>
+      <button class="btn paint">Paint accent</button>
+    </div></div>
+    <div class="demo"><h4>Pills</h4><div class="pills">
+      <span class="pill" style="background:color-mix(in srgb,var(--magenta) 12%,#fff);color:var(--magenta)">Magenta</span>
+      <span class="pill" style="background:color-mix(in srgb,var(--mint) 14%,#fff);color:#0c7d6e">Mint</span>
+      <span class="pill" style="background:color-mix(in srgb,var(--azure) 12%,#fff);color:var(--azure)">Azure</span>
+      <span class="pill" style="background:color-mix(in srgb,var(--mauve) 16%,#fff);color:#6a4ba0">Mauve</span>
+    </div></div>
+    <div class="demo"><h4>Input</h4><input class="inp" placeholder="Type a topic — any subject…" value="Class 11 · Titration curve"></div>
+    <div class="demo"><h4>Content card</h4>
+      <div class="card"><div class="top" style="background:var(--mint)"></div><div class="body"><div class="k">Lesson</div><h5>The drop that flips the flask</h5><p>An acid–base titration, walked through to the equivalence point.</p></div></div>
+    </div>
+  </div>
+  <div style="margin-top:18px" class="grid2">
+    <div class="demo" style="--paint:var(--magenta)"><h4>Dark focus panel · the signature moment</h4>
+      <div class="panel">
+        <div class="pk" style="color:var(--magenta)">Computer Science · assemble the program</div>
+        <div class="code-line lit"><span class="tick">✓</span> def factorial(n):</div>
+        <div class="code-line ind1"><span class="tick">✓</span> result = 1</div>
+        <div class="code-line ind1"><span class="tick">✓</span> for i in range(2, n + 1):</div>
+        <div class="code-line ind2"><span class="tick">✓</span> result = result * i</div>
+        <div class="code-line ind1"><span class="tick">✓</span> return result</div>
+      </div>
+    </div>
+    <div class="demo" style="--paint:var(--mint)"><h4>Same panel · different paint</h4>
+      <div class="panel">
+        <div class="pk" style="color:var(--mint)">Mathematics · build the proof</div>
+        <div class="code-line lit"><span class="tick">✓</span> Given △ABC, AB = AC</div>
+        <div class="code-line ind1"><span class="tick">✓</span> ∠B = ∠C  (isosceles)</div>
+        <div class="code-line ind1"><span class="tick">✓</span> drop altitude AD ⊥ BC</div>
+        <div class="code-line ind2"><span class="tick">✓</span> △ABD ≅ △ACD</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SAME STYLE ANY COLOR -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">05</span><h2>Same style, any colour</h2></div>
+  <p class="lede">The proof of the whole idea: one card, four colour worlds. Nothing about the <em>style</em> changes — type, spacing, structure are identical — yet each feels distinct. That's how the product stays one thing while every lesson gets its own life.</p>
+  <div class="worlds">
+    <div class="world"><div class="ph" style="background:var(--magenta)"><span class="tag">Computer Science</span></div><div class="wb"><div class="kk" style="color:var(--magenta)">Parsons</div><h6>Factorial with a loop</h6><p>Drag the lines into order, indent the body.</p></div></div>
+    <div class="world"><div class="ph" style="background:var(--mint)"><span class="tag">Chemistry</span></div><div class="wb"><div class="kk" style="color:#0c7d6e">Titration</div><h6>The equivalence point</h6><p>Add base until the flask flips pink.</p></div></div>
+    <div class="world"><div class="ph" style="background:var(--azure)"><span class="tag">Mathematics</span></div><div class="wb"><div class="kk" style="color:var(--azure)">Trigonometry</div><h6>Where sine comes from</h6><p>Wind the point; watch it draw the wave.</p></div></div>
+    <div class="world"><div class="ph" style="background:var(--mauve)"><span class="tag">Biology</span></div><div class="wb"><div class="kk" style="color:#6a4ba0">Cell</div><h6>Inside an animal cell</h6><p>Rotate to find where energy is made.</p></div></div>
+  </div>
+  <div class="note">same bones, different light. the magazine, not the rainbow.</div>
+</div></section>
+
+<!-- TOKENS -->
+<section style="border-bottom:none"><div class="wrap">
+  <div class="s-head"><span class="n">06</span><h2>Tokens</h2></div>
+  <p class="lede">The starting set, ready to drop into the system. Identity tokens are fixed; the expressive palette is open — add to it freely.</p>
+  <div class="tok">
+<span class="c">/* identity — fixed */</span><br>
+--ink:<span class="v">#0E0E10</span>;  --page:<span class="v">#FFFFFF</span>;  --paper:<span class="v">#FAFAFB</span>;  --line:<span class="v">#E7E8EC</span>;<br>
+--panel:<span class="v">#141418</span>;  <span class="c">/* dark focus surface — moments only */</span><br><br>
+<span class="c">/* expressive paint — free, unmapped */</span><br>
+--magenta:<span class="p">#D6196F</span>;  --mint:<span class="v">#13B5A0</span>;  --azure:<span class="v">#2563EB</span>;  --mauve:<span class="v">#8E6FC4</span>;<br>
+--violet:<span class="v">#6D4AE0</span>;  --grass:<span class="v">#1CA363</span>;  --mandarin:<span class="v">#F26A38</span>;  --gold:<span class="v">#DFA21F</span>;<br>
+--rose:<span class="v">#E0518A</span>;  --sky:<span class="v">#39A0DE</span>;  --lime:<span class="v">#82B23A</span>;  --silver:<span class="v">#9AA0AA</span>;<br><br>
+<span class="c">/* type — the real identity, never changes */</span><br>
+--serif:<span class="v">'Fraunces'</span>;  --sans:<span class="v">'Inter'</span>;  --mono:<span class="v">'JetBrains Mono'</span>;  --hand:<span class="v">'Caveat'</span>;
+  </div>
+</div></section>
+
+<style>
+/* ── extended component styles ── */
+.surf-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.surf-row{grid-template-columns:1fr 1fr}}
+.surf{height:96px;border-radius:var(--r);border:1px solid var(--line);display:flex;align-items:flex-end;padding:12px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
+
+.nav-demo{display:grid;grid-template-columns:208px 1fr;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;min-height:300px}
+@media(max-width:760px){.nav-demo{grid-template-columns:1fr}}
+.side{background:var(--paper);border-right:1px solid var(--line);padding:20px 14px}
+.side .wm{font-family:var(--serif);font-weight:600;font-size:19px;margin-bottom:22px;padding:0 8px}
+.side a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:8px;font-size:14px;color:var(--ink-2);text-decoration:none;margin-bottom:3px;font-weight:450}
+.side a .ic{width:7px;height:7px;border-radius:2px;background:var(--ink-4)}
+.side a.on{background:var(--ink);color:#fff;font-weight:500}.side a.on .ic{background:var(--magenta)}
+.side a:not(.on):hover{background:var(--mist)}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--page)}
+.topbar .crumb{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.main-stub{padding:26px 22px;background:var(--page)}
+.main-stub h3{font-family:var(--serif);font-weight:500;font-size:26px;letter-spacing:-.02em}
+.main-stub .sline{font-size:14px;color:var(--ink-3);margin-top:6px}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px}
+.sel{width:100%;font-family:var(--sans);font-size:15px;padding:11px 14px;border:1px solid var(--line-2);border-radius:var(--r-sm);background:var(--page);color:var(--ink);appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink-3) 50%),linear-gradient(135deg,var(--ink-3) 50%,transparent 50%);background-position:calc(100% - 18px) 18px,calc(100% - 13px) 18px;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.check{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-2);margin-bottom:9px}
+.check .box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex:none}
+.check .box.on{background:var(--magenta);border-color:var(--magenta);color:#fff;font-size:11px;font-weight:700}
+.check .rad{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line-2);flex:none;position:relative}
+.check .rad.on{border-color:var(--magenta)}.check .rad.on::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--magenta)}
+.toggle{width:40px;height:23px;border-radius:999px;background:var(--line-2);position:relative;flex:none;transition:.18s}
+.toggle.on{background:var(--magenta)}
+.toggle::after{content:"";position:absolute;top:2.5px;left:2.5px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.18s;box-shadow:var(--sh-sm)}
+.toggle.on::after{left:19.5px}
+
+.badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.04em;padding:4px 9px;border-radius:6px;text-transform:uppercase}
+.avatar{width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:15px;color:#fff}
+.av-row{display:flex;gap:10px;align-items:center}
+
+.alert{display:flex;gap:12px;padding:13px 16px;border-radius:var(--r-sm);font-size:14px;align-items:flex-start;margin-bottom:10px;border:1px solid}
+.alert .b{width:7px;height:7px;border-radius:50%;margin-top:6px;flex:none}
+.alert .at{font-weight:600;color:var(--ink)}.alert .ax{color:var(--ink-3);font-size:13px}
+
+.table{width:100%;border-collapse:collapse;font-size:14px}
+.table th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-2);font-weight:600}
+.table td{padding:12px;border-bottom:1px solid var(--line);color:var(--ink-2)}
+.table tr:last-child td{border-bottom:none}
+.table .nm{color:var(--ink);font-weight:500}
+
+.lesson-head{border-left:3px solid var(--magenta);padding:4px 0 4px 18px;margin-bottom:18px}
+.lesson-head .lk{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);font-weight:600}
+.lesson-head h3{font-family:var(--serif);font-weight:500;font-size:30px;letter-spacing:-.02em;margin-top:7px}
+.lesson-head h3 em{font-style:italic}
+.stepbar{display:flex;gap:5px;margin-top:14px}
+.stepbar i{height:4px;border-radius:4px;flex:1;background:var(--line-2)}
+.stepbar i.done{background:color-mix(in srgb,var(--magenta) 55%,#fff)}.stepbar i.now{background:var(--magenta)}
+
+.quiz-opt{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1.5px solid var(--line-2);border-radius:10px;margin-bottom:9px;font-size:15px;color:var(--ink-2);cursor:pointer;transition:.14s}
+.quiz-opt .key{font-family:var(--mono);font-size:12px;font-weight:600;width:24px;height:24px;border-radius:6px;background:var(--mist);display:flex;align-items:center;justify-content:center;color:var(--ink-3);flex:none}
+.quiz-opt.correct{border-color:var(--grass);background:color-mix(in srgb,var(--grass) 7%,#fff)}.quiz-opt.correct .key{background:var(--grass);color:#fff}
+.quiz-opt.wrong{border-color:var(--rose);background:color-mix(in srgb,var(--rose) 7%,#fff)}.quiz-opt.wrong .key{background:var(--rose);color:#fff}
+
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.kpi-row{grid-template-columns:1fr 1fr}}
+.kpi{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:var(--page)}
+.kpi .kl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
+.kpi .kv{font-family:var(--serif);font-weight:500;font-size:34px;letter-spacing:-.02em;margin:8px 0 4px}
+.kpi .kd{font-family:var(--mono);font-size:11px;font-weight:600}
+
+.prog{height:8px;border-radius:8px;background:var(--mist);overflow:hidden;margin-bottom:14px}
+.prog i{display:block;height:100%;border-radius:8px}
+.streak{display:flex;gap:6px}
+.streak i{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:600}
+
+.bars{display:flex;align-items:flex-end;gap:14px;height:150px;padding-top:10px}
+.bars .bar{flex:1;border-radius:6px 6px 0 0;position:relative;min-width:0}
+.bars .bar span{position:absolute;bottom:-22px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10px;color:var(--ink-4)}
+
+.modal-stub{background:var(--page);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-lg);padding:26px;max-width:420px}
+.modal-stub h4{font-family:var(--serif);font-weight:500;font-size:23px;letter-spacing:-.01em;margin-bottom:8px}
+.modal-stub p{font-size:14px;color:var(--ink-3);margin-bottom:20px}
+
+.empty{text-align:center;padding:44px 20px;border:1px dashed var(--line-2);border-radius:var(--r)}
+.empty .circ{width:54px;height:54px;border-radius:50%;background:var(--mist);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:24px;color:var(--ink-4)}
+.empty h4{font-family:var(--serif);font-weight:500;font-size:21px;margin-bottom:6px}
+.empty p{font-size:14px;color:var(--ink-3);max-width:38ch;margin:0 auto 18px}
+
+.banner{border-radius:var(--r);padding:22px 26px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--panel);position:relative;overflow:hidden}
+.banner h4{font-family:var(--serif);font-weight:500;font-size:24px;letter-spacing:-.01em}
+.banner p{font-size:14px;opacity:.8;margin-top:4px}
+.banner .btn{background:#fff;color:var(--ink);border-color:#fff;flex:none}
+
+.price-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.price-row{grid-template-columns:1fr}}
+.price{border:1px solid var(--line);border-radius:var(--r);padding:24px;background:var(--page)}
+.price.feat{border-color:var(--ink);box-shadow:var(--sh)}
+.price .pt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.price .pp{font-family:var(--serif);font-weight:500;font-size:38px;letter-spacing:-.02em;margin:10px 0}.price .pp small{font-size:14px;color:var(--ink-4);font-family:var(--sans)}
+.price ul{list-style:none;margin:16px 0;font-size:14px;color:var(--ink-2)}
+.price li{padding:6px 0;border-top:1px solid var(--line)}
+</style>
+
+<!-- SURFACES -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">07</span><h2>Surfaces</h2></div>
+  <p class="lede">Light-first — it's an education app, never a dark void. Three near-white surfaces stack for depth; the <em>focus-dark</em> is reserved for moments that deserve the spotlight.</p>
+  <div class="surf-row">
+    <div class="surf" style="background:var(--page)">Page · #FFFFFF</div>
+    <div class="surf" style="background:var(--paper)">Paper · #FAFAFB</div>
+    <div class="surf" style="background:var(--mist)">Mist · #F1F2F5</div>
+    <div class="surf" style="background:var(--panel);color:var(--panel-ink-2);border-color:var(--panel)">Focus · #141418</div>
+  </div>
+</div></section>
+
+<!-- NAVIGATION -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">08</span><h2>Navigation</h2></div>
+  <div class="nav-demo">
+    <div class="side">
+      <div class="wm">Classess.</div>
+      <a class="on"><span class="ic"></span> Today</a>
+      <a><span class="ic"></span> Lessons</a>
+      <a><span class="ic"></span> Library</a>
+      <a><span class="ic"></span> Students</a>
+      <a><span class="ic"></span> Insights</a>
+    </div>
+    <div>
+      <div class="topbar"><span class="crumb">Lessons / Class 11 / Chemistry</span><span class="badge" style="background:color-mix(in srgb,var(--magenta) 12%,#fff);color:var(--magenta)">Live</span></div>
+      <div class="main-stub"><h3>Acids, Bases &amp; Salts</h3><div class="sline">12 topics · 4 ready to generate</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FORMS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">09</span><h2>Form controls</h2></div>
+  <div class="grid2">
+    <div class="demo">
+      <div class="field"><label>Topic</label><input class="inp" value="Equivalence point"></div>
+      <div class="field"><label>Subject</label><select class="sel"><option>Chemistry</option><option>Physics</option></select></div>
+      <div class="field"><label>Notes</label><textarea class="inp" rows="2" style="resize:none">Class 11, English medium</textarea></div>
+    </div>
+    <div class="demo">
+      <h4>Selection</h4>
+      <div class="check"><span class="box on">✓</span> Generate worked example</div>
+      <div class="check"><span class="box">✓</span> Include practice set</div>
+      <div class="check"><span class="rad on"></span> Core band (9–10)</div>
+      <div class="check"><span class="rad"></span> Stretch band (11–12)</div>
+      <div class="check" style="margin-top:14px"><span class="toggle on"></span> Auto-narrate</div>
+      <div class="check"><span class="toggle"></span> Vernacular subtitles</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BADGES & AVATARS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">10</span><h2>Badges &amp; avatars</h2></div>
+  <div class="grid2">
+    <div class="demo"><h4>Badges · paint as intent</h4><div class="pills">
+      <span class="badge" style="background:color-mix(in srgb,var(--magenta) 12%,#fff);color:var(--magenta)">New</span>
+      <span class="badge" style="background:color-mix(in srgb,var(--grass) 13%,#fff);color:#0c7d4e">Ready</span>
+      <span class="badge" style="background:color-mix(in srgb,var(--gold) 16%,#fff);color:#8a6510">Draft</span>
+      <span class="badge" style="background:color-mix(in srgb,var(--azure) 11%,#fff);color:var(--azure)">Beta</span>
+      <span class="badge" style="background:var(--mist);color:var(--ink-3)">Archived</span>
+    </div></div>
+    <div class="demo"><h4>Avatars</h4><div class="av-row">
+      <span class="avatar" style="background:var(--magenta)">SR</span>
+      <span class="avatar" style="background:var(--azure)">VK</span>
+      <span class="avatar" style="background:var(--mauve)">AP</span>
+      <span class="avatar" style="background:var(--mint)">RG</span>
+      <span class="avatar" style="background:var(--ink);font-size:12px">+6</span>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- ALERTS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">11</span><h2>Alerts &amp; toasts</h2></div>
+  <p class="lede">Semantic colour is the <em>one</em> place colour carries fixed meaning — success, caution, error — because legibility demands it. Everywhere else, colour stays free.</p>
+  <div class="grid2">
+    <div>
+      <div class="alert" style="border-color:color-mix(in srgb,var(--grass) 30%,#fff);background:color-mix(in srgb,var(--grass) 6%,#fff)"><span class="b" style="background:var(--grass)"></span><div><div class="at">Lesson generated</div><div class="ax">Titration walkthrough is ready to review.</div></div></div>
+      <div class="alert" style="border-color:color-mix(in srgb,var(--gold) 36%,#fff);background:color-mix(in srgb,var(--gold) 8%,#fff)"><span class="b" style="background:var(--gold)"></span><div><div class="at">Needs a check</div><div class="ax">One answer in this set failed the verify gate.</div></div></div>
+    </div>
+    <div>
+      <div class="alert" style="border-color:color-mix(in srgb,var(--rose) 32%,#fff);background:color-mix(in srgb,var(--rose) 6%,#fff)"><span class="b" style="background:var(--rose)"></span><div><div class="at">Render failed</div><div class="ax">The 3D scene threw on load — retrying.</div></div></div>
+      <div class="alert" style="border-color:color-mix(in srgb,var(--azure) 30%,#fff);background:color-mix(in srgb,var(--azure) 6%,#fff)"><span class="b" style="background:var(--azure)"></span><div><div class="at">Tip</div><div class="ax">Drag the point around the circle to draw the wave.</div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CARDS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">12</span><h2>Cards</h2></div>
+  <div class="worlds">
+    <div class="card"><div class="top" style="background:var(--magenta)"></div><div class="body"><div class="k">Computer Science</div><h5>Factorial with a loop</h5><p>Parsons · drag to order.</p></div></div>
+    <div class="card"><div class="top" style="background:var(--azure)"></div><div class="body"><div class="k">Mathematics</div><h5>The sine wave</h5><p>Unit circle · interactive.</p></div></div>
+    <div class="card"><div class="top" style="background:var(--mint)"></div><div class="body"><div class="k">Chemistry</div><h5>Titration</h5><p>Live pH curve.</p></div></div>
+    <div class="card"><div class="top" style="background:var(--mauve)"></div><div class="body"><div class="k">Biology</div><h5>Animal cell</h5><p>3D · rotatable.</p></div></div>
+  </div>
+</div></section>
+
+<!-- TABLE -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">13</span><h2>Tables</h2></div>
+  <div class="demo" style="padding:6px 16px">
+    <table class="table">
+      <thead><tr><th>Topic</th><th>Engine</th><th>Band</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">Equivalence point</td><td>Chart</td><td>11–12</td><td><span class="badge" style="background:color-mix(in srgb,var(--grass) 13%,#fff);color:#0c7d4e">Ready</span></td></tr>
+        <tr><td class="nm">Sine from circle</td><td>2D</td><td>11–12</td><td><span class="badge" style="background:color-mix(in srgb,var(--grass) 13%,#fff);color:#0c7d4e">Ready</span></td></tr>
+        <tr><td class="nm">Animal cell</td><td>3D</td><td>9–10</td><td><span class="badge" style="background:color-mix(in srgb,var(--gold) 16%,#fff);color:#8a6510">Review</span></td></tr>
+        <tr><td class="nm">Factorial loop</td><td>Code</td><td>11–12</td><td><span class="badge" style="background:color-mix(in srgb,var(--magenta) 12%,#fff);color:var(--magenta)">New</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<!-- LESSON UI -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">14</span><h2>Lesson UI</h2></div>
+  <div class="demo" style="--paint:var(--mint)">
+    <div class="lesson-head" style="border-color:var(--mint)">
+      <div class="lk" style="color:#0c7d6e">Chemistry · Class 11</div>
+      <h3>The drop that <em>flips</em> the flask</h3>
+    </div>
+    <div class="stepbar"><i class="done"></i><i class="done"></i><i class="now"></i><i></i><i></i></div>
+    <p style="font-size:14px;color:var(--ink-3);margin-top:14px">Step 3 of 5 — Add base past the equivalence point and watch the indicator turn.</p>
+  </div>
+</div></section>
+
+<!-- QUIZ -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">15</span><h2>Quiz components</h2></div>
+  <div class="demo">
+    <p style="font-family:var(--serif);font-size:18px;margin-bottom:16px">At the equivalence point of a strong acid–strong base titration, the pH is:</p>
+    <div class="quiz-opt"><span class="key">A</span> Less than 7</div>
+    <div class="quiz-opt correct"><span class="key">B</span> Exactly 7</div>
+    <div class="quiz-opt"><span class="key">C</span> Greater than 7</div>
+    <div class="quiz-opt wrong"><span class="key">D</span> Undefined</div>
+  </div>
+</div></section>
+
+<!-- STATS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">16</span><h2>Stats &amp; KPIs</h2></div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="kl">Topics live</div><div class="kv">604</div><div class="kd" style="color:var(--grass)">+38 this week</div></div>
+    <div class="kpi"><div class="kl">Engines</div><div class="kv">11</div><div class="kd" style="color:var(--ink-4)">9 production</div></div>
+    <div class="kpi"><div class="kl">Avg generate</div><div class="kv">2.4<small style="font-size:15px"> s</small></div><div class="kd" style="color:var(--grass)">−0.3s</div></div>
+    <div class="kpi"><div class="kl">Pass rate</div><div class="kv">98<small style="font-size:15px">%</small></div><div class="kd" style="color:var(--azure)">verify gate</div></div>
+  </div>
+</div></section>
+
+<!-- PROGRESS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">17</span><h2>Progress</h2></div>
+  <div class="grid2">
+    <div class="demo"><h4>Bars · any paint</h4>
+      <div class="prog"><i style="width:82%;background:var(--magenta)"></i></div>
+      <div class="prog"><i style="width:64%;background:var(--azure)"></i></div>
+      <div class="prog"><i style="width:45%;background:var(--mint)"></i></div>
+    </div>
+    <div class="demo"><h4>Streak</h4>
+      <div class="streak">
+        <i style="background:var(--magenta);color:#fff">M</i><i style="background:var(--magenta);color:#fff">T</i>
+        <i style="background:var(--magenta);color:#fff">W</i><i style="background:color-mix(in srgb,var(--magenta) 18%,#fff);color:var(--magenta)">T</i>
+        <i style="background:var(--mist);color:var(--ink-4)">F</i><i style="background:var(--mist);color:var(--ink-4)">S</i><i style="background:var(--mist);color:var(--ink-4)">S</i>
+      </div>
+      <p style="font-size:13px;color:var(--ink-3);margin-top:14px">3-day streak · keep it going</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- CHARTS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">18</span><h2>Charts</h2></div>
+  <p class="lede">Within one chart, colour <em>organises</em> — distinct series need distinct hues. Across the product it stays free. Pull from the expressive palette, high-contrast first.</p>
+  <div class="grid2">
+    <div class="demo"><h4>Bars</h4>
+      <div class="bars">
+        <div class="bar" style="height:62%;background:var(--magenta)"><span>Mon</span></div>
+        <div class="bar" style="height:84%;background:var(--azure)"><span>Tue</span></div>
+        <div class="bar" style="height:48%;background:var(--mint)"><span>Wed</span></div>
+        <div class="bar" style="height:96%;background:var(--mauve)"><span>Thu</span></div>
+        <div class="bar" style="height:70%;background:var(--gold)"><span>Fri</span></div>
+      </div>
+    </div>
+    <div class="demo"><h4>Donut</h4>
+      <svg viewBox="0 0 120 120" style="width:150px;height:150px;display:block;margin:0 auto">
+        <circle cx="60" cy="60" r="46" fill="none" stroke="var(--mist)" stroke-width="16"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="var(--magenta)" stroke-width="16" stroke-dasharray="130 289" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="var(--azure)" stroke-width="16" stroke-dasharray="86 289" stroke-dashoffset="-130" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="var(--mint)" stroke-width="16" stroke-dasharray="73 289" stroke-dashoffset="-216" transform="rotate(-90 60 60)"/>
+      </svg>
+    </div>
+  </div>
+</div></section>
+
+<!-- MODAL -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">19</span><h2>Modals &amp; empty states</h2></div>
+  <div class="grid2">
+    <div class="demo" style="display:flex;justify-content:center;align-items:center">
+      <div class="modal-stub">
+        <h4>Publish this lesson?</h4>
+        <p>It'll be visible to all Class 11 students once published.</p>
+        <div class="btns"><button class="btn">Publish</button><button class="btn ghost">Cancel</button></div>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="empty"><div class="circ">∅</div><h4>No lessons yet</h4><p>Pick a topic and the engine will generate the first lesson for you.</p><button class="btn">Generate a lesson</button></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BANNER -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">20</span><h2>Banners</h2></div>
+  <div class="banner">
+    <div><h4>Your school, amplified.</h4><p>The intelligence layer your classroom runs on.</p></div>
+    <button class="btn">Book a walkthrough</button>
+  </div>
+</div></section>
+
+<!-- PRICING -->
+<section style="border-bottom:none"><div class="wrap">
+  <div class="s-head"><span class="n">21</span><h2>Pricing tiles</h2></div>
+  <div class="price-row">
+    <div class="price"><div class="pt">Core</div><div class="pp">$$$<small> /student/yr</small></div><ul><li>All engines</li><li>CBSE 9–12</li><li>Teacher tools</li></ul><button class="btn ghost" style="width:100%">Choose Core</button></div>
+    <div class="price feat"><div class="pt" style="color:var(--magenta)">Premium</div><div class="pp">$$$<small> /student/yr</small></div><ul><li>Everything in Core</li><li>Video lessons</li><li>Vernacular</li><li>Priority support</li></ul><button class="btn" style="width:100%">Choose Premium</button></div>
+    <div class="price"><div class="pt">Flagship</div><div class="pp">$$$<small> /student/yr</small></div><ul><li>Everything in Premium</li><li>Custom content</li><li>White-glove onboarding</li></ul><button class="btn ghost" style="width:100%">Talk to us</button></div>
+  </div>
+</div></section>
+
+<style>
+/* ════════════════════════════════════════════════════════════
+   v4 — EXTENDED COMPONENT LIBRARY  (soft steel, bright on intent)
+   ════════════════════════════════════════════════════════════ */
+
+/* extended paint — rounds out the wheel, same cool-leaning vibe */
+:root{
+  --cobalt:#1F4FD8; --teal:#0FA3A3; --plum:#9A3DA8; --amber:#E8881A;
+  --coral:#E2674A;  --indigo:#4F46E5; --fuchsia:#C026A6; --slate:#5B6473;
+  --cyan:#1BA6C9;   --moss:#5E8C3A;
+  /* semantic — the one place colour is fixed */
+  --ok:#1CA363; --warn:#DFA21F; --err:#E0518A; --info:#2563EB;
+}
+/* generic helpers: any element gets --paint, fills derive from it */
+.paint-soft{ background:color-mix(in srgb, var(--paint) 12%, #fff); }
+.paint-ink { color:color-mix(in srgb, var(--paint) 72%, #000); }
+
+.subhead{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);font-weight:600;margin:22px 0 12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
+
+/* ── EXTENDED PALETTE / TINTS ── */
+.pal-xl{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+@media(max-width:760px){.pal-xl{grid-template-columns:repeat(4,1fr)}}
+.tint-row{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.tint-row:first-of-type{border-top:none}
+.tint-row .tn{font-size:13px;font-weight:600}.tint-row .th{font-family:var(--mono);font-size:10px;color:var(--ink-4);margin-top:1px}
+.ramp{display:flex;border-radius:var(--r-sm);overflow:hidden;height:38px;border:1px solid var(--line)}
+.ramp i{flex:1}
+
+/* ── DROPDOWNS / MENUS ── */
+.menu{background:var(--page);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:7px;width:248px}
+.menu .mh{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);padding:7px 10px 4px}
+.menu .mi{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;font-size:14px;color:var(--ink-2);cursor:pointer}
+.menu .mi:hover{background:var(--mist);color:var(--ink)}
+.menu .mi.sel{background:var(--ink);color:#fff}
+.menu .mi .mc{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-4)}
+.menu .mi.sel .mc{color:#fff;opacity:.7}
+.menu .mi .dot{width:8px;height:8px;border-radius:3px;flex:none}
+.menu .div{height:1px;background:var(--line);margin:6px 4px}
+.menu .mi.danger{color:var(--err)} .menu .mi.danger:hover{background:color-mix(in srgb,var(--err) 8%,#fff)}
+.combo{position:relative}
+.combo .cv{display:flex;align-items:center;gap:8px;padding:11px 14px;border:1px solid var(--line-2);border-radius:var(--r-sm);font-size:15px;color:var(--ink);cursor:pointer}
+.combo .cv::after{content:"";margin-left:auto;width:6px;height:6px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);transform:rotate(45deg);margin-top:-3px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip-x{display:inline-flex;align-items:center;gap:7px;font-size:13px;padding:6px 10px;border-radius:8px;background:var(--mist);color:var(--ink-2)}
+.chip-x b{cursor:pointer;color:var(--ink-4);font-weight:600}
+.cmd{background:var(--page);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-lg);overflow:hidden;max-width:480px}
+.cmd .ci{display:flex;align-items:center;gap:11px;padding:15px 18px;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink-3)}
+.cmd .ci .sq{font-family:var(--mono);font-size:11px;color:var(--ink-4)}
+.cmd .cl{padding:7px}
+.cmd .cr{display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:8px;font-size:14px;color:var(--ink-2);cursor:pointer}
+.cmd .cr:hover,.cmd .cr.on{background:var(--mist);color:var(--ink)}
+.cmd .cr .kbd{margin-left:auto;font-family:var(--mono);font-size:10px;padding:2px 6px;border:1px solid var(--line-2);border-radius:5px;color:var(--ink-4)}
+
+/* ── ACCORDION ── */
+.acc{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--page)}
+.acc .ai{border-top:1px solid var(--line)}.acc .ai:first-child{border-top:none}
+.acc .aq{display:flex;align-items:center;gap:14px;padding:17px 20px;cursor:pointer;font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);letter-spacing:-.01em}
+.acc .aq .sgn{margin-left:auto;width:20px;height:20px;position:relative;flex:none}
+.acc .aq .sgn::before,.acc .aq .sgn::after{content:"";position:absolute;background:var(--ink-3);transition:.2s}
+.acc .aq .sgn::before{top:9px;left:2px;right:2px;height:1.5px}
+.acc .aq .sgn::after{left:9px;top:2px;bottom:2px;width:1.5px}
+.acc .ai.open .aq .sgn::after{transform:scaleY(0)}
+.acc .ai.open .aq{color:var(--paint,var(--ink))}
+.acc .aa{max-height:0;overflow:hidden;transition:max-height .26s ease}
+.acc .ai.open .aa{max-height:240px}
+.acc .aa .ab{padding:0 20px 18px;font-size:14.5px;color:var(--ink-3);line-height:1.6;max-width:64ch}
+.acc .ai.open{box-shadow:inset 3px 0 0 var(--paint,var(--ink))}
+
+/* ── TABS / SEGMENTED ── */
+.seg{display:inline-flex;background:var(--mist);border-radius:10px;padding:3px;gap:2px}
+.seg button{font-family:var(--sans);font-size:13.5px;font-weight:500;padding:8px 16px;border:none;background:transparent;color:var(--ink-3);border-radius:8px;cursor:pointer;transition:.15s}
+.seg button.on{background:var(--page);color:var(--ink);box-shadow:var(--sh-sm)}
+.utabs{display:flex;gap:26px;border-bottom:1px solid var(--line)}
+.utabs button{font-family:var(--sans);font-size:14.5px;font-weight:500;background:none;border:none;padding:0 0 13px;color:var(--ink-3);cursor:pointer;position:relative}
+.utabs button.on{color:var(--ink)}
+.utabs button.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--paint,var(--ink));border-radius:2px}
+.codepanel{background:var(--panel);border:1px solid var(--panel-line);border-radius:var(--r);overflow:hidden}
+.codepanel .ct{display:flex;gap:2px;padding:8px 8px 0;background:var(--panel-2);border-bottom:1px solid var(--panel-line)}
+.codepanel .ct button{font-family:var(--mono);font-size:11.5px;padding:8px 14px;border:none;background:transparent;color:var(--panel-ink-2);cursor:pointer;border-radius:8px 8px 0 0}
+.codepanel .ct button.on{background:var(--panel);color:var(--panel-ink)}
+.codepanel pre{margin:0;padding:18px 20px;font-family:var(--mono);font-size:13px;line-height:1.85;color:var(--panel-ink);overflow-x:auto}
+.codepanel .cm{color:#6E7180}.codepanel .ck{color:var(--mint)}.codepanel .cs{color:var(--gold)}.codepanel .cn{color:var(--sky)}
+
+/* ── TOOLTIP / POPOVER ── */
+.tip{position:relative;display:inline-flex}
+.tip .bub{position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:12.5px;padding:7px 11px;border-radius:8px;white-space:nowrap;font-weight:450}
+.tip .bub::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--ink)}
+.pop{background:var(--page);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:16px 18px;max-width:280px}
+.pop h5{font-family:var(--serif);font-size:17px;font-weight:500;margin-bottom:5px}
+.pop p{font-size:13px;color:var(--ink-3);line-height:1.55}
+
+/* ── BREADCRUMB / PAGINATION ── */
+.crumbs{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink-3)}
+.crumbs a{color:var(--ink-3);text-decoration:none}.crumbs a:hover{color:var(--ink)}
+.crumbs .sep{color:var(--ink-4)}.crumbs .cur{color:var(--ink);font-weight:500}
+.pg{display:flex;gap:6px}
+.pg button{width:36px;height:36px;border:1px solid var(--line-2);background:var(--page);border-radius:8px;font-family:var(--mono);font-size:13px;color:var(--ink-2);cursor:pointer}
+.pg button:hover{border-color:var(--ink-3)}
+.pg button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pg button.gap{border:none;cursor:default}
+
+/* ── SLIDER / RANGE ── */
+.slider{position:relative;height:6px;border-radius:6px;background:var(--mist);margin:22px 0}
+.slider .fill{position:absolute;top:0;bottom:0;left:0;border-radius:6px;background:var(--paint,var(--ink))}
+.slider .knob{position:absolute;top:50%;width:20px;height:20px;border-radius:50%;background:var(--page);border:2px solid var(--paint,var(--ink));transform:translate(-50%,-50%);box-shadow:var(--sh-sm)}
+.slider .val{position:absolute;top:-30px;transform:translateX(-50%);font-family:var(--mono);font-size:11px;font-weight:600;color:var(--paint,var(--ink))}
+
+/* ── STEPPER / TIMELINE ── */
+.tl{position:relative;padding-left:30px}
+.tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl .ev{position:relative;padding-bottom:22px}
+.tl .ev:last-child{padding-bottom:0}
+.tl .ev .nd{position:absolute;left:-30px;top:1px;width:20px;height:20px;border-radius:50%;background:var(--page);border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center}
+.tl .ev.done .nd{background:var(--paint,var(--ink));border-color:var(--paint,var(--ink))}
+.tl .ev.now .nd{border-color:var(--paint,var(--ink));box-shadow:0 0 0 4px color-mix(in srgb,var(--paint,#000) 14%,#fff)}
+.tl .ev .et{font-family:var(--serif);font-size:17px;font-weight:500;letter-spacing:-.01em}
+.tl .ev .ed{font-size:13px;color:var(--ink-3);margin-top:2px}
+.tl .ev .em{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px}
+.hstep{display:flex;align-items:center}
+.hstep .st{display:flex;align-items:center;gap:10px}
+.hstep .sc{width:30px;height:30px;border-radius:50%;border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-4);flex:none}
+.hstep .st.done .sc{background:var(--paint,var(--ink));border-color:var(--paint,var(--ink));color:#fff}
+.hstep .st.now .sc{border-color:var(--paint,var(--ink));color:var(--paint,var(--ink))}
+.hstep .sl{font-size:13.5px;color:var(--ink-3)} .hstep .st.now .sl,.hstep .st.done .sl{color:var(--ink)}
+.hstep .bar{flex:1;height:2px;background:var(--line);margin:0 12px}
+.hstep .bar.fill{background:var(--paint,var(--ink))}
+
+/* ── CHARTS (expanded) ── */
+.chart{position:relative}
+.chart .axis{font-family:var(--mono);font-size:9px;fill:var(--ink-4)}
+.chart .grid-l{stroke:var(--line);stroke-width:1}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+.legend span{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-3)}
+.legend span i{width:10px;height:10px;border-radius:3px}
+.stack{display:flex;height:26px;border-radius:7px;overflow:hidden;margin:7px 0}
+.stack i{height:100%}
+.spark{display:block}
+.gauge-lbl{font-family:var(--serif);font-size:30px;font-weight:500;fill:var(--ink);letter-spacing:-.02em}
+.heat{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.heat i{aspect-ratio:1;border-radius:4px;background:var(--mist)}
+
+/* ── RICH CARDS ── */
+.statcard{border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;background:var(--page);box-shadow:var(--sh-sm)}
+.statcard .sl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
+.statcard .sv{font-family:var(--serif);font-size:32px;font-weight:500;letter-spacing:-.02em;margin:6px 0 2px}
+.statcard .sd{font-family:var(--mono);font-size:11px;font-weight:600}
+.mediacard{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--page);box-shadow:var(--sh-sm)}
+.mediacard .thumb{height:120px;position:relative;display:flex;align-items:flex-end;padding:14px}
+.mediacard .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.28),transparent 55%)}
+.mediacard .thumb .ty{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#fff;font-weight:600;position:relative;z-index:1;background:rgba(0,0,0,.22);padding:3px 8px;border-radius:6px}
+.mediacard .mb{padding:15px 17px}
+.mediacard .mb .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+.mediacard .mb h5{font-family:var(--serif);font-size:19px;font-weight:500;margin:5px 0 5px;letter-spacing:-.01em}
+.mediacard .mb .meta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-4);font-family:var(--mono)}
+.profile{border:1px solid var(--line);border-radius:var(--r);padding:22px;text-align:center;background:var(--page)}
+.profile .pa{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:22px;color:#fff}
+.profile h5{font-family:var(--serif);font-size:19px;font-weight:500}
+.profile .role{font-size:13px;color:var(--ink-3);margin-top:2px}
+.profile .pst{display:flex;justify-content:center;gap:22px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.profile .pst div .n{font-family:var(--serif);font-size:19px;font-weight:500}
+.profile .pst div .l{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);margin-top:2px}
+.lead-list{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--page)}
+.lead-list .lr{display:flex;align-items:center;gap:13px;padding:13px 17px;border-top:1px solid var(--line)}
+.lead-list .lr:first-child{border-top:none}
+.lead-list .rank{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink-4);width:20px}
+.lead-list .lr.top .rank{color:var(--paint,var(--ink))}
+.lead-list .nm{font-weight:500;font-size:14.5px;color:var(--ink)}
+.lead-list .sub{font-size:12px;color:var(--ink-4)}
+.lead-list .sc{margin-left:auto;font-family:var(--serif);font-size:18px;font-weight:500}
+
+/* ── ADVANCED TABLE ── */
+.table.adv th.sort{cursor:pointer}
+.table.adv th.sort::after{content:"↕";margin-left:6px;color:var(--ink-4);font-size:9px}
+.table.adv th.sort.asc::after{content:"↑";color:var(--ink-2)}
+.table.adv .ravatar{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:11px;font-weight:600;color:#fff;margin-right:9px;vertical-align:middle}
+.table.adv tfoot td{font-weight:600;color:var(--ink);border-top:1.5px solid var(--line-2);font-family:var(--mono);font-size:13px}
+.table.adv .exrow td{background:var(--paper);padding:0}
+.table.adv .exrow .exb{padding:14px 16px;font-size:13px;color:var(--ink-3);line-height:1.6}
+.minibar{display:inline-block;width:70px;height:6px;border-radius:6px;background:var(--mist);overflow:hidden;vertical-align:middle}
+.minibar i{display:block;height:100%}
+
+/* ── NOTIFICATIONS / INBOX ── */
+.inbox{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--page)}
+.inbox .nr{display:flex;gap:13px;padding:14px 17px;border-top:1px solid var(--line);position:relative}
+.inbox .nr:first-child{border-top:none}
+.inbox .nr.unread{background:color-mix(in srgb,var(--paint,#000) 4%,#fff)}
+.inbox .nr.unread::before{content:"";position:absolute;left:7px;top:20px;width:6px;height:6px;border-radius:50%;background:var(--paint,var(--ink))}
+.inbox .ni{width:34px;height:34px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:600;color:#fff}
+.inbox .nt{font-size:14px;color:var(--ink);font-weight:500}
+.inbox .nx{font-size:13px;color:var(--ink-3);margin-top:1px}
+.inbox .nw{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ink-4);white-space:nowrap}
+
+/* ── CALENDAR ── */
+.cal{border:1px solid var(--line);border-radius:var(--r);padding:18px;background:var(--page)}
+.cal .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cal .ch h5{font-family:var(--serif);font-size:18px;font-weight:500}
+.cal .cg{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cal .dh{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-4);text-align:center;padding-bottom:5px}
+.cal .d{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--ink-2);border-radius:8px;position:relative;cursor:pointer}
+.cal .d:hover{background:var(--mist)}.cal .d.mut{color:var(--ink-4)}
+.cal .d.on{background:var(--paint,var(--ink));color:#fff;font-weight:600}
+.cal .d.has::after{content:"";position:absolute;bottom:5px;width:4px;height:4px;border-radius:50%;background:var(--paint,var(--ink))}
+.cal .d.on.has::after{background:#fff}
+
+/* ── SKELETON ── */
+@keyframes shimmer{0%{background-position:-340px 0}100%{background-position:340px 0}}
+.sk{background:linear-gradient(90deg,var(--mist) 25%,#E9EBEF 50%,var(--mist) 75%);background-size:680px 100%;animation:shimmer 1.3s infinite linear;border-radius:7px}
+.sk.line{height:12px;margin-bottom:9px}.sk.line.s{width:55%}.sk.line.m{width:78%}
+.sk.av{width:42px;height:42px;border-radius:50%}
+.sk.block{height:96px;border-radius:var(--r)}
+
+/* ── DROPZONE ── */
+.dz{border:1.5px dashed var(--line-2);border-radius:var(--r);padding:34px 24px;text-align:center;background:var(--paper)}
+.dz .di{width:46px;height:46px;border-radius:12px;background:var(--mist);margin:0 auto 13px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ink-4)}
+.dz h5{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:4px}
+.dz p{font-size:13px;color:var(--ink-4)}
+.fileitem{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;margin-top:10px}
+.fileitem .fic{width:32px;height:32px;border-radius:8px;background:var(--mist);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:600;color:var(--ink-3)}
+.fileitem .fn{font-size:14px;color:var(--ink);font-weight:500}.fileitem .fs{font-size:11px;color:var(--ink-4);font-family:var(--mono)}
+.fileitem .fp{margin-left:auto;width:90px}
+
+/* ── ANAM-STYLE: COUNTERS + BENCHMARK ── */
+.countrow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+@media(max-width:760px){.countrow{grid-template-columns:1fr}}
+.countrow .cc{padding:30px 26px;border-left:1px solid var(--line)}
+.countrow .cc:first-child{border-left:none}
+.countrow .cv{font-family:var(--serif);font-size:48px;font-weight:500;letter-spacing:-.03em;line-height:1}
+.countrow .cv .u{font-family:var(--sans);font-size:22px;color:var(--ink-3)}
+.countrow .cl{font-size:13px;color:var(--ink-3);margin-top:9px;max-width:24ch}
+.bench{display:grid;grid-template-columns:78px 1fr 52px;gap:14px;align-items:center;padding:11px 0}
+.bench .bn{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.bench.lead .bn{color:var(--ink);font-weight:600}
+.bench .bt{height:12px;border-radius:6px;background:var(--mist);overflow:hidden}
+.bench .bt i{display:block;height:100%;border-radius:6px;background:var(--line-2)}
+.bench.lead .bt i{background:var(--paint,var(--ink))}
+.bench .bp{font-family:var(--mono);font-size:12px;font-weight:600;text-align:right;color:var(--ink-3)}
+.bench.lead .bp{color:var(--ink)}
+
+/* ── FEATURE GRID (enterprise, anam-style) ── */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+@media(max-width:760px){.feat-grid{grid-template-columns:1fr}}
+.feat-grid .fc{padding:26px 24px;border-left:1px solid var(--line);border-top:1px solid var(--line)}
+.feat-grid .fc:nth-child(-n+3){border-top:none}
+.feat-grid .fc:nth-child(3n+1){border-left:none}
+.feat-grid .fic2{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;font-family:var(--mono);font-size:14px;font-weight:600}
+.feat-grid h5{font-family:var(--serif);font-size:19px;font-weight:500;letter-spacing:-.01em;margin-bottom:6px}
+.feat-grid p{font-size:13.5px;color:var(--ink-3);line-height:1.55}
+.glow-panel{background:var(--panel);border:1px solid var(--panel-line);border-radius:var(--r-lg);padding:40px 36px;position:relative;overflow:hidden;color:var(--panel-ink)}
+.glow-panel::before{content:"";position:absolute;top:-40%;right:-10%;width:60%;height:160%;background:radial-gradient(circle,color-mix(in srgb,var(--paint,#fff) 38%,transparent),transparent 62%);filter:blur(8px);opacity:.6}
+.glow-panel .gk{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--paint,#fff);font-weight:600;position:relative}
+.glow-panel h3{font-family:var(--serif);font-size:34px;font-weight:500;letter-spacing:-.025em;margin:14px 0 12px;max-width:16ch;position:relative}
+.glow-panel p{font-size:15px;color:var(--panel-ink-2);max-width:46ch;line-height:1.6;position:relative}
+.glow-panel .gb{margin-top:24px;position:relative}
+.glow-panel .gb .btn{background:#fff;color:var(--ink);border-color:#fff}
+</style>
+
+<!-- 22 · EXTENDED PALETTE -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">22</span><h2>Extended paint</h2></div>
+  <p class="lede">The core set, widened. Same rule — <em>no fixed meaning</em>, cool-leaning, bright on intent. These round out the wheel so a deck, a dashboard, and a chemistry lesson never have to borrow each other's colour.</p>
+  <div class="subhead">Core paint</div>
+  <div class="pal-xl">
+    <div class="sw"><div class="chip" style="background:var(--magenta)"></div><div class="meta"><div class="nm">Magenta</div><div class="hx">#D6196F</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--azure)"></div><div class="meta"><div class="nm">Azure</div><div class="hx">#2563EB</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--mint)"></div><div class="meta"><div class="nm">Mint</div><div class="hx">#13B5A0</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--mauve)"></div><div class="meta"><div class="nm">Mauve</div><div class="hx">#8E6FC4</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--violet)"></div><div class="meta"><div class="nm">Violet</div><div class="hx">#6D4AE0</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--grass)"></div><div class="meta"><div class="nm">Grass</div><div class="hx">#1CA363</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--mandarin)"></div><div class="meta"><div class="nm">Mandarin</div><div class="hx">#F26A38</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--gold)"></div><div class="meta"><div class="nm">Gold</div><div class="hx">#DFA21F</div></div></div>
+  </div>
+  <div class="subhead" style="margin-top:18px">Extended paint — new</div>
+  <div class="pal-xl">
+    <div class="sw"><div class="chip" style="background:var(--cobalt)"></div><div class="meta"><div class="nm">Cobalt</div><div class="hx">#1F4FD8</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--indigo)"></div><div class="meta"><div class="nm">Indigo</div><div class="hx">#4F46E5</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--cyan)"></div><div class="meta"><div class="nm">Cyan</div><div class="hx">#1BA6C9</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--teal)"></div><div class="meta"><div class="nm">Teal</div><div class="hx">#0FA3A3</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--moss)"></div><div class="meta"><div class="nm">Moss</div><div class="hx">#5E8C3A</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--amber)"></div><div class="meta"><div class="nm">Amber</div><div class="hx">#E8881A</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--coral)"></div><div class="meta"><div class="nm">Coral</div><div class="hx">#E2674A</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--plum)"></div><div class="meta"><div class="nm">Plum</div><div class="hx">#9A3DA8</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--fuchsia)"></div><div class="meta"><div class="nm">Fuchsia</div><div class="hx">#C026A6</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--rose)"></div><div class="meta"><div class="nm">Rose</div><div class="hx">#E0518A</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--sky)"></div><div class="meta"><div class="nm">Sky</div><div class="hx">#39A0DE</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--lime)"></div><div class="meta"><div class="nm">Lime</div><div class="hx">#82B23A</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--slate)"></div><div class="meta"><div class="nm">Slate</div><div class="hx">#5B6473</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--silver)"></div><div class="meta"><div class="nm">Silver</div><div class="hx">#9AA0AA</div></div></div>
+  </div>
+  <div class="subhead" style="margin-top:26px">Every paint carries a tint scale</div>
+  <p class="lede" style="margin-bottom:16px">You never hand-pick a light fill or a legible text shade again. <em>Soft</em> for backgrounds, <em>base</em> for marks, <em>ink</em> for text on light — all derived from the one hue with <span class="t-mono" style="font-size:13px">color-mix</span>.</p>
+  <div class="tint-row"><div><div class="tn">Magenta</div><div class="th">soft · base · ink</div></div><div class="ramp"><i style="background:color-mix(in srgb,var(--magenta) 12%,#fff)"></i><i style="background:color-mix(in srgb,var(--magenta) 30%,#fff)"></i><i style="background:var(--magenta)"></i><i style="background:color-mix(in srgb,var(--magenta) 72%,#000)"></i></div></div>
+  <div class="tint-row"><div><div class="tn">Azure</div><div class="th">soft · base · ink</div></div><div class="ramp"><i style="background:color-mix(in srgb,var(--azure) 12%,#fff)"></i><i style="background:color-mix(in srgb,var(--azure) 30%,#fff)"></i><i style="background:var(--azure)"></i><i style="background:color-mix(in srgb,var(--azure) 72%,#000)"></i></div></div>
+  <div class="tint-row"><div><div class="tn">Teal</div><div class="th">soft · base · ink</div></div><div class="ramp"><i style="background:color-mix(in srgb,var(--teal) 12%,#fff)"></i><i style="background:color-mix(in srgb,var(--teal) 30%,#fff)"></i><i style="background:var(--teal)"></i><i style="background:color-mix(in srgb,var(--teal) 72%,#000)"></i></div></div>
+  <div class="tint-row"><div><div class="tn">Amber</div><div class="th">soft · base · ink</div></div><div class="ramp"><i style="background:color-mix(in srgb,var(--amber) 12%,#fff)"></i><i style="background:color-mix(in srgb,var(--amber) 30%,#fff)"></i><i style="background:var(--amber)"></i><i style="background:color-mix(in srgb,var(--amber) 72%,#000)"></i></div></div>
+  <div class="note">— more hues, same discipline. the wheel got wider; the rule didn't move.</div>
+</div></section>
+
+<!-- 23 · DROPDOWNS / MENUS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">23</span><h2>Dropdowns &amp; menus</h2></div>
+  <p class="lede">Quiet by default — monochrome rows on white, paint only on the <em>selected</em> state. The command palette is the power-user moment.</p>
+  <div class="grid3">
+    <div class="demo"><h4>Select menu</h4>
+      <div class="menu">
+        <div class="mh">Subject</div>
+        <div class="mi sel">Chemistry <span class="mc">⌘1</span></div>
+        <div class="mi">Physics <span class="mc">⌘2</span></div>
+        <div class="mi">Mathematics <span class="mc">⌘3</span></div>
+        <div class="div"></div>
+        <div class="mi danger">Clear selection</div>
+      </div>
+    </div>
+    <div class="demo"><h4>Multi-select · combobox</h4>
+      <div class="combo" style="--paint:var(--azure)">
+        <div class="cv">Add subjects</div>
+        <div class="chips" style="margin-top:12px">
+          <span class="chip-x">Chemistry <b>×</b></span>
+          <span class="chip-x">Physics <b>×</b></span>
+          <span class="chip-x">Maths <b>×</b></span>
+        </div>
+      </div>
+      <div class="menu" style="margin-top:12px;width:100%">
+        <div class="mi"><span class="dot" style="background:var(--mint)"></span> Biology</div>
+        <div class="mi"><span class="dot" style="background:var(--mauve)"></span> Computer Science</div>
+        <div class="mi"><span class="dot" style="background:var(--gold)"></span> Economics</div>
+      </div>
+    </div>
+    <div class="demo"><h4>Context menu</h4>
+      <div class="menu">
+        <div class="mi">Open lesson</div>
+        <div class="mi">Duplicate <span class="mc">⌘D</span></div>
+        <div class="mi">Regenerate on Opus</div>
+        <div class="div"></div>
+        <div class="mi">Move to…</div>
+        <div class="mi">Export PDF</div>
+        <div class="div"></div>
+        <div class="mi danger">Delete</div>
+      </div>
+    </div>
+  </div>
+  <div class="demo" style="margin-top:18px;display:flex;justify-content:center;--paint:var(--magenta)">
+    <div class="cmd">
+      <div class="ci"><span class="sq">⌘K</span> Search topics, lessons, students…</div>
+      <div class="cl">
+        <div class="cr on"><span class="dot" style="width:8px;height:8px;border-radius:3px;background:var(--magenta)"></span> Generate lesson — Equivalence point <span class="kbd">↵</span></div>
+        <div class="cr"><span class="dot" style="width:8px;height:8px;border-radius:3px;background:var(--azure)"></span> Open Class 11 · Chemistry</div>
+        <div class="cr"><span class="dot" style="width:8px;height:8px;border-radius:3px;background:var(--mint)"></span> Jump to Insights</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 24 · ACCORDION -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">24</span><h2>Accordions</h2></div>
+  <p class="lede">Serif questions, a hairline divider per row, and a paint <em>edge</em> that lights the open item. Used for FAQs, lesson outlines, and settings groups.</p>
+  <div class="grid2">
+    <div class="acc js-acc" style="--paint:var(--azure)">
+      <div class="ai open"><div class="aq">What does an engine actually generate?<span class="sgn"></span></div><div class="aa"><div class="ab">A complete, reviewable lesson for one topic — scenario, worked steps, an interactive, and a practice set — keyed to the subject's colour and ready for a teacher to approve.</div></div></div>
+      <div class="ai"><div class="aq">Can a school keep its own branding?<span class="sgn"></span></div><div class="aa"><div class="ab">The wordmark stays monochrome, but the paint layer flexes — a school can run its house colour across its portal without breaking the system.</div></div></div>
+      <div class="ai"><div class="aq">How is content kept accurate?<span class="sgn"></span></div><div class="aa"><div class="ab">Every generated answer passes a verify gate before it can be published. Anything that fails is flagged for a human check rather than shipped.</div></div></div>
+    </div>
+    <div class="acc js-acc" style="--paint:var(--mint)">
+      <div class="ai open"><div class="aq">Lesson outline · Titration<span class="sgn"></span></div><div class="aa"><div class="ab">Step 1 — the setup. Step 2 — the indicator. Step 3 — approaching equivalence. Step 4 — the flip. Step 5 — reading the curve.</div></div></div>
+      <div class="ai"><div class="aq">Prerequisites<span class="sgn"></span></div><div class="aa"><div class="ab">Strong vs weak acids, the pH scale, and what a mole means in solution.</div></div></div>
+      <div class="ai"><div class="aq">Common mistakes<span class="sgn"></span></div><div class="aa"><div class="ab">Confusing the endpoint with the equivalence point; forgetting that strong–strong lands exactly at pH 7.</div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 25 · TABS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">25</span><h2>Tabs &amp; segmented</h2></div>
+  <p class="lede">Three flavours: a pill segment for view-switching, an underline tab for sections, and the <em>dark code panel</em> for anything developer-facing.</p>
+  <div class="grid2" style="align-items:start">
+    <div class="demo"><h4>Segmented</h4>
+      <div class="seg js-seg"><button class="on">Day</button><button>Week</button><button>Month</button></div>
+      <div class="utabs js-utabs" style="--paint:var(--magenta);margin-top:26px"><button class="on">Overview</button><button>Lessons</button><button>Students</button><button>Settings</button></div>
+    </div>
+    <div class="demo" style="padding:0;background:transparent;border:none"><h4 style="padding:0 0 12px">Code panel</h4>
+      <div class="codepanel js-code">
+        <div class="ct"><button class="on">JavaScript</button><button>Python</button><button>cURL</button></div>
+        <pre><span class="cm">// generate a lesson</span>
+<span class="ck">const</span> lesson = <span class="ck">await</span> classess.<span class="cn">generate</span>({
+  topic: <span class="cs">"Equivalence point"</span>,
+  subject: <span class="cs">"chemistry"</span>,
+  band: <span class="cs">"11-12"</span>,
+});</pre>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 26 · TOOLTIPS / POPOVERS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">26</span><h2>Tooltips &amp; popovers</h2></div>
+  <div class="grid3">
+    <div class="demo" style="display:flex;justify-content:center;align-items:center;min-height:120px"><div class="tip"><button class="btn ghost">Hover target</button><span class="bub">Generates on Opus</span></div></div>
+    <div class="demo" style="display:flex;justify-content:center;align-items:center;min-height:120px">
+      <div class="pop"><h5>Verify gate</h5><p>Answers are checked against a solver before publishing. 98% pass on the first try.</p></div>
+    </div>
+    <div class="demo" style="display:flex;justify-content:center;align-items:center;min-height:120px">
+      <div class="pop" style="--paint:var(--mint)"><h5 class="paint-ink">Mint world</h5><p>The same popover, repainted. Structure holds; the accent moves.</p><div style="margin-top:12px"><button class="btn paint" style="background:var(--mint);border-color:var(--mint);padding:8px 14px">Got it</button></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 27 · BREADCRUMB / PAGINATION -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">27</span><h2>Breadcrumbs &amp; pagination</h2></div>
+  <div class="grid2">
+    <div class="demo"><h4>Breadcrumb</h4>
+      <div class="crumbs"><a>Library</a><span class="sep">/</span><a>Class 11</a><span class="sep">/</span><a>Chemistry</a><span class="sep">/</span><span class="cur">Titration</span></div>
+    </div>
+    <div class="demo"><h4>Pagination</h4>
+      <div class="pg"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button class="gap">…</button><button>9</button><button>›</button></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 28 · SLIDERS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">28</span><h2>Sliders &amp; range</h2></div>
+  <div class="grid3">
+    <div class="demo" style="--paint:var(--magenta)"><h4>Difficulty</h4><div class="slider"><div class="fill" style="width:64%"></div><div class="knob" style="left:64%"></div><div class="val" style="left:64%">64</div></div></div>
+    <div class="demo" style="--paint:var(--azure)"><h4>Reading pace</h4><div class="slider"><div class="fill" style="width:38%"></div><div class="knob" style="left:38%"></div><div class="val" style="left:38%">0.8×</div></div></div>
+    <div class="demo" style="--paint:var(--mint)"><h4>Class band</h4><div class="slider"><div class="fill" style="width:82%"></div><div class="knob" style="left:82%"></div><div class="val" style="left:82%">11–12</div></div></div>
+  </div>
+</div></section>
+
+<!-- 29 · STEPPER / TIMELINE -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">29</span><h2>Steppers &amp; timelines</h2></div>
+  <div class="grid2" style="align-items:start">
+    <div class="demo" style="--paint:var(--magenta)"><h4>Horizontal stepper</h4>
+      <div class="hstep">
+        <div class="st done"><div class="sc">✓</div><div class="sl">Topic</div></div><div class="bar fill"></div>
+        <div class="st done"><div class="sc">✓</div><div class="sl">Generate</div></div><div class="bar fill"></div>
+        <div class="st now"><div class="sc">3</div><div class="sl">Review</div></div><div class="bar"></div>
+        <div class="st"><div class="sc">4</div><div class="sl">Publish</div></div>
+      </div>
+    </div>
+    <div class="demo" style="--paint:var(--azure)"><h4>Activity timeline</h4>
+      <div class="tl">
+        <div class="ev done"><div class="nd"></div><div class="em">09:14</div><div class="et">Lesson generated</div><div class="ed">Titration · Chart engine · Haiku</div></div>
+        <div class="ev done"><div class="nd"></div><div class="em">09:20</div><div class="et">Passed verify gate</div><div class="ed">All 6 answers checked</div></div>
+        <div class="ev now"><div class="nd"></div><div class="em">now</div><div class="et">Awaiting review</div><div class="ed">Assigned to Vijay</div></div>
+        <div class="ev"><div class="nd"></div><div class="em">—</div><div class="et">Publish to Class 11</div><div class="ed">Pending approval</div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 30 · CHARTS EXPANDED -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">30</span><h2>Charts — full set</h2></div>
+  <p class="lede">Inside one chart, colour <em>organises</em>; across the product it stays free. High-contrast hues first, soft grid, mono axes.</p>
+  <div class="grid2" style="align-items:start">
+    <div class="demo"><h4>Area + line</h4>
+      <svg class="chart" viewBox="0 0 320 150" style="width:100%;height:auto">
+        <line class="grid-l" x1="0" y1="30" x2="320" y2="30"/><line class="grid-l" x1="0" y1="70" x2="320" y2="70"/><line class="grid-l" x1="0" y1="110" x2="320" y2="110"/>
+        <defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--azure)" stop-opacity=".22"/><stop offset="1" stop-color="var(--azure)" stop-opacity="0"/></linearGradient></defs>
+        <polygon fill="url(#ar)" points="0,120 0,96 53,104 106,72 160,84 213,46 266,58 320,28 320,120"/>
+        <polyline fill="none" stroke="var(--azure)" stroke-width="2.5" points="0,96 53,104 106,72 160,84 213,46 266,58 320,28"/>
+        <text class="axis" x="0" y="142">Mon</text><text class="axis" x="146" y="142">Thu</text><text class="axis" x="298" y="142">Sun</text>
+      </svg>
+    </div>
+    <div class="demo"><h4>Multi-series</h4>
+      <svg class="chart" viewBox="0 0 320 150" style="width:100%;height:auto">
+        <line class="grid-l" x1="0" y1="30" x2="320" y2="30"/><line class="grid-l" x1="0" y1="70" x2="320" y2="70"/><line class="grid-l" x1="0" y1="110" x2="320" y2="110"/>
+        <polyline fill="none" stroke="var(--magenta)" stroke-width="2.5" points="0,100 53,88 106,92 160,60 213,66 266,40 320,34"/>
+        <polyline fill="none" stroke="var(--mint)" stroke-width="2.5" points="0,118 53,110 106,96 160,98 213,80 266,84 320,70"/>
+        <polyline fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-dasharray="4 4" points="0,86 53,90 106,78 160,82 213,72 266,74 320,66"/>
+      </svg>
+      <div class="legend"><span><i style="background:var(--magenta)"></i>Class 11A</span><span><i style="background:var(--mint)"></i>Class 11B</span><span><i style="background:var(--gold)"></i>Target</span></div>
+    </div>
+    <div class="demo"><h4>Stacked bars</h4>
+      <div class="stack"><i style="width:46%;background:var(--azure)"></i><i style="width:30%;background:var(--mint)"></i><i style="width:24%;background:var(--mist)"></i></div>
+      <div class="stack"><i style="width:62%;background:var(--azure)"></i><i style="width:22%;background:var(--mint)"></i><i style="width:16%;background:var(--mist)"></i></div>
+      <div class="stack"><i style="width:38%;background:var(--azure)"></i><i style="width:40%;background:var(--mint)"></i><i style="width:22%;background:var(--mist)"></i></div>
+      <div class="legend"><span><i style="background:var(--azure)"></i>Ready</span><span><i style="background:var(--mint)"></i>Review</span><span><i style="background:var(--mist)"></i>Draft</span></div>
+    </div>
+    <div class="demo"><h4>Radial gauge</h4>
+      <svg viewBox="0 0 120 120" style="width:148px;height:148px;display:block;margin:0 auto">
+        <circle cx="60" cy="60" r="48" fill="none" stroke="var(--mist)" stroke-width="12"/>
+        <circle cx="60" cy="60" r="48" fill="none" stroke="var(--magenta)" stroke-width="12" stroke-linecap="round" stroke-dasharray="248 302" transform="rotate(-90 60 60)"/>
+        <text class="gauge-lbl" x="60" y="68" text-anchor="middle">82%</text>
+      </svg>
+      <p style="text-align:center;font-size:12px;color:var(--ink-4);font-family:var(--mono);margin-top:4px">MASTERY</p>
+    </div>
+  </div>
+  <div class="demo" style="margin-top:18px;--paint:var(--grass)"><h4>Mastery heatmap · 12 weeks</h4>
+    <div class="heat">
+      <i style="background:color-mix(in srgb,var(--grass) 20%,#fff)"></i><i style="background:color-mix(in srgb,var(--grass) 55%,#fff)"></i><i style="background:color-mix(in srgb,var(--grass) 80%,#fff)"></i><i style="background:var(--grass)"></i><i></i><i style="background:color-mix(in srgb,var(--grass) 40%,#fff)"></i><i style="background:color-mix(in srgb,var(--grass) 90%,#fff)"></i><i style="background:var(--grass)"></i><i style="background:color-mix(in srgb,var(--grass) 60%,#fff)"></i><i style="background:color-mix(in srgb,var(--grass) 30%,#fff)"></i><i style="background:var(--grass)"></i><i style="background:color-mix(in srgb,var(--grass) 75%,#fff)"></i>
+      <i style="background:color-mix(in srgb,var(--grass) 70%,#fff)"></i><i style="background:var(--grass)"></i><i style="background:color-mix(in srgb,var(--grass) 45%,#fff)"></i><i></i><i style="background:color-mix(in srgb,var(--grass) 85%,#fff)"></i><i style="background:var(--grass)"></i><i style="background:color-mix(in srgb,var(--grass) 25%,#fff)"></i><i style="background:color-mix(in srgb,var(--grass) 95%,#fff)"></i><i style="background:var(--grass)"></i><i style="background:color-mix(in srgb,var(--grass) 50%,#fff)"></i><i style="background:color-mix(in srgb,var(--grass) 80%,#fff)"></i><i style="background:var(--grass)"></i>
+    </div>
+  </div>
+</div></section>
+
+<!-- 31 · RICH CARDS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">31</span><h2>Card library</h2></div>
+  <div class="subhead">Stat cards with sparklines</div>
+  <div class="grid4">
+    <div class="statcard"><div class="sl">Lessons live</div><div class="sv">642</div><svg class="spark" viewBox="0 0 100 28" style="width:100%;height:24px"><polyline fill="none" stroke="var(--azure)" stroke-width="2" points="0,22 16,18 33,20 50,12 66,14 83,6 100,8"/></svg></div>
+    <div class="statcard"><div class="sl">Avg generate</div><div class="sv">2.4<span style="font-size:18px;color:var(--ink-3)">s</span></div><svg class="spark" viewBox="0 0 100 28" style="width:100%;height:24px"><polyline fill="none" stroke="var(--mint)" stroke-width="2" points="0,8 16,12 33,10 50,16 66,14 83,20 100,22"/></svg></div>
+    <div class="statcard"><div class="sl">Verify pass</div><div class="sv">98<span style="font-size:18px;color:var(--ink-3)">%</span></div><svg class="spark" viewBox="0 0 100 28" style="width:100%;height:24px"><polyline fill="none" stroke="var(--grass)" stroke-width="2" points="0,16 16,14 33,12 50,12 66,8 83,9 100,6"/></svg></div>
+    <div class="statcard"><div class="sl">Active classes</div><div class="sv">37</div><svg class="spark" viewBox="0 0 100 28" style="width:100%;height:24px"><polyline fill="none" stroke="var(--magenta)" stroke-width="2" points="0,20 16,16 33,18 50,10 66,12 83,8 100,4"/></svg></div>
+  </div>
+  <div class="subhead" style="margin-top:24px">Media / lesson cards</div>
+  <div class="grid4">
+    <div class="mediacard"><div class="thumb" style="background:var(--magenta)"><span class="ty">Computer Science</span></div><div class="mb"><div class="k" style="color:var(--magenta)">Parsons</div><h5>Factorial with a loop</h5><div class="meta">8 min · code</div></div></div>
+    <div class="mediacard"><div class="thumb" style="background:var(--azure)"><span class="ty">Mathematics</span></div><div class="mb"><div class="k" style="color:var(--azure)">Trigonometry</div><h5>Where sine comes from</h5><div class="meta">11 min · 2D</div></div></div>
+    <div class="mediacard"><div class="thumb" style="background:var(--mint)"><span class="ty">Chemistry</span></div><div class="mb"><div class="k paint-ink" style="--paint:var(--mint)">Titration</div><h5>The equivalence point</h5><div class="meta">9 min · chart</div></div></div>
+    <div class="mediacard"><div class="thumb" style="background:var(--mauve)"><span class="ty">Biology</span></div><div class="mb"><div class="k paint-ink" style="--paint:var(--mauve)">Cell</div><h5>Inside an animal cell</h5><div class="meta">14 min · 3D</div></div></div>
+  </div>
+  <div class="subhead" style="margin-top:24px">Profile &amp; leaderboard</div>
+  <div class="grid3">
+    <div class="profile"><div class="pa" style="background:var(--azure)">SR</div><h5>Shreyan R.</h5><div class="role">Founder · Operations</div><div class="pst"><div><div class="n">12</div><div class="l">Schools</div></div><div><div class="n">642</div><div class="l">Lessons</div></div></div></div>
+    <div style="grid-column:span 2"><div class="lead-list" style="--paint:var(--magenta)">
+      <div class="lr top"><span class="rank">1</span><span class="avatar" style="width:30px;height:30px;font-size:12px;background:var(--magenta)">AP</span><div><div class="nm">Ananya P.</div><div class="sub">Class 11A · 24 topics</div></div><span class="sc">98</span></div>
+      <div class="lr"><span class="rank">2</span><span class="avatar" style="width:30px;height:30px;font-size:12px;background:var(--azure)">RG</span><div><div class="nm">Rohit G.</div><div class="sub">Class 11A · 23 topics</div></div><span class="sc">95</span></div>
+      <div class="lr"><span class="rank">3</span><span class="avatar" style="width:30px;height:30px;font-size:12px;background:var(--mint)">KS</span><div><div class="nm">Kavya S.</div><div class="sub">Class 11B · 22 topics</div></div><span class="sc">91</span></div>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- 32 · ADVANCED TABLE -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">32</span><h2>Tables — advanced</h2></div>
+  <p class="lede">Row avatars, a sortable header, an inline mini-bar, an expandable row, and a footer total — the working dashboard table.</p>
+  <div class="demo" style="padding:6px 16px">
+    <table class="table adv">
+      <thead><tr><th>Student</th><th class="sort asc">Mastery</th><th>Topics</th><th>Engine mix</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="nm"><span class="ravatar" style="background:var(--magenta)">AP</span>Ananya P.</td><td><span class="minibar"><i style="width:98%;background:var(--grass)"></i></span> 98%</td><td>24</td><td>3D · chart · code</td><td><span class="badge" style="background:color-mix(in srgb,var(--grass) 13%,#fff);color:color-mix(in srgb,var(--grass) 72%,#000)">On track</span></td></tr>
+        <tr><td class="nm"><span class="ravatar" style="background:var(--azure)">RG</span>Rohit G.</td><td><span class="minibar"><i style="width:95%;background:var(--grass)"></i></span> 95%</td><td>23</td><td>chart · 2D</td><td><span class="badge" style="background:color-mix(in srgb,var(--grass) 13%,#fff);color:color-mix(in srgb,var(--grass) 72%,#000)">On track</span></td></tr>
+        <tr><td class="nm"><span class="ravatar" style="background:var(--gold)">KS</span>Kavya S.</td><td><span class="minibar"><i style="width:71%;background:var(--gold)"></i></span> 71%</td><td>18</td><td>chart</td><td><span class="badge" style="background:color-mix(in srgb,var(--gold) 16%,#fff);color:color-mix(in srgb,var(--gold) 70%,#000)">Watch</span></td></tr>
+        <tr class="exrow"><td colspan="5"><div class="exb"><b>Kavya S.</b> — strongest in stoichiometry, slipping on organic mechanisms. Suggested next: <span class="t-mono" style="font-size:12px">Reaction pathways · 3D</span>.</div></td></tr>
+      </tbody>
+      <tfoot><tr><td>Class average</td><td>88%</td><td>21.7</td><td>—</td><td></td></tr></tfoot>
+    </table>
+  </div>
+</div></section>
+
+<!-- 33 · NOTIFICATIONS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">33</span><h2>Notifications &amp; inbox</h2></div>
+  <div class="inbox" style="--paint:var(--azure)">
+    <div class="nr unread"><div class="ni" style="background:var(--grass)">✓</div><div><div class="nt">Titration lesson is ready to review</div><div class="nx">Generated on Haiku · passed the verify gate</div></div><span class="nw">2m</span></div>
+    <div class="nr unread"><div class="ni" style="background:var(--gold)">!</div><div><div class="nt">One answer needs a human check</div><div class="nx">Organic mechanisms · Class 11B set</div></div><span class="nw">18m</span></div>
+    <div class="nr"><div class="ni" style="background:var(--azure)">@</div><div><div class="nt">Vijay mentioned you</div><div class="nx">“ready to publish the chemistry pack?”</div></div><span class="nw">1h</span></div>
+    <div class="nr"><div class="ni" style="background:var(--mauve)">★</div><div><div class="nt">Class 11A hit 90% average mastery</div><div class="nx">Up from 81% last week</div></div><span class="nw">3h</span></div>
+  </div>
+</div></section>
+
+<!-- 34 · CALENDAR -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">34</span><h2>Calendar &amp; schedule</h2></div>
+  <div class="grid2" style="align-items:start">
+    <div class="cal" style="--paint:var(--magenta)">
+      <div class="ch"><h5>June 2026</h5><div class="pg"><button>‹</button><button>›</button></div></div>
+      <div class="cg">
+        <div class="dh">S</div><div class="dh">M</div><div class="dh">T</div><div class="dh">W</div><div class="dh">T</div><div class="dh">F</div><div class="dh">S</div>
+        <div class="d mut">31</div><div class="d">1</div><div class="d has">2</div><div class="d">3</div><div class="d">4</div><div class="d on has">5</div><div class="d">6</div>
+        <div class="d">7</div><div class="d">8</div><div class="d has">9</div><div class="d">10</div><div class="d">11</div><div class="d">12</div><div class="d has">13</div>
+        <div class="d">14</div><div class="d">15</div><div class="d">16</div><div class="d has">17</div><div class="d">18</div><div class="d">19</div><div class="d">20</div>
+      </div>
+    </div>
+    <div class="demo"><h4>Upcoming</h4>
+      <div class="tl" style="--paint:var(--magenta)">
+        <div class="ev now"><div class="nd"></div><div class="em">Today · 4:00 PM</div><div class="et">Greenwood demo</div><div class="ed">School walkthrough · principal</div></div>
+        <div class="ev"><div class="nd"></div><div class="em">Jun 9 · 11:00 AM</div><div class="et">Chemistry pack review</div><div class="ed">With Vijay</div></div>
+        <div class="ev"><div class="nd"></div><div class="em">Jun 13</div><div class="et">Class 11 publish</div><div class="ed">12 topics live</div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 35 · SKELETONS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">35</span><h2>Loading &amp; skeletons</h2></div>
+  <div class="grid3">
+    <div class="demo"><h4>Card loading</h4><div class="sk block" style="margin-bottom:14px"></div><div class="sk line m"></div><div class="sk line s"></div></div>
+    <div class="demo"><h4>List loading</h4>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px"><div class="sk av"></div><div style="flex:1"><div class="sk line m"></div><div class="sk line s" style="margin-bottom:0"></div></div></div>
+      <div style="display:flex;gap:12px;align-items:center"><div class="sk av"></div><div style="flex:1"><div class="sk line m"></div><div class="sk line s" style="margin-bottom:0"></div></div></div>
+    </div>
+    <div class="demo" style="--paint:var(--magenta)"><h4>Generating</h4>
+      <div class="panel" style="padding:20px">
+        <div class="pk" style="color:var(--magenta)">Generating lesson…</div>
+        <div class="sk line m" style="background:linear-gradient(90deg,var(--panel-2) 25%,#2A2C34 50%,var(--panel-2) 75%);background-size:680px 100%"></div>
+        <div class="sk line s" style="background:linear-gradient(90deg,var(--panel-2) 25%,#2A2C34 50%,var(--panel-2) 75%);background-size:680px 100%;margin-bottom:0"></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 36 · DROPZONE -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">36</span><h2>Upload &amp; files</h2></div>
+  <div class="grid2" style="align-items:start">
+    <div class="demo"><h4>Dropzone</h4>
+      <div class="dz"><div class="di">↑</div><h5>Drop a syllabus PDF</h5><p>or click to browse · max 20 MB</p></div>
+    </div>
+    <div class="demo" style="--paint:var(--azure)"><h4>Uploaded</h4>
+      <div class="fileitem"><div class="fic">PDF</div><div><div class="fn">CBSE-class-11-chemistry.pdf</div><div class="fs">2.1 MB</div></div><div class="fp"><div class="prog" style="margin-bottom:0"><i style="width:100%;background:var(--grass)"></i></div></div></div>
+      <div class="fileitem"><div class="fic">CSV</div><div><div class="fn">student-roster.csv</div><div class="fs">48 KB · uploading</div></div><div class="fp"><div class="prog" style="margin-bottom:0"><i style="width:62%;background:var(--azure)"></i></div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 37 · ANAM MOMENT -->
+<section style="border-bottom:none"><div class="wrap">
+  <div class="s-head"><span class="n">37</span><h2>Numbers &amp; the spotlight</h2></div>
+  <p class="lede">The marketing register: big animated figures, a benchmark where Classess <em>leads</em>, and one dark glow panel for the moment that has to land.</p>
+  <div class="countrow">
+    <div class="cc"><div class="cv js-count" data-to="642">0</div><div class="cl">Lessons generated and verified across live classes.</div></div>
+    <div class="cc"><div class="cv"><span class="js-count" data-to="98">0</span><span class="u">%</span></div><div class="cl">Pass the verify gate on the first generation.</div></div>
+    <div class="cc"><div class="cv"><span class="js-count" data-to="2.4" data-dec="1">0</span><span class="u">s</span></div><div class="cl">Average time to a finished, reviewable lesson.</div></div>
+  </div>
+  <div class="demo" style="margin-top:18px;--paint:var(--magenta)"><h4>Benchmark — generation speed</h4>
+    <div class="bench lead"><div class="bn">Classess</div><div class="bt"><i style="width:96%"></i></div><div class="bp">2.4s</div></div>
+    <div class="bench"><div class="bn">Tool B</div><div class="bt"><i style="width:58%"></i></div><div class="bp">5.1s</div></div>
+    <div class="bench"><div class="bn">Tool C</div><div class="bt"><i style="width:41%"></i></div><div class="bp">7.8s</div></div>
+  </div>
+  <div class="glow-panel" style="margin-top:18px;--paint:var(--magenta)">
+    <div class="gk">The intelligence layer</div>
+    <h3>Your school, <em>amplified.</em></h3>
+    <p>One style, every colour, a thousand agents per student. Classess is what great schools use to become the school every parent in the city is talking about.</p>
+    <div class="gb"><button class="btn">Book a walkthrough</button></div>
+  </div>
+</div></section>
+
+<script>
+(function(){
+  document.querySelectorAll('.js-acc').forEach(function(acc){
+    acc.querySelectorAll('.aq').forEach(function(q){
+      q.addEventListener('click',function(){ q.parentElement.classList.toggle('open'); });
+    });
+  });
+  function tabGroup(sel){ document.querySelectorAll(sel).forEach(function(g){
+    g.querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+      g.querySelectorAll('button').forEach(function(x){x.classList.remove('on')}); b.classList.add('on');
+    });});
+  });}
+  tabGroup('.js-seg'); tabGroup('.js-utabs');
+  document.querySelectorAll('.js-code').forEach(function(p){
+    var tabs=p.querySelectorAll('.ct button');
+    tabs.forEach(function(b){ b.addEventListener('click',function(){ tabs.forEach(function(x){x.classList.remove('on')}); b.classList.add('on'); });});
+  });
+  function animate(el){ var to=parseFloat(el.dataset.to), dec=parseInt(el.dataset.dec||'0'), t0=null, dur=1100;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3); var v=to*e;
+      el.textContent=dec?v.toFixed(dec):Math.round(v); if(p<1)requestAnimationFrame(step); }
+    requestAnimationFrame(step); }
+  var seen=false;
+  var io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting&&!seen){ seen=true;
+    document.querySelectorAll('.js-count').forEach(animate); } }); },{threshold:.4});
+  var first=document.querySelector('.js-count'); if(first)io.observe(first.closest('.countrow'));
+})();
+</script>
+
+<style>
+/* ════════════════════════════════════════════════════════════
+   v4 — ICONS · PEOPLE · ELEMENTS
+   ════════════════════════════════════════════════════════════ */
+
+/* line-icon system: stroke = currentColor, one weight, round joins */
+.icn{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block}
+.icn.fill{fill:currentColor;stroke:none}
+.icon-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+@media(max-width:760px){.icon-grid{grid-template-columns:repeat(4,1fr)}}
+.ig{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px;border:1px solid var(--line);border-radius:var(--r);color:var(--ink);background:var(--page);transition:.15s}
+.ig:hover{border-color:var(--ink-3);transform:translateY(-1px);box-shadow:var(--sh-sm)}
+.ig span{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-4)}
+.icon-sizes{display:flex;align-items:flex-end;gap:26px}
+.icon-sizes .iz{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink)}
+.icon-sizes .iz span{font-family:var(--mono);font-size:9px;color:var(--ink-4)}
+.icon-paints{display:flex;gap:14px;flex-wrap:wrap}
+.icon-paints .ip{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+
+/* ── PEOPLE ── neutral, geometric, faceless */
+.people-row{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap;justify-content:center;padding:14px 0}
+.figure{display:block}
+.people-scene{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:34px;position:relative;overflow:hidden}
+.av-illus{display:flex;gap:16px;flex-wrap:wrap}
+.av-illus .ai2{width:72px;height:72px;border-radius:50%;overflow:hidden;border:1px solid var(--line);display:block}
+.persona{border:1px solid var(--line);border-radius:var(--r);padding:22px;text-align:center;background:var(--page)}
+.persona .pf{width:96px;height:96px;margin:0 auto 14px}
+.persona h5{font-family:var(--serif);font-size:19px;font-weight:500}
+.persona p{font-size:13px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+
+/* ── OBJECT ILLUSTRATIONS ── */
+.illus-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.illus-grid{grid-template-columns:1fr 1fr}}
+.illus{border:1px solid var(--line);border-radius:var(--r);background:var(--page);padding:24px 18px 16px;display:flex;flex-direction:column;align-items:center;gap:14px;box-shadow:var(--sh-sm)}
+.illus svg{width:84px;height:84px}
+.illus span{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}
+
+/* ── DECORATIVE ELEMENTS ── */
+.elem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.elem-grid{grid-template-columns:1fr}}
+.elem{border:1px solid var(--line);border-radius:var(--r);background:var(--page);padding:26px;min-height:150px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.elem h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);margin-bottom:16px;font-weight:600}
+.dotgrid{background-image:radial-gradient(var(--line-2) 1.2px,transparent 1.2px);background-size:16px 16px}
+.spark-scatter svg{position:absolute;opacity:.9}
+.markline{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--ink);position:relative;display:inline-block;width:max-content}
+.markline svg{position:absolute;left:-4px;right:-4px;bottom:-8px;width:calc(100% + 8px);height:12px;overflow:visible}
+.handnote2{font-family:var(--hand);font-size:24px;color:var(--magenta);transform:rotate(-3deg);display:inline-block}
+.rulex{display:flex;align-items:center;gap:10px;color:var(--ink-4);font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.rulex::before,.rulex::after{content:"";flex:1;height:1px;background:var(--line)}
+.cmark{display:flex;align-items:center;gap:16px}
+.cmark .cwm{font-family:var(--serif);font-weight:600;font-size:30px;letter-spacing:-.02em}
+</style>
+
+<!-- ICON SPRITE (defs only, hidden) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h5v-5h4v5h5v-9"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 1 6.5 18H19v3H6.5A1.5 1.5 0 0 1 5 19.5z"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M4 16l4-4 4 2 5-7"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.2a3 3 0 0 1 0 5.6"/><path d="M16 14.5a5.5 5.5 0 0 1 4.5 4.5"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 19a2 2 0 0 0 4 0"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1M18.7 18.7l-2.1-2.1M7.4 7.4L5.3 5.3"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12M8 12l4 4 4-4M5 20h14"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8z"/></symbol>
+<symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M7 4h10v16l-5-4-5 4z"/></symbol>
+<symbol id="i-idea" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 4 10c-1 1-1 2-1 3H9c0-1 0-2-1-3a6 6 0 0 1 4-10z"/><path d="M9.5 19h5M10.5 21.5h3"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M4 6h6l2 2.5h8V19H4z"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.3.9-4.5 4.4 1 6.2L12 17.8 6.5 20.1l1-6.2L3 9.5l6.3-.9z"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 20V8M8 12l4-4 4 4M5 4h14"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.4"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.4"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.4"/></symbol>
+<!-- subjects -->
+<symbol id="i-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9.5" ry="4"/><ellipse cx="12" cy="12" rx="9.5" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.5" ry="4" transform="rotate(120 12 12)"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5.2 9.3A1.8 1.8 0 0 0 6.4 21h11.2a1.8 1.8 0 0 0 1.6-2.7L14 9V3"/><path d="M7.6 15h8.8"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14z"/><path d="M5 19C9 15 13 11 17 9"/></symbol>
+<symbol id="i-sigma" viewBox="0 0 24 24"><path d="M17 5H7l6 7-6 7h10"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></symbol>
+</defs></svg>
+
+<!-- 38 · ICONS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">38</span><h2>Icon system</h2></div>
+  <p class="lede">One weight, one geometry, drawn on a 24px grid with round joins. Icons are <em>monochrome</em> by default — they inherit text colour, so they take a paint only when the moment asks for one.</p>
+  <div class="subhead">Interface</div>
+  <div class="icon-grid">
+    <div class="ig"><svg class="icn"><use href="#i-home"/></svg><span>Home</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-search"/></svg><span>Search</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-book"/></svg><span>Lessons</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-layers"/></svg><span>Library</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-chart"/></svg><span>Insights</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-users"/></svg><span>Students</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-grid"/></svg><span>Dashboard</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-bell"/></svg><span>Alerts</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-calendar"/></svg><span>Schedule</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-settings"/></svg><span>Settings</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-filter"/></svg><span>Filter</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-folder"/></svg><span>Folder</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-chat"/></svg><span>Message</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-bookmark"/></svg><span>Save</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-idea"/></svg><span>Idea</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-target"/></svg><span>Goal</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-clock"/></svg><span>Time</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-play"/></svg><span>Play</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-check"/></svg><span>Done</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-plus"/></svg><span>Add</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-arrow"/></svg><span>Next</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-download"/></svg><span>Download</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-upload"/></svg><span>Upload</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-edit"/></svg><span>Edit</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-trash"/></svg><span>Delete</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-eye"/></svg><span>View</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-lock"/></svg><span>Lock</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-star"/></svg><span>Star</span></div>
+    <div class="ig"><svg class="icn"><use href="#i-globe"/></svg><span>Globe</span></div>
+    <div class="ig"><svg class="icn fill"><use href="#i-sparkle"/></svg><span>Sparkle</span></div>
+  </div>
+  <div class="subhead" style="margin-top:24px">Subjects</div>
+  <div class="icon-grid">
+    <div class="ig" style="color:var(--physics,#C84A1F)"><svg class="icn"><use href="#i-atom"/></svg><span>Physics</span></div>
+    <div class="ig" style="color:var(--amber)"><svg class="icn"><use href="#i-flask"/></svg><span>Chemistry</span></div>
+    <div class="ig" style="color:var(--grass)"><svg class="icn"><use href="#i-leaf"/></svg><span>Biology</span></div>
+    <div class="ig" style="color:var(--cobalt)"><svg class="icn"><use href="#i-sigma"/></svg><span>Maths</span></div>
+    <div class="ig" style="color:var(--magenta)"><svg class="icn"><use href="#i-code"/></svg><span>Comp Sci</span></div>
+    <div class="ig" style="color:var(--sky)"><svg class="icn"><use href="#i-globe"/></svg><span>Geography</span></div>
+    <div class="ig" style="color:var(--mauve)"><svg class="icn"><use href="#i-music"/></svg><span>Music</span></div>
+    <div class="ig" style="color:var(--gold)"><svg class="icn"><use href="#i-idea"/></svg><span>Ideas</span></div>
+  </div>
+  <div class="grid2" style="margin-top:24px">
+    <div class="demo"><h4>Sizes — one geometry, scaled</h4>
+      <div class="icon-sizes">
+        <div class="iz"><svg class="icn" style="width:16px;height:16px"><use href="#i-book"/></svg><span>16</span></div>
+        <div class="iz"><svg class="icn" style="width:20px;height:20px"><use href="#i-book"/></svg><span>20</span></div>
+        <div class="iz"><svg class="icn"><use href="#i-book"/></svg><span>24</span></div>
+        <div class="iz"><svg class="icn" style="width:32px;height:32px"><use href="#i-book"/></svg><span>32</span></div>
+        <div class="iz"><svg class="icn" style="width:44px;height:44px"><use href="#i-book"/></svg><span>44</span></div>
+      </div>
+    </div>
+    <div class="demo"><h4>Paint chips — colour only on intent</h4>
+      <div class="icon-paints">
+        <div class="ip" style="background:color-mix(in srgb,var(--magenta) 12%,#fff);color:var(--magenta)"><svg class="icn"><use href="#i-sparkle"/></svg></div>
+        <div class="ip" style="background:color-mix(in srgb,var(--azure) 12%,#fff);color:var(--azure)"><svg class="icn"><use href="#i-target"/></svg></div>
+        <div class="ip" style="background:color-mix(in srgb,var(--mint) 14%,#fff);color:color-mix(in srgb,var(--mint) 72%,#000)"><svg class="icn"><use href="#i-check"/></svg></div>
+        <div class="ip" style="background:var(--ink);color:#fff"><svg class="icn"><use href="#i-play"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 39 · PEOPLE -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">39</span><h2>People</h2></div>
+  <p class="lede">Students and teachers are drawn as <em>simple geometry</em> — a head, a body, a paint. No faces, no markers, no stereotypes; anyone can see themselves in them. Personality comes from colour and a small prop, never from features.</p>
+  <div class="people-row">
+    <!-- student, idea spark -->
+    <svg class="figure" viewBox="0 0 90 130" style="width:74px">
+      <path d="M12 4l1.6 4.4L18 10l-4.4 1.6L12 16l-1.6-4.4L6 10l4.4-1.6z" fill="var(--gold)"/>
+      <circle cx="45" cy="46" r="17" fill="var(--azure)"/>
+      <path d="M16 130 C16 92 26 70 45 70 C64 70 74 92 74 130 Z" fill="var(--azure)"/>
+    </svg>
+    <!-- teacher with board -->
+    <svg class="figure" viewBox="0 0 110 130" style="width:88px">
+      <circle cx="42" cy="44" r="17" fill="var(--magenta)"/>
+      <path d="M13 130 C13 92 23 70 42 70 C61 70 71 92 71 130 Z" fill="var(--magenta)"/>
+      <rect x="62" y="78" width="40" height="30" rx="4" fill="var(--page)" stroke="var(--ink)" stroke-width="2"/>
+      <path d="M70 88h24M70 96h16" stroke="var(--ink-3)" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <!-- reader holding book -->
+    <svg class="figure" viewBox="0 0 100 130" style="width:80px">
+      <circle cx="50" cy="44" r="17" fill="var(--mint)"/>
+      <path d="M18 130 C18 96 28 72 50 72 C72 72 82 96 82 130 Z" fill="var(--mint)"/>
+      <path d="M34 104h32v18H34z" fill="var(--page)" stroke="var(--ink)" stroke-width="2"/>
+      <path d="M50 104v18" stroke="var(--ink)" stroke-width="2"/>
+    </svg>
+    <!-- achiever, star -->
+    <svg class="figure" viewBox="0 0 90 130" style="width:74px">
+      <circle cx="45" cy="46" r="17" fill="var(--mauve)"/>
+      <path d="M16 130 C16 92 26 70 45 70 C64 70 74 92 74 130 Z" fill="var(--mauve)"/>
+      <path d="M45 2l2.4 5 5.4.8-3.9 3.8.9 5.4L45 20.4 40.1 23l.9-5.4L37 13.8l5.4-.8z" fill="var(--gold)"/>
+    </svg>
+  </div>
+
+  <div class="subhead" style="margin-top:8px">Avatar illustrations · busts</div>
+  <div class="av-illus">
+    <svg class="ai2" viewBox="0 0 72 72"><rect width="72" height="72" fill="color-mix(in srgb,var(--azure) 14%,#fff)"/><circle cx="36" cy="30" r="13" fill="var(--azure)"/><path d="M14 72c0-14 10-22 22-22s22 8 22 22z" fill="var(--azure)"/></svg>
+    <svg class="ai2" viewBox="0 0 72 72"><rect width="72" height="72" fill="color-mix(in srgb,var(--magenta) 12%,#fff)"/><circle cx="36" cy="30" r="13" fill="var(--magenta)"/><path d="M14 72c0-14 10-22 22-22s22 8 22 22z" fill="var(--magenta)"/></svg>
+    <svg class="ai2" viewBox="0 0 72 72"><rect width="72" height="72" fill="color-mix(in srgb,var(--mint) 16%,#fff)"/><circle cx="36" cy="30" r="13" fill="var(--mint)"/><path d="M14 72c0-14 10-22 22-22s22 8 22 22z" fill="var(--mint)"/></svg>
+    <svg class="ai2" viewBox="0 0 72 72"><rect width="72" height="72" fill="color-mix(in srgb,var(--gold) 18%,#fff)"/><circle cx="36" cy="30" r="13" fill="var(--gold)"/><path d="M14 72c0-14 10-22 22-22s22 8 22 22z" fill="var(--gold)"/></svg>
+    <svg class="ai2" viewBox="0 0 72 72"><rect width="72" height="72" fill="var(--mist)"/><circle cx="36" cy="30" r="13" fill="var(--ink)"/><path d="M14 72c0-14 10-22 22-22s22 8 22 22z" fill="var(--ink)"/></svg>
+  </div>
+
+  <div class="subhead" style="margin-top:26px">Scene · a class</div>
+  <div class="people-scene">
+    <svg viewBox="0 0 520 200" style="width:100%;height:auto;display:block">
+      <!-- shared board -->
+      <rect x="200" y="20" width="120" height="74" rx="6" fill="var(--page)" stroke="var(--ink)" stroke-width="2"/>
+      <path d="M218 44h84M218 58h60M218 72h74" stroke="var(--ink-3)" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M260 6l1.8 3.8 4.1.6-3 2.9.7 4.1-3.6-1.9-3.6 1.9.7-4.1-3-2.9 4.1-.6z" fill="var(--gold)"/>
+      <!-- figures along a baseline -->
+      <g>
+        <circle cx="70" cy="120" r="20" fill="var(--azure)"/><path d="M34 200c0-30 14-50 36-50s36 20 36 50z" fill="var(--azure)"/>
+      </g>
+      <g>
+        <circle cx="170" cy="128" r="17" fill="var(--mint)"/><path d="M140 200c0-26 12-44 30-44s30 18 30 44z" fill="var(--mint)"/>
+      </g>
+      <g>
+        <circle cx="360" cy="128" r="17" fill="var(--mauve)"/><path d="M330 200c0-26 12-44 30-44s30 18 30 44z" fill="var(--mauve)"/>
+      </g>
+      <g>
+        <circle cx="455" cy="120" r="20" fill="var(--magenta)"/><path d="M419 200c0-30 14-50 36-50s36 20 36 50z" fill="var(--magenta)"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="subhead" style="margin-top:26px">Personas</div>
+  <div class="grid3">
+    <div class="persona">
+      <svg class="pf" viewBox="0 0 96 96"><circle cx="48" cy="36" r="18" fill="var(--azure)"/><path d="M16 96c0-20 14-32 32-32s32 12 32 32z" fill="var(--azure)"/><path d="M74 12l2 4.4 4.4.6-3.2 3.1.8 4.4L74 26.9 69.2 28l.8-4.4-3.2-3.1 4.4-.6z" fill="var(--gold)"/></svg>
+      <h5>The student</h5><p>Curious, time-poor. Wants the idea to click, fast.</p>
+    </div>
+    <div class="persona">
+      <svg class="pf" viewBox="0 0 96 96"><circle cx="48" cy="36" r="18" fill="var(--magenta)"/><path d="M16 96c0-20 14-32 32-32s32 12 32 32z" fill="var(--magenta)"/><rect x="60" y="58" width="30" height="22" rx="3" fill="var(--page)" stroke="var(--ink)" stroke-width="2"/></svg>
+      <h5>The teacher</h5><p>Stretched thin. Wants to approve, not author from scratch.</p>
+    </div>
+    <div class="persona">
+      <svg class="pf" viewBox="0 0 96 96"><circle cx="48" cy="36" r="18" fill="var(--mint)"/><path d="M16 96c0-20 14-32 32-32s32 12 32 32z" fill="var(--mint)"/><svg x="58" y="56" width="26" height="26" fill="none" stroke="var(--page)" stroke-width="1.8"><use href="#i-target"/></svg></svg>
+      <h5>The head</h5><p>Builds the school's reputation. Wants the visible edge.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 40 · ELEMENTS -->
+<section style="border-bottom:none"><div class="wrap">
+  <div class="s-head"><span class="n">40</span><h2>Objects &amp; elements</h2></div>
+  <p class="lede">Hand-feel object drawings for empty states, section openers, and marketing — each fitted to its subject's paint. Plus the small <em>editorial furniture</em> that makes a Classess page feel typeset, not generated.</p>
+
+  <div class="subhead">Object illustrations</div>
+  <div class="illus-grid">
+    <div class="illus"><svg viewBox="0 0 96 96"><rect x="20" y="14" width="56" height="68" rx="5" fill="color-mix(in srgb,var(--cobalt) 12%,#fff)" stroke="var(--cobalt)" stroke-width="2.4"/><path d="M30 30h36M30 42h36M30 54h24" stroke="var(--cobalt)" stroke-width="2.4" stroke-linecap="round"/><path d="M62 60l3 6 6-3-3 6 6 3-6 3 3 6-6-3-3 6-3-6-6 3 3-6-6-3 6-3-3-6 6 3z" fill="var(--gold)"/></svg><span>Notebook</span></div>
+    <div class="illus"><svg viewBox="0 0 96 96"><path d="M40 16h16M44 16v22l-18 32a5 5 0 0 0 4.4 7.4h27.2A5 5 0 0 0 62 70L44 38" fill="color-mix(in srgb,var(--amber) 12%,#fff)" stroke="var(--amber)" stroke-width="2.4" stroke-linejoin="round"/><path d="M33 56h30" stroke="var(--amber)" stroke-width="2.4"/><circle cx="40" cy="64" r="2.4" fill="var(--amber)"/><circle cx="52" cy="68" r="2" fill="var(--amber)"/></svg><span>Flask</span></div>
+    <div class="illus"><svg viewBox="0 0 96 96"><path d="M22 74c0-32 24-56 56-56 0 32-24 56-56 56z" fill="color-mix(in srgb,var(--grass) 12%,#fff)" stroke="var(--grass)" stroke-width="2.4"/><path d="M22 74C38 58 54 42 70 34" stroke="var(--grass)" stroke-width="2.4" stroke-linecap="round"/></svg><span>Leaf</span></div>
+    <div class="illus"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="6" fill="var(--physics,#C84A1F)"/><g stroke="var(--physics,#C84A1F)" stroke-width="2.4" fill="none"><ellipse cx="48" cy="48" rx="34" ry="13"/><ellipse cx="48" cy="48" rx="34" ry="13" transform="rotate(60 48 48)"/><ellipse cx="48" cy="48" rx="34" ry="13" transform="rotate(120 48 48)"/></g></svg><span>Atom</span></div>
+    <div class="illus"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="32" fill="color-mix(in srgb,var(--sky) 12%,#fff)" stroke="var(--sky)" stroke-width="2.4"/><path d="M16 48h64M48 16c11 11 11 53 0 64M48 16c-11 11-11 53 0 64" stroke="var(--sky)" stroke-width="2.2" fill="none"/></svg><span>Globe</span></div>
+    <div class="illus"><svg viewBox="0 0 96 96"><rect x="16" y="22" width="64" height="52" rx="6" fill="var(--panel)"/><path d="M16 34h64" stroke="var(--panel-line)" stroke-width="2"/><circle cx="24" cy="28" r="2" fill="var(--magenta)"/><circle cx="31" cy="28" r="2" fill="var(--gold)"/><circle cx="38" cy="28" r="2" fill="var(--mint)"/><path d="M34 50l-7 6 7 6M58 50l7 6-7 6" stroke="var(--mint)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Terminal</span></div>
+    <div class="illus"><svg viewBox="0 0 96 96"><path d="M34 28h28v34a14 14 0 0 1-28 0z" fill="color-mix(in srgb,var(--gold) 14%,#fff)" stroke="var(--gold)" stroke-width="2.4"/><path d="M34 34h-8a8 8 0 0 0 8 12M62 34h8a8 8 0 0 1-8 12M40 76h16M44 76v-6h8v6" stroke="var(--gold)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg><span>Trophy</span></div>
+    <div class="illus"><svg viewBox="0 0 96 96"><path d="M24 22h36a8 8 0 0 1 8 8v44H32a8 8 0 0 0-8 8z" fill="color-mix(in srgb,var(--mauve) 12%,#fff)" stroke="var(--mauve)" stroke-width="2.4" stroke-linejoin="round"/><path d="M68 30l3 6 6-3-3 6 6 3-6 3 3 6-6-3-3 6" stroke="var(--gold)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Book of ideas</span></div>
+  </div>
+
+  <div class="subhead" style="margin-top:26px">Editorial furniture</div>
+  <div class="elem-grid">
+    <div class="elem">
+      <h4>The spark mark</h4>
+      <div class="cmark">
+        <svg width="54" height="54" viewBox="0 0 54 54"><path d="M44 16a20 20 0 1 0 0 22" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/><path d="M27 18l2.6 6.4L36 27l-6.4 2.6L27 36l-2.6-6.4L18 27l6.4-2.6z" fill="var(--magenta)"/></svg>
+        <span class="cwm">Classess<span style="color:var(--ink)">.</span></span>
+      </div>
+    </div>
+    <div class="elem dotgrid"><h4>Dot grid</h4><div style="flex:1"></div></div>
+    <div class="elem spark-scatter">
+      <h4>Spark scatter</h4>
+      <svg style="top:40px;left:30px" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="var(--magenta)"/></svg>
+      <svg style="top:90px;left:120px" width="14" height="14" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="var(--azure)"/></svg>
+      <svg style="top:60px;right:36px" width="18" height="18" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="var(--gold)"/></svg>
+      <div style="flex:1"></div>
+    </div>
+    <div class="elem">
+      <h4>Marker underline</h4>
+      <div class="markline">the equivalence point<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 7c40 4 120 4 196 1" fill="none" stroke="var(--magenta)" stroke-width="3" stroke-linecap="round"/></svg></div>
+    </div>
+    <div class="elem">
+      <h4>Margin note</h4>
+      <span class="handnote2">this is what trips students up</span>
+    </div>
+    <div class="elem">
+      <h4>Section rule</h4>
+      <div class="rulex">§ 04 · components</div>
+    </div>
+  </div>
+
+  <div class="subhead" style="margin-top:26px">Empty state · figure + object</div>
+  <div class="demo" style="--paint:var(--azure)">
+    <div class="empty" style="border:none">
+      <svg viewBox="0 0 120 96" style="width:140px;margin:0 auto 8px;display:block">
+        <rect x="38" y="24" width="44" height="54" rx="5" fill="color-mix(in srgb,var(--azure) 10%,#fff)" stroke="var(--azure)" stroke-width="2.4"/>
+        <path d="M48 40h24M48 50h24M48 60h14" stroke="var(--azure)" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M84 18l2 4.4 4.4.6-3.2 3.1.8 4.4L84 32.9 79.2 34l.8-4.4-3.2-3.1 4.4-.6z" fill="var(--gold)"/>
+      </svg>
+      <h4>No lessons yet</h4>
+      <p>Pick a topic and an engine will draft the first one for you.</p>
+      <button class="btn">Generate a lesson</button>
+    </div>
+  </div>
+</div></section>
+
+<style>
+/* ════════════════════════════════════════════════════════════
+   v4 — GRADIENTS · CHARACTERS · EMPTY STATES
+   ════════════════════════════════════════════════════════════ */
+:root{
+  --g-magenta:linear-gradient(135deg,#E8337F 0%,#9A1250 100%);
+  --g-sunset: linear-gradient(135deg,#F88A3C 0%,#D6196F 100%);
+  --g-azure:  linear-gradient(135deg,#3B82F6 0%,#4F46E5 100%);
+  --g-mauve:  linear-gradient(135deg,#A57FE6 0%,#6D4AE0 100%);
+  --g-mint:   linear-gradient(135deg,#27C9B0 0%,#0F8F9C 100%);
+  --g-cyan:   linear-gradient(135deg,#39A0DE 0%,#1F6FD8 100%);
+  --g-gold:   linear-gradient(135deg,#F4B53A 0%,#E8881A 100%);
+  --g-ink:    linear-gradient(135deg,#2A2C34 0%,#0E0E10 100%);
+}
+.grad-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:760px){.grad-grid{grid-template-columns:repeat(2,1fr)}}
+.gsw{border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+.gsw .gc{height:84px}
+.gsw .gm{padding:9px 11px}.gsw .gn{font-size:12.5px;font-weight:600}.gsw .gx{font-family:var(--mono);font-size:9.5px;color:var(--ink-4);margin-top:1px}
+.btn.grad{background:var(--g-magenta);border:none;color:#fff}
+.btn.grad:hover{filter:brightness(1.06)}
+.pill.grad{background:var(--g-magenta);color:#fff}
+.grad-ring{width:54px;height:54px;border-radius:50%;padding:3px;background:var(--g-magenta)}
+.grad-ring .in{width:100%;height:100%;border-radius:50%;background:var(--page);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;color:var(--ink)}
+.grad-num{font-family:var(--serif);font-size:54px;font-weight:500;letter-spacing:-.03em;background:var(--g-magenta);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.grad-hero{border-radius:var(--r-lg);padding:34px 32px;background:var(--g-magenta);color:#fff;position:relative;overflow:hidden}
+.grad-hero h3{font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.02em;max-width:18ch}
+.grad-hero p{font-size:14.5px;opacity:.92;margin-top:10px;max-width:42ch}
+.grad-hero .spk{position:absolute;top:18px;right:24px;opacity:.5}
+.parsons{background:var(--panel);border-radius:var(--r);padding:26px 26px 30px;position:relative;overflow:hidden;background-image:repeating-linear-gradient(90deg,transparent 0 39px,rgba(255,255,255,.035) 39px 40px);box-shadow:var(--sh)}
+.pl{display:inline-flex;align-items:center;gap:11px;font-family:var(--mono);font-size:15px;color:#fff;padding:11px 17px;border-radius:9px;margin:9px 0;width:max-content;max-width:100%;background:linear-gradient(95deg,rgba(214,25,111,.55),rgba(214,25,111,.14));border:1.5px solid rgba(224,51,127,.85);box-shadow:0 0 0 1px rgba(214,25,111,.18),0 8px 22px -8px rgba(214,25,111,.75)}
+.pl .tk{color:#F58FBE;font-size:12px;font-weight:600}
+.pl.i1{margin-left:30px}.pl.i2{margin-left:60px}
+.solved{display:flex;align-items:center;gap:18px;margin-top:22px}
+.btn.shuffle{background:color-mix(in srgb,var(--magenta) 14%,#fff);color:var(--magenta);border:1px solid color-mix(in srgb,var(--magenta) 28%,#fff)}
+.solved .sv{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);display:flex;align-items:center;gap:7px}
+.lesson-aside{border-left:3px solid var(--magenta);padding:4px 0 4px 22px;margin:24px 0;font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.55;color:var(--ink-2);max-width:62ch}
+.lesson-aside b{font-style:normal;color:var(--ink);font-weight:600}
+.dragnote{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);margin:18px 0 4px}
+.cast{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:flex-end;padding:18px 0}
+.char{width:120px;height:160px}
+.char-card{border:1px solid var(--line);border-radius:var(--r);background:var(--page);padding:14px 14px 16px;text-align:center;box-shadow:var(--sh-sm)}
+.char-card .cn{font-family:var(--serif);font-size:16px;font-weight:500;margin-top:6px}
+.char-card .cr{font-size:11.5px;color:var(--ink-4);font-family:var(--mono);letter-spacing:.04em}
+.char-scene{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;position:relative;overflow:hidden}
+@media (prefers-reduced-motion: no-preference){
+  .a-bob{animation:bob 3.4s ease-in-out infinite}
+  .a-bob2{animation:bob 4.1s ease-in-out infinite}
+  .a-bob3{animation:bob 3.8s ease-in-out infinite .3s}
+  .a-blink{animation:blink 4.2s infinite;transform-box:fill-box;transform-origin:center}
+  .a-float{animation:floaty 4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+  .a-wave{animation:wave 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:80% 90%}
+  .a-sway{animation:sway 4.4s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom center}
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-7px) rotate(10deg)}}
+@keyframes wave{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-16deg)}}
+@keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+.es-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.es-grid{grid-template-columns:1fr}}
+.es{text-align:center;padding:30px 20px;border:1px solid var(--line);border-radius:var(--r);background:var(--page)}
+.es .esi{width:60px;height:60px;border-radius:16px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
+.es h5{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:5px}
+.es p{font-size:13px;color:var(--ink-3);max-width:32ch;margin:0 auto 15px;line-height:1.5}
+.es .btn{padding:9px 16px;font-size:13px}
+.ph-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.ph-grid{grid-template-columns:1fr 1fr}}
+.ph{border:1.5px dashed var(--line-2);border-radius:var(--r);background:var(--paper);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:var(--ink-4)}
+.ph .pht{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase}
+.ph.coming{border-style:solid;border-color:var(--line);background:var(--page)}
+.spin{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--mist);border-top-color:var(--magenta)}
+@media (prefers-reduced-motion: no-preference){.spin{animation:spin .8s linear infinite}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.welcome{border-radius:var(--r-lg);border:1px solid var(--line);background:var(--paper);padding:30px 32px;display:flex;align-items:center;gap:28px}
+@media(max-width:760px){.welcome{flex-direction:column;text-align:center}}
+.welcome .wt h3{font-family:var(--serif);font-size:28px;font-weight:500;letter-spacing:-.02em}
+.welcome .wt h3 em{font-style:italic}
+.welcome .wt p{font-size:14.5px;color:var(--ink-3);margin:10px 0 18px;max-width:46ch;line-height:1.55}
+</style>
+
+<!-- 41 · GRADIENTS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">41</span><h2>Gradients</h2></div>
+  <p class="lede">Used sparingly, for <em>moments that have to land</em> — the magenta gradient is the signature, the way the dark code panel glows in a live lesson. Cool blends for everything else; warm only when it earns it.</p>
+  <div class="grad-grid">
+    <div class="gsw"><div class="gc" style="background:var(--g-magenta)"></div><div class="gm"><div class="gn">Magenta</div><div class="gx">#E8337F → #9A1250</div></div></div>
+    <div class="gsw"><div class="gc" style="background:var(--g-sunset)"></div><div class="gm"><div class="gn">Sunset</div><div class="gx">#F88A3C → #D6196F</div></div></div>
+    <div class="gsw"><div class="gc" style="background:var(--g-azure)"></div><div class="gm"><div class="gn">Azure</div><div class="gx">#3B82F6 → #4F46E5</div></div></div>
+    <div class="gsw"><div class="gc" style="background:var(--g-mauve)"></div><div class="gm"><div class="gn">Mauve</div><div class="gx">#A57FE6 → #6D4AE0</div></div></div>
+    <div class="gsw"><div class="gc" style="background:var(--g-mint)"></div><div class="gm"><div class="gn">Mint</div><div class="gx">#27C9B0 → #0F8F9C</div></div></div>
+    <div class="gsw"><div class="gc" style="background:var(--g-cyan)"></div><div class="gm"><div class="gn">Cyan</div><div class="gx">#39A0DE → #1F6FD8</div></div></div>
+    <div class="gsw"><div class="gc" style="background:var(--g-gold)"></div><div class="gm"><div class="gn">Gold</div><div class="gx">#F4B53A → #E8881A</div></div></div>
+    <div class="gsw"><div class="gc" style="background:var(--g-ink)"></div><div class="gm"><div class="gn">Ink</div><div class="gx">#2A2C34 → #0E0E10</div></div></div>
+  </div>
+  <div class="grid2" style="margin-top:18px;align-items:start">
+    <div class="demo"><h4>Applied</h4>
+      <div class="btns" style="margin-bottom:16px"><button class="btn grad">Generate lesson</button><span class="pill grad">Premium</span><div class="grad-ring"><div class="in">SR</div></div></div>
+      <div class="grad-num">$1M</div>
+      <p style="font-size:12px;color:var(--ink-4);font-family:var(--mono);margin-top:4px">TARGET ARR — gradient text</p>
+    </div>
+    <div class="grad-hero">
+      <svg class="spk" width="40" height="40" viewBox="0 0 24 24"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#fff"/></svg>
+      <h3>Your school, <em>amplified.</em></h3>
+      <p>The one place the gradient gets to shine — a paywall, a celebration, a hero. Never inside a lesson.</p>
+    </div>
+  </div>
+  <div class="subhead" style="margin-top:26px">Code assembly — the live Plexus moment</div>
+  <p class="lede" style="margin-bottom:6px">The Parsons interactive, exactly as it ships: editorial header, magenta-bordered blocks on a guide-lined dark panel, gradient fill left-to-right.</p>
+  <div class="demo">
+    <div class="kicker" style="--accent:var(--magenta);color:var(--magenta);font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600"><span style="display:inline-block;width:28px;height:1px;background:var(--magenta);vertical-align:middle;margin-right:10px"></span>Computer Science · Factorial with a loop</div>
+    <h3 style="font-family:var(--serif);font-weight:500;font-size:38px;letter-spacing:-.025em;margin:14px 0 6px">Factorial with a Loop</h3>
+    <div class="t-mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4)">Core band · EN · Python</div>
+    <div class="lesson-aside">You're building a function that returns <b>n!</b> using a for loop. Drag the lines into the correct order and indent the body of each block.</div>
+    <div class="dragnote">Drag a block to reorder · drag it right to indent</div>
+    <div class="parsons">
+      <div class="pl"><span class="tk">✓:</span> def factorial(n):</div><br>
+      <div class="pl i1"><span class="tk">✓:</span> result = 1</div><br>
+      <div class="pl i1"><span class="tk">✓:</span> for i in range(2, n + 1):</div><br>
+      <div class="pl i2"><span class="tk">✓:</span> result = result * i</div><br>
+      <div class="pl i1"><span class="tk">✓:</span> return result</div>
+    </div>
+    <div class="solved">
+      <button class="btn shuffle">Shuffle</button>
+      <span class="sv"><svg class="icn" style="width:14px;height:14px;color:var(--magenta)"><use href="#i-check"/></svg> Solved</span>
+    </div>
+    <div class="rulex assemble" style="display:flex;align-items:center;gap:10px;color:var(--ink-4);font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:24px"><span style="flex:1;height:1px;background:var(--line)"></span>Assemble the program<span style="flex:1;height:1px;background:var(--line)"></span></div>
+  </div>
+</div></section>
+
+<!-- 42 · CHARACTERS -->
+<section><div class="wrap">
+  <div class="s-head"><span class="n">42</span><h2>Characters</h2></div>
+  <p class="lede">The warmer cast — a half-step toward human. Simple friendly faces, varied hair and tone so the set feels <em>inclusive without stereotyping</em>, and a little idle life: a bob, a blink, a wave, a floating spark. Use them in onboarding, empty states, and marketing.</p>
+  <div class="cast">
+    <!-- Ace -->
+    <svg class="char" viewBox="0 0 120 160"><g class="a-float"><path d="M60 6l2.4 7 7 2.4-7 2.4L60 27l-2.4-7.2-7-2.4 7-2.4z" fill="var(--gold)"/></g><g class="a-bob"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--azure)"/><rect x="53" y="92" width="14" height="14" rx="6" fill="#E3A977"/><circle cx="60" cy="74" r="24" fill="#F2C9A0"/><path d="M36 74C36 54 47 46 60 46 73 46 84 54 84 74 84 66 78 60 60 60 42 60 36 66 36 74Z" fill="#2B2B30"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#9C6B3F" stroke-width="2" stroke-linecap="round"/></g></svg>
+    <!-- Iris (board) -->
+    <svg class="char" viewBox="0 0 120 160"><g class="a-bob2"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--magenta)"/><rect x="53" y="92" width="14" height="14" rx="6" fill="#C68642"/><circle cx="60" cy="74" r="24" fill="#C68642"/><circle cx="60" cy="44" r="8" fill="#3A2A22"/><path d="M36 74C36 54 47 46 60 46 73 46 84 54 84 74 84 66 78 60 60 60 42 60 36 66 36 74Z" fill="#3A2A22"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#7A4B28" stroke-width="2" stroke-linecap="round"/><rect x="64" y="116" width="40" height="28" rx="4" fill="var(--page)" stroke="var(--ink)" stroke-width="2"/><path d="M72 126h24M72 134h16" stroke="var(--ink-3)" stroke-width="2" stroke-linecap="round"/></g></svg>
+    <!-- Theo (wave) -->
+    <svg class="char" viewBox="0 0 120 160"><g class="a-bob3"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--mint)"/><g class="a-wave"><rect x="82" y="96" width="11" height="34" rx="5.5" fill="#F2C9A0"/></g><rect x="53" y="92" width="14" height="14" rx="6" fill="#F2C9A0"/><circle cx="60" cy="74" r="24" fill="#F2C9A0"/><g fill="#5A3A22"><circle cx="44" cy="58" r="6"/><circle cx="52" cy="51" r="6.5"/><circle cx="60" cy="49" r="7"/><circle cx="68" cy="51" r="6.5"/><circle cx="76" cy="58" r="6"/></g><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#9C6B3F" stroke-width="2" stroke-linecap="round"/></g></svg>
+    <!-- Maya (long hair, book) -->
+    <svg class="char" viewBox="0 0 120 160"><g class="a-bob"><path d="M34 74C34 52 46 46 60 46 74 46 86 52 86 74L86 110 78 110 78 72C78 64 70 60 60 60 50 60 42 64 42 72L42 110 34 110Z" fill="#2B2B30"/><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--mauve)"/><rect x="53" y="92" width="14" height="14" rx="6" fill="#9C6B3F"/><circle cx="60" cy="74" r="24" fill="#9C6B3F"/><path d="M36 72C36 54 47 47 60 47 73 47 84 54 84 72 84 64 78 59 60 59 42 59 36 64 36 72Z" fill="#2B2B30"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#1C1C20"/><circle cx="68" cy="74" r="2.6" fill="#1C1C20"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#6B4A2C" stroke-width="2" stroke-linecap="round"/><path d="M40 120h40v22H40z" fill="var(--page)" stroke="var(--ink)" stroke-width="2"/><path d="M60 120v22" stroke="var(--ink)" stroke-width="2"/></g></svg>
+    <!-- Sol (star, sway) -->
+    <svg class="char" viewBox="0 0 120 160"><g class="a-float"><path d="M60 6l2 4.6 5 .8-3.6 3.5.9 5L60 23l-4.3 1.9.9-5L53 11.4l5-.8z" fill="var(--gold)"/></g><g class="a-sway"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--gold)"/><rect x="53" y="92" width="14" height="14" rx="6" fill="#E3A977"/><circle cx="60" cy="74" r="24" fill="#E3A977"/><path d="M36 74C36 54 47 46 60 46 73 46 84 54 84 74 84 66 80 60 66 60 58 60 40 62 36 74Z" fill="#4A3520"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#9C6B3F" stroke-width="2" stroke-linecap="round"/></g></svg>
+  </div>
+  <div class="subhead" style="margin-top:8px">Named cast</div>
+  <div class="grid4">
+    <div class="char-card"><svg class="char" style="width:90px;height:120px" viewBox="0 0 120 160"><g class="a-bob"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--azure)"/><circle cx="60" cy="74" r="24" fill="#F2C9A0"/><path d="M36 74C36 54 47 46 60 46 73 46 84 54 84 74 84 66 78 60 60 60 42 60 36 66 36 74Z" fill="#2B2B30"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#9C6B3F" stroke-width="2" stroke-linecap="round"/></g></svg><div class="cn">Ace</div><div class="cr">The learner</div></div>
+    <div class="char-card"><svg class="char" style="width:90px;height:120px" viewBox="0 0 120 160"><g class="a-bob2"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--magenta)"/><circle cx="60" cy="74" r="24" fill="#C68642"/><circle cx="60" cy="44" r="8" fill="#3A2A22"/><path d="M36 74C36 54 47 46 60 46 73 46 84 54 84 74 84 66 78 60 60 60 42 60 36 66 36 74Z" fill="#3A2A22"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#7A4B28" stroke-width="2" stroke-linecap="round"/></g></svg><div class="cn">Iris</div><div class="cr">The teacher</div></div>
+    <div class="char-card"><svg class="char" style="width:90px;height:120px" viewBox="0 0 120 160"><g class="a-bob3"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--mint)"/><circle cx="60" cy="74" r="24" fill="#F2C9A0"/><g fill="#5A3A22"><circle cx="44" cy="58" r="6"/><circle cx="52" cy="51" r="6.5"/><circle cx="60" cy="49" r="7"/><circle cx="68" cy="51" r="6.5"/><circle cx="76" cy="58" r="6"/></g><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#9C6B3F" stroke-width="2" stroke-linecap="round"/></g></svg><div class="cn">Theo</div><div class="cr">The explorer</div></div>
+    <div class="char-card"><svg class="char" style="width:90px;height:120px" viewBox="0 0 120 160"><g class="a-bob"><path d="M34 74C34 52 46 46 60 46 74 46 86 52 86 74L86 110 78 110 78 72C78 64 70 60 60 60 50 60 42 64 42 72L42 110 34 110Z" fill="#2B2B30"/><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--mauve)"/><circle cx="60" cy="74" r="24" fill="#9C6B3F"/><path d="M36 72C36 54 47 47 60 47 73 47 84 54 84 72 84 64 78 59 60 59 42 59 36 64 36 72Z" fill="#2B2B30"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#1C1C20"/><circle cx="68" cy="74" r="2.6" fill="#1C1C20"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#6B4A2C" stroke-width="2" stroke-linecap="round"/></g></svg><div class="cn">Maya</div><div class="cr">The builder</div></div>
+  </div>
+  <div class="subhead" style="margin-top:26px">In a scene</div>
+  <div class="char-scene">
+    <div style="display:flex;align-items:flex-end;justify-content:center;gap:30px">
+      <svg class="char" style="width:96px" viewBox="0 0 120 160"><g class="a-bob"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--azure)"/><circle cx="60" cy="74" r="24" fill="#F2C9A0"/><path d="M36 74C36 54 47 46 60 46 73 46 84 54 84 74 84 66 78 60 60 60 42 60 36 66 36 74Z" fill="#2B2B30"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#9C6B3F" stroke-width="2" stroke-linecap="round"/></g></svg>
+      <div class="grad-hero" style="padding:22px 26px;align-self:center;max-width:300px"><svg class="spk" width="30" height="30" viewBox="0 0 24 24" style="top:12px;right:14px"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#fff"/></svg><h3 style="font-size:22px">Let's begin.</h3><p style="font-size:13px">Your first lesson is one tap away.</p></div>
+      <svg class="char" style="width:96px" viewBox="0 0 120 160"><g class="a-bob2"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--mint)"/><circle cx="60" cy="74" r="24" fill="#F2C9A0"/><g fill="#5A3A22"><circle cx="44" cy="58" r="6"/><circle cx="52" cy="51" r="6.5"/><circle cx="60" cy="49" r="7"/><circle cx="68" cy="51" r="6.5"/><circle cx="76" cy="58" r="6"/></g><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#9C6B3F" stroke-width="2" stroke-linecap="round"/></g></svg>
+    </div>
+  </div>
+</div></section>
+
+<!-- 43 · EMPTY STATES -->
+<section style="border-bottom:none"><div class="wrap">
+  <div class="s-head"><span class="n">43</span><h2>Empty states &amp; placeholders</h2></div>
+  <p class="lede">Every blank surface gets a <em>reason and a next step</em> — never a dead end. A soft paint square, a line icon, one sentence, one action.</p>
+  <div class="es-grid">
+    <div class="es"><div class="esi" style="background:color-mix(in srgb,var(--azure) 12%,#fff);color:var(--azure)"><svg class="icn"><use href="#i-book"/></svg></div><h5>No lessons yet</h5><p>Pick a topic and an engine drafts the first one.</p><button class="btn">Generate</button></div>
+    <div class="es"><div class="esi" style="background:var(--mist);color:var(--slate)"><svg class="icn"><use href="#i-search"/></svg></div><h5>No results</h5><p>Nothing matched "equivalance". Check the spelling or try a broader term.</p></div>
+    <div class="es"><div class="esi" style="background:color-mix(in srgb,var(--mint) 14%,#fff);color:color-mix(in srgb,var(--mint) 72%,#000)"><svg class="icn"><use href="#i-users"/></svg></div><h5>No students added</h5><p>Import a roster CSV or add students one by one.</p><button class="btn ghost">Import roster</button></div>
+    <div class="es"><div class="esi" style="background:color-mix(in srgb,var(--grass) 13%,#fff);color:color-mix(in srgb,var(--grass) 72%,#000)"><svg class="icn"><use href="#i-check"/></svg></div><h5>You're all caught up</h5><p>No lessons waiting for review. Nice work.</p></div>
+    <div class="es"><div class="esi" style="background:color-mix(in srgb,var(--mauve) 14%,#fff);color:color-mix(in srgb,var(--mauve) 70%,#000)"><svg class="icn"><use href="#i-chart"/></svg></div><h5>No data yet</h5><p>Mastery shows up once students start working through lessons.</p></div>
+    <div class="es"><div class="esi" style="background:color-mix(in srgb,var(--gold) 16%,#fff);color:color-mix(in srgb,var(--gold) 70%,#000)"><svg class="icn"><use href="#i-globe"/></svg></div><h5>You're offline</h5><p>Reconnect to keep generating and publishing.</p><button class="btn ghost">Retry</button></div>
+    <div class="es"><div class="esi" style="background:color-mix(in srgb,var(--rose) 12%,#fff);color:color-mix(in srgb,var(--rose) 70%,#000)"><svg class="icn"><use href="#i-bell"/></svg></div><h5>Something went wrong</h5><p>A render threw on load. We're retrying automatically.</p><button class="btn ghost">Reload</button></div>
+    <div class="es" style="background:var(--g-magenta);border:none;color:#fff"><div class="esi" style="background:rgba(255,255,255,.16);color:#fff"><svg class="icn"><use href="#i-lock"/></svg></div><h5 style="color:#fff">A Premium lesson</h5><p style="color:rgba(255,255,255,.88)">Video and vernacular lessons are on the Premium tier.</p><button class="btn" style="background:#fff;color:var(--ink);border-color:#fff">Upgrade</button></div>
+    <div class="es">
+      <svg viewBox="0 0 120 100" style="width:120px;margin:0 auto 6px;display:block"><g class="a-bob"><path d="M40 100C40 76 50 64 60 64 70 64 80 76 80 100Z" fill="var(--azure)"/><circle cx="60" cy="48" r="16" fill="#F2C9A0"/><path d="M44 48C44 36 51 31 60 31 69 31 76 36 76 48 76 42 71 38 60 38 49 38 44 42 44 48Z" fill="#2B2B30"/><g class="a-blink"><circle cx="54" cy="48" r="2" fill="#2B2B30"/><circle cx="66" cy="48" r="2" fill="#2B2B30"/></g><path d="M55 55Q60 59 65 55" fill="none" stroke="#9C6B3F" stroke-width="1.8" stroke-linecap="round"/></g></svg>
+      <h5>Nothing here — yet</h5><p>Ace is waiting. Add your first class to get going.</p><button class="btn">Add a class</button>
+    </div>
+  </div>
+
+  <div class="subhead" style="margin-top:26px">Placeholders</div>
+  <div class="ph-grid">
+    <div class="ph"><svg class="icn" style="width:30px;height:30px"><use href="#i-grid"/></svg><span class="pht">Image</span></div>
+    <div class="ph"><div style="width:44px;height:44px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;color:var(--ink-4)"><svg class="icn" style="width:22px;height:22px"><use href="#i-users"/></svg></div><span class="pht">Avatar</span></div>
+    <div class="ph"><div class="spin"></div><span class="pht">Generating…</span></div>
+    <div class="ph coming"><svg class="icn fill" style="width:26px;height:26px;color:var(--magenta)"><use href="#i-sparkle"/></svg><span class="pht" style="color:var(--ink-3)">Coming soon</span></div>
+  </div>
+
+  <div class="subhead" style="margin-top:26px">First-run welcome</div>
+  <div class="welcome">
+    <svg class="char" style="width:110px;flex:none" viewBox="0 0 120 160"><g class="a-float"><path d="M60 6l2.4 7 7 2.4-7 2.4L60 27l-2.4-7.2-7-2.4 7-2.4z" fill="var(--gold)"/></g><g class="a-bob"><path d="M30 160C30 120 40 104 60 104 80 104 90 120 90 160Z" fill="var(--magenta)"/><circle cx="60" cy="74" r="24" fill="#C68642"/><circle cx="60" cy="44" r="8" fill="#3A2A22"/><path d="M36 74C36 54 47 46 60 46 73 46 84 54 84 74 84 66 78 60 60 60 42 60 36 66 36 74Z" fill="#3A2A22"/><g class="a-blink"><circle cx="52" cy="74" r="2.6" fill="#2B2B30"/><circle cx="68" cy="74" r="2.6" fill="#2B2B30"/></g><path d="M54 84Q60 89 66 84" fill="none" stroke="#7A4B28" stroke-width="2" stroke-linecap="round"/></g></svg>
+    <div class="wt">
+      <h3>Welcome to <em>Classess.</em></h3>
+      <p>Add a class, pick a subject, and watch the first lesson assemble itself. You approve — we generate.</p>
+      <div class="btns"><button class="btn">Add your first class</button><button class="btn ghost">Take the tour</button></div>
+    </div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="wordmark">Classess<span class="dot">.</span></div>
+  <p>Brand kit · v4 · 43 sections</p>
+</footer>
+
+</body>
+</html>

@@ -1,5 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
 
+/* Classess brand tokens */
+:root {
+  --ink:        #0E0E10;
+  --ink-2:      #33343A;
+  --ink-3:      #6A6C75;
+  --ink-4:      #A6A8B0;
+  --page:       #FFFFFF;
+  --paper:      #FAFAFB;
+  --mist:       #F1F2F5;
+  --line:       #E7E8EC;
+  --line-2:     #D7D9E0;
+  --panel:      #141418;
+  /* expressive paint */
+  --magenta:    #D6196F;
+  --mint:       #13B5A0;
+  --azure:      #2563EB;
+  --mauve:      #8E6FC4;
+  --grass:      #1CA363;
+  --gold:       #DFA21F;
+  /* gradients */
+  --g-magenta:  linear-gradient(135deg, #E8337F 0%, #9A1250 100%);
+  --g-azure:    linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%);
+  /* radius */
+  --r:    14px;
+  --r-sm: 8px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,7 +58,7 @@
 
 /* Smooth focus outline for role cards */
 button:focus-visible {
-  outline: 2px solid #6366f1;
+  outline: 2px solid var(--magenta);
   outline-offset: 2px;
 }
 

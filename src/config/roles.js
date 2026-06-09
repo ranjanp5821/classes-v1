@@ -77,10 +77,10 @@ export const ROLES_CONFIG = {
       title: "I am a Student",
       description: "Learn at your own pace and track progress in real time.",
     },
-    accent: "#0ea5e9",
-    accentLight: "#e0f2fe",
-    accentBorder: "#7dd3fc",
-    accentGradient: "linear-gradient(135deg, #0ea5e9, #38bdf8)",
+    accent: "#2563EB",
+    accentLight: "#EBF0FD",
+    accentBorder: "#93AFEE",
+    accentGradient: "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)",
 
     navbar: {
       links: [
@@ -118,10 +118,10 @@ export const ROLES_CONFIG = {
       title: "I am a Teacher",
       description: "Plan lessons, assess student work, and understand who needs support.",
     },
-    accent: "#10b981",
-    accentLight: "#ecfdf5",
-    accentBorder: "#6ee7b7",
-    accentGradient: "linear-gradient(135deg, #10b981, #34d399)",
+    accent: "#1CA363",
+    accentLight: "#E8F7F0",
+    accentBorder: "#A9DDBF",
+    accentGradient: "linear-gradient(135deg, #22C55E 0%, #1CA363 100%)",
 
     navbar: {
       links: [

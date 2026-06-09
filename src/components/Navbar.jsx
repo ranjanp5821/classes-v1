@@ -123,8 +123,8 @@ export default function Navbar({ onOpenAuth }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "shadow-sm" : ""
-        } bg-white/95 backdrop-blur-sm border-b border-neutral-100`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "shadow-sm" : ""}`}
+      style={{ background: "rgba(255,255,255,0.96)", backdropFilter: "blur(8px)", borderBottom: "1px solid var(--line)" }}
     >
       <nav className="max-w-5xl mx-auto px-8 h-16 flex items-center justify-between">
 
@@ -138,7 +138,7 @@ export default function Navbar({ onOpenAuth }) {
           <img
             src="/assets/classess_logo.png"
             alt="Classess logo"
-            className="h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            className="h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
           />
         </a>
 
@@ -151,19 +151,21 @@ export default function Navbar({ onOpenAuth }) {
                 <a
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className={`relative px-4 py-2 text-[14.5px] font-semibold rounded-md transition-all duration-150 block ${isActive
-                      ? "bg-neutral-50"
-                      : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-50"
-                    }`}
-                  style={isActive && accent ? { color: accent } : {}}
+                  className="relative px-4 py-2 text-[14.5px] font-medium rounded-[8px] transition-all duration-150 block"
+                  style={{
+                    color: isActive ? (accent ?? "var(--ink)") : "var(--ink-3)",
+                    background: isActive ? "var(--mist)" : "transparent",
+                  }}
+                  onMouseEnter={e => { if (!isActive) { e.currentTarget.style.color = "var(--ink)"; e.currentTarget.style.background = "var(--mist)"; }}}
+                  onMouseLeave={e => { if (!isActive) { e.currentTarget.style.color = "var(--ink-3)"; e.currentTarget.style.background = "transparent"; }}}
                 >
                   {link.label}
-                  {/* Active underline indicator */}
+                  {/* Active underline — brand 2px paint line */}
                   {isActive && (
                     <motion.span
                       layoutId="nav-active-pill"
                       className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
-                      style={{ background: accent }}
+                      style={{ background: accent ?? "var(--ink)" }}
                       transition={{ type: "spring", stiffness: 500, damping: 40 }}
                     />
                   )}
@@ -175,21 +177,27 @@ export default function Navbar({ onOpenAuth }) {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-2">
+          {/* Ghost / secondary */}
           <a
             href="#"
             onClick={openAuth("signin")}
-            className="px-4 py-2 text-[14.5px] font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 rounded-lg transition-all duration-150"
+            className="px-4 py-2 text-[14px] font-medium rounded-[8px] transition-all duration-150"
+            style={{ color: "var(--ink-2)", border: "1px solid var(--line-2)", background: "transparent" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "var(--mist)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
           >
             {secondaryCta}
           </a>
+          {/* Primary */}
           <a
             href={hasRoleNav ? firstSectionHref : "#"}
             onClick={handleCtaClick}
-            className={`px-4 py-2 text-[14.5px] font-semibold rounded-lg transition-all duration-150 shadow-sm ${activeRoleConfig
-                ? "text-white hover:opacity-90 active:scale-95"
-                : "bg-neutral-900 text-white hover:bg-neutral-800 active:bg-neutral-950"
-              }`}
-            style={gradient ? { background: gradient } : {}}
+            className="px-4 py-2 text-[14px] font-medium rounded-[8px] transition-all duration-150 hover:opacity-90 active:scale-95"
+            style={
+              activeRoleConfig && gradient
+                ? { background: gradient, color: "#fff", border: "1px solid transparent" }
+                : { background: "var(--ink)", color: "#fff", border: "1px solid var(--ink)" }
+            }
           >
             {primaryCta}
           </a>
@@ -197,15 +205,15 @@ export default function Navbar({ onOpenAuth }) {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden p-2 rounded-lg hover:bg-neutral-100 transition-colors"
+          className="md:hidden p-2 rounded-[8px] transition-colors"
+          style={{ color: "var(--ink-3)" }}
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
+          onMouseEnter={e => { e.currentTarget.style.background = "var(--mist)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
         >
-          {menuOpen
-            ? <X size={20} className="text-neutral-700" />
-            : <Menu size={20} className="text-neutral-700" />
-          }
+          {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
@@ -218,7 +226,8 @@ export default function Navbar({ onOpenAuth }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="md:hidden bg-white border-t border-neutral-100 px-8 pb-4 pt-3 flex flex-col gap-1"
+            className="md:hidden px-8 pb-4 pt-3 flex flex-col gap-1"
+            style={{ background: "var(--page)", borderTop: "1px solid var(--line)" }}
           >
             {links.map((link) => {
               const isActive = activeLinkLabel === link.label;
@@ -227,11 +236,11 @@ export default function Navbar({ onOpenAuth }) {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className={`py-2.5 px-3 text-[15px] font-semibold rounded-lg transition-colors ${isActive
-                      ? "bg-neutral-50"
-                      : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
-                    }`}
-                  style={isActive && accent ? { color: accent } : {}}
+                  className="py-2.5 px-3 text-[15px] font-medium rounded-[8px] transition-colors"
+                  style={{
+                    color: isActive ? (accent ?? "var(--ink)") : "var(--ink-2)",
+                    background: isActive ? "var(--mist)" : "transparent",
+                  }}
                 >
                   {link.label}
                 </a>
@@ -242,18 +251,20 @@ export default function Navbar({ onOpenAuth }) {
               <a
                 href="#"
                 onClick={openAuth("signin")}
-                className="py-2.5 px-3 text-[15px] font-medium text-neutral-700 border border-neutral-200 rounded-lg text-center hover:bg-neutral-50 transition-colors"
+                className="py-2.5 px-3 text-[15px] font-medium rounded-[8px] text-center transition-colors"
+                style={{ color: "var(--ink-2)", border: "1px solid var(--line-2)", background: "transparent" }}
               >
                 {secondaryCta}
               </a>
               <a
                 href={hasRoleNav ? firstSectionHref : "#"}
                 onClick={handleCtaClick}
-                className={`py-2.5 px-3 text-[15px] font-semibold rounded-lg text-center transition-colors ${activeRoleConfig
-                    ? "text-white hover:opacity-90"
-                    : "bg-neutral-900 text-white hover:bg-neutral-800"
-                  }`}
-                style={gradient ? { background: gradient } : {}}
+                className="py-2.5 px-3 text-[15px] font-medium rounded-[8px] text-center transition-colors hover:opacity-90"
+                style={
+                  activeRoleConfig && gradient
+                    ? { background: gradient, color: "#fff" }
+                    : { background: "var(--ink)", color: "#fff" }
+                }
               >
                 {primaryCta}
               </a>
