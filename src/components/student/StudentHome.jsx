@@ -1689,8 +1689,8 @@ function StudentOverviewSection() {
                         </span>
                         {/* Label chip — brand mono */}
                         <span
-                          className="px-2 py-1 rounded-[6px] font-mono text-[10px] font-semibold text-center leading-tight backdrop-blur-sm transition-colors duration-200"
-                          style={{ background: "rgba(255,255,255,0.9)", color: "var(--ink-3)" }}
+                          className="px-2 py-1 font-mono text-[10px] font-semibold text-center leading-tight transition-colors duration-200"
+                          style={{ background: "transparent", color: "var(--ink-3)" }}
                         >
                           {label}
                         </span>
