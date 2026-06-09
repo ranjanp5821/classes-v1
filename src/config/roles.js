@@ -36,22 +36,22 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "Dashboard", href: "#dashboard" },
-        { label: "Courses",   href: "#courses"   },
-        { label: "Students",  href: "#students"  },
-        { label: "Reports",   href: "#reports"   },
-        { label: "Settings",  href: "#settings"  },
+        { label: "Platform",              href: "#academic-system"   },
+        { label: "Academic Intelligence", href: "#student-learning"  },
+        { label: "Implementation",        href: "#implementation"    },
+        { label: "Trust & Governance",    href: "#trust"             },
+        { label: "Resources",             href: "#faq"               },
       ],
-      primaryCta: "Manage Institute",
+      primaryCta: "Request a Demo",
       secondaryCta: "Sign In",
     },
 
     hero: {
-      headline: "Power Your Institution With",
-      headlineGradient: "Smarter Education.",
+      headline: "See what is happening academically—and know",
+      headlineGradient: "what to improve next.",
       subheadline:
-        "Streamline admissions, manage curricula, and track student outcomes — all from one unified dashboard built for modern institutes.",
-      ctaLabel: "Get Started",
+        "Classess.com® connects curriculum, teaching, assessment, student support, and leadership insights into one academic intelligence layer.",
+      ctaLabel: "Request a Demo",
     },
 
     // ─── Section stubs (content to be added in future iterations) ───────────

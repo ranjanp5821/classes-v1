@@ -25,7 +25,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ChevronDown, ChevronRight, ArrowRight } from "lucide-react";
+import { Check, ChevronRight, ArrowRight, Plus, Minus } from "lucide-react";
 
 /* ── Theming ─────────────────────────────────────────────────────────────── */
 const ACCENT   = "#10b981";
@@ -55,7 +55,7 @@ function FadeIn({ children, delay = 0, className = "" }) {
 function MediaPlaceholder({ mediaId, description }) {
   return (
     <div
-      className="rounded-2xl flex flex-col items-center justify-center gap-3 p-10 min-h-[280px] border-2 border-dashed"
+      className="rounded-2xl flex flex-col items-center justify-center gap-3 p-10 min-h-[280px] h-full border-2 border-dashed"
       style={{ borderColor: `${ACCENT}35`, background: `${ACCENT}06` }}
       aria-label={`Media placeholder – ${mediaId}`}
     >
@@ -167,7 +167,7 @@ function HeroSection() {
   return (
     <section id="teacher-hero" className="w-full pt-28 pb-20 bg-white">
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-stretch">
 
           <FadeIn>
             <h1 className="text-[2.6rem] lg:text-[3rem] font-extrabold text-neutral-900 leading-[1.1] tracking-tight font-display mb-5">
@@ -191,7 +191,7 @@ function HeroSection() {
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.12}>
+          <FadeIn delay={0.12} className="h-full">
             <MediaPlaceholder
               mediaId="TEA-HOME-M01"
               description="Short looping teacher-workspace animation — teacher's day simplified into 4 priorities: Today's class, Lesson preparation, Student work requiring review, Students needing support."
@@ -375,8 +375,8 @@ function ClassroomSection() {
         </Lead>
       </FadeIn>
 
-      <div className="grid lg:grid-cols-2 gap-12 items-start">
-        <FadeIn delay={0.08}>
+      <div className="grid lg:grid-cols-2 gap-10 items-stretch">
+        <FadeIn delay={0.08} className="h-full">
           <MediaPlaceholder
             mediaId="TEA-HOME-M04"
             description="Live classroom insight animation. Shows: one concept being taught, student response indicators, students who understood, students who are uncertain, recommended teacher action."
@@ -410,7 +410,7 @@ function ClassroomSection() {
 function AssessmentSection() {
   return (
     <Section id="assessment">
-      <div className="grid lg:grid-cols-2 gap-14 items-start">
+      <div className="grid lg:grid-cols-2 gap-10 items-stretch">
 
         <FadeIn>
           <Heading className="text-[2rem] lg:text-[2.3rem] mb-4">
@@ -458,7 +458,7 @@ function AssessmentSection() {
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
+        <FadeIn delay={0.1} className="h-full">
           <MediaPlaceholder
             mediaId="TEA-HOME-M05"
             description="Assessment-to-feedback product animation. Demonstrates: teacher creates assessment → student responses reviewed → recurring misconception identified → teacher reviews & approves feedback → corrective activity assigned."
@@ -500,7 +500,7 @@ function InsightsSection() {
         </div>
       </FadeIn>
 
-      <div className="grid lg:grid-cols-2 gap-12 items-start">
+      <div className="grid lg:grid-cols-2 gap-10 items-stretch">
         <FadeIn>
           <h3 className="text-[1.4rem] font-extrabold text-neutral-900 mb-4">Turn insight into action</h3>
           <Lead className="mb-6">
@@ -519,7 +519,7 @@ function InsightsSection() {
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
+        <FadeIn delay={0.1} className="h-full">
           <MediaPlaceholder
             mediaId="TEA-HOME-M06"
             description="Student-insight-to-intervention animation. Shows: student need, reason for difficulty, recommended intervention, teacher-selected action, improvement check. Small number of dummy student profiles."
@@ -572,7 +572,7 @@ function AIControlSection() {
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
+        <FadeIn delay={0.1} className="h-full">
           <MediaPlaceholder
             mediaId="TEA-HOME-M07"
             description="Teacher approval workflow animation. Shows: AI creates suggested academic output → teacher reviews → teacher edits a section → teacher approves → approved content becomes available to students. Approval step must be clearly visible."
@@ -643,30 +643,25 @@ function FAQItem({ question, answer }) {
     <div className="border-b border-neutral-100 last:border-0">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between gap-4 py-5 text-left"
+        className="w-full flex items-center justify-between gap-4 py-5 text-left group"
         aria-expanded={open}
       >
-        <span className="text-[15px] font-semibold text-neutral-800">{question}</span>
-        <ChevronDown
-          size={18}
-          className="shrink-0 transition-transform duration-200"
-          style={{ color: ACCENT, transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
-        />
+        <span className="text-[15px] font-semibold text-neutral-800 group-hover:text-neutral-600 transition-colors">{question}</span>
+        <span
+          className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors"
+          style={{ background: open ? ACCENT : `${ACCENT}12`, color: open ? "#fff" : ACCENT }}
+        >
+          {open ? <Minus size={15} /> : <Plus size={15} />}
+        </span>
       </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="answer"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.22, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <p className="pb-5 text-[14.5px] text-neutral-500 leading-relaxed">{answer}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        className="overflow-hidden"
+      >
+        <p className="pb-5 pr-10 text-[14.5px] text-neutral-500 leading-relaxed">{answer}</p>
+      </motion.div>
     </div>
   );
 }
@@ -676,11 +671,11 @@ function FAQSection() {
 
   return (
     <Section id="faq" alt>
-      <FadeIn className="mb-10">
+      <FadeIn className="mb-10 text-center">
         <Heading className="text-[2rem]">Frequently Asked Questions</Heading>
       </FadeIn>
 
-      <FadeIn delay={0.06} className="max-w-3xl">
+      <FadeIn delay={0.06} className="max-w-3xl mx-auto">
         <div className="bg-white rounded-2xl border border-neutral-100 px-6 shadow-sm">
           {FAQS_VISIBLE.map((faq) => (
             <FAQItem key={faq.q} question={faq.q} answer={faq.a} />

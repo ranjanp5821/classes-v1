@@ -23,7 +23,7 @@ export default function LandingPage() {
 
   const renderRoleSections = () => {
     if (!activeRoleId) return null;
-    if (activeRoleId === "institute") return <InstitutePage hideHero />;
+    if (activeRoleId === "institute") return <InstitutePage />;
     if (activeRoleId === "student") return <><StudentHero /><StudentPage /></>;
     if (activeRoleId === "teacher") return <TeacherPage />;
     return null;
