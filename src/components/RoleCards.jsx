@@ -10,6 +10,9 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ROLES_LIST } from "../config/roles";
 
+// Maps role.id → the section anchor id the voice assistant uses.
+const ROLE_SECTION_ID = { student: "student", teacher: "tutor", institute: "college" };
+
 const cardVariants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i) => ({
@@ -35,7 +38,7 @@ export default function RoleCards({ selectedRole, onSelect }) {
         return (
           <motion.button
             key={role.id}
-            id={`role-card-${role.id}`}
+            id={ROLE_SECTION_ID[role.id] ?? `role-card-${role.id}`}
             custom={i}
             variants={cardVariants}
             initial="hidden"

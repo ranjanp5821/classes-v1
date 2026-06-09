@@ -29,21 +29,21 @@ export default function LandingPage() {
     return null;
   };
 
-  // When a role is picked, reveal roughly the top 50% of the downstream
-  // section by scrolling its midpoint to the bottom edge of the viewport.
+  // When a role is picked, gently scroll just below the hero to reveal the
+  // start of the downstream section (~top half), so the user keeps scrolling
+  // naturally rather than being jumped deep into the page.
   useEffect(() => {
     if (!activeRoleId) return;
 
-    const el = roleSectionRef.current;
-    if (!el) return;
-
-    // Wait a frame so the newly rendered section has its real height.
+    // Wait two frames so the newly rendered section has mounted + measured.
     const id = requestAnimationFrame(() => {
-      const rect = el.getBoundingClientRect();
-      const sectionTop = rect.top + window.scrollY;
-      // Scroll so half the section sits within the viewport.
-      const target = sectionTop - window.innerHeight * 0.5;
-      window.scrollTo({ top: Math.max(target, 0), behavior: "smooth" });
+      requestAnimationFrame(() => {
+        const el = roleSectionRef.current;
+        if (!el) return;
+        const sectionTop = el.getBoundingClientRect().top + window.scrollY;
+        const target = sectionTop - window.innerHeight * 0.5;
+        window.scrollTo({ top: Math.max(target, 0), behavior: "smooth" });
+      });
     });
 
     return () => cancelAnimationFrame(id);
@@ -72,6 +72,14 @@ export default function LandingPage() {
       >
         <Navbar onOpenAuth={(mode, pos) => setAuthModal({ mode, pos })} />
         {renderHero()}
+
+        {/* Anchor targets for avatar voice navigation & navbar links.
+            Replace each div with a real content section as the site grows. */}
+        <div id="products" />
+        <div id="features" />
+        <div id="about"    />
+        <div id="contact"  />
+
         <div ref={roleSectionRef}>{renderRoleSections()}</div>
       </div>
 
