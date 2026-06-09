@@ -25,7 +25,7 @@ export default function LandingPage() {
     if (!activeRoleId) return null;
     if (activeRoleId === "institute") return <InstitutePage />;
     if (activeRoleId === "student") return <><StudentHero /><StudentPage /></>;
-    if (activeRoleId === "teacher") return <TeacherPage />;
+    if (activeRoleId === "teacher") return <TeacherPage onOpenAuth={(mode) => setAuthModal({ mode, pos: null })} />;
     return null;
   };
 

@@ -803,15 +803,15 @@ function PracticeSection() {
 
   return (
     <Section id="practice" alt>
-      {/* Two-column: media LEFT, copy RIGHT */}
+      {/* Two-column: media LEFT, copy RIGHT — on mobile copy comes first */}
       <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-        {/* Left — MEDIA 04 interactive recommendation */}
-        <motion.div {...fadeUp} className="flex flex-col">
+        {/* Left — MEDIA 04 interactive recommendation (order-2 on mobile) */}
+        <motion.div {...fadeUp} className="flex flex-col order-2 lg:order-1">
           <PracticeRecommendation />
         </motion.div>
 
-        {/* Right — copy */}
-        <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }} className="text-right">
+        {/* Right — copy (order-1 on mobile) */}
+        <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }} className="text-left lg:text-right order-1 lg:order-2">
 
           <Heading className="mt-5">Do not just practise more. Practise what matters.</Heading>
           <Lead className="mt-5">
@@ -822,7 +822,7 @@ function PracticeSection() {
             Use quizzes, flashcards, reasoning exercises, concept matching, written responses,
             self-tests, and gamified challenges to strengthen understanding in different ways.
           </Lead>
-          <div className="mt-8 flex justify-end">
+          <div className="mt-8 flex justify-start lg:justify-end">
             <PrimaryButton icon={PencilRuler}>Explore Practice Activities</PrimaryButton>
           </div>
         </motion.div>

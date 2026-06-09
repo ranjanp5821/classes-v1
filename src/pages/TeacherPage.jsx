@@ -9,14 +9,14 @@
 import { useRole } from "../hooks/useRole";
 import TeacherHome from "../components/teacher/TeacherHome";
 
-export default function TeacherPage() {
+export default function TeacherPage({ onOpenAuth }) {
   const { activeRoleConfig, clearRole } = useRole();
 
   if (!activeRoleConfig) return null;
 
   return (
     <div className="w-full bg-white">
-      <TeacherHome />
+      <TeacherHome onOpenAuth={onOpenAuth} />
 
       {/* Footer */}
       <footer className="border-t border-neutral-100 bg-neutral-50 py-10 text-center">

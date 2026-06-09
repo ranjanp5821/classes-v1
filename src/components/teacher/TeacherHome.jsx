@@ -219,7 +219,7 @@ function BenefitList({ items }) {
 /* ════════════════════════════════════════════════════════════════════════════
    SECTION 1 — Teacher Hero
    ════════════════════════════════════════════════════════════════════════════ */
-function HeroSection() {
+function HeroSection({ onOpenAuth }) {
   return (
     <section
       id="teacher-hero"
@@ -256,7 +256,7 @@ function HeroSection() {
               Use it independently or through your institution.
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
-              <PrimaryButton>Start as a Teacher <ArrowRight size={16} /></PrimaryButton>
+              <PrimaryButton onClick={() => onOpenAuth?.("signin")}>Start as a Teacher <ArrowRight size={16} /></PrimaryButton>
               <SecondaryButton>See How It Works</SecondaryButton>
             </div>
             <p className="text-[13.5px] font-medium" style={{ color: "var(--ink-3)" }}>
@@ -713,7 +713,7 @@ function AIControlSection() {
 /* ════════════════════════════════════════════════════════════════════════════
    SECTION 8 — Final Call to Action
    ════════════════════════════════════════════════════════════════════════════ */
-function FinalCTASection() {
+function FinalCTASection({ onOpenAuth }) {
   return (
     <section
       id="get-started"
@@ -737,6 +737,7 @@ function FinalCTASection() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center mb-10">
             <button
+              onClick={() => onOpenAuth?.("signin")}
               className="inline-flex items-center gap-2 px-7 py-[11px] rounded-[8px] font-medium text-[14px] transition-all duration-200 hover:opacity-95 active:scale-95"
               style={{ background: "var(--page)", color: ACCENT }}
             >
@@ -1096,10 +1097,10 @@ function TeacherOverviewSection() {
   );
 }
 
-export default function TeacherHome() {
+export default function TeacherHome({ onOpenAuth }) {
   return (
     <div className="w-full" style={{ background: "var(--page)" }}>
-      <HeroSection />
+      <HeroSection onOpenAuth={onOpenAuth} />
       <TeacherOverviewSection />
       <WorkflowSection />
       <PlanningSection />
@@ -1107,7 +1108,7 @@ export default function TeacherHome() {
       <AssessmentSection />
       <InsightsSection />
       <AIControlSection />
-      <FinalCTASection />
+      <FinalCTASection onOpenAuth={onOpenAuth} />
       <FAQSection />
     </div>
   );

@@ -52,8 +52,9 @@ export default function AuthModal({ open, mode = "signin", position = null, init
   const accent = role?.accent ?? DEFAULT_ACCENT;
   const gradient = role?.accentGradient ?? DEFAULT_GRADIENT;
 
-  // Pin the dialog near the clicked button when a position is provided.
-  const dialogStyle = position
+  // Pin the dialog near the clicked button on desktop; always center on mobile.
+  const useAnchor = position && typeof window !== "undefined" && window.innerWidth >= 640;
+  const dialogStyle = useAnchor
     ? { transformOrigin: "top right", right: `${position.right}px`, top: `${position.top}px` }
     : {};
 
@@ -92,7 +93,7 @@ export default function AuthModal({ open, mode = "signin", position = null, init
       {open && (
         <motion.div
           key="auth-overlay"
-          className={`fixed inset-0 z-[100]${!position ? " flex items-center justify-center" : ""}`}
+          className={`fixed inset-0 z-[100]${!useAnchor ? " flex items-center justify-center" : ""}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -109,7 +110,7 @@ export default function AuthModal({ open, mode = "signin", position = null, init
           <motion.div
             role="dialog"
             aria-modal="true"
-            className={`${position ? "fixed" : "relative"} w-full max-w-sm bg-white rounded-2xl shadow-2xl p-7`}
+            className={`${useAnchor ? "fixed" : "relative"} w-full max-w-sm bg-white rounded-2xl shadow-2xl p-7 mx-4 sm:mx-0`}
             style={dialogStyle}
             initial={{ opacity: 0, scale: 0.4, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
