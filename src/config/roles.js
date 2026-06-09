@@ -25,8 +25,8 @@ export const ROLES_CONFIG = {
     shortLabel: "Institute",
     image: "/assets/college-img.png",
     card: {
-      eyebrow: "College",
-      title: "Institutions Worldwide",
+      eyebrow: "Institute",
+      title: "I am an Institute",
       description: "Run admissions, curricula, and reporting from one dashboard.",
     },
     accent: "#6366f1",
@@ -36,11 +36,11 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "Platform",              href: "#academic-system"   },
-        { label: "Academic Intelligence", href: "#student-learning"  },
-        { label: "Implementation",        href: "#implementation"    },
-        { label: "Trust & Governance",    href: "#trust"             },
-        { label: "Resources",             href: "#faq"               },
+        { label: "Platform", href: "#academic-system" },
+        { label: "Academic Intelligence", href: "#student-learning" },
+        { label: "Implementation", href: "#implementation" },
+        { label: "Trust & Governance", href: "#trust" },
+        { label: "Resources", href: "#faq" },
       ],
       primaryCta: "Request a Demo",
       secondaryCta: "Sign In",
@@ -84,11 +84,11 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "How It Helps",    href: "#how-it-helps" },
-        { label: "Learn Concepts",  href: "#concepts"     },
-        { label: "Practice",        href: "#practice"     },
-        { label: "Exam Prep",       href: "#exam-prep"    },
-        { label: "AI Tutor",        href: "#ai-tutor"     },
+        { label: "How It Helps", href: "#how-it-helps" },
+        { label: "Learn Concepts", href: "#concepts" },
+        { label: "Practice", href: "#practice" },
+        { label: "Exam Prep", href: "#exam-prep" },
+        { label: "AI Tutor", href: "#ai-tutor" },
       ],
       primaryCta: "Start Learning Free",
       secondaryCta: "Sign In",
@@ -125,10 +125,10 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "How It Helps",    href: "#teaching-workflow" },
-        { label: "Plan & Create",   href: "#planning"          },
-        { label: "Assess & Support", href: "#assessment"       },
-        { label: "Tutorials",       href: "#faq"               },
+        { label: "How It Helps", href: "#teaching-workflow" },
+        { label: "Plan & Create", href: "#planning" },
+        { label: "Assess & Support", href: "#assessment" },
+        { label: "Tutorials", href: "#faq" },
       ],
       primaryCta: "Start as a Teacher",
       secondaryCta: "Sign In",
