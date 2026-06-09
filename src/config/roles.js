@@ -115,8 +115,8 @@ export const ROLES_CONFIG = {
     image: "/assets/tutor-img.png",
     card: {
       eyebrow: "Tutor",
-      title: "Any Subject, Blended",
-      description: "Build courses, manage students, and grow your impact globally.",
+      title: "I am a Teacher",
+      description: "Plan lessons, assess student work, and understand who needs support.",
     },
     accent: "#10b981",
     accentLight: "#ecfdf5",
@@ -125,22 +125,21 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "My Classes",    href: "#my-classes"    },
-        { label: "Create Course", href: "#create-course" },
-        { label: "Students",      href: "#my-students"   },
-        { label: "Earnings",      href: "#earnings"      },
-        { label: "Analytics",     href: "#analytics"     },
+        { label: "How It Helps",    href: "#teaching-workflow" },
+        { label: "Plan & Create",   href: "#planning"          },
+        { label: "Assess & Support", href: "#assessment"       },
+        { label: "Tutorials",       href: "#faq"               },
       ],
-      primaryCta: "Start Teaching",
+      primaryCta: "Start as a Teacher",
       secondaryCta: "Sign In",
     },
 
     hero: {
-      headline: "Teach Your Way, Scale Your",
-      headlineGradient: "Impact Globally.",
+      headline: "Spend less time managing work. Spend more time",
+      headlineGradient: "improving learning.",
       subheadline:
-        "Create engaging courses, manage your students, and grow your teaching practice — with powerful tools designed for modern educators.",
-      ctaLabel: "Create a Course",
+        "Classess.com® helps teachers plan lessons, create academic resources, assess student work, provide meaningful feedback, and understand who needs support—all from one connected academic workspace. Use it independently or through your institution.",
+      ctaLabel: "Start as a Teacher",
     },
 
     features: [],
