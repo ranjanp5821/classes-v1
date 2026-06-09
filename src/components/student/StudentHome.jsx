@@ -52,9 +52,9 @@ import {
   Minus,
 } from "lucide-react";
 
-/* ── Theming ──────────────────────────────────────────────────────── */
-const ACCENT = "#0ea5e9";
-const GRADIENT = "linear-gradient(135deg, #0ea5e9, #38bdf8)";
+/* ── Theming — brand azure paint ─────────────────────────────────── */
+const ACCENT = "#2563EB";
+const GRADIENT = "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)";
 
 /* ── DEMO media ───────────────────────────────────────────────────────
  * A single placeholder clip (bundled in /public/assets) shown in every media
@@ -71,20 +71,31 @@ const fadeUp = {
   transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
 };
 
-/* ── Layout primitives ────────────────────────────────────────────── */
+/* ── Layout primitives ─────────────────────────────────────────────
+   Brand surfaces: page (#FFF) / paper (#FAFAFB) / mist (#F1F2F5)
+   ─────────────────────────────────────────────────────────────────── */
 function Section({ id, alt = false, children }) {
   return (
-    <section id={id} className={`w-full py-20 sm:py-24 ${alt ? "bg-neutral-50/70" : "bg-white"}`}>
+    <section
+      id={id}
+      className="w-full py-20 sm:py-24"
+      style={{ background: alt ? "var(--paper)" : "var(--page)" }}
+    >
       <div className="max-w-5xl mx-auto px-6 sm:px-8">{children}</div>
     </section>
   );
 }
 
+/* Brand .kick / pill — JetBrains Mono, uppercase, 11px, tracked */
 function Eyebrow({ children }) {
   return (
     <span
-      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10.5px] font-bold uppercase tracking-widest"
-      style={{ background: `${ACCENT}12`, color: ACCENT, border: `1px solid ${ACCENT}25` }}
+      className="inline-flex items-center gap-1.5 px-[11px] py-[5px] rounded-[999px] font-mono text-[11px] font-semibold uppercase tracking-[.04em]"
+      style={{
+        background: `color-mix(in srgb, ${ACCENT} 12%, #fff)`,
+        color: ACCENT,
+        border: `1px solid color-mix(in srgb, ${ACCENT} 25%, #fff)`,
+      }}
     >
       <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
       {children}
@@ -92,44 +103,62 @@ function Eyebrow({ children }) {
   );
 }
 
+/* Brand display heading — Fraunces, weight 500, tracking -.025em */
 function Heading({ children, className = "" }) {
   return (
-    <h2 className={`font-display font-bold text-neutral-900 tracking-tight leading-[1.12] text-[clamp(1.7rem,3.6vw,2.6rem)] ${className}`}>
+    <h2
+      className={`font-serif font-medium leading-[1.08] text-[2rem] lg:text-[2.4rem] ${className}`}
+      style={{ letterSpacing: "-0.025em", color: "var(--ink)" }}
+    >
       {children}
     </h2>
   );
 }
 
+/* Brand body text — ink-3 (#6A6C75) */
 function Lead({ children, className = "" }) {
-  return <p className={`text-[15.5px] sm:text-[16px] text-neutral-500 leading-relaxed ${className}`}>{children}</p>;
+  return (
+    <p
+      className={`text-[15.5px] sm:text-[16px] leading-relaxed ${className}`}
+      style={{ color: "var(--ink-3)" }}
+    >
+      {children}
+    </p>
+  );
 }
 
+/* Brand .btn — 8px radius, weight 500, ink bg */
 function PrimaryButton({ children, icon: Icon = ArrowRight }) {
   return (
     <button
-      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white text-[14.5px] shadow-md transition-all duration-200 hover:opacity-90 active:scale-95"
-      style={{ background: GRADIENT }}
+      className="inline-flex items-center gap-2 px-5 py-[11px] rounded-[8px] font-medium text-white text-[14px] transition-all duration-150 hover:-translate-y-px hover:opacity-90 active:scale-95"
+      style={{ background: GRADIENT, border: "1px solid transparent" }}
     >
       {children}
-      {Icon && <Icon size={16} />}
+      {Icon && <Icon size={15} />}
     </button>
   );
 }
 
+/* Brand .btn.ghost — 8px radius, line-2 border, ink text */
 function SecondaryButton({ children, icon: Icon }) {
   return (
-    <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-neutral-700 text-[14.5px] border border-neutral-200 bg-white transition-all duration-200 hover:bg-neutral-50 active:scale-95">
-      {Icon && <Icon size={16} />}
+    <button
+      className="inline-flex items-center gap-2 px-5 py-[11px] rounded-[8px] font-medium text-[14px] transition-all duration-150 hover:bg-[#FAFAFB] active:scale-95"
+      style={{ color: "var(--ink)", border: "1px solid var(--line-2)", background: "var(--page)" }}
+    >
+      {Icon && <Icon size={15} />}
       {children}
     </button>
   );
 }
 
+/* Benefit list — check icon in ACCENT */
 function BenefitList({ items }) {
   return (
     <ul className="flex flex-col gap-2.5">
       {items.map((t) => (
-        <li key={t} className="flex items-start gap-2.5 text-[14.5px] text-neutral-700 leading-snug">
+        <li key={t} className="flex items-start gap-2.5 text-[14.5px] leading-snug" style={{ color: "var(--ink-2)" }}>
           <CheckCircle2 size={18} className="mt-0.5 shrink-0" style={{ color: ACCENT }} />
           <span>{t}</span>
         </li>
@@ -138,16 +167,30 @@ function BenefitList({ items }) {
   );
 }
 
+/* Brand content card — --r (14px), --line border, Fraunces heading */
 function Card({ icon: Icon, title, children, className = "" }) {
   return (
-    <div className={`bg-white p-6 rounded-2xl border border-neutral-100 shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${className}`}>
+    <div
+      className={`p-6 ${className}`}
+      style={{
+        background: "var(--page)",
+        border: "1px solid var(--line)",
+        borderRadius: "var(--r)",
+        boxShadow: "0 1px 3px rgba(14,14,16,.05), 0 1px 2px rgba(14,14,16,.04)",
+      }}
+    >
       {Icon && (
-        <div className="inline-flex p-2.5 rounded-xl mb-4" style={{ background: `${ACCENT}10`, color: ACCENT }}>
+        <div
+          className="inline-flex p-2.5 rounded-[9px] mb-4"
+          style={{ background: `color-mix(in srgb, ${ACCENT} 10%, #fff)`, color: ACCENT }}
+        >
           <Icon size={20} />
         </div>
       )}
-      <h3 className="text-[16px] font-bold text-neutral-900 font-display mb-1.5">{title}</h3>
-      <p className="text-[14px] text-neutral-500 leading-relaxed">{children}</p>
+      <h3 className="font-serif font-medium text-[16px] mb-1.5" style={{ letterSpacing: "-0.01em", color: "var(--ink)" }}>
+        {title}
+      </h3>
+      <p className="text-[14px] leading-relaxed" style={{ color: "var(--ink-3)" }}>{children}</p>
     </div>
   );
 }
@@ -167,19 +210,33 @@ function MediaFrame({ slot, src, poster, frameLabel, className = "", children })
   return (
     <div
       data-media-slot={slot}
-      className={`relative flex flex-col rounded-3xl border border-neutral-100 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.08)] overflow-hidden ${className}`}
+      className={`relative flex flex-col overflow-hidden ${className}`}
+      style={{
+        border: "1px solid var(--line)",
+        borderRadius: "var(--r-lg)",
+        background: "var(--page)",
+        boxShadow: "0 12px 40px rgba(14,14,16,0.08)",
+      }}
     >
       {showVideo ? (
-        /* Clip framed as an in-product window — interface chrome + the site's
-           rounding/border so it reads as part of the UI, not an external video. */
-        <div className="flex flex-col flex-1 rounded-2xl overflow-hidden border border-neutral-200/70 bg-white">
-          <div className="flex items-center gap-2 px-3.5 py-2.5 border-b border-neutral-100 bg-neutral-50/80 shrink-0">
+        /* Clip framed as an in-product window — brand chrome */
+        <div
+          className="flex flex-col flex-1 overflow-hidden"
+          style={{ border: "1px solid var(--line-2)", borderRadius: "12px", background: "var(--page)" }}
+        >
+          <div
+            className="flex items-center gap-2 px-3.5 py-2.5 shrink-0"
+            style={{ borderBottom: "1px solid var(--line)", background: "var(--paper)" }}
+          >
             <span className="flex gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-neutral-200" />
-              <span className="w-2.5 h-2.5 rounded-full bg-neutral-200" />
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--line-2)" }} />
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--line-2)" }} />
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: ACCENT }} />
             </span>
-            <span className="ml-1.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-neutral-200 text-[11px] font-semibold text-neutral-500">
+            <span
+              className="ml-1.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[11px] font-semibold"
+              style={{ background: "var(--page)", border: "1px solid var(--line)", color: "var(--ink-3)" }}
+            >
               <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
               {frameLabel ?? "classess.com"}
             </span>
@@ -219,13 +276,20 @@ export function StudentHero() {
     <section
       id="student-hero"
       className="relative w-full overflow-hidden pt-20 pb-10 sm:pt-24 sm:pb-12"
-      style={{ backgroundImage: `radial-gradient(ellipse 70% 55% at 50% 0%, ${ACCENT}14 0%, transparent 70%)` }}
+      style={{
+        backgroundImage: `radial-gradient(ellipse 70% 55% at 50% 0%, #F1F2F5 0%, transparent 55%), radial-gradient(ellipse 50% 35% at 50% 0%, color-mix(in srgb, ${ACCENT} 8%, #fff) 0%, transparent 70%)`,
+      }}
     >
       <div className="max-w-5xl mx-auto w-full px-6 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-10 items-stretch">
         {/* Copy */}
         <motion.div {...fadeUp} className="flex flex-col">
-          <Heading className="mt-5">Stop studying without direction.</Heading>
+          <h1
+            className="font-serif text-[clamp(2rem,4.5vw,3rem)] font-medium leading-[1.08] mt-5"
+            style={{ letterSpacing: "-0.03em", color: "var(--ink)" }}
+          >
+            Stop studying without direction.
+          </h1>
           <Lead className="mt-5 max-w-[520px]">
             Classess.com® creates a personalised learning path based on your subjects, academic
             level, goals, and progress—so you always know what to learn, where you need support, and
@@ -251,7 +315,7 @@ export function StudentHero() {
         >
           <MediaFrame slot="MEDIA 01" frameLabel="Your Learning Today" className="p-5 sm:p-6 h-full">
             <div className="flex items-center justify-between mb-5">
-              <span className="text-[12px] font-bold uppercase tracking-widest text-neutral-400">Your Learning Today</span>
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-[.14em]" style={{ color: "var(--ink-4)" }}>Your Learning Today</span>
               <span className="flex gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-neutral-200" />
                 <span className="w-2 h-2 rounded-full bg-neutral-200" />
@@ -775,7 +839,7 @@ function PracticeSection() {
       </div>
 
       <motion.div {...fadeUp} className="mt-8 text-center">
-        <p className="text-[18px] sm:text-[20px] font-bold text-neutral-900 font-display leading-snug">
+        <p className="font-serif font-medium text-[18px] sm:text-[20px] leading-snug" style={{ color: "var(--ink)" }}>
           Every practice activity should move you closer to mastery.
         </p>
       </motion.div>
@@ -885,8 +949,17 @@ function ExamPrepSection() {
       {/* Study plan subsection — weekly plan LEFT, copy RIGHT */}
       <div className="mt-16 grid lg:grid-cols-2 gap-12 items-stretch">
         {/* Short weekly plan — Learn → Practise → Revise → Self-test */}
-        <motion.div {...fadeUp} className="flex flex-col bg-white rounded-2xl border border-neutral-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-6">
-          <div className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest text-neutral-400 mb-5">
+        <motion.div
+          {...fadeUp}
+          className="flex flex-col p-6"
+          style={{
+            background: "var(--page)",
+            border: "1px solid var(--line)",
+            borderRadius: "var(--r)",
+            boxShadow: "0 8px 30px rgba(14,14,16,0.06)",
+          }}
+        >
+          <div className="flex items-center gap-2 mb-5 font-mono text-[10.5px] font-semibold uppercase tracking-[.14em]" style={{ color: "var(--ink-4)" }}>
             <CalendarDays size={14} style={{ color: ACCENT }} />
             This week's plan
           </div>
@@ -910,7 +983,10 @@ function ExamPrepSection() {
         </motion.div>
 
         <motion.div {...fadeUp} className="flex flex-col">
-          <h3 className="font-display font-bold text-neutral-900 tracking-tight text-[clamp(1.4rem,2.6vw,1.9rem)] leading-snug">
+          <h3
+            className="font-serif font-medium text-[clamp(1.4rem,2.6vw,1.9rem)] leading-[1.1]"
+            style={{ letterSpacing: "-0.02em", color: "var(--ink)" }}
+          >
             Turn your examination date into a practical study plan.
           </h3>
           <Lead className="mt-4">
@@ -1001,7 +1077,7 @@ function ProgressSection() {
             Classess.com® helps you understand your progress across learning, practice, revision, and
             examination preparation—not only through one final score.
           </Lead>
-          <p className="mt-6 text-[17px] font-bold text-neutral-900 font-display leading-snug">
+          <p className="mt-6 font-serif font-medium text-[17px] leading-snug" style={{ color: "var(--ink)" }}>
             When progress becomes visible, the next step becomes clearer.
           </p>
         </motion.div>
@@ -1012,7 +1088,11 @@ function ProgressSection() {
         </motion.div>
       </div>
 
-      <motion.h3 {...fadeUp} className="mt-14 mb-5 font-display font-bold text-neutral-900 text-[18px]">
+      <motion.h3
+        {...fadeUp}
+        className="mt-14 mb-5 font-serif font-medium text-[18px]"
+        style={{ letterSpacing: "-0.015em", color: "var(--ink)" }}
+      >
         A clearer picture of your progress
       </motion.h3>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -1178,7 +1258,13 @@ function IndependentLearningSection() {
             key={item}
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: i * 0.07 }}
-            className="group flex items-start gap-3 bg-white border border-neutral-100 rounded-2xl p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_28px_rgba(14,165,233,0.12)] hover:border-sky-200 hover:-translate-y-1 transition-all duration-200 cursor-default"
+            className="group flex items-start gap-3 p-5 transition-all duration-200 cursor-default hover:-translate-y-1"
+          style={{
+            background: "var(--page)",
+            border: "1px solid var(--line)",
+            borderRadius: "var(--r)",
+            boxShadow: "0 2px 10px rgba(14,14,16,0.04)",
+          }}
           >
             <span
               className="mt-0.5 shrink-0 flex items-center justify-center w-7 h-7 rounded-full"
@@ -1241,24 +1327,36 @@ function FinalCTASection() {
     <section id="start" className="w-full py-24 relative overflow-hidden" style={{ background: GRADIENT }}>
       <CtaBackdrop />
       <div className="relative max-w-3xl mx-auto px-6 sm:px-8 text-center text-white">
-        <motion.h2 {...fadeUp} className="font-display font-bold tracking-tight leading-[1.12] text-[clamp(1.8rem,4vw,2.8rem)]">
+        <motion.h2
+          {...fadeUp}
+          className="font-serif font-medium leading-[1.05] text-[clamp(1.8rem,4vw,2.8rem)]"
+          style={{ letterSpacing: "-0.025em" }}
+        >
           Your next learning step should never be unclear.
         </motion.h2>
-        <motion.p {...fadeUp} className="mt-5 text-[16px] text-white/90 leading-relaxed max-w-[640px] mx-auto">
+        <motion.p {...fadeUp} className="mt-5 font-serif text-[16px] text-white/90 leading-relaxed max-w-[640px] mx-auto">
           Know what to learn. Understand difficult concepts. Practise with purpose. Correct your
           learning gaps. Prepare confidently for examinations.
         </motion.p>
         <motion.div {...fadeUp} className="mt-9 flex flex-wrap justify-center gap-3">
-          <button className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-[15px] bg-white shadow-lg transition-all duration-200 hover:opacity-95 active:scale-95" style={{ color: ACCENT }}>
+          {/* White primary on gradient bg — brand pattern */}
+          <button
+            className="inline-flex items-center gap-2 px-6 py-[11px] rounded-[8px] font-medium text-[14px] transition-all duration-150 hover:-translate-y-px active:scale-95"
+            style={{ background: "#fff", color: ACCENT, border: "1px solid transparent" }}
+          >
             Start Learning Free
-            <ArrowRight size={17} />
+            <ArrowRight size={15} />
           </button>
-          <button className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-[15px] text-white border border-white/40 transition-all duration-200 hover:bg-white/10 active:scale-95">
-            <Play size={16} />
+          {/* Ghost on gradient bg */}
+          <button
+            className="inline-flex items-center gap-2 px-6 py-[11px] rounded-[8px] font-medium text-[14px] text-white transition-all duration-150 hover:bg-white/10 active:scale-95"
+            style={{ border: "1px solid rgba(255,255,255,0.4)" }}
+          >
+            <Play size={15} />
             Watch Student Tutorial
           </button>
         </motion.div>
-        <motion.p {...fadeUp} className="mt-8 text-[15px] font-semibold text-white/95">
+        <motion.p {...fadeUp} className="mt-8 font-serif text-[15px] text-white/95" style={{ fontStyle: "italic" }}>
           Your learning. Your pace. A clearer path forward.
         </motion.p>
       </div>
@@ -1360,11 +1458,16 @@ function FaqSection() {
           <div className="mt-8 text-center">
             <button
               onClick={() => setShowAll(true)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-[14px] font-semibold border border-neutral-200 bg-white transition-all duration-200 hover:bg-neutral-50 active:scale-95"
-              style={{ color: ACCENT }}
+              className="inline-flex items-center gap-2 px-5 py-[10px] font-medium text-[14px] transition-all duration-150 hover:bg-[#FAFAFB] active:scale-95"
+              style={{
+                color: "var(--ink)",
+                border: "1px solid var(--line-2)",
+                background: "var(--page)",
+                borderRadius: "var(--r-sm)",
+              }}
             >
               View More Questions
-              <Plus size={15} />
+              <Plus size={14} />
             </button>
           </div>
         )}
@@ -1469,16 +1572,17 @@ function StudentOverviewSection() {
   return (
     <section
       id="student-overview"
-      className="w-full py-16 sm:py-20 relative overflow-hidden bg-white"
+      className="w-full py-16 sm:py-20 relative overflow-hidden"
       style={{
-        backgroundImage: `radial-gradient(ellipse 75% 50% at 50% -5%, ${ACCENT}12 0%, transparent 65%)`,
+        background: "var(--page)",
+        backgroundImage: `radial-gradient(ellipse 75% 50% at 50% -5%, #F1F2F5 0%, transparent 65%)`,
       }}
     >
-      {/* Subtle dot-grid */}
+      {/* Subtle brand dot-grid */}
       <div
-        className="absolute inset-0 opacity-[0.028]"
+        className="absolute inset-0 opacity-[0.025]"
         style={{
-          backgroundImage: `radial-gradient(circle, ${ACCENT} 1px, transparent 1px)`,
+          backgroundImage: "radial-gradient(circle, #0E0E10 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
@@ -1487,10 +1591,14 @@ function StudentOverviewSection() {
 
         {/* ── Header ─────────────────────────────────────────────────── */}
         <motion.div {...fadeUp} className="text-center mb-10">
-          <h2 className="font-display font-bold text-neutral-900 tracking-tight leading-[1.08] text-[clamp(1.9rem,4.2vw,3rem)]">
+          <h2
+            className="font-serif font-medium leading-[1.05] text-[clamp(1.9rem,4.2vw,3rem)]"
+            style={{ letterSpacing: "-0.03em", color: "var(--ink)" }}
+          >
             Everything inside your{" "}
-            <span
+            <em
               style={{
+                fontStyle: "italic",
                 background: GRADIENT,
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -1498,11 +1606,11 @@ function StudentOverviewSection() {
               }}
             >
               student experience.
-            </span>
+            </em>
           </h2>
 
-          <p className="mt-4 text-[15px] text-neutral-400 max-w-[440px] mx-auto leading-relaxed">
-            Everything revolves around <span className="font-semibold text-neutral-500">you</span>.
+          <p className="mt-4 text-[15px] max-w-[440px] mx-auto leading-relaxed" style={{ color: "var(--ink-4)" }}>
+            Everything revolves around <span className="font-medium" style={{ color: "var(--ink-3)" }}>you</span>.
             Tap any orbiting feature to jump straight to it — or hover to pause and explore.
           </p>
         </motion.div>
@@ -1565,17 +1673,25 @@ function StudentOverviewSection() {
                       <div className="group/node flex flex-col items-center gap-2 w-[108px]">
                         {/* Icon disc */}
                         <span
-                          className="relative flex items-center justify-center w-[58px] h-[58px] rounded-full bg-white border border-neutral-200 shadow-[0_6px_20px_rgba(14,165,233,0.14)] transition-all duration-200 group-hover/node:scale-[1.16] group-hover/node:-translate-y-0.5 group-hover/node:border-sky-300 group-hover/node:shadow-[0_12px_30px_rgba(14,165,233,0.32)]"
-                          style={{ color: ACCENT }}
+                          className="relative flex items-center justify-center w-[58px] h-[58px] rounded-full transition-all duration-200 group-hover/node:scale-[1.16] group-hover/node:-translate-y-0.5"
+                          style={{
+                            background: "var(--page)",
+                            border: "1px solid var(--line)",
+                            boxShadow: `0 6px 20px color-mix(in srgb, ${ACCENT} 14%, transparent)`,
+                            color: ACCENT,
+                          }}
                         >
                           <span
                             className="absolute inset-0 rounded-full opacity-0 group-hover/node:opacity-100 transition-opacity duration-200"
-                            style={{ background: `${ACCENT}10` }}
+                            style={{ background: `color-mix(in srgb, ${ACCENT} 10%, #fff)` }}
                           />
                           <Icon size={22} className="relative" />
                         </span>
-                        {/* Label chip */}
-                        <span className="px-2 py-1 rounded-lg text-[11px] font-bold text-neutral-600 text-center leading-tight bg-white/90 backdrop-blur-sm transition-colors duration-200 group-hover/node:text-sky-600">
+                        {/* Label chip — brand mono */}
+                        <span
+                          className="px-2 py-1 rounded-[6px] font-mono text-[10px] font-semibold text-center leading-tight backdrop-blur-sm transition-colors duration-200"
+                          style={{ background: "rgba(255,255,255,0.9)", color: "var(--ink-3)" }}
+                        >
                           {label}
                         </span>
                       </div>
@@ -1602,14 +1718,14 @@ function StudentOverviewSection() {
                 />
                 {/* Core disc */}
                 <div
-                  className="relative flex flex-col items-center justify-center w-full h-full rounded-full text-white shadow-[0_18px_50px_rgba(14,165,233,0.45)]"
-                  style={{ background: GRADIENT }}
+                  className="relative flex flex-col items-center justify-center w-full h-full rounded-full text-white"
+                  style={{ background: GRADIENT, boxShadow: `0 18px 50px color-mix(in srgb, ${ACCENT} 45%, transparent)` }}
                 >
                   <GraduationCap size={26} className="mb-1 opacity-90" />
-                  <span className="font-display font-black text-[22px] tracking-tight leading-none">
+                  <span className="font-serif font-medium text-[22px] leading-none" style={{ letterSpacing: "-0.02em" }}>
                     Student
                   </span>
-                  <span className="mt-1.5 text-[9.5px] font-bold uppercase tracking-[0.22em] text-white/70">
+                  <span className="mt-1.5 font-mono text-[9.5px] font-semibold uppercase tracking-[0.22em] text-white/70">
                     8 features
                   </span>
                 </div>
@@ -1628,30 +1744,36 @@ function StudentOverviewSection() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.38, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
               onClick={() => scrollTo(anchor)}
-              className="group flex items-center gap-3.5 p-3.5 rounded-2xl border border-neutral-100 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-left transition-all duration-200 active:scale-[0.98] hover:border-sky-200"
+              className="group flex items-center gap-3.5 p-3.5 text-left transition-all duration-200 active:scale-[0.98]"
+              style={{
+                borderRadius: "var(--r)",
+                border: "1px solid var(--line)",
+                background: "var(--page)",
+                boxShadow: "0 2px 8px rgba(14,14,16,0.04)",
+              }}
             >
               <span
-                className="flex items-center justify-center w-11 h-11 rounded-xl shrink-0"
-                style={{ background: `${ACCENT}12`, color: ACCENT }}
+                className="flex items-center justify-center w-11 h-11 rounded-[9px] shrink-0"
+                style={{ background: `color-mix(in srgb, ${ACCENT} 12%, #fff)`, color: ACCENT }}
               >
                 <Icon size={20} />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[14px] font-bold text-neutral-900 leading-snug">{label}</span>
-                <span className="block text-[12px] text-neutral-400 leading-snug truncate">{desc}</span>
+                <span className="block text-[14px] font-medium leading-snug" style={{ color: "var(--ink)" }}>{label}</span>
+                <span className="block text-[12px] leading-snug truncate" style={{ color: "var(--ink-4)" }}>{desc}</span>
               </span>
-              <ArrowRight size={15} className="shrink-0 text-neutral-300 group-hover:text-sky-400 transition-colors" />
+              <ArrowRight size={15} className="shrink-0 transition-colors" style={{ color: "var(--line-2)" }} />
             </motion.button>
           ))}
         </div>
 
         {/* ── Divider ───────────────────────────────────────────────── */}
         <div className="mt-12 flex items-center gap-4">
-          <div className="flex-1 h-px bg-neutral-100" />
-          <span className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-neutral-300">
+          <div className="flex-1 h-px" style={{ background: "var(--line)" }} />
+          <span className="font-mono text-[10.5px] font-semibold uppercase tracking-[.2em]" style={{ color: "var(--ink-4)" }}>
             Scroll to explore each feature
           </span>
-          <div className="flex-1 h-px bg-neutral-100" />
+          <div className="flex-1 h-px" style={{ background: "var(--line)" }} />
         </div>
       </div>
     </section>

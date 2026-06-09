@@ -44,49 +44,48 @@ export default function RoleHero() {
       }}
       aria-labelledby="role-hero-headline"
     >
-      {/* Role-specific radial background tint */}
+      {/* Neutral mist tint with a faint accent blush — brand surface approach */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 transition-all duration-700"
         style={{
-          backgroundImage: `radial-gradient(ellipse 70% 55% at 50% 0%, ${accentLight} 0%, transparent 70%)`,
+          backgroundImage: `radial-gradient(ellipse 70% 55% at 50% 0%, #F1F2F5 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 50% 0%, ${accentLight}60 0%, transparent 70%)`,
         }}
       />
 
-      {/* Role badge */}
+      {/* Role badge — brand .kick / pill style: JetBrains Mono, 11px, tracked */}
       <motion.div
         variants={fadeUp(0.1)}
         initial="hidden"
         animate="visible"
-        className="mb-4"
+        className="mb-5"
       >
         <span
-          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-widest"
+          className="inline-flex items-center gap-1.5 px-[11px] py-[5px] rounded-[999px] font-mono text-[11px] font-semibold uppercase tracking-[.04em]"
           style={{
-            background: `${accent}15`,
+            background: `color-mix(in srgb, ${accent} 12%, #fff)`,
             color: accent,
-            border: `1px solid ${accent}30`,
+            border: `1px solid color-mix(in srgb, ${accent} 25%, #fff)`,
           }}
         >
-          <span
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ background: accent }}
-          />
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent }} />
           {label}
         </span>
       </motion.div>
 
-      {/* Role-specific headline */}
+      {/* Headline — Fraunces display, weight 500, brand tracking */}
       <motion.h1
         id="role-hero-headline"
         variants={fadeUp(0.2)}
         initial="hidden"
         animate="visible"
-        className="font-display text-[clamp(1.9rem,4.8vw,3.2rem)] font-bold tracking-tight text-neutral-900 leading-[1.1] max-w-[680px] mx-auto"
+        className="font-serif text-[clamp(1.9rem,4.8vw,3.4rem)] font-medium leading-[1.05] max-w-[700px] mx-auto"
+        style={{ letterSpacing: "-0.03em", color: "var(--ink)" }}
       >
         {hero.headline}{" "}
-        <span
+        <em
           style={{
+            fontStyle: "italic",
             background: accentGradient,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -94,15 +93,16 @@ export default function RoleHero() {
           }}
         >
           {hero.headlineGradient}
-        </span>
+        </em>
       </motion.h1>
 
-      {/* Role-specific subheadline */}
+      {/* Subheadline — Fraunces serif, ink-2 */}
       <motion.p
         variants={fadeUp(0.3)}
         initial="hidden"
         animate="visible"
-        className="mt-4 text-[clamp(0.9rem,1.8vw,1.05rem)] text-neutral-500 max-w-[460px] mx-auto leading-relaxed"
+        className="mt-5 font-serif text-[clamp(0.95rem,1.8vw,1.1rem)] max-w-[500px] mx-auto leading-[1.6]"
+        style={{ color: "var(--ink-2)" }}
       >
         {hero.subheadline}
       </motion.p>
@@ -114,24 +114,28 @@ export default function RoleHero() {
         animate="visible"
         className="mt-8 flex flex-col items-center gap-3"
       >
-        {/* Primary CTA — role accent color */}
+        {/* Primary CTA — brand .btn: 8px radius, weight 500 */}
         <button
-          className="px-7 py-3 rounded-xl font-semibold text-white text-[15px] shadow-md transition-all duration-200 hover:opacity-90 active:scale-95"
-          style={{ background: accentGradient }}
+          className="px-6 py-[11px] rounded-[8px] font-medium text-white text-[14px] transition-all duration-150 hover:-translate-y-px hover:opacity-90 active:scale-95"
+          style={{ background: accentGradient, border: "1px solid transparent" }}
           aria-label={hero.ctaLabel}
         >
           {hero.ctaLabel}
         </button>
 
-        {/* Change Role link */}
+        {/* Change Role — brand mono label style */}
         <button
           onClick={clearRole}
-          className="text-[12.5px] text-neutral-400 hover:text-neutral-600 transition-colors underline-offset-2 hover:underline"
+          className="font-mono text-[11px] uppercase tracking-[.1em] transition-colors"
+          style={{ color: "var(--ink-4)" }}
+          onMouseEnter={e => { e.currentTarget.style.color = "var(--ink-3)"; }}
+          onMouseLeave={e => { e.currentTarget.style.color = "var(--ink-4)"; }}
           aria-label="Go back and change your role"
         >
           ← Change Role
         </button>
       </motion.div>
+
 
       {/*
        * ─── Section Stubs ────────────────────────────────────────────────────

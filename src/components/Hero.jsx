@@ -30,49 +30,52 @@ export default function Hero({ onOpenAuth }) {
       className="relative flex flex-col items-center text-center px-6 pt-24 pb-10 gap-6 md:gap-0 md:min-h-[calc(100vh-64px)] md:pt-[4.8rem] md:pb-8"
       aria-labelledby="hero-headline"
     >
-      {/* Subtle radial tint */}
+      {/* Neutral paper radial — brand surface tint */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 50% at 50% 0%, #eef2ff 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 50% at 50% 0%, #F1F2F5 0%, transparent 70%)",
         }}
       />
 
-      {/* Headline */}
+      {/* Headline — Fraunces display, brand weight + tracking */}
       <motion.h1
         id="hero-headline"
         variants={fadeUp(0.2)}
         initial="hidden"
         animate="visible"
-        className="mt-auto font-display text-[clamp(2.4rem,6vw,4.2rem)] font-bold tracking-tight text-neutral-900 leading-[1.05] max-w-[860px] mx-auto"
+        className="mt-auto font-serif text-[clamp(2.4rem,6vw,4.2rem)] font-medium leading-[1.02] max-w-[860px] mx-auto"
+        style={{ letterSpacing: "-0.03em", color: "var(--ink)" }}
       >
         One Platform. Multiple Curricula.{" "}
-        <span
+        <em
           style={{
-            background: "linear-gradient(135deg, #6366f1, #0ea5e9)",
+            fontStyle: "italic",
+            background: "var(--g-magenta)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
           }}
         >
           Boundless Learning.
-        </span>
+        </em>
       </motion.h1>
 
-      {/* Subheadline */}
+      {/* Subheadline — Fraunces serif body, ink-2 */}
       <motion.p
         variants={fadeUp(0.3)}
         initial="hidden"
         animate="visible"
-        className="mt-5 text-[clamp(1.05rem,2.2vw,1.35rem)] text-neutral-500 max-w-[560px] mx-auto leading-relaxed"
+        className="mt-5 font-serif text-[clamp(1.05rem,2.2vw,1.2rem)] max-w-[560px] mx-auto leading-relaxed"
+        style={{ color: "var(--ink-2)" }}
       >
         One unified platform for institutes, students, and teachers — built to
         simplify education and amplify outcomes.
       </motion.p>
 
-      {/* CTA Buttons */}
+      {/* CTA Buttons — brand .btn pattern: 8px radius, weight 500 */}
       <motion.div
         variants={fadeUp(0.38)}
         initial="hidden"
@@ -81,31 +84,39 @@ export default function Hero({ onOpenAuth }) {
       >
         <button
           onClick={() => onOpenAuth?.("signup", null)}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[14.5px] text-white bg-neutral-900 shadow-md transition-all duration-200 hover:bg-neutral-800 active:scale-95"
+          className="inline-flex items-center gap-2 px-5 py-[11px] rounded-[8px] font-medium text-[14px] text-white transition-all duration-150 hover:-translate-y-px active:scale-95"
+          style={{ background: "var(--ink)", border: "1px solid var(--ink)" }}
         >
           Get Started — Free
         </button>
-        <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[14.5px] text-neutral-700 bg-white border border-neutral-200 shadow-sm transition-all duration-200 hover:bg-neutral-50 active:scale-95">
+        <button
+          className="inline-flex items-center gap-2 px-5 py-[11px] rounded-[8px] font-medium text-[14px] transition-all duration-150 hover:bg-[#FAFAFB] active:scale-95"
+          style={{ color: "var(--ink)", border: "1px solid var(--line-2)", background: "var(--page)" }}
+        >
           See It In Action
-          <span className="text-neutral-400">→</span>
+          <span style={{ color: "var(--ink-4)" }}>→</span>
         </button>
       </motion.div>
 
-      {/* Role selection label */}
+      {/* Role selection label — JetBrains Mono, ink-4 */}
       <motion.div
         variants={fadeUp(0.4)}
         initial="hidden"
         animate="visible"
         className="mt-auto mb-2 flex flex-col items-center gap-1.5"
       >
-        <p className="text-[10.5px] uppercase tracking-widest text-neutral-400 font-semibold">
+        <p
+          className="font-mono text-[10.5px] uppercase tracking-[.22em] font-semibold"
+          style={{ color: "var(--ink-4)" }}
+        >
           Choose your role to begin
         </p>
-        <div className="w-8 h-px bg-neutral-200" />
+        <div className="w-8 h-px" style={{ background: "var(--line)" }} />
       </motion.div>
 
       {/* Role Cards — onSelect dispatches to global context */}
       <RoleCards selectedRole={activeRoleId} onSelect={selectRole} />
+
     </section>
   );
 }

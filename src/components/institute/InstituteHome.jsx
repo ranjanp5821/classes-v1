@@ -53,17 +53,21 @@ function FadeIn({ children, delay = 0, className = "" }) {
   );
 }
 
-/* ── Media placeholder ───────────────────────────────────────────────────── */
+/* ── Media placeholder (swapped out when real assets arrive) ─────────────── */
 function MediaPlaceholder({ mediaId, description }) {
   return (
     <div
-      className="rounded-2xl flex flex-col items-center justify-center gap-3 p-10 min-h-[280px] h-full border-2 border-dashed"
-      style={{ borderColor: `${ACCENT}35`, background: `${ACCENT}06` }}
+      className="flex flex-col items-center justify-center gap-3 p-10 min-h-[280px] h-full border-dashed border-2"
+      style={{
+        borderColor: `color-mix(in srgb, ${ACCENT} 25%, #fff)`,
+        background: `color-mix(in srgb, ${ACCENT} 5%, #fff)`,
+        borderRadius: "var(--r-lg)",
+      }}
       aria-label={`Media placeholder – ${mediaId}`}
     >
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center"
-        style={{ background: `${ACCENT}18` }}
+        style={{ background: `color-mix(in srgb, ${ACCENT} 12%, #fff)` }}
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="3" />
@@ -71,8 +75,8 @@ function MediaPlaceholder({ mediaId, description }) {
           <polyline points="21 15 16 10 5 21" />
         </svg>
       </div>
-      <p className="text-[13px] font-bold tracking-wide" style={{ color: ACCENT }}>{mediaId}</p>
-      <p className="text-[12px] text-neutral-400 text-center max-w-[240px] leading-relaxed">{description}</p>
+      <p className="text-[13px] font-mono font-semibold uppercase tracking-[.04em]" style={{ color: ACCENT }}>{mediaId}</p>
+      <p className="text-[12px] text-center max-w-[220px] leading-relaxed" style={{ color: "var(--ink-4)" }}>{description}</p>
     </div>
   );
 }
@@ -80,15 +84,37 @@ function MediaPlaceholder({ mediaId, description }) {
 /* ── Layout primitives ───────────────────────────────────────────────────── */
 function Section({ id, alt = false, children }) {
   return (
-    <section id={id} className={`w-full py-20 sm:py-24 ${alt ? "bg-neutral-50/70" : "bg-white"}`}>
+    <section
+      id={id}
+      className="w-full py-20 sm:py-24"
+      style={{ background: alt ? "var(--paper)" : "var(--page)" }}
+    >
       <div className="max-w-5xl mx-auto px-6 sm:px-8">{children}</div>
     </section>
   );
 }
 
+function Eyebrow({ children }) {
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 px-[11px] py-[5px] rounded-[999px] font-mono text-[11px] font-semibold uppercase tracking-[.04em] mb-4"
+      style={{
+        background: `color-mix(in srgb, ${ACCENT} 10%, #fff)`,
+        color: ACCENT,
+        border: `1px solid color-mix(in srgb, ${ACCENT} 20%, #fff)`,
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
 function Heading({ children, className = "" }) {
   return (
-    <h2 className={`font-display font-extrabold text-neutral-900 tracking-tight leading-tight ${className}`}>
+    <h2
+      className={`font-serif font-medium leading-[1.08] ${className}`}
+      style={{ letterSpacing: "-0.025em", color: "var(--ink)" }}
+    >
       {children}
     </h2>
   );
@@ -96,15 +122,22 @@ function Heading({ children, className = "" }) {
 
 function Lead({ children, className = "" }) {
   return (
-    <p className={`text-[15px] text-neutral-500 leading-relaxed ${className}`}>{children}</p>
+    <p className={`text-[15px] leading-relaxed ${className}`} style={{ color: "var(--ink-3)" }}>
+      {children}
+    </p>
   );
 }
 
 function HighlightLine({ children }) {
   return (
     <div
-      className="rounded-xl px-5 py-4 border-l-4 text-[15px] font-semibold text-neutral-800 leading-snug"
-      style={{ borderColor: ACCENT, background: `${ACCENT}08` }}
+      className="px-5 py-4 border-l-4 text-[15px] font-medium leading-snug"
+      style={{
+        borderColor: ACCENT,
+        background: `color-mix(in srgb, ${ACCENT} 7%, #fff)`,
+        borderRadius: "0 var(--r-sm) var(--r-sm) 0",
+        color: "var(--ink-2)",
+      }}
     >
       {children}
     </div>
@@ -115,8 +148,8 @@ function PrimaryButton({ children, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[15px] font-semibold text-white shadow-sm hover:opacity-90 active:scale-95 transition-all duration-150"
-      style={{ background: GRADIENT }}
+      className="inline-flex items-center gap-2 px-6 py-[11px] rounded-[8px] text-[14px] font-medium text-white transition-all duration-150 hover:-translate-y-px hover:opacity-90 active:scale-95"
+      style={{ background: GRADIENT, border: "1px solid transparent" }}
     >
       {children}
     </button>
@@ -127,8 +160,10 @@ function SecondaryButton({ children, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[15px] font-semibold border transition-all duration-150 hover:bg-neutral-50 active:scale-95"
-      style={{ color: ACCENT, borderColor: `${ACCENT}40` }}
+      className="inline-flex items-center gap-2 px-6 py-[11px] rounded-[8px] text-[14px] font-medium transition-all duration-150 active:scale-95"
+      style={{ color: "var(--ink)", border: "1px solid var(--line-2)", background: "var(--page)" }}
+      onMouseEnter={e => { e.currentTarget.style.background = "var(--mist)"; }}
+      onMouseLeave={e => { e.currentTarget.style.background = "var(--page)"; }}
     >
       {children}
     </button>
@@ -137,14 +172,31 @@ function SecondaryButton({ children, onClick }) {
 
 function Card({ title, body, icon }) {
   return (
-    <div className="rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm flex flex-col gap-3">
+    <div
+      className="p-6 flex flex-col gap-3"
+      style={{
+        background: "var(--page)",
+        border: "1px solid var(--line)",
+        borderRadius: "var(--r)",
+      }}
+    >
       {icon && (
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${ACCENT}12` }}>
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center"
+          style={{ background: `color-mix(in srgb, ${ACCENT} 10%, #fff)` }}
+        >
           {icon}
         </div>
       )}
-      <h4 className="text-[16px] font-bold text-neutral-900">{title}</h4>
-      <p className="text-[14px] text-neutral-500 leading-relaxed">{body}</p>
+      <h4
+        className="text-[16px] font-serif font-medium"
+        style={{ color: "var(--ink)" }}
+      >
+        {title}
+      </h4>
+      <p className="text-[14px] leading-relaxed" style={{ color: "var(--ink-3)" }}>
+        {body}
+      </p>
     </div>
   );
 }
@@ -153,7 +205,7 @@ function BenefitList({ items }) {
   return (
     <ul className="flex flex-col gap-3">
       {items.map((b) => (
-        <li key={b} className="flex items-start gap-3 text-[14.5px] text-neutral-700">
+        <li key={b} className="flex items-start gap-3 text-[14.5px]" style={{ color: "var(--ink-2)" }}>
           <Check size={16} className="mt-0.5 shrink-0" style={{ color: ACCENT }} />
           {b}
         </li>
@@ -168,12 +220,18 @@ function JourneyPills({ steps }) {
       {steps.map((step, i) => (
         <div key={step} className="flex items-center gap-2">
           <span
-            className="px-4 py-1.5 rounded-full text-[13px] font-bold border"
-            style={{ color: ACCENT, borderColor: `${ACCENT}35`, background: `${ACCENT}08` }}
+            className="px-4 py-1.5 rounded-[999px] font-mono text-[11px] font-semibold uppercase tracking-[.04em]"
+            style={{
+              color: ACCENT,
+              border: `1px solid color-mix(in srgb, ${ACCENT} 30%, #fff)`,
+              background: `color-mix(in srgb, ${ACCENT} 8%, #fff)`,
+            }}
           >
             {step}
           </span>
-          {i < steps.length - 1 && <ChevronRight size={14} className="text-neutral-300" />}
+          {i < steps.length - 1 && (
+            <ChevronRight size={14} style={{ color: "var(--line-2)" }} />
+          )}
         </div>
       ))}
     </div>
@@ -269,17 +327,30 @@ function HeroSection() {
     <section
       id="institution-hero"
       className="relative w-full overflow-hidden pt-28 pb-20"
-      style={{ backgroundImage: `radial-gradient(ellipse 70% 55% at 50% 0%, ${ACCENT}14 0%, transparent 70%)` }}
+      style={{
+        backgroundImage: `radial-gradient(ellipse 70% 55% at 50% 0%, #F1F2F5 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 50% 0%, ${ACCENT}0D 0%, transparent 70%)`,
+      }}
     >
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-stretch">
 
           <FadeIn>
-            <h1 className="text-[2.6rem] lg:text-[3rem] font-extrabold text-neutral-900 leading-[1.1] tracking-tight font-display mb-5">
-              See what is happening academically—
-              <span style={{ background: GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <h1
+              className="font-serif text-[clamp(2rem,4.5vw,3rem)] font-medium leading-[1.08] mb-5"
+              style={{ letterSpacing: "-0.03em", color: "var(--ink)" }}
+            >
+              See what is happening academically—{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  background: GRADIENT,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
                 and know what to improve next.
-              </span>
+              </em>
             </h1>
             <Lead className="mb-3">
               Classess.com® connects curriculum, teaching, assessment, student support, and leadership insights into one academic intelligence layer.
@@ -291,7 +362,7 @@ function HeroSection() {
               <PrimaryButton>Request a Demo <ArrowRight size={16} /></PrimaryButton>
               <SecondaryButton>Explore the Platform</SecondaryButton>
             </div>
-            <p className="text-[13.5px] font-semibold text-neutral-500">
+            <p className="text-[13.5px] font-medium" style={{ color: "var(--ink-3)" }}>
               From academic activity to academic intelligence.
             </p>
           </FadeIn>
@@ -326,18 +397,29 @@ function InstitutionTypeSection({ selectedType, setSelectedType }) {
       </FadeIn>
 
       <FadeIn delay={0.06} className="mb-8">
-        <p className="text-[13px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 text-center">I represent:</p>
+        <p
+          className="font-mono text-[10.5px] font-semibold uppercase tracking-[.1em] mb-3 text-center"
+          style={{ color: "var(--ink-4)" }}
+        >
+          I represent:
+        </p>
         <div className="flex flex-wrap justify-center gap-2">
           {ORG_TYPES.map((type) => (
             <button
               key={type.id}
               onClick={() => setSelectedType(type.id)}
-              className={`px-4 py-2.5 rounded-xl text-[13.5px] font-semibold border transition-all duration-150 ${
+              className="px-4 py-2 rounded-[8px] text-[13.5px] font-medium border transition-all duration-150"
+              style={
                 selectedType === type.id
-                  ? "text-white shadow-sm"
-                  : "bg-white text-neutral-600 border-neutral-200 hover:border-neutral-300"
-              }`}
-              style={selectedType === type.id ? { background: GRADIENT, borderColor: "transparent" } : {}}
+                  ? { background: GRADIENT, color: "#fff", borderColor: "transparent" }
+                  : { background: "var(--page)", color: "var(--ink-2)", borderColor: "var(--line-2)" }
+              }
+              onMouseEnter={e => {
+                if (selectedType !== type.id) e.currentTarget.style.borderColor = "var(--line)";
+              }}
+              onMouseLeave={e => {
+                if (selectedType !== type.id) e.currentTarget.style.borderColor = "var(--line-2)";
+              }}
             >
               {type.label}
             </button>
@@ -354,8 +436,20 @@ function InstitutionTypeSection({ selectedType, setSelectedType }) {
           transition={{ duration: 0.25 }}
           className="grid lg:grid-cols-2 gap-10 items-stretch"
         >
-          <div className="rounded-2xl border border-neutral-100 bg-white p-8 shadow-sm flex flex-col gap-4">
-            <h3 className="text-[1.2rem] font-extrabold text-neutral-900">{active.label}</h3>
+          <div
+            className="p-8 flex flex-col gap-4"
+            style={{
+              background: "var(--page)",
+              border: "1px solid var(--line)",
+              borderRadius: "var(--r)",
+            }}
+          >
+            <h3
+              className="text-[1.2rem] font-serif font-medium"
+              style={{ color: "var(--ink)" }}
+            >
+              {active.label}
+            </h3>
             <Lead>{active.copy}</Lead>
           </div>
           <MediaPlaceholder
@@ -500,7 +594,12 @@ function StudentLearningSection() {
 
       <div className="grid lg:grid-cols-2 gap-10 items-stretch mb-12">
         <FadeIn>
-          <h3 className="text-[1.15rem] font-extrabold text-neutral-900 mb-5">A clearer view of every learner</h3>
+          <h3
+            className="text-[1.15rem] font-serif font-medium mb-5"
+            style={{ color: "var(--ink)" }}
+          >
+            A clearer view of every learner
+          </h3>
           <BenefitList items={INSIGHT_AREAS} />
         </FadeIn>
 
@@ -513,7 +612,12 @@ function StudentLearningSection() {
       </div>
 
       <FadeIn delay={0.12}>
-        <h3 className="text-[1.4rem] font-extrabold text-neutral-900 mb-3">Turn insight into coordinated action.</h3>
+        <h3
+          className="text-[1.4rem] font-serif font-medium mb-3"
+          style={{ color: "var(--ink)" }}
+        >
+          Turn insight into coordinated action.
+        </h3>
         <Lead className="mb-6">
           Classess.com® helps institutions move from identifying a problem to planning, assigning, and reviewing an appropriate intervention.
         </Lead>
@@ -554,8 +658,20 @@ function OutcomesSection({ selectedType }) {
             transition={{ duration: 0.25 }}
             className="flex flex-col gap-5"
           >
-            <div className="rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm">
-              <h3 className="text-[1.1rem] font-extrabold text-neutral-900 mb-5">{outcomes.title}</h3>
+            <div
+              className="p-6"
+              style={{
+                background: "var(--page)",
+                border: "1px solid var(--line)",
+                borderRadius: "var(--r)",
+              }}
+            >
+              <h3
+                className="text-[1.1rem] font-serif font-medium mb-5"
+                style={{ color: "var(--ink)" }}
+              >
+                {outcomes.title}
+              </h3>
               <BenefitList items={outcomes.points} />
             </div>
             {outcomes.supporting && (
@@ -609,10 +725,15 @@ function IntegrationSection() {
 
       <div className="grid lg:grid-cols-2 gap-10 items-start mb-10">
         <FadeIn>
-          <h3 className="text-[1.1rem] font-extrabold text-neutral-900 mb-4">Compatible integration areas</h3>
+          <h3
+            className="text-[1.1rem] font-serif font-medium mb-4"
+            style={{ color: "var(--ink)" }}
+          >
+            Compatible integration areas
+          </h3>
           <ul className="grid sm:grid-cols-2 gap-2.5">
             {INTEGRATION_AREAS.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-[14px] text-neutral-700">
+              <li key={item} className="flex items-center gap-2.5 text-[14px]" style={{ color: "var(--ink-2)" }}>
                 <Check size={14} className="shrink-0" style={{ color: ACCENT }} />
                 {item}
               </li>
@@ -621,7 +742,12 @@ function IntegrationSection() {
         </FadeIn>
 
         <FadeIn delay={0.08}>
-          <h3 className="text-[1.1rem] font-extrabold text-neutral-900 mb-3">Begin with what matters most.</h3>
+          <h3
+            className="text-[1.1rem] font-serif font-medium mb-3"
+            style={{ color: "var(--ink)" }}
+          >
+            Begin with what matters most.
+          </h3>
           <Lead className="mb-6">
             Implementation can begin with one institution, campus, grade, subject, department, programme, or district cluster and expand according to adoption, readiness, and outcomes.
           </Lead>
@@ -703,28 +829,41 @@ function TrustSection() {
    ════════════════════════════════════════════════════════════════════════════ */
 function FinalCTASection() {
   return (
-    <section id="get-started" className="w-full py-28 relative overflow-hidden" style={{ background: GRADIENT }}>
+    <section
+      id="get-started"
+      className="w-full py-28 relative overflow-hidden"
+      style={{ background: GRADIENT }}
+    >
       <div
-        className="absolute right-0 top-0 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-30"
+        className="absolute right-0 top-0 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-20"
         style={{ background: "#fff" }}
       />
-      <div className="max-w-5xl mx-auto px-6 sm:px-8 text-center relative z-10 text-white">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center relative z-10 text-white">
         <FadeIn>
-          <h2 className="text-[2.2rem] lg:text-[2.8rem] font-extrabold tracking-tight leading-tight mb-5">
+          <h2
+            className="font-serif font-medium text-[clamp(1.9rem,4vw,2.8rem)] leading-[1.08] mb-5 text-white"
+            style={{ letterSpacing: "-0.025em" }}
+          >
             Build a clearer, more connected academic system.
           </h2>
-          <p className="text-[16px] text-white/90 leading-relaxed mb-10 max-w-[560px] mx-auto">
+          <p className="text-[16px] text-white/90 leading-relaxed mb-10 max-w-[560px] mx-auto font-serif">
             Support teachers. Understand student learning. Strengthen academic decisions. Improve coordination across institutions, programmes, campuses, or districts.
           </p>
           <div className="flex flex-wrap gap-4 justify-center mb-10">
-            <button className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-[15px] bg-white shadow-lg transition-all duration-200 hover:opacity-95 active:scale-95" style={{ color: ACCENT }}>
+            <button
+              className="inline-flex items-center gap-2 px-7 py-[11px] rounded-[8px] font-medium text-[14px] transition-all duration-200 hover:opacity-95 active:scale-95"
+              style={{ background: "var(--page)", color: ACCENT }}
+            >
               Request a Demo <ArrowRight size={16} />
             </button>
-            <button className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-[15px] text-white border border-white/40 transition-all duration-200 hover:bg-white/10 active:scale-95">
+            <button
+              className="inline-flex items-center gap-2 px-7 py-[11px] rounded-[8px] font-medium text-[14px] text-white transition-all duration-200 hover:bg-white/10 active:scale-95"
+              style={{ border: "1px solid rgba(255,255,255,0.4)" }}
+            >
               Speak with Our Academic Team
             </button>
           </div>
-          <p className="text-[14px] font-semibold text-white/80">
+          <p className="font-mono text-[11px] uppercase tracking-[.1em] text-white/70">
             Basic platforms help institutions run. Classess.com® helps institutions improve.
           </p>
         </FadeIn>
@@ -756,16 +895,24 @@ const FAQS_HIDDEN = [
 function FAQItem({ question, answer }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-neutral-100 last:border-0">
+    <div style={{ borderBottom: "1px solid var(--line)" }} className="last:border-0">
       <button
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between gap-4 py-5 text-left group"
         aria-expanded={open}
       >
-        <span className="text-[15px] font-semibold text-neutral-800 group-hover:text-neutral-600 transition-colors">{question}</span>
+        <span
+          className="text-[15px] font-medium transition-colors"
+          style={{ color: open ? "var(--ink)" : "var(--ink-2)" }}
+        >
+          {question}
+        </span>
         <span
           className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors"
-          style={{ background: open ? ACCENT : `${ACCENT}12`, color: open ? "#fff" : ACCENT }}
+          style={{
+            background: open ? ACCENT : `color-mix(in srgb, ${ACCENT} 12%, #fff)`,
+            color: open ? "#fff" : ACCENT,
+          }}
         >
           {open ? <Minus size={15} /> : <Plus size={15} />}
         </span>
@@ -776,7 +923,7 @@ function FAQItem({ question, answer }) {
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         className="overflow-hidden"
       >
-        <p className="pb-5 pr-10 text-[14.5px] text-neutral-500 leading-relaxed">{answer}</p>
+        <p className="pb-5 pr-10 text-[14.5px] leading-relaxed" style={{ color: "var(--ink-3)" }}>{answer}</p>
       </motion.div>
     </div>
   );
@@ -792,7 +939,14 @@ function FAQSection() {
       </FadeIn>
 
       <FadeIn delay={0.06} className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-2xl border border-neutral-100 px-6 shadow-sm">
+        <div
+          className="px-6"
+          style={{
+            background: "var(--page)",
+            border: "1px solid var(--line)",
+            borderRadius: "var(--r-lg)",
+          }}
+        >
           {FAQS_VISIBLE.map((faq) => (
             <FAQItem key={faq.q} question={faq.q} answer={faq.a} />
           ))}
@@ -832,7 +986,7 @@ export default function InstituteHome() {
   const [selectedType, setSelectedType] = useState("independent");
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full" style={{ background: "var(--page)" }}>
       <HeroSection />
       <InstitutionTypeSection selectedType={selectedType} setSelectedType={setSelectedType} />
       <ConnectedSystemSection />
