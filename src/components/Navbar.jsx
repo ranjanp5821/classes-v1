@@ -132,7 +132,7 @@ export default function Navbar({ onOpenAuth }) {
         <a
           href="/"
           onClick={handleLogoClick}
-          className="flex items-center group"
+          className="flex items-center shrink-0 group"
           aria-label="Classess Home"
         >
           <img

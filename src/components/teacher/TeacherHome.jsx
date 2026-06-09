@@ -165,7 +165,11 @@ function BenefitList({ items }) {
    ════════════════════════════════════════════════════════════════════════════ */
 function HeroSection() {
   return (
-    <section id="teacher-hero" className="w-full pt-28 pb-20 bg-white">
+    <section
+      id="teacher-hero"
+      className="relative w-full overflow-hidden pt-28 pb-20"
+      style={{ backgroundImage: `radial-gradient(ellipse 70% 55% at 50% 0%, ${ACCENT}14 0%, transparent 70%)` }}
+    >
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-stretch">
 
