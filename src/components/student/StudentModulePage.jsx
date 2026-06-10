@@ -1,13 +1,3 @@
-/**
- * StudentModulePage.jsx — Shared layout for the five student module pages.
- *
- * Driven by a content object from config/studentModules.js. Renders the
- * student-specific header (Navbar), a breadcrumb, the page heading + intro,
- * a "Main Student Outcomes" grid, flexible content blocks, a final-outcome
- * call to action, and a "Back to Student Home" link — one consistent layout
- * across Learn / Practice / Exam Preparation / Progress / AI Tutor.
- */
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -17,8 +7,9 @@ import AuthModal from "../AuthModal";
 import VoiceAssistant from "../VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 
-const ACCENT = "#2563EB";
-const GRADIENT = "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)";
+const ACCENT    = "#2563EB";
+const GRADIENT  = "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)";
+const ACCENT_LIGHT = "#EBF0FD";
 
 const fadeUp = {
   initial: { opacity: 0, y: 18 },
@@ -32,7 +23,9 @@ const fadeUp = {
 function FlowBlock({ block }) {
   return (
     <motion.div {...fadeUp} className="mt-16">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">
+      <h2
+        className="text-2xl md:text-3xl font-serif font-medium tracking-tight text-ink"
+      >
         {block.heading}
       </h2>
       <div className="mt-6 flex flex-wrap items-center gap-2">
@@ -45,13 +38,13 @@ function FlowBlock({ block }) {
               {step}
             </span>
             {i < block.steps.length - 1 && (
-              <ChevronRight size={18} className="text-neutral-300" />
+              <ChevronRight size={18} className="text-line-2" />
             )}
           </div>
         ))}
       </div>
       {block.copy && (
-        <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+        <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-ink-3">
           {block.copy}
         </p>
       )}
@@ -62,11 +55,13 @@ function FlowBlock({ block }) {
 function ListBlock({ block }) {
   return (
     <motion.div {...fadeUp} className="mt-16">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">
+      <h2
+        className="text-2xl md:text-3xl font-serif font-medium tracking-tight text-ink"
+      >
         {block.heading}
       </h2>
       {block.intro && (
-        <p className="mt-3 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+        <p className="mt-3 max-w-3xl text-[16px] leading-relaxed text-ink-3">
           {block.intro}
         </p>
       )}
@@ -74,13 +69,13 @@ function ListBlock({ block }) {
         {block.items.map((item) => (
           <li
             key={item}
-            className="flex items-start gap-3 rounded-xl border border-neutral-100 bg-neutral-50 px-4 py-3"
+            className="flex items-start gap-3 rounded-xl border border-line bg-paper px-4 py-3"
           >
             <span
               className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
               style={{ background: ACCENT }}
             />
-            <span className="text-[15px] text-neutral-700">{item}</span>
+            <span className="text-[15px] text-ink-2">{item}</span>
           </li>
         ))}
       </ul>
@@ -91,26 +86,28 @@ function ListBlock({ block }) {
 function ExampleBlock({ block }) {
   return (
     <motion.div {...fadeUp} className="mt-16">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">
+      <h2
+        className="text-2xl md:text-3xl font-serif font-medium tracking-tight text-ink"
+      >
         {block.heading}
       </h2>
-      <div className="mt-6 max-w-2xl overflow-hidden rounded-2xl border border-neutral-200">
+      <div className="mt-6 max-w-2xl overflow-hidden rounded-2xl border border-line-2">
         {block.rows.map((row, i) => (
           <div
             key={row.label}
             className={`flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-center sm:gap-4 ${
-              i !== block.rows.length - 1 ? "border-b border-neutral-100" : ""
+              i !== block.rows.length - 1 ? "border-b border-line" : ""
             }`}
           >
-            <span className="w-28 shrink-0 text-[13px] font-semibold uppercase tracking-wide text-neutral-400">
+            <span className="w-28 shrink-0 text-[13px] font-mono uppercase tracking-wide text-ink-4">
               {row.label}
             </span>
-            <span className="text-[15px] text-neutral-800">{row.value}</span>
+            <span className="text-[15px] text-ink-2">{row.value}</span>
           </div>
         ))}
       </div>
       {block.copy && (
-        <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+        <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-ink-3">
           {block.copy}
         </p>
       )}
@@ -121,12 +118,14 @@ function ExampleBlock({ block }) {
 function HighlightBlock({ block }) {
   return (
     <motion.div {...fadeUp} className="mt-16">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">
+      <h2
+        className="text-2xl md:text-3xl font-serif font-medium tracking-tight text-ink"
+      >
         {block.heading}
       </h2>
       <div
-        className="mt-6 rounded-2xl border border-neutral-100 p-6 md:p-8"
-        style={{ background: "#EBF0FD" }}
+        className="mt-6 rounded-2xl border border-line p-6 md:p-8"
+        style={{ background: ACCENT_LIGHT }}
       >
         <p
           className="flex items-center gap-2 text-xl font-semibold"
@@ -136,7 +135,7 @@ function HighlightBlock({ block }) {
           {block.text}
         </p>
         {block.copy && (
-          <p className="mt-4 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+          <p className="mt-4 max-w-3xl text-[16px] leading-relaxed text-ink-3">
             {block.copy}
           </p>
         )}
@@ -162,13 +161,10 @@ export default function StudentModulePage({ module }) {
   const { activeRoleId, selectRole } = useRole();
   const [authModal, setAuthModal] = useState(null);
 
-  // Keep the selected role as "Student" while browsing module pages, so the
-  // header shows the student nav and returning to "/" lands on the student home.
   useEffect(() => {
     if (activeRoleId !== "student") selectRole("student");
   }, [activeRoleId, selectRole]);
 
-  // Per-page title + meta description (own shareable, indexable page).
   useEffect(() => {
     const prevTitle = document.title;
     document.title = module.docTitle;
@@ -186,7 +182,7 @@ export default function StudentModulePage({ module }) {
   const authOpen = authModal !== null;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-page">
       <div
         className="transition-[filter] duration-200"
         style={authOpen ? { filter: "blur(4px)" } : undefined}
@@ -196,26 +192,29 @@ export default function StudentModulePage({ module }) {
 
         <main className="mx-auto max-w-5xl px-6 pb-24 pt-28 md:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[13px] text-neutral-400">
-            <button onClick={goHome} className="transition-colors hover:text-neutral-700">
+          <nav className="flex items-center gap-2 text-[13px] text-ink-4">
+            <button
+              onClick={goHome}
+              className="transition-colors hover:text-ink-2"
+            >
               Student Home
             </button>
             <ChevronRight size={14} />
-            <span className="font-medium text-neutral-600">{module.navLabel}</span>
+            <span className="font-medium text-ink-3">{module.navLabel}</span>
           </nav>
 
           {/* Heading + intro */}
           <motion.header {...fadeUp} className="mt-6 max-w-3xl">
             {module.productName && (
-              <p className="mb-3 text-[14px] font-semibold" style={{ color: ACCENT }}>
+              <p className="mb-3 font-mono text-[13px] uppercase tracking-widest" style={{ color: ACCENT }}>
                 {module.productName}
               </p>
             )}
-            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-5xl">
+            <h1 className="text-3xl font-serif font-medium leading-tight tracking-tight text-ink md:text-5xl">
               {module.heading}
             </h1>
             {module.intro.map((p) => (
-              <p key={p} className="mt-5 text-[17px] leading-relaxed text-neutral-600">
+              <p key={p} className="mt-5 text-[17px] leading-relaxed text-ink-3">
                 {p}
               </p>
             ))}
@@ -223,17 +222,20 @@ export default function StudentModulePage({ module }) {
 
           {/* Main Student Outcomes */}
           <motion.section {...fadeUp} className="mt-16">
-            <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              What you gain
+            </p>
+            <h2 className="mt-2 text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
               Main Student Outcomes
             </h2>
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
               {module.outcomes.map((o) => (
                 <div
                   key={o.title}
-                  className="rounded-2xl border border-neutral-100 bg-neutral-50 p-6"
+                  className="rounded-2xl border border-line bg-paper p-6"
                 >
-                  <h3 className="text-[17px] font-semibold text-neutral-900">{o.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-neutral-600">{o.body}</p>
+                  <h3 className="text-[17px] font-semibold text-ink">{o.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-ink-3">{o.body}</p>
                 </div>
               ))}
             </div>
@@ -247,14 +249,14 @@ export default function StudentModulePage({ module }) {
           {/* Final outcome + CTAs */}
           <motion.section
             {...fadeUp}
-            className="mt-20 overflow-hidden rounded-3xl border border-neutral-100 p-8 md:p-12"
-            style={{ background: "#EBF0FD" }}
+            className="mt-20 overflow-hidden rounded-3xl border border-line p-8 md:p-12"
+            style={{ background: ACCENT_LIGHT }}
           >
-            <h2 className="max-w-2xl text-2xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-3xl">
+            <h2 className="max-w-2xl text-2xl font-serif font-medium leading-tight tracking-tight text-ink md:text-3xl">
               {module.final.heading}
             </h2>
             {module.final.copy && (
-              <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-neutral-600">
+              <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-ink-3">
                 {module.final.copy}
               </p>
             )}
@@ -269,7 +271,7 @@ export default function StudentModulePage({ module }) {
               </button>
               <button
                 onClick={goHome}
-                className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-6 py-3 text-[15px] font-semibold text-neutral-700 transition-colors hover:bg-neutral-50"
+                className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-page px-6 py-3 text-[15px] font-semibold text-ink-2 transition-colors hover:bg-paper"
               >
                 {module.final.secondary}
               </button>
@@ -280,7 +282,7 @@ export default function StudentModulePage({ module }) {
           <div className="mt-12">
             <button
               onClick={goHome}
-              className="inline-flex items-center gap-2 text-[14px] font-medium text-neutral-500 transition-colors hover:text-neutral-800"
+              className="inline-flex items-center gap-2 text-[14px] font-medium text-ink-4 transition-colors hover:text-ink"
             >
               <ArrowLeft size={16} />
               Back to Student Home
@@ -288,8 +290,8 @@ export default function StudentModulePage({ module }) {
           </div>
         </main>
 
-        <footer className="border-t border-neutral-100 bg-neutral-50 py-10 text-center">
-          <p className="text-[13px] font-medium text-neutral-400">
+        <footer className="border-t border-line bg-paper py-10 text-center">
+          <p className="text-[13px] font-medium text-ink-4">
             © 2026 Classess · Independent Student Homepage · Built for Lifelong Learners
           </p>
         </footer>

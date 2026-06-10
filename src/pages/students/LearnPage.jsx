@@ -1,13 +1,3 @@
-/**
- * LearnPage.jsx — /students/learn
- *
- * A bespoke, standalone Learn page (not the shared module template). It explains
- * how Classess.com® helps students understand concepts clearly — outcomes first,
- * features framed only as supporting evidence — following the "Navigation Page 1:
- * Learn" spec. Bracketed internal/developer notes from the spec are intentionally
- * not rendered.
- */
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -34,8 +24,9 @@ import AuthModal from "../../components/AuthModal";
 import VoiceAssistant from "../../components/VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 
-const ACCENT = "#2563EB";
-const GRADIENT = "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)";
+const ACCENT    = "#2563EB";
+const GRADIENT  = "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)";
+const ACCENT_LIGHT = "#EBF0FD";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -72,13 +63,10 @@ export default function LearnPage() {
   const { activeRoleId, selectRole } = useRole();
   const [authModal, setAuthModal] = useState(null);
 
-  // Keep the role as "Student" so the header shows the student nav and
-  // returning to "/" lands on the student home.
   useEffect(() => {
     if (activeRoleId !== "student") selectRole("student");
   }, [activeRoleId, selectRole]);
 
-  // Own title + meta description (shareable, indexable page).
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "Learn — Classess";
@@ -100,7 +88,7 @@ export default function LearnPage() {
   const authOpen = authModal !== null;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-page">
       <div
         className="transition-[filter] duration-200"
         style={authOpen ? { filter: "blur(4px)" } : undefined}
@@ -117,12 +105,12 @@ export default function LearnPage() {
           />
           <div className="mx-auto max-w-5xl px-6 pt-28 pb-16 md:px-8">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-[13px] text-neutral-400">
-              <button onClick={goHome} className="transition-colors hover:text-neutral-700">
+            <nav className="flex items-center gap-2 text-[13px] text-ink-4">
+              <button onClick={goHome} className="transition-colors hover:text-ink-2">
                 Student Home
               </button>
               <ChevronRight size={14} />
-              <span className="font-medium text-neutral-600">Learn</span>
+              <span className="font-medium text-ink-3">Learn</span>
             </nav>
 
             <motion.div
@@ -132,19 +120,19 @@ export default function LearnPage() {
               className="mt-6 max-w-3xl"
             >
               <span
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12.5px] font-semibold"
-                style={{ background: "#EBF0FD", color: ACCENT }}
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[12px] font-medium uppercase tracking-[0.18em]"
+                style={{ background: ACCENT_LIGHT, color: ACCENT }}
               >
-                <Brain size={14} /> Learn
+                <Brain size={13} /> Learn
               </span>
-              <h1 className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight text-neutral-900 md:text-6xl">
+              <h1 className="mt-5 text-4xl font-serif font-medium leading-[1.08] tracking-tight text-ink md:text-6xl">
                 Understand difficult concepts in a way that works for you.
               </h1>
-              <p className="mt-6 text-[17px] leading-relaxed text-neutral-600 md:text-[18px]">
+              <p className="mt-6 text-[17px] leading-relaxed text-ink-3 md:text-[18px]">
                 Classess.com® organises your subject into a structured learning path and breaks
                 difficult topics into smaller, manageable learning steps.
               </p>
-              <p className="mt-4 text-[17px] leading-relaxed text-neutral-600 md:text-[18px]">
+              <p className="mt-4 text-[17px] leading-relaxed text-ink-3 md:text-[18px]">
                 Learn through explanations, examples, videos, voice support, read-aloud content,
                 and AI-guided assistance until the concept becomes clear.
               </p>
@@ -159,7 +147,7 @@ export default function LearnPage() {
                 </button>
                 <button
                   onClick={goHome}
-                  className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-6 py-3 text-[15px] font-semibold text-neutral-700 transition-colors hover:bg-neutral-50"
+                  className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-page px-6 py-3 text-[15px] font-semibold text-ink-2 transition-colors hover:bg-paper"
                 >
                   Try a Sample Concept
                 </button>
@@ -171,10 +159,10 @@ export default function LearnPage() {
         {/* ── Main Student Outcomes ────────────────────────────── */}
         <section className="mx-auto max-w-5xl px-6 py-16 md:px-8">
           <motion.div {...fadeUp}>
-            <p className="text-[13px] font-semibold uppercase tracking-wide" style={{ color: ACCENT }}>
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
               What you gain
             </p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl">
+            <h2 className="mt-2 text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
               Main Student Outcomes
             </h2>
           </motion.div>
@@ -187,7 +175,7 @@ export default function LearnPage() {
                   key={o.title}
                   {...fadeUp}
                   transition={{ ...fadeUp.transition, delay: i * 0.05 }}
-                  className="group rounded-2xl border border-neutral-100 bg-neutral-50 p-6 transition-colors hover:border-neutral-200 hover:bg-white"
+                  className="group rounded-2xl border border-line bg-paper p-6 transition-colors hover:border-line-2 hover:bg-page"
                 >
                   <span
                     className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-white"
@@ -195,8 +183,8 @@ export default function LearnPage() {
                   >
                     <Icon size={20} />
                   </span>
-                  <h3 className="mt-4 text-[17px] font-semibold text-neutral-900">{o.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-neutral-600">{o.body}</p>
+                  <h3 className="mt-4 text-[17px] font-semibold text-ink">{o.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-ink-3">{o.body}</p>
                 </motion.div>
               );
             })}
@@ -204,13 +192,13 @@ export default function LearnPage() {
         </section>
 
         {/* ── How It Works: structured path ────────────────────── */}
-        <section className="bg-neutral-50 py-16">
+        <section className="bg-paper py-16">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl">
+              <h2 className="text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
                 A structured path from subject to understanding
               </h2>
-              <p className="mt-4 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+              <p className="mt-4 max-w-3xl text-[16px] leading-relaxed text-ink-3">
                 Each subject is organised into a clear academic structure. The platform then
                 recommends what to learn based on the student's course, selected subject, previous
                 progress, and academic goals.
@@ -224,19 +212,19 @@ export default function LearnPage() {
             >
               {PATH_STEPS.map((step, i) => (
                 <li key={step} className="flex items-center gap-2 md:flex-1 md:flex-col md:items-stretch md:gap-3">
-                  <div className="flex w-full items-center gap-3 rounded-2xl border border-neutral-200 bg-white px-4 py-4">
+                  <div className="flex w-full items-center gap-3 rounded-2xl border border-line bg-page px-4 py-4">
                     <span
                       className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[13px] font-bold text-white"
                       style={{ background: GRADIENT }}
                     >
                       {i + 1}
                     </span>
-                    <span className="text-[15px] font-semibold text-neutral-800">{step}</span>
+                    <span className="text-[15px] font-semibold text-ink">{step}</span>
                   </div>
                   {i < PATH_STEPS.length - 1 && (
                     <ChevronRight
                       size={20}
-                      className="mx-auto shrink-0 rotate-90 text-neutral-300 md:rotate-0"
+                      className="mx-auto shrink-0 rotate-90 text-line-2 md:rotate-0"
                     />
                   )}
                 </li>
@@ -248,10 +236,10 @@ export default function LearnPage() {
         {/* ── Supporting Capabilities ──────────────────────────── */}
         <section className="mx-auto max-w-5xl px-6 py-16 md:px-8">
           <motion.div {...fadeUp}>
-            <p className="text-[13px] font-semibold uppercase tracking-wide text-neutral-400">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
               Supporting evidence
             </p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl">
+            <h2 className="mt-2 text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
               Supporting Capabilities
             </h2>
           </motion.div>
@@ -264,15 +252,15 @@ export default function LearnPage() {
                   key={c.label}
                   {...fadeUp}
                   transition={{ ...fadeUp.transition, delay: (i % 3) * 0.04 }}
-                  className="flex items-center gap-3 rounded-xl border border-neutral-100 bg-white px-4 py-4 transition-colors hover:bg-neutral-50"
+                  className="flex items-center gap-3 rounded-xl border border-line bg-page px-4 py-4 transition-colors hover:bg-paper"
                 >
                   <span
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                    style={{ background: "#EBF0FD", color: ACCENT }}
+                    style={{ background: ACCENT_LIGHT, color: ACCENT }}
                   >
                     <Icon size={17} />
                   </span>
-                  <span className="text-[14.5px] text-neutral-700">{c.label}</span>
+                  <span className="text-[14.5px] text-ink-2">{c.label}</span>
                 </motion.div>
               );
             })}
@@ -286,7 +274,7 @@ export default function LearnPage() {
             className="relative overflow-hidden rounded-3xl px-8 py-14 text-center md:px-12"
             style={{ background: GRADIENT }}
           >
-            <h2 className="mx-auto max-w-2xl text-3xl font-semibold leading-tight tracking-tight text-white md:text-4xl">
+            <h2 className="mx-auto max-w-2xl text-3xl font-serif font-medium leading-tight tracking-tight text-white md:text-4xl">
               Move from confusion to clarity.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-[16px] leading-relaxed text-white/85">
@@ -314,15 +302,15 @@ export default function LearnPage() {
           <div className="mt-10">
             <button
               onClick={goHome}
-              className="inline-flex items-center gap-2 text-[14px] font-medium text-neutral-500 transition-colors hover:text-neutral-800"
+              className="inline-flex items-center gap-2 text-[14px] font-medium text-ink-4 transition-colors hover:text-ink"
             >
               <ArrowLeft size={16} /> Back to Student Home
             </button>
           </div>
         </section>
 
-        <footer className="border-t border-neutral-100 bg-neutral-50 py-10 text-center">
-          <p className="text-[13px] font-medium text-neutral-400">
+        <footer className="border-t border-line bg-paper py-10 text-center">
+          <p className="text-[13px] font-medium text-ink-4">
             © 2026 Classess · Independent Student Homepage · Built for Lifelong Learners
           </p>
         </footer>

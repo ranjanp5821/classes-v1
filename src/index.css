@@ -25,6 +25,7 @@
   /* radius */
   --r:    14px;
   --r-sm: 8px;
+  --r-lg: 20px;
 }
 
 @tailwind base;
