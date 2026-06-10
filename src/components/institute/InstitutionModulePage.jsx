@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronRight, Sparkles } from "lucide-react";
 import Navbar from "../Navbar";
 import AuthModal from "../AuthModal";
+import Footer from "../Footer";
 import VoiceAssistant from "../VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 
@@ -257,11 +258,6 @@ export default function InstitutionModulePage({ module }) {
           </div>
         </main>
 
-        <footer className="border-t border-line bg-paper py-10 text-center">
-          <p className="text-[13px] font-medium text-ink-4">
-            © 2026 Classess · Institution Platform · Academic Intelligence for Education
-          </p>
-        </footer>
       </div>
 
       <AuthModal
@@ -277,6 +273,7 @@ export default function InstitutionModulePage({ module }) {
         }}
       />
 
+      <Footer />
       <VoiceAssistant />
     </div>
   );

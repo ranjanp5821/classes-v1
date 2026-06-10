@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import AuthModal from "../../components/AuthModal";
+import Footer from "../../components/Footer";
 import VoiceAssistant from "../../components/VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 
@@ -309,11 +310,6 @@ export default function LearnPage() {
           </div>
         </section>
 
-        <footer className="border-t border-line bg-paper py-10 text-center">
-          <p className="text-[13px] font-medium text-ink-4">
-            © 2026 Classess · Independent Student Homepage · Built for Lifelong Learners
-          </p>
-        </footer>
       </div>
 
       <AuthModal
@@ -329,6 +325,7 @@ export default function LearnPage() {
         }}
       />
 
+      <Footer />
       <VoiceAssistant />
     </div>
   );

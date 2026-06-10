@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronRight, Search, Download, FileText, Play } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import AuthModal from "../../components/AuthModal";
+import Footer from "../../components/Footer";
 import VoiceAssistant from "../../components/VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 import { RESOURCE_CATEGORIES } from "../../config/instituteModules";
@@ -222,11 +223,6 @@ export default function ResourcesPage() {
           </div>
         </main>
 
-        <footer className="border-t border-line bg-paper py-10 text-center">
-          <p className="text-[13px] font-medium text-ink-4">
-            © 2026 Classess · Institution Platform · Academic Intelligence for Education
-          </p>
-        </footer>
       </div>
 
       <AuthModal
@@ -242,6 +238,7 @@ export default function ResourcesPage() {
         }}
       />
 
+      <Footer />
       <VoiceAssistant />
     </div>
   );

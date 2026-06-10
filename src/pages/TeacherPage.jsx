@@ -8,6 +8,7 @@
 
 import { useRole } from "../hooks/useRole";
 import TeacherHome from "../components/teacher/TeacherHome";
+import Footer from "../components/Footer";
 
 export default function TeacherPage({ onOpenAuth }) {
   const { activeRoleConfig, clearRole } = useRole();
@@ -17,19 +18,7 @@ export default function TeacherPage({ onOpenAuth }) {
   return (
     <div className="w-full bg-white">
       <TeacherHome onOpenAuth={onOpenAuth} />
-
-      {/* Footer */}
-      <footer className="border-t border-neutral-100 bg-neutral-50 py-10 text-center">
-        <p className="text-[13px] text-neutral-400 font-medium">
-          © 2026 Classess.com® · Teacher Platform · Built for Modern Educators
-        </p>
-        <button
-          onClick={clearRole}
-          className="mt-3 text-[12px] text-neutral-400 hover:text-neutral-600 underline-offset-2 hover:underline transition-colors"
-        >
-          ← Switch Role
-        </button>
-      </footer>
+      <Footer />
     </div>
   );
 }

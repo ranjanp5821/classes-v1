@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronRight, Search, Play, FileText, Clock } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import AuthModal from "../../components/AuthModal";
+import Footer from "../../components/Footer";
 import VoiceAssistant from "../../components/VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 import { TUTORIAL_CATEGORIES } from "../../config/teacherModules";
@@ -227,11 +228,6 @@ export default function TutorialsPage() {
           </div>
         </main>
 
-        <footer className="border-t border-line bg-paper py-10 text-center">
-          <p className="text-[13px] font-medium text-ink-4">
-            © 2026 Classess · Teacher Workspace · Built for Better Teaching
-          </p>
-        </footer>
       </div>
 
       <AuthModal
@@ -247,6 +243,7 @@ export default function TutorialsPage() {
         }}
       />
 
+      <Footer />
       <VoiceAssistant />
     </div>
   );
