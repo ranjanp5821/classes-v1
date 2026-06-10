@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronRight, Sparkles } from "lucide-react";
 import Navbar from "../Navbar";
 import AuthModal from "../AuthModal";
+import Assistant from "../Assistant";
 import Footer from "../Footer";
 import VoiceAssistant from "../VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
@@ -306,6 +307,7 @@ export default function StudentModulePage({ module }) {
         }}
       />
 
+      <Assistant />
       <Footer />
       <VoiceAssistant />
     </div>

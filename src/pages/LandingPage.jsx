@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import AuthModal from "../components/AuthModal";
-import VoiceAssistant from "../components/VoiceAssistant";
+import Assistant from "../components/Assistant";
 import InstitutePage from "./InstitutePage";
 import StudentPage from "./StudentPage";
 import TeacherPage from "./TeacherPage";
@@ -93,8 +93,8 @@ export default function LandingPage() {
         onSelectRole={handleAuthRoleSelect}
       />
 
-      {/* Anam.ai avatar voice assistant — bottom-right launcher */}
-      <VoiceAssistant />
+      {/* Assistant: Anam avatar pre-selection, GIF voice circle after */}
+      <Assistant />
     </div>
   );
 }

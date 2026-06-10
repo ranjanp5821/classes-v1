@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import AuthModal from "../../components/AuthModal";
+import Assistant from "../../components/Assistant";
 import Footer from "../../components/Footer";
 import VoiceAssistant from "../../components/VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
@@ -325,6 +326,7 @@ export default function LearnPage() {
         }}
       />
 
+      <Assistant />
       <Footer />
       <VoiceAssistant />
     </div>
