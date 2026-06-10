@@ -36,11 +36,11 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "Platform", href: "#academic-system" },
-        { label: "Academic Intelligence", href: "#student-learning" },
-        { label: "Implementation", href: "#implementation" },
-        { label: "Trust & Governance", href: "#trust" },
-        { label: "Resources", href: "#faq" },
+        { label: "Platform", href: "/institutions/platform" },
+        { label: "Academic Intelligence", href: "/institutions/academic-intelligence" },
+        { label: "Implementation", href: "/institutions/implementation" },
+        { label: "Trust & Governance", href: "/institutions/trust-governance" },
+        { label: "Resources", href: "/institutions/resources" },
       ],
       primaryCta: "Request a Demo",
       secondaryCta: "Sign In",
@@ -125,10 +125,10 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "How It Helps", href: "#teaching-workflow" },
-        { label: "Plan & Create", href: "#planning" },
-        { label: "Assess & Support", href: "#assessment" },
-        { label: "Tutorials", href: "#faq" },
+        { label: "How It Helps", href: "/teachers/how-it-helps" },
+        { label: "Plan & Create", href: "/teachers/plan-and-create" },
+        { label: "Assess & Support", href: "/teachers/assess-and-support" },
+        { label: "Tutorials", href: "/teachers/tutorials" },
       ],
       primaryCta: "Start as a Teacher",
       secondaryCta: "Sign In",
