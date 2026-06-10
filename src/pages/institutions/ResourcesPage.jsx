@@ -1,23 +1,16 @@
-/**
- * ResourcesPage.jsx — /institutions/resources
- *
- * Searchable institutional resource hub organised by category. Each resource
- * card shows title, description, type, and a Download / Read / Watch CTA.
- * Indigo-themed to match the institution role accent.
- */
-
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronRight, Search, Download, FileText, Play } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import AuthModal from "../../components/AuthModal";
+import Footer from "../../components/Footer";
 import VoiceAssistant from "../../components/VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 import { RESOURCE_CATEGORIES } from "../../config/instituteModules";
 
-const ACCENT      = "#6366f1";
-const GRADIENT    = "linear-gradient(135deg, #6366f1, #818cf8)";
+const ACCENT       = "#6366f1";
+const GRADIENT     = "linear-gradient(135deg, #6366f1, #818cf8)";
 const ACCENT_LIGHT = "#eef2ff";
 
 const TYPE_COLORS = {
@@ -46,19 +39,19 @@ function ActionIcon({ action }) {
 function ResourceCard({ resource }) {
   const tc = TYPE_COLORS[resource.type] ?? TYPE_COLORS.PDF;
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-neutral-100 bg-white p-5 transition-shadow hover:shadow-md">
+    <div className="flex flex-col gap-3 rounded-2xl border border-line bg-page p-5 transition-shadow hover:shadow-card-hover">
       <div className="flex items-start justify-between gap-2">
         <span
-          className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide"
+          className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wide"
           style={{ background: tc.bg, color: tc.text }}
         >
           {resource.type}
         </span>
       </div>
-      <h4 className="text-[15px] font-semibold leading-snug text-neutral-900">
+      <h4 className="text-[15px] font-semibold leading-snug text-ink">
         {resource.title}
       </h4>
-      <p className="text-[13.5px] leading-relaxed text-neutral-500 flex-1">
+      <p className="flex-1 text-[13.5px] leading-relaxed text-ink-3">
         {resource.desc}
       </p>
       <div className="pt-1">
@@ -121,7 +114,7 @@ export default function ResourcesPage() {
   const authOpen = authModal !== null;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-page">
       <div
         className="transition-[filter] duration-200"
         style={authOpen ? { filter: "blur(4px)" } : undefined}
@@ -131,20 +124,20 @@ export default function ResourcesPage() {
 
         <main className="mx-auto max-w-5xl px-6 pb-24 pt-28 md:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[13px] text-neutral-400">
-            <button onClick={goHome} className="transition-colors hover:text-neutral-700">
+          <nav className="flex items-center gap-2 text-[13px] text-ink-4">
+            <button onClick={goHome} className="transition-colors hover:text-ink-2">
               Institution Home
             </button>
             <ChevronRight size={14} />
-            <span className="font-medium text-neutral-600">Resources</span>
+            <span className="font-medium text-ink-3">Resources</span>
           </nav>
 
           {/* Hero */}
           <motion.header {...fadeUp} className="mt-6 max-w-3xl">
-            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-5xl">
+            <h1 className="text-3xl font-serif font-medium leading-tight tracking-tight text-ink md:text-5xl">
               Everything you need to evaluate, adopt, and use Classess.com®.
             </h1>
-            <p className="mt-5 text-[17px] leading-relaxed text-neutral-600">
+            <p className="mt-5 text-[17px] leading-relaxed text-ink-3">
               Guides, templates, case studies, training materials, and platform resources — organised by audience and purpose.
             </p>
           </motion.header>
@@ -154,21 +147,21 @@ export default function ResourcesPage() {
             <div className="relative">
               <Search
                 size={16}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"
+                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-4"
               />
               <input
                 type="search"
                 placeholder="Search institution resources"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 py-3 pl-10 pr-4 text-[15px] text-neutral-800 placeholder-neutral-400 outline-none transition focus:border-[#6366f1] focus:ring-2 focus:ring-[#6366f120]"
+                className="w-full rounded-xl border border-line bg-paper py-3 pl-10 pr-4 text-[15px] text-ink outline-none transition placeholder:text-ink-4 focus:border-[#6366f1] focus:ring-2 focus:ring-[#6366f120]"
               />
             </div>
           </motion.div>
 
           {/* Resource categories */}
           {filteredCategories.length === 0 ? (
-            <motion.p {...fadeUp} className="mt-16 text-neutral-500 text-[15px]">
+            <motion.p {...fadeUp} className="mt-16 text-[15px] text-ink-3">
               No resources found for "{query}". Try a different search term.
             </motion.p>
           ) : (
@@ -179,7 +172,7 @@ export default function ResourcesPage() {
                 id={cat.id}
                 className="mt-16 scroll-mt-24"
               >
-                <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl mb-6">
+                <h2 className="mb-6 text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
                   {cat.label}
                 </h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -194,10 +187,10 @@ export default function ResourcesPage() {
           {/* Final CTA */}
           <motion.section
             {...fadeUp}
-            className="mt-20 overflow-hidden rounded-3xl border border-neutral-100 p-8 md:p-12"
+            className="mt-20 overflow-hidden rounded-3xl border border-line p-8 md:p-12"
             style={{ background: ACCENT_LIGHT }}
           >
-            <h2 className="max-w-2xl text-2xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-3xl">
+            <h2 className="max-w-2xl text-2xl font-serif font-medium leading-tight tracking-tight text-ink md:text-3xl">
               Ready to explore Classess.com® for your institution?
             </h2>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -211,7 +204,7 @@ export default function ResourcesPage() {
               </button>
               <button
                 onClick={goHome}
-                className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-6 py-3 text-[15px] font-semibold text-neutral-700 transition-colors hover:bg-neutral-50"
+                className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-page px-6 py-3 text-[15px] font-semibold text-ink-2 transition-colors hover:bg-paper"
               >
                 Back to Institution Home
               </button>
@@ -222,7 +215,7 @@ export default function ResourcesPage() {
           <div className="mt-12">
             <button
               onClick={goHome}
-              className="inline-flex items-center gap-2 text-[14px] font-medium text-neutral-500 transition-colors hover:text-neutral-800"
+              className="inline-flex items-center gap-2 text-[14px] font-medium text-ink-4 transition-colors hover:text-ink"
             >
               <ArrowLeft size={16} />
               Back to Institution Home
@@ -230,11 +223,6 @@ export default function ResourcesPage() {
           </div>
         </main>
 
-        <footer className="border-t border-neutral-100 bg-neutral-50 py-10 text-center">
-          <p className="text-[13px] font-medium text-neutral-400">
-            © 2026 Classess · Institution Platform · Academic Intelligence for Education
-          </p>
-        </footer>
       </div>
 
       <AuthModal
@@ -250,6 +238,7 @@ export default function ResourcesPage() {
         }}
       />
 
+      <Footer />
       <VoiceAssistant />
     </div>
   );

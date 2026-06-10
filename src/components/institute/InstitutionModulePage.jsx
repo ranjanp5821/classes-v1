@@ -1,23 +1,15 @@
-/**
- * InstitutionModulePage.jsx — Shared layout for the five institution dedicated pages.
- *
- * Driven by a content object from config/instituteModules.js. Indigo-themed to
- * match the institute role accent. Mirrors TeacherModulePage / StudentModulePage:
- * Navbar → breadcrumb → heading + intro → outcomes grid → content sections
- * → final CTA → back link → footer.
- */
-
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronRight, Sparkles } from "lucide-react";
 import Navbar from "../Navbar";
 import AuthModal from "../AuthModal";
+import Footer from "../Footer";
 import VoiceAssistant from "../VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 
-const ACCENT      = "#6366f1";
-const GRADIENT    = "linear-gradient(135deg, #6366f1, #818cf8)";
+const ACCENT       = "#6366f1";
+const GRADIENT     = "linear-gradient(135deg, #6366f1, #818cf8)";
 const ACCENT_LIGHT = "#eef2ff";
 
 const fadeUp = {
@@ -32,11 +24,11 @@ const fadeUp = {
 function FlowSection({ section }) {
   return (
     <motion.div {...fadeUp} id={section.id} className="mt-16 scroll-mt-24">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">
+      <h2 className="text-2xl md:text-3xl font-serif font-medium tracking-tight text-ink">
         {section.heading}
       </h2>
       {section.intro && (
-        <p className="mt-4 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+        <p className="mt-4 max-w-3xl text-[16px] leading-relaxed text-ink-3">
           {section.intro}
         </p>
       )}
@@ -50,13 +42,13 @@ function FlowSection({ section }) {
               {step}
             </span>
             {i < section.steps.length - 1 && (
-              <ChevronRight size={18} className="text-neutral-300" />
+              <ChevronRight size={18} className="text-line-2" />
             )}
           </div>
         ))}
       </div>
       {section.copy && (
-        <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+        <p className="mt-6 max-w-3xl text-[16px] leading-relaxed text-ink-3">
           {section.copy}
         </p>
       )}
@@ -67,11 +59,11 @@ function FlowSection({ section }) {
 function ListSection({ section }) {
   return (
     <motion.div {...fadeUp} id={section.id} className="mt-16 scroll-mt-24">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">
+      <h2 className="text-2xl md:text-3xl font-serif font-medium tracking-tight text-ink">
         {section.heading}
       </h2>
       {section.intro && (
-        <p className="mt-3 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+        <p className="mt-3 max-w-3xl text-[16px] leading-relaxed text-ink-3">
           {section.intro}
         </p>
       )}
@@ -79,13 +71,13 @@ function ListSection({ section }) {
         {section.items.map((item) => (
           <li
             key={item}
-            className="flex items-start gap-3 rounded-xl border border-neutral-100 bg-neutral-50 px-4 py-3"
+            className="flex items-start gap-3 rounded-xl border border-line bg-paper px-4 py-3"
           >
             <span
               className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
               style={{ background: ACCENT }}
             />
-            <span className="text-[15px] text-neutral-700">{item}</span>
+            <span className="text-[15px] text-ink-2">{item}</span>
           </li>
         ))}
       </ul>
@@ -96,11 +88,11 @@ function ListSection({ section }) {
 function HighlightSection({ section }) {
   return (
     <motion.div {...fadeUp} id={section.id} className="mt-16 scroll-mt-24">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900">
+      <h2 className="text-2xl md:text-3xl font-serif font-medium tracking-tight text-ink">
         {section.heading}
       </h2>
       <div
-        className="mt-6 rounded-2xl border border-neutral-100 p-6 md:p-8"
+        className="mt-6 rounded-2xl border border-line p-6 md:p-8"
         style={{ background: ACCENT_LIGHT }}
       >
         <p
@@ -111,7 +103,7 @@ function HighlightSection({ section }) {
           {section.text}
         </p>
         {section.copy && (
-          <p className="mt-4 max-w-3xl text-[16px] leading-relaxed text-neutral-600">
+          <p className="mt-4 max-w-3xl text-[16px] leading-relaxed text-ink-3">
             {section.copy}
           </p>
         )}
@@ -171,7 +163,7 @@ export default function InstitutionModulePage({ module }) {
   const authOpen = authModal !== null;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-page">
       <div
         className="transition-[filter] duration-200"
         style={authOpen ? { filter: "blur(4px)" } : undefined}
@@ -181,21 +173,21 @@ export default function InstitutionModulePage({ module }) {
 
         <main className="mx-auto max-w-5xl px-6 pb-24 pt-28 md:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[13px] text-neutral-400">
-            <button onClick={goHome} className="transition-colors hover:text-neutral-700">
+          <nav className="flex items-center gap-2 text-[13px] text-ink-4">
+            <button onClick={goHome} className="transition-colors hover:text-ink-2">
               Institution Home
             </button>
             <ChevronRight size={14} />
-            <span className="font-medium text-neutral-600">{module.navLabel}</span>
+            <span className="font-medium text-ink-3">{module.navLabel}</span>
           </nav>
 
           {/* Heading + intro */}
           <motion.header {...fadeUp} className="mt-6 max-w-3xl">
-            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-5xl">
+            <h1 className="text-3xl font-serif font-medium leading-tight tracking-tight text-ink md:text-5xl">
               {module.heading}
             </h1>
             {module.intro.map((p) => (
-              <p key={p} className="mt-5 text-[17px] leading-relaxed text-neutral-600">
+              <p key={p} className="mt-5 text-[17px] leading-relaxed text-ink-3">
                 {p}
               </p>
             ))}
@@ -203,17 +195,20 @@ export default function InstitutionModulePage({ module }) {
 
           {/* Institutional outcomes grid */}
           <motion.section {...fadeUp} className="mt-16">
-            <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              What you can expect
+            </p>
+            <h2 className="mt-2 text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
               What institutions can expect
             </h2>
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
               {module.outcomes.map((o) => (
                 <div
                   key={o.title}
-                  className="rounded-2xl border border-neutral-100 bg-neutral-50 p-6"
+                  className="rounded-2xl border border-line bg-paper p-6"
                 >
-                  <h3 className="text-[17px] font-semibold text-neutral-900">{o.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-neutral-600">{o.body}</p>
+                  <h3 className="text-[17px] font-semibold text-ink">{o.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-ink-3">{o.body}</p>
                 </div>
               ))}
             </div>
@@ -227,10 +222,10 @@ export default function InstitutionModulePage({ module }) {
           {/* Final CTA */}
           <motion.section
             {...fadeUp}
-            className="mt-20 overflow-hidden rounded-3xl border border-neutral-100 p-8 md:p-12"
+            className="mt-20 overflow-hidden rounded-3xl border border-line p-8 md:p-12"
             style={{ background: ACCENT_LIGHT }}
           >
-            <h2 className="max-w-2xl text-2xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-3xl">
+            <h2 className="max-w-2xl text-2xl font-serif font-medium leading-tight tracking-tight text-ink md:text-3xl">
               {module.final.heading}
             </h2>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -244,7 +239,7 @@ export default function InstitutionModulePage({ module }) {
               </button>
               <button
                 onClick={goHome}
-                className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-6 py-3 text-[15px] font-semibold text-neutral-700 transition-colors hover:bg-neutral-50"
+                className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-page px-6 py-3 text-[15px] font-semibold text-ink-2 transition-colors hover:bg-paper"
               >
                 {module.final.secondary}
               </button>
@@ -255,7 +250,7 @@ export default function InstitutionModulePage({ module }) {
           <div className="mt-12">
             <button
               onClick={goHome}
-              className="inline-flex items-center gap-2 text-[14px] font-medium text-neutral-500 transition-colors hover:text-neutral-800"
+              className="inline-flex items-center gap-2 text-[14px] font-medium text-ink-4 transition-colors hover:text-ink"
             >
               <ArrowLeft size={16} />
               Back to Institution Home
@@ -263,11 +258,6 @@ export default function InstitutionModulePage({ module }) {
           </div>
         </main>
 
-        <footer className="border-t border-neutral-100 bg-neutral-50 py-10 text-center">
-          <p className="text-[13px] font-medium text-neutral-400">
-            © 2026 Classess · Institution Platform · Academic Intelligence for Education
-          </p>
-        </footer>
       </div>
 
       <AuthModal
@@ -283,6 +273,7 @@ export default function InstitutionModulePage({ module }) {
         }}
       />
 
+      <Footer />
       <VoiceAssistant />
     </div>
   );

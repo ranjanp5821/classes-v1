@@ -1,24 +1,16 @@
-/**
- * TutorialsPage.jsx — /teachers/tutorials
- *
- * Searchable tutorial hub organised by category. Each tutorial card shows
- * title, description, duration, difficulty level, type (Video/Article), and
- * a Watch / Read CTA. Matches the green teacher theme and shares the same
- * page shell as the other teacher module pages.
- */
-
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronRight, Search, Play, FileText, Clock } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import AuthModal from "../../components/AuthModal";
+import Footer from "../../components/Footer";
 import VoiceAssistant from "../../components/VoiceAssistant";
 import { useRole } from "../../hooks/useRole";
 import { TUTORIAL_CATEGORIES } from "../../config/teacherModules";
 
-const ACCENT   = "#1CA363";
-const GRADIENT = "linear-gradient(135deg, #22C55E 0%, #1CA363 100%)";
+const ACCENT      = "#1CA363";
+const GRADIENT    = "linear-gradient(135deg, #22C55E 0%, #1CA363 100%)";
 const ACCENT_LIGHT = "#E8F7F0";
 
 const LEVEL_COLORS = {
@@ -39,31 +31,29 @@ function TutorialCard({ tutorial }) {
   const isVideo = tutorial.type === "Video";
 
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-neutral-100 bg-white p-5 transition-shadow hover:shadow-md">
+    <div className="flex flex-col gap-3 rounded-2xl border border-line bg-page p-5 transition-shadow hover:shadow-card-hover">
       <div className="flex items-start justify-between gap-2">
         <span
-          className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide"
+          className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wide"
           style={{ background: level.bg, color: level.text }}
         >
           {tutorial.level}
         </span>
-        <span
-          className="inline-flex items-center gap-1 text-[11px] font-medium uppercase tracking-wide text-neutral-400"
-        >
+        <span className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-wide text-ink-4">
           {isVideo ? <Play size={10} /> : <FileText size={10} />}
           {tutorial.type}
         </span>
       </div>
 
-      <h4 className="text-[15px] font-semibold leading-snug text-neutral-900">
+      <h4 className="text-[15px] font-semibold leading-snug text-ink">
         {tutorial.title}
       </h4>
-      <p className="text-[13.5px] leading-relaxed text-neutral-500 flex-1">
+      <p className="flex-1 text-[13.5px] leading-relaxed text-ink-3">
         {tutorial.desc}
       </p>
 
       <div className="flex items-center justify-between gap-2 pt-1">
-        <span className="flex items-center gap-1 text-[12px] text-neutral-400">
+        <span className="flex items-center gap-1 font-mono text-[12px] text-ink-4">
           <Clock size={12} />
           {tutorial.duration}
         </span>
@@ -129,7 +119,7 @@ export default function TutorialsPage() {
   const authOpen = authModal !== null;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-page">
       <div
         className="transition-[filter] duration-200"
         style={authOpen ? { filter: "blur(4px)" } : undefined}
@@ -139,20 +129,20 @@ export default function TutorialsPage() {
 
         <main className="mx-auto max-w-5xl px-6 pb-24 pt-28 md:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[13px] text-neutral-400">
-            <button onClick={goHome} className="transition-colors hover:text-neutral-700">
+          <nav className="flex items-center gap-2 text-[13px] text-ink-4">
+            <button onClick={goHome} className="transition-colors hover:text-ink-2">
               Teacher Home
             </button>
             <ChevronRight size={14} />
-            <span className="font-medium text-neutral-600">Tutorials</span>
+            <span className="font-medium text-ink-3">Tutorials</span>
           </nav>
 
           {/* Hero */}
           <motion.header {...fadeUp} className="mt-6 max-w-3xl">
-            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-5xl">
+            <h1 className="text-3xl font-serif font-medium leading-tight tracking-tight text-ink md:text-5xl">
               Learn Classess.com® one teaching task at a time.
             </h1>
-            <p className="mt-5 text-[17px] leading-relaxed text-neutral-600">
+            <p className="mt-5 text-[17px] leading-relaxed text-ink-3">
               Follow short, practical tutorials for planning lessons, creating resources, assessing students, providing feedback, reviewing insights, and supporting improvement.
             </p>
           </motion.header>
@@ -162,21 +152,21 @@ export default function TutorialsPage() {
             <div className="relative">
               <Search
                 size={16}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"
+                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-4"
               />
               <input
                 type="search"
                 placeholder="Search teacher tutorials"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full rounded-xl border border-neutral-200 bg-neutral-50 py-3 pl-10 pr-4 text-[15px] text-neutral-800 placeholder-neutral-400 outline-none focus:border-[#1CA363] focus:ring-2 focus:ring-[#1CA36320] transition"
+                className="w-full rounded-xl border border-line bg-paper py-3 pl-10 pr-4 text-[15px] text-ink outline-none transition placeholder:text-ink-4 focus:border-[#1CA363] focus:ring-2 focus:ring-[#1CA36320]"
               />
             </div>
           </motion.div>
 
           {/* Tutorial categories */}
           {filteredCategories.length === 0 ? (
-            <motion.p {...fadeUp} className="mt-16 text-neutral-500 text-[15px]">
+            <motion.p {...fadeUp} className="mt-16 text-[15px] text-ink-3">
               No tutorials found for "{query}". Try a different search term.
             </motion.p>
           ) : (
@@ -187,7 +177,7 @@ export default function TutorialsPage() {
                 id={cat.id}
                 className="mt-16 scroll-mt-24"
               >
-                <h2 className="text-2xl font-semibold tracking-tight text-neutral-900 md:text-3xl mb-6">
+                <h2 className="mb-6 text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
                   {cat.label}
                 </h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -202,10 +192,10 @@ export default function TutorialsPage() {
           {/* Final CTA */}
           <motion.section
             {...fadeUp}
-            className="mt-20 overflow-hidden rounded-3xl border border-neutral-100 p-8 md:p-12"
+            className="mt-20 overflow-hidden rounded-3xl border border-line p-8 md:p-12"
             style={{ background: ACCENT_LIGHT }}
           >
-            <h2 className="max-w-2xl text-2xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-3xl">
+            <h2 className="max-w-2xl text-2xl font-serif font-medium leading-tight tracking-tight text-ink md:text-3xl">
               Ready to put it into practice?
             </h2>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -219,7 +209,7 @@ export default function TutorialsPage() {
               </button>
               <button
                 onClick={goHome}
-                className="inline-flex items-center justify-center rounded-xl border border-neutral-300 bg-white px-6 py-3 text-[15px] font-semibold text-neutral-700 transition-colors hover:bg-neutral-50"
+                className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-page px-6 py-3 text-[15px] font-semibold text-ink-2 transition-colors hover:bg-paper"
               >
                 Back to Teacher Home
               </button>
@@ -230,7 +220,7 @@ export default function TutorialsPage() {
           <div className="mt-12">
             <button
               onClick={goHome}
-              className="inline-flex items-center gap-2 text-[14px] font-medium text-neutral-500 transition-colors hover:text-neutral-800"
+              className="inline-flex items-center gap-2 text-[14px] font-medium text-ink-4 transition-colors hover:text-ink"
             >
               <ArrowLeft size={16} />
               Back to Teacher Home
@@ -238,11 +228,6 @@ export default function TutorialsPage() {
           </div>
         </main>
 
-        <footer className="border-t border-neutral-100 bg-neutral-50 py-10 text-center">
-          <p className="text-[13px] font-medium text-neutral-400">
-            © 2026 Classess · Teacher Workspace · Built for Better Teaching
-          </p>
-        </footer>
       </div>
 
       <AuthModal
@@ -258,6 +243,7 @@ export default function TutorialsPage() {
         }}
       />
 
+      <Footer />
       <VoiceAssistant />
     </div>
   );
