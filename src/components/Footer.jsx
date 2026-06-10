@@ -165,7 +165,7 @@ const SOCIALS = [
 function FooterLink({ href, auth, onAuth, children }) {
   const navigate = useNavigate();
   const cls =
-    "text-[13.5px] leading-relaxed text-white/50 transition-colors hover:text-white text-left";
+    "text-[13.5px] leading-relaxed text-ink-3 transition-colors hover:text-ink text-left";
 
   if (auth && onAuth) {
     return (
@@ -191,21 +191,21 @@ function ColumnBlock({ heading, id, openSection, onToggle, children }) {
   return (
     <div>
       {/* Desktop label */}
-      <p className="hidden md:block font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/35 mb-4">
+      <p className="hidden md:block font-mono text-[10.5px] uppercase tracking-[0.22em] text-ink-4 mb-4">
         {heading}
       </p>
       {/* Mobile accordion toggle */}
       <button
-        className="md:hidden flex w-full items-center justify-between py-3.5 border-b border-white/[0.07] text-left"
+        className="md:hidden flex w-full items-center justify-between py-3.5 border-b border-line text-left"
         onClick={() => onToggle(id)}
         aria-expanded={isOpen}
       >
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-white/35">
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-ink-4">
           {heading}
         </span>
         <ChevronDown
           size={13}
-          className={`text-white/30 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`text-ink-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
       {/* Content — always visible desktop, toggled on mobile */}
@@ -240,25 +240,25 @@ export default function Footer() {
     <>
       {/* ── Footer shell (self-blurs when its own auth modal is open) ── */}
       <footer
-        className="bg-panel transition-[filter] duration-200"
+        className="bg-paper transition-[filter] duration-200"
         style={authOpen ? { filter: "blur(4px)" } : undefined}
         aria-label="Site footer"
       >
 
         {/* ── Intro band ──────────────────────────────────────────── */}
-        <div className="border-b border-white/[0.07] px-6 py-12 md:px-12 md:py-14">
+        <div className="border-b border-line px-6 py-12 md:px-12 md:py-14">
           <div className="mx-auto max-w-7xl">
             <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
 
               {/* Brand intro */}
               <div className="max-w-[340px]">
-                <p className="font-display text-[22px] font-semibold text-white">
+                <p className="font-display text-[22px] font-semibold text-ink">
                   Classess.com®
                 </p>
-                <p className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.2em] text-white/35">
+                <p className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.2em] text-ink-4">
                   Academic intelligence for every learner, teacher, and institution
                 </p>
-                <p className="mt-5 text-[14px] leading-[1.75] text-white/45">
+                <p className="mt-5 text-[14px] leading-[1.75] text-ink-3">
                   Classess.com® connects learning, teaching, assessment, student
                   support, and institutional intelligence in one responsible
                   AI-powered education ecosystem.
@@ -277,15 +277,15 @@ export default function Footer() {
                   </button>
                   <button
                     onClick={() => navigate("/")}
-                    className="inline-flex items-center justify-center rounded-xl border border-white/[0.18] px-5 py-2.5 text-[14px] font-medium text-white/65 transition-colors hover:border-white/35 hover:text-white"
+                    className="inline-flex items-center justify-center rounded-xl border border-line-2 px-5 py-2.5 text-[14px] font-medium text-ink-3 transition-colors hover:border-ink-4 hover:text-ink"
                   >
                     Contact Us
                   </button>
                 </div>
 
                 {/* Role switcher pill */}
-                <div className="flex items-center gap-0.5 rounded-xl border border-white/[0.08] bg-white/[0.04] p-1">
-                  <span className="select-none px-2.5 text-[11.5px] text-white/25">
+                <div className="flex items-center gap-0.5 rounded-xl border border-line bg-mist p-1">
+                  <span className="select-none px-2.5 text-[11.5px] text-ink-4">
                     Viewing as:
                   </span>
                   {["student", "teacher", "institute"].map((r) => (
@@ -294,8 +294,8 @@ export default function Footer() {
                       onClick={() => selectRole(r)}
                       className={`rounded-[9px] px-3 py-1.5 text-[12.5px] font-medium transition-all ${
                         role === r
-                          ? "bg-white text-panel shadow"
-                          : "text-white/45 hover:text-white/75"
+                          ? "bg-ink text-page shadow-sm"
+                          : "text-ink-4 hover:text-ink-2"
                       }`}
                     >
                       {r === "institute"
@@ -361,7 +361,7 @@ export default function Footer() {
               >
                 {ECOSYSTEM.map((group) => (
                   <div key={group.group}>
-                    <p className="mb-2 mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/25">
+                    <p className="mb-2 mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-4">
                       {group.group}
                     </p>
                     {group.items.map((item) => (
@@ -383,7 +383,7 @@ export default function Footer() {
                 {RESOURCES.map((l) => (
                   <FooterLink key={l}>{l}</FooterLink>
                 ))}
-                <p className="mb-1 mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/25">
+                <p className="mb-1 mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-4">
                   Support
                 </p>
                 {SUPPORT.map((l) => (
@@ -401,7 +401,7 @@ export default function Footer() {
                 {COMPANY.map((l) => (
                   <FooterLink key={l}>{l}</FooterLink>
                 ))}
-                <p className="mb-1 mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/25">
+                <p className="mb-1 mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-4">
                   Work With Us
                 </p>
                 {PARTNERSHIPS.map((l) => (
@@ -414,16 +414,16 @@ export default function Footer() {
         </div>
 
         {/* ── Trust & Governance band ──────────────────────────────── */}
-        <div className="border-t border-white/[0.07] bg-panel-2 px-6 py-8 md:px-12">
+        <div className="border-t border-line bg-mist px-6 py-8 md:px-12">
           <div className="mx-auto max-w-7xl">
-            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-white/25">
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-4">
               Trust, Safety &amp; Governance
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-3">
               {TRUST_LINKS.map((l) => (
                 <span
                   key={l}
-                  className="text-[12.5px] text-white/40 transition-colors hover:text-white cursor-pointer"
+                  className="text-[12.5px] text-ink-3 transition-colors hover:text-ink cursor-pointer"
                 >
                   {l}
                 </span>
@@ -433,15 +433,15 @@ export default function Footer() {
         </div>
 
         {/* ── Bottom bar ──────────────────────────────────────────── */}
-        <div className="border-t border-white/[0.05] bg-panel-2 px-6 py-6 md:px-12">
+        <div className="border-t border-line-2 bg-mist px-6 py-6 md:px-12">
           <div className="mx-auto max-w-7xl flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
 
             {/* Copyright + trademark */}
             <div className="flex flex-col gap-1">
-              <p className="text-[12px] text-white/30">
+              <p className="text-[12px] text-ink-4">
                 © {year} Dot eVentures Pvt. Ltd. All rights reserved.
               </p>
-              <p className="text-[11.5px] text-white/20">
+              <p className="text-[11.5px] text-ink-4">
                 Classess® and Classess.com® are registered trademarks of Dot eVentures Pvt. Ltd.
               </p>
             </div>
@@ -451,7 +451,7 @@ export default function Footer() {
               {LEGAL_BOTTOM.map((l) => (
                 <span
                   key={l}
-                  className="text-[12px] text-white/30 transition-colors hover:text-white/65 cursor-pointer"
+                  className="text-[12px] text-ink-4 transition-colors hover:text-ink-2 cursor-pointer"
                 >
                   {l}
                 </span>
@@ -465,7 +465,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={`Classess.com® on ${label}`}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.10] text-white/35 transition-colors hover:border-white/25 hover:text-white/70"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-line text-ink-4 transition-colors hover:border-ink-4 hover:text-ink-2"
                 >
                   <Icon size={14} />
                 </a>
