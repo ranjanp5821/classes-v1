@@ -125,10 +125,10 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "How It Helps", href: "#teaching-workflow" },
-        { label: "Plan & Create", href: "#planning" },
-        { label: "Assess & Support", href: "#assessment" },
-        { label: "Tutorials", href: "#faq" },
+        { label: "How It Helps", href: "/teachers/how-it-helps" },
+        { label: "Plan & Create", href: "/teachers/plan-and-create" },
+        { label: "Assess & Support", href: "/teachers/assess-and-support" },
+        { label: "Tutorials", href: "/teachers/tutorials" },
       ],
       primaryCta: "Start as a Teacher",
       secondaryCta: "Sign In",

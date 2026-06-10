@@ -24,6 +24,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Check, ChevronRight, ArrowRight, Plus, Minus,
@@ -158,6 +159,24 @@ function PrimaryButton({ children, onClick }) {
   );
 }
 
+function ReadMoreLink({ href, label, ariaLabel }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    const [path, hash] = href.split("#");
+    navigate(path + (hash ? `#${hash}` : ""), { replace: false });
+  };
+  return (
+    <button
+      onClick={handleClick}
+      className="inline-flex items-center gap-1 text-[13.5px] font-medium transition-colors hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+      style={{ color: ACCENT }}
+      aria-label={ariaLabel}
+    >
+      {label || "Read More"} <ArrowRight size={13} />
+    </button>
+  );
+}
+
 function SecondaryButton({ children, onClick }) {
   return (
     <button
@@ -220,6 +239,7 @@ function BenefitList({ items }) {
    SECTION 1 — Teacher Hero
    ════════════════════════════════════════════════════════════════════════════ */
 function HeroSection({ onOpenAuth }) {
+  const navigate = useNavigate();
   return (
     <section
       id="teacher-hero"
@@ -257,7 +277,7 @@ function HeroSection({ onOpenAuth }) {
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
               <PrimaryButton onClick={() => onOpenAuth?.("signin")}>Start as a Teacher <ArrowRight size={16} /></PrimaryButton>
-              <SecondaryButton>See How It Works</SecondaryButton>
+              <SecondaryButton onClick={() => navigate("/teachers/how-it-helps")} aria-label="Learn how Classess.com® helps teachers">See How It Works</SecondaryButton>
             </div>
             <p className="text-[13.5px] font-medium" style={{ color: "var(--ink-3)" }}>
               AI handles repetitive academic work while the teacher remains in control.
@@ -333,6 +353,12 @@ function WorkflowSection() {
           </FadeIn>
         ))}
       </div>
+      <FadeIn delay={0.1} className="mt-8 flex justify-center">
+        <ReadMoreLink
+          href="/teachers/how-it-helps#connected-teaching-journey"
+          ariaLabel="Read more about the connected teaching journey"
+        />
+      </FadeIn>
     </Section>
   );
 }
@@ -350,6 +376,7 @@ const PLANNING_TAB_CONTENT = {
 };
 
 function PlanningSection() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(PLANNING_TABS[0]);
 
   return (
@@ -377,8 +404,12 @@ function PlanningSection() {
           <HighlightLine>
             The platform prepares the first draft. The teacher shapes the final learning experience.
           </HighlightLine>
-          <div className="mt-8">
-            <PrimaryButton>Explore Planning Tools <ArrowRight size={16} /></PrimaryButton>
+          <div className="mt-8 flex flex-col gap-3">
+            <PrimaryButton onClick={() => navigate("/teachers/plan-and-create")}>Explore Planning Tools <ArrowRight size={16} /></PrimaryButton>
+            <ReadMoreLink
+              href="/teachers/plan-and-create"
+              ariaLabel="Read more about planning lessons and creating academic resources"
+            />
           </div>
         </FadeIn>
 
@@ -492,6 +523,12 @@ function ClassroomSection() {
               Completion tells you what was taught. Evidence tells you what was learned.
             </HighlightLine>
           </FadeIn>
+          <FadeIn delay={0.36} className="mt-4">
+            <ReadMoreLink
+              href="/teachers/assess-and-support#classroom-understanding"
+              ariaLabel="Read more about understanding student learning during class"
+            />
+          </FadeIn>
         </div>
       </div>
     </Section>
@@ -502,6 +539,7 @@ function ClassroomSection() {
    SECTION 5 — Assessment and Feedback
    ════════════════════════════════════════════════════════════════════════════ */
 function AssessmentSection() {
+  const navigate = useNavigate();
   return (
     <Section id="assessment">
       <div className="grid lg:grid-cols-2 gap-10 items-stretch">
@@ -556,8 +594,12 @@ function AssessmentSection() {
             </div>
 
             <HighlightLine>Classess.com® helps teachers measure the skills behind the marks.</HighlightLine>
-            <div className="mt-6">
-              <PrimaryButton>Explore Assessment and Feedback <ArrowRight size={16} /></PrimaryButton>
+            <div className="mt-6 flex flex-col gap-3">
+              <PrimaryButton onClick={() => navigate("/teachers/assess-and-support#assessment-and-feedback")}>Explore Assessment and Feedback <ArrowRight size={16} /></PrimaryButton>
+              <ReadMoreLink
+                href="/teachers/assess-and-support#assessment-and-feedback"
+                ariaLabel="Read more about assessment, evaluation, and student feedback"
+              />
             </div>
           </div>
         </FadeIn>
@@ -577,6 +619,7 @@ function AssessmentSection() {
    SECTION 6 — Student Insights and Intervention
    ════════════════════════════════════════════════════════════════════════════ */
 function InsightsSection() {
+  const navigate = useNavigate();
   return (
     <Section id="insights" alt>
       <FadeIn className="mb-10">
@@ -641,8 +684,12 @@ function InsightsSection() {
           </div>
 
           <HighlightLine>Every student should be seen, supported, and learning at their best.</HighlightLine>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-col gap-3">
             <PrimaryButton>View Sample Student Insights <ArrowRight size={16} /></PrimaryButton>
+            <ReadMoreLink
+              href="/teachers/assess-and-support#student-insights"
+              ariaLabel="Read more about student insights and academic intervention"
+            />
           </div>
         </FadeIn>
 
@@ -671,6 +718,7 @@ const AI_PRINCIPLES = [
 ];
 
 function AIControlSection() {
+  const navigate = useNavigate();
   return (
     <Section id="ai-control">
       <div className="grid lg:grid-cols-2 gap-14 items-start">
@@ -694,8 +742,12 @@ function AIControlSection() {
           <HighlightLine>
             Helping teachers do what they do best—while AI and technology do the rest.
           </HighlightLine>
-          <div className="mt-8">
-            <PrimaryButton>See Responsible AI in Action <ArrowRight size={16} /></PrimaryButton>
+          <div className="mt-8 flex flex-col gap-3">
+            <PrimaryButton onClick={() => navigate("/teachers/how-it-helps#teacher-controlled-ai")}>See Responsible AI in Action <ArrowRight size={16} /></PrimaryButton>
+            <ReadMoreLink
+              href="/teachers/how-it-helps#teacher-controlled-ai"
+              ariaLabel="Read more about teacher-controlled artificial intelligence"
+            />
           </div>
         </FadeIn>
 
@@ -714,6 +766,7 @@ function AIControlSection() {
    SECTION 8 — Final Call to Action
    ════════════════════════════════════════════════════════════════════════════ */
 function FinalCTASection({ onOpenAuth }) {
+  const navigate = useNavigate();
   return (
     <section
       id="get-started"
@@ -744,6 +797,7 @@ function FinalCTASection({ onOpenAuth }) {
               Start as a Teacher <ArrowRight size={16} />
             </button>
             <button
+              onClick={() => navigate("/teachers/tutorials#getting-started")}
               className="inline-flex items-center gap-2 px-7 py-[11px] rounded-[8px] font-medium text-[14px] text-white transition-all duration-200 hover:bg-white/10 active:scale-95"
               style={{ border: "1px solid rgba(255,255,255,0.4)" }}
             >
