@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useRole } from "../hooks/useRole";
@@ -30,8 +31,14 @@ export default function Navbar({ onOpenAuth }) {
   const [activeSection, setActiveSection] = useState(null);
 
   const { activeRoleConfig, clearRole } = useRole();
-  // Any selected role drives anchor-based section nav (links point to #ids).
+  const navigate = useNavigate();
+  const location = useLocation();
+  // Any selected role drives section nav. Links are either route paths
+  // ("/students/learn") or in-page anchors ("#concepts").
   const hasRoleNav = !!activeRoleConfig;
+
+  // A link is "route" navigation if its href is a real path, else anchor scroll.
+  const isRouteLink = (href) => !!href && href.startsWith("/");
 
   /* ── scroll shadow ─────────────────────────────────────────── */
   useEffect(() => {
@@ -72,26 +79,46 @@ export default function Navbar({ onOpenAuth }) {
   const accent = activeRoleConfig?.accent;
   const gradient = activeRoleConfig?.accentGradient;
 
-  /* ── which label matches activeSection ─────────────────────── */
+  /* ── which label matches the current section / route ───────── */
   const activeLinkLabel = hasRoleNav
     ? links.find((l) => l.href === `#${activeSection}`)?.label ?? null
     : null;
 
+  // Active state: route links match the current path; anchor links match the
+  // section currently scrolled into view.
+  const isLinkActive = (link) =>
+    isRouteLink(link.href)
+      ? location.pathname === link.href
+      : activeLinkLabel === link.label;
+
   /* ── link click handler ─────────────────────────────────────── */
   const handleLinkClick = (e, link) => {
-    if (hasRoleNav && link.href && link.href !== "#") {
+    if (!link.href || link.href === "#") return;
+    if (isRouteLink(link.href)) {
+      e.preventDefault();
+      navigate(link.href);
+      window.scrollTo({ top: 0 });
+      setMenuOpen(false);
+      return;
+    }
+    if (hasRoleNav) {
       e.preventDefault();
       scrollToSection(link.href);
       setMenuOpen(false);
     }
   };
 
-  /* ── primary CTA click: jump to first section ──────────────── */
+  /* ── primary CTA click: go to the first nav destination ────── */
   const firstSectionHref = links.find((l) => l.href && l.href !== "#")?.href ?? "#";
   const handleCtaClick = (e) => {
     if (hasRoleNav && firstSectionHref !== "#") {
       e.preventDefault();
-      scrollToSection(firstSectionHref);
+      if (isRouteLink(firstSectionHref)) {
+        navigate(firstSectionHref);
+        window.scrollTo({ top: 0 });
+      } else {
+        scrollToSection(firstSectionHref);
+      }
       setMenuOpen(false);
       return;
     }
@@ -113,12 +140,11 @@ export default function Navbar({ onOpenAuth }) {
 
   /* ── logo click: reset to the default Navbar + Hero ────────── */
   const handleLogoClick = (e) => {
-    if (hasRoleNav) {
-      e.preventDefault();
-      clearRole();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setMenuOpen(false);
-    }
+    e.preventDefault();
+    clearRole();
+    if (location.pathname !== "/") navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setMenuOpen(false);
   };
 
   return (
@@ -145,7 +171,7 @@ export default function Navbar({ onOpenAuth }) {
         {/* Desktop Nav */}
         <ul className="hidden md:flex items-center gap-0.5">
           {links.map((link) => {
-            const isActive = activeLinkLabel === link.label;
+            const isActive = isLinkActive(link);
             return (
               <li key={link.label}>
                 <a
@@ -230,7 +256,7 @@ export default function Navbar({ onOpenAuth }) {
             style={{ background: "var(--page)", borderTop: "1px solid var(--line)" }}
           >
             {links.map((link) => {
-              const isActive = activeLinkLabel === link.label;
+              const isActive = isLinkActive(link);
               return (
                 <a
                   key={link.label}

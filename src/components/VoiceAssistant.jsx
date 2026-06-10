@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { createClient } from "@anam-ai/js-sdk";
-import { Mic, MicOff, Phone, Loader2, X } from "lucide-react";
+import { Mic, MicOff, Phone, Loader2, X, ChevronDown } from "lucide-react";
 import { useRole } from "../hooks/useRole";
 
 const VIDEO_ID = "anam-avatar-video";
@@ -633,6 +633,23 @@ export default function VoiceAssistant() {
   );
   const { activeRoleId, selectRole } = useRole();
 
+  // ── "App mode" (mobile / small screens) ───────────────────────────────────
+  // On phones the full 220px avatar panel takes up too much room, so Vidya
+  // starts collapsed into a small floating button. Tapping it reveals the full
+  // widget; a minimize control collapses it back. On desktop she's always full.
+  const MOBILE_QUERY = "(max-width: 767px)";
+  const [isMobile,  setIsMobile]  = useState(
+    () => typeof window !== "undefined" && window.matchMedia(MOBILE_QUERY).matches
+  );
+  const [collapsed, setCollapsed] = useState(isMobile);
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const apply = () => { setIsMobile(mq.matches); setCollapsed(mq.matches); };
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
   const clientRef        = useRef(null);
   const lastUserMsgRef   = useRef(null);
   const greetingRef      = useRef(null);      // first line Vidya speaks once live
@@ -1048,6 +1065,50 @@ export default function VoiceAssistant() {
   const isIdle = status === "idle";
   const t      = STRINGS[language];
 
+  // ── Collapsed (app-mode) launcher ─────────────────────────────────────────
+  // Only collapse while idle — once a session is connecting/live we always show
+  // the full widget so the controls (and the SDK video element) are present.
+  const showButton = collapsed && isIdle;
+  if (showButton) {
+    return (
+      <motion.button
+        type="button"
+        onClick={() => setCollapsed(false)}
+        aria-label={t.talkToVidya}
+        className="fixed bottom-6 right-6 z-[90] flex h-16 w-16 items-center justify-center overflow-hidden rounded-full shadow-xl ring-2 ring-white/40 cursor-pointer"
+        initial={{ opacity: 0, scale: 0.6 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {/* Idle avatar thumbnail (falls back to a brand gradient) */}
+        {idleMedia?.videoUrl ? (
+          <video
+            src={idleMedia.videoUrl}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover"
+          />
+        ) : idleMedia?.imageUrl ? (
+          <img src={idleMedia.imageUrl} alt="Vidya" className="h-full w-full object-cover" />
+        ) : (
+          <div
+            className="h-full w-full"
+            style={{
+              background: "linear-gradient(160deg, #1e1b4b 0%, #312e81 40%, #0f172a 100%)",
+            }}
+          />
+        )}
+
+        {/* Mic badge — signals it's a tap-to-talk launcher */}
+        <span className="absolute bottom-1 right-1 flex h-5 w-5 items-center justify-center rounded-full bg-black/55 backdrop-blur-sm ring-1 ring-white/40">
+          <Mic size={11} className="text-white" />
+        </span>
+      </motion.button>
+    );
+  }
+
   return (
     <motion.div
       className={`fixed bottom-6 right-6 z-[90] w-[220px] overflow-hidden rounded-2xl ${
@@ -1079,6 +1140,17 @@ export default function VoiceAssistant() {
         >
           {language === "en" ? "EN" : "हिं"}
         </button>
+
+        {/* ── Minimize back to the launcher button (app mode only) ── */}
+        {isIdle && isMobile && (
+          <button
+            onClick={(e) => { e.stopPropagation(); setCollapsed(true); }}
+            aria-label="Minimize"
+            className="absolute left-2.5 top-2.5 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-colors hover:bg-black/60"
+          >
+            <ChevronDown size={15} />
+          </button>
+        )}
 
         {/* ── Idle: looping avatar video ── */}
         {isIdle && (
