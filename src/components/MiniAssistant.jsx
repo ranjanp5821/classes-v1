@@ -27,7 +27,7 @@ const STRINGS = {
   hi: { tap: "बात करने के लिए टैप करें", listening: "सुन रही हूँ…", thinking: "सोच रही हूँ…", speaking: "बोल रही हूँ…" },
 };
 
-export default function MiniAssistant() {
+export default function MiniAssistant({ autoStart = false }) {
   // idle | listening | thinking | talking
   const [state, setState] = useState("idle");
   const [lang] = useState(
@@ -37,6 +37,11 @@ export default function MiniAssistant() {
   const recRef    = useRef(null);
   const audioRef  = useRef(null);
   const talkTimer = useRef(null);
+  const autoTimer = useRef(null);
+  // Hands-free loop is enabled only if Vidya was used (autoStart). Otherwise the
+  // user must tap to start; the first tap then enables the loop.
+  const autoRef   = useRef(autoStart);
+  const mountedRef = useRef(true);
   const stateRef  = useRef(state);
   useEffect(() => { stateRef.current = state; }, [state]);
 
@@ -48,7 +53,6 @@ export default function MiniAssistant() {
      audio/TTS ending only finishes it early (after it has actually played). */
   const speak = (text, audioUrl) => {
     setState("talking");
-    const startedAt = Date.now();
     // ~60ms/char, clamped to a sensible 1.8s–12s window.
     const estMs = Math.min(12000, Math.max(1800, (text?.length || 24) * 60));
 
@@ -58,9 +62,13 @@ export default function MiniAssistant() {
       finished = true;
       clearTimeout(talkTimer.current);
       setState("idle");
+      autoListen(); // hands-free: listen again after each reply
     };
-    // Only let a real end event finish early once it has played a moment.
-    const maybeFinish = () => { if (Date.now() - startedAt > 600) finish(); };
+    // Only let a real audio/TTS 'end' finish early once it has actually played
+    // for a moment (guards against an instant/empty end event).
+    let canEarlyFinish = false;
+    const playGuard = setTimeout(() => { canEarlyFinish = true; }, 600);
+    const maybeFinish = () => { if (canEarlyFinish) { clearTimeout(playGuard); finish(); } };
 
     clearTimeout(talkTimer.current);
     talkTimer.current = setTimeout(finish, estMs);
@@ -122,8 +130,21 @@ export default function MiniAssistant() {
     try { rec.start(); } catch { setState("idle"); }
   };
 
+  // Resume listening shortly after a reply (or on mount), unless the user
+  // tapped to stop. This keeps the conversation hands-free — no click needed.
+  const autoListen = () => {
+    clearTimeout(autoTimer.current);
+    if (!autoRef.current) return;
+    autoTimer.current = setTimeout(() => {
+      if (autoRef.current && mountedRef.current && stateRef.current === "idle") {
+        startListening();
+      }
+    }, 500);
+  };
+
   const stopAll = () => {
     clearTimeout(talkTimer.current);
+    clearTimeout(autoTimer.current);
     try { recRef.current?.stop(); } catch { /* noop */ }
     try { window.speechSynthesis?.cancel(); } catch { /* noop */ }
     try { audioRef.current?.pause(); } catch { /* noop */ }
@@ -132,12 +153,31 @@ export default function MiniAssistant() {
   };
 
   const handleTap = () => {
-    if (state === "idle") startListening();
-    else stopAll(); // tap again to cancel listening / interrupt speaking
+    if (state === "idle") {
+      autoRef.current = true;     // re-enable hands-free
+      startListening();
+    } else {
+      autoRef.current = false;    // user wants quiet — stop the loop
+      stopAll();
+    }
   };
 
-  // Cleanup on unmount.
-  useEffect(() => () => stopAll(), []);
+  // Auto-start when the circle takes over from Anam — but ONLY if the visitor
+  // actually used Vidya. Otherwise it stays idle until the user taps.
+  useEffect(() => {
+    mountedRef.current = true;
+    let id;
+    if (autoStart) {
+      id = setTimeout(() => {
+        if (mountedRef.current && autoRef.current) startListening();
+      }, 700);
+    }
+    return () => {
+      mountedRef.current = false;
+      clearTimeout(id);
+      stopAll();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isTalking = state === "talking";
   const label =

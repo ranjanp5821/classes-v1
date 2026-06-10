@@ -623,7 +623,7 @@ function extractName(text) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function VoiceAssistant() {
+export default function VoiceAssistant({ onStarted } = {}) {
   const [status,    setStatus]    = useState("idle"); // idle | connecting | live | error
   const [muted,     setMuted]     = useState(false);
   const [error,     setError]     = useState(null);
@@ -842,6 +842,7 @@ export default function VoiceAssistant() {
 
   const start = async (langOverride) => {
     if (status === "connecting" || status === "live") return;
+    onStarted?.(); // mark that the visitor actually used Vidya (for hand-off auto-start)
 
     // Greet (and load the voice) in the language the user woke Vidya with;
     // fall back to the toggle when started by a tap. `langOverride` is only a
