@@ -31,7 +31,7 @@ import {
 } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import AuthModal from "../../components/AuthModal";
-import VoiceAssistant from "../../components/VoiceAssistant";
+import Assistant from "../../components/Assistant";
 import { useRole } from "../../hooks/useRole";
 
 const ACCENT = "#2563EB";
@@ -341,7 +341,7 @@ export default function LearnPage() {
         }}
       />
 
-      <VoiceAssistant />
+      <Assistant />
     </div>
   );
 }

@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, ChevronRight, Sparkles } from "lucide-react";
 import Navbar from "../Navbar";
 import AuthModal from "../AuthModal";
-import VoiceAssistant from "../VoiceAssistant";
+import Assistant from "../Assistant";
 import { useRole } from "../../hooks/useRole";
 
 const ACCENT = "#2563EB";
@@ -308,7 +308,7 @@ export default function StudentModulePage({ module }) {
         }}
       />
 
-      <VoiceAssistant />
+      <Assistant />
     </div>
   );
 }
