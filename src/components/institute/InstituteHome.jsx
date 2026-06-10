@@ -26,6 +26,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Check, ChevronRight, ArrowRight, Plus, Minus,
@@ -218,6 +219,24 @@ function BenefitList({ items }) {
   );
 }
 
+function ReadMoreLink({ href, label, ariaLabel }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    const [path, hash] = href.split("#");
+    navigate(path + (hash ? `#${hash}` : ""), { replace: false });
+  };
+  return (
+    <button
+      onClick={handleClick}
+      className="inline-flex items-center gap-1 text-[13.5px] font-medium transition-colors hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+      style={{ color: ACCENT }}
+      aria-label={ariaLabel}
+    >
+      {label || "Read More"} <ArrowRight size={13} />
+    </button>
+  );
+}
+
 function JourneyPills({ steps }) {
   return (
     <div className="flex flex-wrap justify-center items-center gap-2">
@@ -327,6 +346,7 @@ const ORG_TYPES = [
    SECTION 1 — Institution Hero
    ════════════════════════════════════════════════════════════════════════════ */
 function HeroSection() {
+  const navigate = useNavigate();
   return (
     <section
       id="institution-hero"
@@ -364,7 +384,7 @@ function HeroSection() {
             </Lead>
             <div className="flex flex-wrap gap-3 mb-8">
               <PrimaryButton>Request a Demo <ArrowRight size={16} /></PrimaryButton>
-              <SecondaryButton>Explore the Platform</SecondaryButton>
+              <SecondaryButton onClick={() => navigate("/institutions/platform")} aria-label="Explore the Classess.com® platform for institutions">Explore the Platform</SecondaryButton>
             </div>
             <p className="text-[13.5px] font-medium" style={{ color: "var(--ink-3)" }}>
               From academic activity to academic intelligence.
@@ -513,6 +533,13 @@ function ConnectedSystemSection() {
           Most platforms store academic information. Classess.com® helps institutions understand how that information is connected.
         </HighlightLine>
       </FadeIn>
+      <FadeIn delay={0.28} className="mt-6 flex justify-center">
+        <ReadMoreLink
+          href="/institutions/platform"
+          label="Read More About the Platform"
+          ariaLabel="Read more about the Classess.com® connected academic platform"
+        />
+      </FadeIn>
     </Section>
   );
 }
@@ -521,6 +548,7 @@ function ConnectedSystemSection() {
    SECTION 4 — Teacher Capacity and Academic Consistency
    ════════════════════════════════════════════════════════════════════════════ */
 function TeacherCapacitySection() {
+  const navigate = useNavigate();
   return (
     <Section id="teacher-capacity" alt>
       <div className="grid lg:grid-cols-2 gap-10 items-stretch">
@@ -550,8 +578,13 @@ function TeacherCapacitySection() {
             AI-supported content remains reviewable and editable. Teachers maintain professional judgement and approval before material reaches students.
           </Lead>
           <HighlightLine>Better systems should support teachers—not control them.</HighlightLine>
-          <div className="mt-6">
-            <PrimaryButton>Explore Teacher Enablement <ArrowRight size={16} /></PrimaryButton>
+          <div className="mt-6 flex flex-col gap-3">
+            <PrimaryButton onClick={() => navigate("/institutions/platform")}>Explore the Platform <ArrowRight size={16} /></PrimaryButton>
+            <ReadMoreLink
+              href="/institutions/platform"
+              label="Explore the Platform"
+              ariaLabel="Explore how Classess.com® supports teacher enablement and academic consistency"
+            />
           </div>
         </FadeIn>
 
@@ -582,6 +615,7 @@ const INSIGHT_AREAS = [
 const INTERVENTION_JOURNEY = ["Identify", "Understand", "Assign Support", "Monitor", "Reassess", "Improve"];
 
 function StudentLearningSection() {
+  const navigate = useNavigate();
   return (
     <Section id="student-learning">
       <FadeIn className="mb-10">
@@ -629,8 +663,13 @@ function StudentLearningSection() {
           <JourneyPills steps={INTERVENTION_JOURNEY} />
         </div>
         <HighlightLine>Leave no learner behind.</HighlightLine>
-        <div className="mt-6">
-          <PrimaryButton>Explore Student Support <ArrowRight size={16} /></PrimaryButton>
+        <div className="mt-6 flex flex-col gap-3">
+          <PrimaryButton onClick={() => navigate("/institutions/academic-intelligence")}>Explore Student Support <ArrowRight size={16} /></PrimaryButton>
+          <ReadMoreLink
+            href="/institutions/academic-intelligence"
+            label="Read More About Academic Intelligence"
+            ariaLabel="Read more about student learning visibility and intervention through academic intelligence"
+          />
         </div>
       </FadeIn>
     </Section>
@@ -641,6 +680,7 @@ function StudentLearningSection() {
    SECTION 6 — Outcomes for Different Institution Types
    ════════════════════════════════════════════════════════════════════════════ */
 function OutcomesSection({ selectedType }) {
+  const navigate = useNavigate();
   const active = ORG_TYPES.find((t) => t.id === selectedType) ?? ORG_TYPES[0];
   const { outcomes } = active;
 
@@ -684,10 +724,15 @@ function OutcomesSection({ selectedType }) {
           </motion.div>
         </AnimatePresence>
 
-        <FadeIn delay={0.1} className="h-full">
+        <FadeIn delay={0.1} className="h-full flex flex-col gap-4">
           <MediaPlaceholder
             mediaId="INSTITUTION-HOME-M06"
             description="Dynamic leadership dashboard demonstration — changes according to selected organisation type: independent campus, education group, NGO/CSR programme, or district system overview."
+          />
+          <ReadMoreLink
+            href="/institutions/academic-intelligence"
+            label="Explore Academic Intelligence"
+            ariaLabel="Explore academic intelligence and leadership visibility for institutions"
           />
         </FadeIn>
       </div>
@@ -713,6 +758,7 @@ const INTEGRATION_AREAS = [
 const IMPLEMENTATION_JOURNEY = ["Discover", "Configure", "Integrate", "Train", "Launch", "Review", "Scale"];
 
 function IntegrationSection() {
+  const navigate = useNavigate();
   return (
     <Section id="implementation">
       <FadeIn className="mb-10">
@@ -759,8 +805,13 @@ function IntegrationSection() {
             <JourneyPills steps={IMPLEMENTATION_JOURNEY} />
           </div>
           <HighlightLine>Built for real institutions—not perfect systems.</HighlightLine>
-          <div className="mt-6">
-            <PrimaryButton>Explore Implementation <ArrowRight size={16} /></PrimaryButton>
+          <div className="mt-6 flex flex-col gap-3">
+            <PrimaryButton onClick={() => navigate("/institutions/implementation")}>Explore Implementation <ArrowRight size={16} /></PrimaryButton>
+            <ReadMoreLink
+              href="/institutions/implementation"
+              label="Read More About Implementation"
+              ariaLabel="Read more about how to implement Classess.com® in your institution"
+            />
           </div>
         </FadeIn>
       </div>
@@ -791,6 +842,7 @@ const GOVERNANCE_PRINCIPLES = [
 ];
 
 function TrustSection() {
+  const navigate = useNavigate();
   return (
     <Section id="trust" alt>
       <div className="grid lg:grid-cols-2 gap-10 items-stretch">
@@ -812,8 +864,13 @@ function TrustSection() {
           </Lead>
 
           <HighlightLine>Trust is not a separate feature. It is part of the platform architecture.</HighlightLine>
-          <div className="mt-6">
-            <PrimaryButton>Explore Trust & Governance <ArrowRight size={16} /></PrimaryButton>
+          <div className="mt-6 flex flex-col gap-3">
+            <PrimaryButton onClick={() => navigate("/institutions/trust-governance")}>Explore Trust &amp; Governance <ArrowRight size={16} /></PrimaryButton>
+            <ReadMoreLink
+              href="/institutions/trust-governance"
+              label="Read More About Trust & Governance"
+              ariaLabel="Read more about trust, privacy, and governance for institutions"
+            />
           </div>
         </FadeIn>
 
@@ -934,6 +991,7 @@ function FAQItem({ question, answer }) {
 }
 
 function FAQSection() {
+  const navigate = useNavigate();
   const [showMore, setShowMore] = useState(false);
 
   return (
@@ -977,6 +1035,13 @@ function FAQSection() {
           <SecondaryButton onClick={() => setShowMore((v) => !v)}>
             {showMore ? "View Fewer Questions" : "View More Questions"}
           </SecondaryButton>
+        </div>
+        <div className="mt-8 text-center">
+          <ReadMoreLink
+            href="/institutions/resources"
+            label="Explore Resources"
+            ariaLabel="Explore guides, case studies, and resources for institutions"
+          />
         </div>
       </FadeIn>
     </Section>

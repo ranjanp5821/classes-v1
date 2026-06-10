@@ -36,11 +36,11 @@ export const ROLES_CONFIG = {
 
     navbar: {
       links: [
-        { label: "Platform", href: "#academic-system" },
-        { label: "Academic Intelligence", href: "#student-learning" },
-        { label: "Implementation", href: "#implementation" },
-        { label: "Trust & Governance", href: "#trust" },
-        { label: "Resources", href: "#faq" },
+        { label: "Platform", href: "/institutions/platform" },
+        { label: "Academic Intelligence", href: "/institutions/academic-intelligence" },
+        { label: "Implementation", href: "/institutions/implementation" },
+        { label: "Trust & Governance", href: "/institutions/trust-governance" },
+        { label: "Resources", href: "/institutions/resources" },
       ],
       primaryCta: "Request a Demo",
       secondaryCta: "Sign In",
