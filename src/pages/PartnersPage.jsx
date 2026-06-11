@@ -474,7 +474,7 @@ export default function PartnersPage() {
 
             <motion.div {...fadeUp} className="mt-6">
               <button
-                onClick={openSignup}
+                onClick={scrollToApply}
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ background: GRADIENT }}
               >
@@ -550,7 +550,7 @@ export default function PartnersPage() {
 
             <motion.div {...fadeUp} className="mt-6">
               <button
-                onClick={openSignup}
+                onClick={scrollToApply}
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ background: "linear-gradient(135deg, #7c3aed, #9333ea)" }}
               >
@@ -629,7 +629,7 @@ export default function PartnersPage() {
 
             <motion.div {...fadeUp} className="mt-6">
               <button
-                onClick={openSignup}
+                onClick={scrollToApply}
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ background: "linear-gradient(135deg, #0369a1, #1d4ed8)" }}
               >
@@ -695,7 +695,7 @@ export default function PartnersPage() {
 
             <motion.div {...fadeUp} className="mt-6 flex flex-col gap-3 sm:flex-row">
               <button
-                onClick={openSignup}
+                onClick={scrollToApply}
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ background: "linear-gradient(135deg, #b45309, #d97706)" }}
               >
@@ -798,7 +798,7 @@ export default function PartnersPage() {
 
             <motion.div {...fadeUp} className="mt-8">
               <button
-                onClick={openSignup}
+                onClick={scrollToApply}
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
                 style={{ background: "linear-gradient(135deg, #b45309, #d97706)" }}
               >
@@ -993,7 +993,7 @@ export default function PartnersPage() {
               </p>
               <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <button
-                  onClick={openSignup}
+                  onClick={scrollToApply}
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-[15px] font-semibold transition-transform hover:scale-[1.02]"
                   style={{ color: ACCENT }}
                 >
