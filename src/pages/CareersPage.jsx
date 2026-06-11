@@ -199,7 +199,7 @@ const WORK_INFO = [
 const FAQS_VISIBLE = [
   {
     q: "Can I apply if there is no suitable opening?",
-    a: "Yes. You can submit your profile under "Future Opportunity." The recruitment team may review it when a relevant role becomes available.",
+    a: "Yes. You can submit your profile under \"Future Opportunity.\" The recruitment team may review it when a relevant role becomes available.",
   },
   {
     q: "Are internships full-time?",
@@ -376,7 +376,10 @@ export default function CareersPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                Why we work here
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Work on problems that matter.
               </h2>
               <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
@@ -465,7 +468,10 @@ export default function CareersPage() {
         <section className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                How we work
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Ownership matters more than job titles.
               </h2>
               <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
@@ -533,7 +539,10 @@ export default function CareersPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                Career areas
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Find where you can contribute.
               </h2>
             </motion.div>
@@ -615,7 +624,10 @@ export default function CareersPage() {
         <section ref={internshipRef} className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                Internships and early careers
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Begin with real work — not simulated experience.
               </h2>
               <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
@@ -738,7 +750,10 @@ export default function CareersPage() {
         <section ref={openingsRef} className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                Open roles
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Current opportunities
               </h2>
               <p className="mt-4 text-[16px] leading-relaxed text-ink-3">
@@ -792,7 +807,10 @@ export default function CareersPage() {
         <section className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                Hiring process
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 A clear and practical hiring process.
               </h2>
             </motion.div>
@@ -860,7 +878,10 @@ export default function CareersPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                Working at Classess®
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 What candidates should know.
               </h2>
             </motion.div>
@@ -898,7 +919,10 @@ export default function CareersPage() {
         <section ref={applyRef} className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                Apply now
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Ready to contribute?
               </h2>
               <p className="mt-4 text-[16px] leading-relaxed text-ink-3">
@@ -1126,7 +1150,10 @@ export default function CareersPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#2563eb" }}>
+                Questions
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Frequently Asked Questions
               </h2>
             </motion.div>
@@ -1168,7 +1195,10 @@ export default function CareersPage() {
                 <Network size={280} color="#fff" />
               </div>
 
-              <h2 className="relative mx-auto max-w-2xl text-3xl font-serif font-medium leading-tight tracking-tight text-white md:text-4xl">
+              <p className="relative font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#93c5fd" }}>
+                Join the team
+              </p>
+              <h2 className="relative mx-auto mt-3 max-w-2xl text-3xl font-serif font-medium leading-tight tracking-tight text-white md:text-4xl">
                 Build something that can improve how people learn and teach.
               </h2>
               <p className="relative mx-auto mt-4 max-w-xl text-[16px] leading-relaxed text-white/80">
