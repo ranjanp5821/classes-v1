@@ -1,155 +1,111 @@
-/**
- * Footer.jsx — Global Dynamic Footer
- *
- * Adapts Column 1 and the primary CTA to the active role (student / teacher /
- * institution). Contains its own AuthModal so it can be placed outside each
- * page's blur wrapper. Dark-panel themed, fully brand-kit-aligned.
- *
- * Structure:
- *   Intro band  →  6 link columns (accordion on mobile)
- *   →  Trust & governance band  →  Bottom legal bar
- */
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
-/* ── Inline social SVGs (brand icons not in this lucide-react version) ── */
+/* ── Inline social SVGs ── */
 const LinkedInIcon  = () => <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>;
 const YouTubeIcon   = () => <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>;
 const InstagramIcon = () => <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>;
 const FacebookIcon  = () => <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>;
-const XIcon         = () => <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.629 5.905-5.629zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>;
+
 import AuthModal from "./AuthModal";
 import { useRole } from "../hooks/useRole";
 
-/* ── Role-specific data ─────────────────────────────────────────── */
-
+/* ── Role gradients ── */
 const ROLE_GRADIENT = {
   student:   "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)",
   teacher:   "linear-gradient(135deg, #22C55E 0%, #1CA363 100%)",
   institute: "linear-gradient(135deg, #6366f1, #818cf8)",
 };
 
+/* ── Role-specific CTA data ── */
 const ROLE_CTA = {
-  student:   "Start Learning Free",
-  teacher:   "Start as a Teacher",
-  institute: "Request a Demo",
-};
-
-const COL1 = {
   student: {
-    heading: "For Students",
-    links: [
-      { label: "Learn",                   href: "/students/learn" },
-      { label: "Practice",                href: "/students/practice" },
-      { label: "Examination Preparation", href: "/students/exam-preparation" },
-      { label: "My Progress",             href: "/students/progress" },
-      { label: "Vidya AI Companion",      href: "/students/ai-tutor" },
-      { label: "Sign In",                 auth: "signin" },
-      { label: "Create Student Account",  auth: "signup" },
-    ],
+    heading:       "Ready to give your learning a clearer direction?",
+    copy:          "Build a personalised learning path, practise with purpose, identify learning gaps, and prepare confidently for examinations.",
+    primary:       "Start Learning Free",
+    secondary:     "Explore Student Tutorials",
+    secondaryHref: "/students/tutorials",
   },
   teacher: {
-    heading: "For Teachers",
-    links: [
-      { label: "How It Helps",           href: "/teachers/how-it-helps" },
-      { label: "Plan & Create",          href: "/teachers/plan-and-create" },
-      { label: "Assess & Support",       href: "/teachers/assess-and-support" },
-      { label: "Tutorials",              href: "/teachers/tutorials" },
-      { label: "Sign In",                auth: "signin" },
-      { label: "Create Teacher Account", auth: "signup" },
-    ],
+    heading:       "Ready to make teaching more focused and manageable?",
+    copy:          "Plan with clarity, assess meaningfully, understand student needs, and spend less time on repetitive academic work.",
+    primary:       "Start as a Teacher",
+    secondary:     "Explore Teacher Tutorials",
+    secondaryHref: "/teachers/tutorials",
   },
   institute: {
-    heading: "For Institutions",
-    links: [
-      { label: "Platform",               href: "/institutions/platform" },
-      { label: "Academic Intelligence",  href: "/institutions/academic-intelligence" },
-      { label: "Implementation",         href: "/institutions/implementation" },
-      { label: "Trust & Governance",     href: "/institutions/trust-governance" },
-      { label: "Resources",              href: "/institutions/resources" },
-      { label: "Request a Demo",         auth: "signup" },
-      { label: "Institution Sign In",    auth: "signin" },
-    ],
+    heading:       "Ready to build a more connected academic system?",
+    copy:          "Support teachers, understand student learning, strengthen academic decisions, and improve outcomes across your institution or network.",
+    primary:       "Request a Demo",
+    secondary:     "Speak with Our Academic Team",
+    secondaryHref: "/contact",
   },
 };
 
-/* ── Static column data ─────────────────────────────────────────── */
+/* ── Column data ── */
+
+const FOR_YOU = [
+  { label: "Students",                      href: "/students" },
+  { label: "Teachers",                      href: "/teachers" },
+  { label: "Institutions",                  href: "/institutions" },
+  { label: "Parents",                       href: "/parents" },
+  { label: "Independent Tutors",            href: "/independent-tutors" },
+  { label: "Education Groups",              href: "/education-groups" },
+  { label: "Districts & Education Networks", href: "/districts" },
+];
 
 const PLATFORM = [
-  "Academic Intelligence",
-  "Personalised Learning",
-  "Curriculum & Learning Outcomes",
-  "Lesson Planning",
-  "Teaching Resources",
-  "Assessments",
-  "Evaluation and Feedback",
-  "Student Learning Gaps",
-  "Learning Analytics",
-  "Institutional Dashboards",
-  "Responsible AI",
+  { label: "Learning & Practice",            href: "/platform/learning-practice" },
+  { label: "Planning & Content Creation",    href: "/platform/planning-content" },
+  { label: "Assessment & Evaluation",        href: "/platform/assessment" },
+  { label: "Student Insights",               href: "/platform/student-insights" },
+  { label: "Academic Intelligence",          href: "/platform/academic-intelligence" },
+  { label: "Implementation & Integrations",  href: "/platform/implementation" },
+  { label: "Trust & Governance",             href: "/platform/trust-governance" },
+];
+
+const PRODUCTS = [
+  { label: "Classess®",         href: "/products/classess" },
+  { label: "Vidya",             href: "/products/vidya" },
+  { label: "Edmission",         href: "/products/edmission" },
+  { label: "Feenance",          href: "/products/feenance" },
+  { label: "Kaho.chat",         href: "/products/kaho-chat" },
+  { label: "PTM",               href: "/products/ptm" },
+  { label: "View All Products", href: "/products" },
 ];
 
 const SOLUTIONS = [
-  "Independent Student Learning",
-  "Vidya AI Companion",
-  "Teacher Academic Workspace",
-  "Assessment and Evaluation",
-  "Voice Feedback and Grading",
-  "Student Progress & Learning Gaps",
-  "Examination Preparation",
-  "Remedial and Revision Planning",
-  "Multi-Campus Academic Intelligence",
+  { label: "Independent Institutions",       href: "/solutions/institutions" },
+  { label: "Education Groups",               href: "/solutions/education-groups" },
+  { label: "NGO & CSR Programmes",           href: "/solutions/ngo-csr" },
+  { label: "Districts & Government",         href: "/solutions/districts-government" },
+  { label: "Publishers & Content Providers", href: "/solutions/publishers" },
+  { label: "Academic Consultants",           href: "/solutions/consultants" },
+  { label: "Partners & Integrations",        href: "/solutions/partners" },
 ];
 
-const ECOSYSTEM = [
-  {
-    group: "Learning & Academic Support",
-    items: ["Classess®", "Vidya", "LearnEng.app", "Independent Student Application"],
-  },
-  {
-    group: "Institution Operations",
-    items: ["Edmission", "Feenance", "Kaho.chat", "PTM"],
-  },
-  {
-    group: "Emerging Solutions",
-    items: ["Edsurance"],
-  },
+const COMPANY_LINKS = [
+  { label: "About Classess®", href: "/about" },
+  { label: "Our Vision",      href: "/vision" },
+  { label: "Partners",        href: "/partners" },
+  { label: "Careers",         href: "/careers" },
+  { label: "Contact Us",      href: "/contact" },
 ];
 
-const RESOURCES = [
-  "Tutorials", "Help Centre", "Product Guides",
-  "Webinars", "Case Studies", "Academic Articles",
-  "Responsible AI Guides", "FAQs",
+const RESOURCES_LINKS = [
+  { label: "Resources",   href: "/resources" },
+  { label: "Tutorials",   href: "/tutorials" },
+  { label: "Help Centre", href: "/help" },
 ];
 
-const SUPPORT = [
-  "Contact Support", "Report a Problem",
-  "Product Feedback", "Accessibility Support", "Account Help",
-];
-
-const COMPANY = [
-  "About Classess.com®", "Our Vision", "Leadership",
-  "Careers", "News and Updates", "Contact Us",
-];
-
-const PARTNERSHIPS = [
-  "Partner With Us", "Academic Partnerships",
-  "Technology Partnerships", "NGO and CSR Partnerships",
-  "Government & District Partnerships", "Careers and Internships",
-];
-
-const TRUST_LINKS = [
-  "Trust Centre", "Responsible AI", "Student Safety", "AI Governance",
-  "Data Protection", "Security", "Privacy Policy", "Cookie Policy",
-  "Terms of Use", "Acceptable Use Policy", "Accessibility",
-  "Child and Student Privacy", "Data Processing Agreement",
-];
-
-const LEGAL_BOTTOM = [
-  "Privacy Policy", "Terms of Use", "Cookie Policy",
-  "Accessibility", "Security", "Responsible AI",
+const LEGAL_LINKS = [
+  { label: "Privacy Policy",  href: "/privacy" },
+  { label: "Terms of Use",    href: "/terms" },
+  { label: "Student Safety",  href: "/student-safety" },
+  { label: "Responsible AI",  href: "/responsible-ai" },
+  { label: "Data Protection", href: "/data-protection" },
+  { label: "Accessibility",   href: "/accessibility" },
 ];
 
 const SOCIALS = [
@@ -157,10 +113,9 @@ const SOCIALS = [
   { label: "YouTube",   Icon: YouTubeIcon,   href: "#" },
   { label: "Instagram", Icon: InstagramIcon, href: "#" },
   { label: "Facebook",  Icon: FacebookIcon,  href: "#" },
-  { label: "X",         Icon: XIcon,         href: "#" },
 ];
 
-/* ── Sub-components ─────────────────────────────────────────────── */
+/* ── Sub-components ── */
 
 function FooterLink({ href, auth, onAuth, children }) {
   const navigate = useNavigate();
@@ -190,7 +145,7 @@ function ColumnBlock({ heading, id, openSection, onToggle, children }) {
   const isOpen = openSection === id;
   return (
     <div>
-      {/* Desktop label */}
+      {/* Desktop heading */}
       <p className="hidden md:block font-mono text-[10.5px] uppercase tracking-[0.22em] text-ink-4 mb-4">
         {heading}
       </p>
@@ -216,20 +171,19 @@ function ColumnBlock({ heading, id, openSection, onToggle, children }) {
   );
 }
 
-/* ── Footer (default export) ────────────────────────────────────── */
+/* ── Footer (default export) ── */
 
 export default function Footer() {
   const navigate = useNavigate();
   const { activeRoleId, selectRole } = useRole();
-  const [authModal, setAuthModal] = useState(null);
+  const [authModal, setAuthModal]   = useState(null);
   const [openSection, setOpenSection] = useState(null);
 
-  const role = activeRoleId ?? "student";
-  const col1 = COL1[role];
+  const role    = activeRoleId ?? "student";
+  const cta     = ROLE_CTA[role];
   const gradient = ROLE_GRADIENT[role];
-  const ctaLabel = ROLE_CTA[role];
   const authOpen = authModal !== null;
-  const year = new Date().getFullYear();
+  const year     = new Date().getFullYear();
 
   const toggleSection = (id) =>
     setOpenSection((prev) => (prev === id ? null : id));
@@ -238,48 +192,42 @@ export default function Footer() {
 
   return (
     <>
-      {/* ── Footer shell (self-blurs when its own auth modal is open) ── */}
       <footer
         className="border-t border-line bg-mist transition-[filter] duration-200"
         style={authOpen ? { filter: "blur(4px)" } : undefined}
         aria-label="Site footer"
       >
 
-        {/* ── Intro band ──────────────────────────────────────────── */}
+        {/* ── Row 1: Role-specific CTA band ── */}
         <div className="border-b border-line px-6 py-12 md:px-12 md:py-14">
           <div className="mx-auto max-w-7xl">
-            <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+            <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
 
-              {/* Brand intro */}
-              <div className="max-w-[340px]">
-                <p className="font-display text-[22px] font-semibold text-ink">
-                  Classess.com®
-                </p>
-                <p className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.2em] text-ink-4">
-                  Academic intelligence for every learner, teacher, and institution
-                </p>
-                <p className="mt-5 text-[14px] leading-[1.75] text-ink-3">
-                  Classess.com® connects learning, teaching, assessment, student
-                  support, and institutional intelligence in one responsible
-                  AI-powered education ecosystem.
+              {/* Heading + copy */}
+              <div className="max-w-xl">
+                <h2 className="text-[22px] font-semibold leading-snug text-ink">
+                  {cta.heading}
+                </h2>
+                <p className="mt-3 text-[14.5px] leading-[1.75] text-ink-3">
+                  {cta.copy}
                 </p>
               </div>
 
-              {/* CTAs + role switcher */}
-              <div className="flex flex-col gap-5 md:items-end">
+              {/* Buttons + role switcher */}
+              <div className="flex shrink-0 flex-col gap-4 md:items-end">
                 <div className="flex flex-col gap-2.5 sm:flex-row">
                   <button
                     onClick={() => openAuth("signup")}
                     className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[14px] font-semibold text-white transition-opacity hover:opacity-90"
                     style={{ background: gradient }}
                   >
-                    {ctaLabel} <ArrowRight size={15} />
+                    {cta.primary} <ArrowRight size={15} />
                   </button>
                   <button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate(cta.secondaryHref)}
                     className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-paper px-5 py-2.5 text-[14px] font-medium text-ink-3 transition-colors hover:border-ink-4 hover:text-ink"
                   >
-                    Contact Us
+                    {cta.secondary}
                   </button>
                 </div>
 
@@ -309,26 +257,53 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Link columns ────────────────────────────────────────── */}
+        {/* ── Row 2: Brand area + 5 link columns ── */}
         <div className="px-6 py-12 md:px-12">
           <div className="mx-auto max-w-7xl">
-            <div className="grid grid-cols-1 gap-y-1 md:grid-cols-2 md:gap-x-8 md:gap-y-10 lg:grid-cols-3 xl:grid-cols-6 xl:gap-x-6">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[220px_1fr_1fr_1fr_1fr_1.1fr]">
 
-              {/* Col 1 — dynamic role column */}
+              {/* Brand area */}
+              <div className="sm:col-span-2 lg:col-span-3 xl:col-span-1">
+                <p className="font-display text-[20px] font-semibold text-ink">
+                  Classess.com®
+                </p>
+                <p className="mt-4 text-[13.5px] leading-[1.7] text-ink-3">
+                  An AI-native Academic Intelligence Platform that puts the student
+                  at the centre, empowers teachers with intelligent support, and
+                  helps institutions make better academic decisions.
+                </p>
+                <p className="mt-3 text-[13px] font-medium text-ink-2">
+                  Every student seen, supported, and learning at their best.
+                </p>
+                <div className="mt-5 flex gap-2">
+                  {SOCIALS.map(({ label, Icon, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={`Classess.com® on ${label}`}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg border border-line text-ink-4 transition-colors hover:border-ink-4 hover:text-ink-2"
+                    >
+                      <Icon />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Col 1: For You */}
               <ColumnBlock
-                heading={col1.heading}
+                heading="For You"
                 id="col1"
                 openSection={openSection}
                 onToggle={toggleSection}
               >
-                {col1.links.map((l) => (
-                  <FooterLink key={l.label} href={l.href} auth={l.auth} onAuth={openAuth}>
+                {FOR_YOU.map((l) => (
+                  <FooterLink key={l.label} href={l.href}>
                     {l.label}
                   </FooterLink>
                 ))}
               </ColumnBlock>
 
-              {/* Col 2 — Platform */}
+              {/* Col 2: Platform */}
               <ColumnBlock
                 heading="Platform"
                 id="col2"
@@ -336,76 +311,59 @@ export default function Footer() {
                 onToggle={toggleSection}
               >
                 {PLATFORM.map((l) => (
-                  <FooterLink key={l}>{l}</FooterLink>
+                  <FooterLink key={l.label} href={l.href}>
+                    {l.label}
+                  </FooterLink>
                 ))}
               </ColumnBlock>
 
-              {/* Col 3 — Academic Solutions */}
+              {/* Col 3: Products */}
               <ColumnBlock
-                heading="Academic Solutions"
+                heading="Products"
                 id="col3"
                 openSection={openSection}
                 onToggle={toggleSection}
               >
-                {SOLUTIONS.map((l) => (
-                  <FooterLink key={l}>{l}</FooterLink>
+                {PRODUCTS.map((l) => (
+                  <FooterLink key={l.label} href={l.href}>
+                    {l.label}
+                  </FooterLink>
                 ))}
               </ColumnBlock>
 
-              {/* Col 4 — Ecosystem */}
+              {/* Col 4: Solutions */}
               <ColumnBlock
-                heading="Classess® Ecosystem"
+                heading="Solutions"
                 id="col4"
                 openSection={openSection}
                 onToggle={toggleSection}
               >
-                {ECOSYSTEM.map((group) => (
-                  <div key={group.group}>
-                    <p className="mb-2 mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-4">
-                      {group.group}
-                    </p>
-                    {group.items.map((item) => (
-                      <div key={item} className="mb-2.5">
-                        <FooterLink>{item}</FooterLink>
-                      </div>
-                    ))}
-                  </div>
+                {SOLUTIONS.map((l) => (
+                  <FooterLink key={l.label} href={l.href}>
+                    {l.label}
+                  </FooterLink>
                 ))}
               </ColumnBlock>
 
-              {/* Col 5 — Resources + Support */}
+              {/* Col 5: Company & Resources */}
               <ColumnBlock
-                heading="Resources"
+                heading="Company & Resources"
                 id="col5"
                 openSection={openSection}
                 onToggle={toggleSection}
               >
-                {RESOURCES.map((l) => (
-                  <FooterLink key={l}>{l}</FooterLink>
+                {COMPANY_LINKS.map((l) => (
+                  <FooterLink key={l.label} href={l.href}>
+                    {l.label}
+                  </FooterLink>
                 ))}
                 <p className="mb-1 mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-4">
-                  Support
+                  Resources
                 </p>
-                {SUPPORT.map((l) => (
-                  <FooterLink key={l}>{l}</FooterLink>
-                ))}
-              </ColumnBlock>
-
-              {/* Col 6 — Company + Partnerships */}
-              <ColumnBlock
-                heading="Company"
-                id="col6"
-                openSection={openSection}
-                onToggle={toggleSection}
-              >
-                {COMPANY.map((l) => (
-                  <FooterLink key={l}>{l}</FooterLink>
-                ))}
-                <p className="mb-1 mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-4">
-                  Work With Us
-                </p>
-                {PARTNERSHIPS.map((l) => (
-                  <FooterLink key={l}>{l}</FooterLink>
+                {RESOURCES_LINKS.map((l) => (
+                  <FooterLink key={l.label} href={l.href}>
+                    {l.label}
+                  </FooterLink>
                 ))}
               </ColumnBlock>
 
@@ -413,71 +371,71 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Trust & Governance band ──────────────────────────────── */}
-        <div className="border-t border-line bg-mist px-6 py-8 md:px-12">
-          <div className="mx-auto max-w-7xl">
-            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-4">
-              Trust, Safety &amp; Governance
-            </p>
-            <div className="flex flex-wrap gap-x-5 gap-y-3">
-              {TRUST_LINKS.map((l) => (
-                <span
-                  key={l}
-                  className="text-[12.5px] text-ink-3 transition-colors hover:text-ink cursor-pointer"
-                >
-                  {l}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ── Bottom bar ──────────────────────────────────────────── */}
-        <div className="border-t border-line-2 bg-mist px-6 py-6 md:px-12">
+        {/* ── Row 3: Contact and Demo area ── */}
+        <div className="border-t border-line px-6 py-8 md:px-12">
           <div className="mx-auto max-w-7xl flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-lg">
+              <p className="text-[15px] font-semibold text-ink">
+                Need help choosing the right solution?
+              </p>
+              <p className="mt-1.5 text-[13.5px] leading-[1.7] text-ink-3">
+                Whether you are a student, teacher, institution, education group,
+                NGO, CSR initiative, or district, our team can help you identify
+                the right starting point.
+              </p>
+            </div>
+            <div className="flex shrink-0 items-center gap-4">
+              <button
+                onClick={() => navigate("/contact")}
+                className="inline-flex items-center justify-center rounded-xl bg-ink px-5 py-2.5 text-[14px] font-semibold text-page transition-opacity hover:opacity-80"
+              >
+                Contact Classess®
+              </button>
+              <button
+                onClick={() => navigate("/contact")}
+                className="text-[13.5px] font-medium text-ink-3 underline-offset-2 transition-colors hover:text-ink hover:underline"
+              >
+                Request a Demo
+              </button>
+            </div>
+          </div>
+        </div>
 
-            {/* Copyright + trademark */}
-            <div className="flex flex-col gap-1">
+        {/* ── Row 4: Legal bar ── */}
+        <div className="border-t border-line-2 bg-mist px-6 py-5 md:px-12">
+          <div className="mx-auto max-w-7xl flex flex-wrap items-center gap-x-5 gap-y-2.5">
+            {LEGAL_LINKS.map((l) => (
+              <button
+                key={l.label}
+                onClick={() => navigate(l.href)}
+                className="text-[12px] text-ink-4 transition-colors hover:text-ink-2"
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Row 5: Copyright bar ── */}
+        <div className="border-t border-line-2 bg-mist px-6 py-5 md:px-12">
+          <div className="mx-auto max-w-7xl flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-col gap-0.5">
               <p className="text-[12px] text-ink-4">
-                © {year} Dot eVentures Pvt. Ltd. All rights reserved.
+                © {year} Classess®. All rights reserved.
               </p>
               <p className="text-[11.5px] text-ink-4">
-                Classess® and Classess.com® are registered trademarks of Dot eVentures Pvt. Ltd.
+                Classess® is a product of Dot eVentures Pvt. Ltd.
               </p>
             </div>
-
-            {/* Legal quick links */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
-              {LEGAL_BOTTOM.map((l) => (
-                <span
-                  key={l}
-                  className="text-[12px] text-ink-4 transition-colors hover:text-ink-2 cursor-pointer"
-                >
-                  {l}
-                </span>
-              ))}
-            </div>
-
-            {/* Social icons */}
-            <div className="flex items-center gap-2">
-              {SOCIALS.map(({ label, Icon, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={`Classess.com® on ${label}`}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-line text-ink-4 transition-colors hover:border-ink-4 hover:text-ink-2"
-                >
-                  <Icon size={14} />
-                </a>
-              ))}
-            </div>
-
+            <p className="text-[11.5px] text-ink-4 md:text-right">
+              Built from first principles, not from copies.
+            </p>
           </div>
         </div>
 
       </footer>
 
-      {/* Auth modal — outside the footer's own blur layer */}
+      {/* Auth modal — outside footer's own blur layer */}
       <AuthModal
         open={authOpen}
         mode={authModal?.mode ?? "signin"}
