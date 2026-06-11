@@ -7,7 +7,7 @@ import { useRole } from "../hooks/useRole";
 const DEFAULT_LINKS = [
   { label: "Products", href: "#products" },
   { label: "Features", href: "#features" },
-  { label: "About",    href: "#about"    },
+  { label: "About",    href: "/about"    },
   { label: "Contact",  href: "#contact"  },
 ];
 

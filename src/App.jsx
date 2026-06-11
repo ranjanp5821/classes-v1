@@ -15,6 +15,7 @@ import AcademicIntelligencePage from "./pages/institutions/AcademicIntelligenceP
 import ImplementationPage from "./pages/institutions/ImplementationPage";
 import TrustGovernancePage from "./pages/institutions/TrustGovernancePage";
 import ResourcesPage from "./pages/institutions/ResourcesPage";
+import AboutPage from "./pages/AboutPage";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/institutions/implementation" element={<ImplementationPage />} />
         <Route path="/institutions/trust-governance" element={<TrustGovernancePage />} />
         <Route path="/institutions/resources" element={<ResourcesPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </RoleProvider>
   );
