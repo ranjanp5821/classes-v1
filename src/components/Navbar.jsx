@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 import { useRole } from "../hooks/useRole";
 
 const DEFAULT_LINKS = [
-  { label: "Products", href: "#products" },
+  { label: "Careers",  href: "/careers"  },
   { label: "Partners", href: "/partners" },
   { label: "About",    href: "/about"    },
   { label: "Contact",  href: "#contact"  },

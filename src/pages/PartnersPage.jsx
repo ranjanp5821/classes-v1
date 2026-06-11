@@ -316,9 +316,6 @@ export default function PartnersPage() {
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className="w-full"
             >
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
-                Partner with Classess®
-              </p>
               <h1 className="mt-3 text-4xl font-serif font-medium leading-[1.08] tracking-tight text-ink md:text-[58px]">
                 Build value. Expand impact. Grow with Classess®.
               </h1>

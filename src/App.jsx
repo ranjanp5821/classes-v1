@@ -17,6 +17,7 @@ import TrustGovernancePage from "./pages/institutions/TrustGovernancePage";
 import ResourcesPage from "./pages/institutions/ResourcesPage";
 import AboutPage from "./pages/AboutPage";
 import PartnersPage from "./pages/PartnersPage";
+import CareersPage from "./pages/CareersPage";
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/institutions/resources" element={<ResourcesPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/partners" element={<PartnersPage />} />
+        <Route path="/careers" element={<CareersPage />} />
       </Routes>
     </RoleProvider>
   );
