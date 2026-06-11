@@ -234,7 +234,7 @@ export default function AboutPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#0f766e" }}>
                 Why we exist
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -307,7 +307,7 @@ export default function AboutPage() {
         <section className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#7c3aed" }}>
                 Our foundation
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -367,7 +367,7 @@ export default function AboutPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#1d4ed8" }}>
                 Our model
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -431,7 +431,7 @@ export default function AboutPage() {
         <section className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#0369a1" }}>
                 Our technology
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -495,7 +495,7 @@ export default function AboutPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#b45309" }}>
                 Our commitment
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -559,7 +559,7 @@ export default function AboutPage() {
         <section className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#0f766e" }}>
                 Our products
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -625,7 +625,7 @@ export default function AboutPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#c2410c" }}>
                 Our vision
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
