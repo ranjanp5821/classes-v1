@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 /* ── Inline social SVGs ── */
 const LinkedInIcon  = () => <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>;
@@ -213,15 +213,15 @@ export default function Footer() {
                 </p>
               </div>
 
-              {/* Buttons + role switcher */}
+              {/* Buttons */}
               <div className="flex shrink-0 flex-col gap-4 md:items-end">
                 <div className="flex flex-col gap-2.5 sm:flex-row">
                   <button
                     onClick={() => openAuth("signup")}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[14px] font-semibold text-white transition-opacity hover:opacity-90"
+                    className="inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-[14px] font-semibold text-white transition-opacity hover:opacity-90"
                     style={{ background: gradient }}
                   >
-                    {cta.primary} <ArrowRight size={15} />
+                    {cta.primary}
                   </button>
                   <button
                     onClick={() => navigate(cta.secondaryHref)}
@@ -231,27 +231,6 @@ export default function Footer() {
                   </button>
                 </div>
 
-                {/* Role switcher pill */}
-                <div className="flex items-center gap-0.5 rounded-xl border border-line bg-paper p-1">
-                  <span className="select-none px-2.5 text-[11.5px] text-ink-4">
-                    Viewing as:
-                  </span>
-                  {["student", "teacher", "institute"].map((r) => (
-                    <button
-                      key={r}
-                      onClick={() => selectRole(r)}
-                      className={`rounded-[9px] px-3 py-1.5 text-[12.5px] font-medium transition-all ${
-                        role === r
-                          ? "bg-ink text-page shadow-sm"
-                          : "text-ink-4 hover:text-ink-2"
-                      }`}
-                    >
-                      {r === "institute"
-                        ? "Institution"
-                        : r.charAt(0).toUpperCase() + r.slice(1)}
-                    </button>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
