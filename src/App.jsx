@@ -18,6 +18,7 @@ import ResourcesPage from "./pages/institutions/ResourcesPage";
 import AboutPage from "./pages/AboutPage";
 import PartnersPage from "./pages/PartnersPage";
 import CareersPage from "./pages/CareersPage";
+import ContactPage from "./pages/ContactPage";
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/partners" element={<PartnersPage />} />
         <Route path="/careers" element={<CareersPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </RoleProvider>
   );

@@ -8,7 +8,7 @@ const DEFAULT_LINKS = [
   { label: "Careers",  href: "/careers"  },
   { label: "Partners", href: "/partners" },
   { label: "About",    href: "/about"    },
-  { label: "Contact",  href: "#contact"  },
+  { label: "Contact",  href: "/contact"  },
 ];
 
 /**
