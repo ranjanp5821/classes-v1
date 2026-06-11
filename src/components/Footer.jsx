@@ -243,9 +243,11 @@ export default function Footer() {
 
               {/* Brand area */}
               <div className="sm:col-span-2 lg:col-span-3 xl:col-span-1">
-                <p className="font-display text-[20px] font-semibold text-ink">
-                  Classess.com®
-                </p>
+                <img
+                  src="/assets/4 Star Logo- Classess.svg"
+                  alt="Classess.com®"
+                  className="h-auto w-[160px]"
+                />
                 <p className="mt-4 text-[13.5px] leading-[1.7] text-ink-3">
                   An AI-native Academic Intelligence Platform that puts the student
                   at the centre, empowers teachers with intelligent support, and
