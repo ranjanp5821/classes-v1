@@ -50,15 +50,6 @@ const MODELS = [
     bg: "#f5f3ff",
   },
   {
-    id: "technology",
-    icon: Cpu,
-    title: "Technology & Integration Partners",
-    copy: "Connect platforms, data, content, applications, and institutional systems with the Classess® ecosystem.",
-    cta: "Explore Technology Partnership",
-    color: "#0369a1",
-    bg: "#eff6ff",
-  },
-  {
     id: "affiliate",
     icon: Users,
     title: "Affiliate & Referral Partners",
@@ -66,6 +57,15 @@ const MODELS = [
     cta: "Join the Affiliate Program",
     color: "#b45309",
     bg: "#fffbeb",
+  },
+  {
+    id: "technology",
+    icon: Cpu,
+    title: "Technology & Integration Partners",
+    copy: "Connect platforms, data, content, applications, and institutional systems with the Classess® ecosystem.",
+    cta: "Explore Technology Partnership",
+    color: "#0369a1",
+    bg: "#eff6ff",
   },
 ];
 
@@ -372,7 +372,10 @@ export default function PartnersPage() {
         <section className="bg-paper py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: ACCENT }}>
+                Partnership models
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Choose how you would like to partner.
               </h2>
               <p className="mt-4 text-[16px] leading-relaxed text-ink-3">
@@ -422,7 +425,7 @@ export default function PartnersPage() {
         <section className="py-20" ref={sectionRefs.growth}>
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#0f766e" }}>
                 Strategic Growth Partners
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -498,7 +501,7 @@ export default function PartnersPage() {
         <section className="bg-paper py-20" ref={sectionRefs.academic}>
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#7c3aed" }}>
                 Academic & Content Partners
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -569,12 +572,182 @@ export default function PartnersPage() {
         </section>
 
         {/* ════════════════════════════════════════════════════════
-            S5 — Technology & Integration Partners
+            S5 — Affiliate & Referral Program
         ════════════════════════════════════════════════════════ */}
-        <section className="py-20" ref={sectionRefs.technology}>
+        <section className="py-20" ref={sectionRefs.affiliate}>
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#c2410c" }}>
+                Classess® Affiliate & Referral Program
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+                Your network can become a meaningful growth opportunity.
+              </h2>
+              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
+                Introduce qualified schools, colleges, education groups, NGOs, CSR initiatives, districts,
+                and education organisations to Classess®. When an approved referral becomes a successful
+                customer, eligible partners receive performance-linked commissions according to the
+                applicable affiliate or referral agreement.
+              </p>
+            </motion.div>
+
+            <motion.div
+              {...fadeUp}
+              className="mt-8 rounded-2xl p-8"
+              style={{ background: "linear-gradient(135deg, #fff7ed, #ffedd5)", border: "1px solid #fdba74" }}
+            >
+              <p className="text-[13px] font-semibold uppercase tracking-[0.12em]" style={{ color: "#c2410c" }}>
+                Your network is your net worth.
+              </p>
+              <p className="mt-3 text-[24px] font-serif font-semibold text-ink">
+                Build the potential to earn ₹10 lakh or more in a quarter.
+              </p>
+              <p className="mt-3 text-[14.5px] leading-relaxed text-ink-3">
+                There is no requirement to build a product, maintain inventory, open a franchise location,
+                or make an upfront product investment. Your role is to use your trusted network to create
+                qualified introductions and support the opportunity where required.
+              </p>
+              <p className="mt-4 text-[12.5px] leading-relaxed text-ink-4">
+                Earnings are not guaranteed. Actual commissions depend on qualified conversions, contract
+                value, collection of customer payments, territory, participation, and the applicable partner
+                agreement.
+              </p>
+            </motion.div>
+
+            <motion.div {...fadeUp} className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <button
+                onClick={scrollToApply}
+                className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ background: "linear-gradient(135deg, #c2410c, #ea580c)" }}
+              >
+                Join the Affiliate Program <ArrowRight size={17} />
+              </button>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════
+            S6+S7 — Affiliate & Referral Partners + How It Works
+        ════════════════════════════════════════════════════════ */}
+        <section className="bg-paper py-20">
+          <div className="mx-auto max-w-5xl px-6 md:px-8">
+
+            {/* — Section header — */}
+            <motion.div {...fadeUp} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#b45309" }}>
+                  Affiliate & Referral Partners
+                </p>
+                <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+                  You may already know the institutions we want to reach.
+                </h2>
+              </div>
+              <p className="shrink-0 text-[15px] leading-relaxed text-ink-3 md:max-w-xs md:text-right">
+                No franchise. No inventory. Just trusted introductions that convert.
+              </p>
+            </motion.div>
+
+            {/* — Who can join — */}
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {AFFILIATE_WHO.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  {...fadeUp}
+                  transition={{ ...fadeUp.transition, delay: i * 0.06 }}
+                  className="rounded-2xl border border-line bg-page p-6"
+                >
+                  <p className="text-[15px] font-semibold text-ink">{item.title}</p>
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-ink-3">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* — Divider with "How it works" label — */}
+            <motion.div {...fadeUp} className="mt-16 flex items-center gap-4">
+              <div className="h-px flex-1" style={{ background: "linear-gradient(to right, #fcd34d, transparent)" }} />
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#b45309" }}>
+                How it works
+              </p>
+              <div className="h-px flex-1" style={{ background: "linear-gradient(to left, #fcd34d, transparent)" }} />
+            </motion.div>
+
+            <motion.div {...fadeUp} className="mt-5 text-center">
+              <h3 className="text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
+                Introduce. Track. Convert. Earn.
+              </h3>
+            </motion.div>
+
+            {/* — Steps grid — */}
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {AFFILIATE_STEPS.map((step, i) => (
+                <motion.div
+                  key={step.n}
+                  {...fadeUp}
+                  transition={{ ...fadeUp.transition, delay: i * 0.06 }}
+                  className="rounded-2xl border border-line bg-page p-6"
+                >
+                  <span
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[13px] font-bold text-white"
+                    style={{ background: "linear-gradient(135deg, #b45309, #d97706)" }}
+                  >
+                    {step.n}
+                  </span>
+                  <p className="mt-4 text-[15px] font-semibold text-ink">{step.title}</p>
+                  <p className="mt-1.5 text-[14px] leading-relaxed text-ink-3">{step.copy}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* — Quote banner — */}
+            <motion.div
+              {...fadeUp}
+              className="mt-8 rounded-2xl px-8 py-5"
+              style={{ background: "#fffbeb", border: "1px solid #fcd34d" }}
+            >
+              <p className="text-[15.5px] font-semibold text-ink">
+                You do not need to become a full-time salesperson. You need to make the right introduction.
+              </p>
+            </motion.div>
+
+            {/* — Media placeholder — */}
+            <motion.div
+              {...fadeUp}
+              className="mt-6 flex min-h-[180px] items-center justify-center rounded-3xl border border-dashed border-line-2 bg-page"
+            >
+              <div className="text-center">
+                <Users size={32} className="mx-auto text-ink-4" />
+                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-4">Media PARTNERS-M07</p>
+                <p className="mt-1 text-[13px] text-ink-4">Partner-profile carousel</p>
+              </div>
+            </motion.div>
+
+            {/* — CTA — */}
+            <motion.div {...fadeUp} className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <button
+                onClick={scrollToApply}
+                className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ background: "linear-gradient(135deg, #b45309, #d97706)" }}
+              >
+                Apply to Become an Affiliate <ArrowRight size={17} />
+              </button>
+              <button
+                onClick={scrollToApply}
+                className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-page px-6 py-3 text-[15px] font-semibold text-ink-2 transition-colors hover:bg-paper"
+              >
+                Join the Affiliate Program
+              </button>
+            </motion.div>
+
+          </div>
+        </section>
+
+        {/* ════════════════════════════════════════════════════════
+            S8 — Technology & Integration Partners
+        ════════════════════════════════════════════════════════ */}
+        <section className="bg-paper py-20" ref={sectionRefs.technology}>
+          <div className="mx-auto max-w-5xl px-6 md:px-8">
+            <motion.div {...fadeUp}>
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#0369a1" }}>
                 Technology & Integration Partners
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -589,13 +762,13 @@ export default function PartnersPage() {
             </motion.div>
 
             <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-              <motion.div {...fadeUp} className="rounded-2xl border border-line bg-paper p-7">
+              <motion.div {...fadeUp} className="rounded-2xl border border-line bg-page p-7">
                 <p className="text-[13px] font-semibold uppercase tracking-[0.12em]" style={{ color: "#0369a1" }}>
                   Potential technology partners
                 </p>
                 <BulletList items={TECH_PARTNERS} color="#0369a1" />
               </motion.div>
-              <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.07 }} className="rounded-2xl border border-line bg-paper p-7">
+              <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.07 }} className="rounded-2xl border border-line bg-page p-7">
                 <p className="text-[13px] font-semibold uppercase tracking-[0.12em]" style={{ color: "#0369a1" }}>
                   Possible partnership models
                 </p>
@@ -605,7 +778,7 @@ export default function PartnersPage() {
 
             <motion.div
               {...fadeUp}
-              className="mt-6 rounded-2xl border border-line bg-paper p-6"
+              className="mt-6 rounded-2xl border border-line bg-page p-6"
             >
               <p className="text-[15px] leading-relaxed text-ink-3">
                 Every integration should have a clear academic purpose and appropriate data permissions.
@@ -648,170 +821,12 @@ export default function PartnersPage() {
         </section>
 
         {/* ════════════════════════════════════════════════════════
-            S6 — Affiliate & Referral Program
-        ════════════════════════════════════════════════════════ */}
-        <section className="bg-paper py-20" ref={sectionRefs.affiliate}>
-          <div className="mx-auto max-w-5xl px-6 md:px-8">
-            <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
-                Classess® Affiliate & Referral Program
-              </p>
-              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
-                Your network can become a meaningful growth opportunity.
-              </h2>
-              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
-                Introduce qualified schools, colleges, education groups, NGOs, CSR initiatives, districts,
-                and education organisations to Classess®. When an approved referral becomes a successful
-                customer, eligible partners receive performance-linked commissions according to the
-                applicable affiliate or referral agreement.
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeUp}
-              className="mt-8 rounded-2xl p-8"
-              style={{ background: "linear-gradient(135deg, #fffbeb, #fef3c7)", border: "1px solid #fcd34d" }}
-            >
-              <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-amber-700">
-                Your network is your net worth.
-              </p>
-              <p className="mt-3 text-[24px] font-serif font-semibold text-ink">
-                Build the potential to earn ₹10 lakh or more in a quarter.
-              </p>
-              <p className="mt-3 text-[14.5px] leading-relaxed text-ink-3">
-                There is no requirement to build a product, maintain inventory, open a franchise location,
-                or make an upfront product investment. Your role is to use your trusted network to create
-                qualified introductions and support the opportunity where required.
-              </p>
-              <p className="mt-4 text-[12.5px] leading-relaxed text-ink-4">
-                Earnings are not guaranteed. Actual commissions depend on qualified conversions, contract
-                value, collection of customer payments, territory, participation, and the applicable partner
-                agreement.
-              </p>
-            </motion.div>
-
-            <motion.div {...fadeUp} className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <button
-                onClick={scrollToApply}
-                className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
-                style={{ background: "linear-gradient(135deg, #b45309, #d97706)" }}
-              >
-                Join the Affiliate Program <ArrowRight size={17} />
-              </button>
-              <button
-                onClick={() => {}}
-                className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-page px-6 py-3 text-[15px] font-semibold text-ink-2 transition-colors hover:bg-paper"
-              >
-                See How the Program Works
-              </button>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ════════════════════════════════════════════════════════
-            S7 — Who Can Become an Affiliate
-        ════════════════════════════════════════════════════════ */}
-        <section className="py-20">
-          <div className="mx-auto max-w-5xl px-6 md:px-8">
-            <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
-                Affiliate & Referral Partners
-              </p>
-              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
-                You may already know the institutions we want to reach.
-              </h2>
-            </motion.div>
-
-            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {AFFILIATE_WHO.map((item, i) => (
-                <motion.div
-                  key={item.title}
-                  {...fadeUp}
-                  transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-                  className="rounded-2xl border border-line bg-paper p-6"
-                >
-                  <p className="text-[15px] font-semibold text-ink">{item.title}</p>
-                  <p className="mt-2 text-[13.5px] leading-relaxed text-ink-3">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div
-              {...fadeUp}
-              className="mt-8 rounded-2xl px-8 py-6"
-              style={{ background: "#fffbeb", border: "1px solid #fcd34d" }}
-            >
-              <p className="text-[16px] font-semibold text-ink">
-                You do not need to become a full-time salesperson. You need to make the right introduction.
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeUp}
-              className="mt-10 flex min-h-[180px] items-center justify-center rounded-3xl border border-dashed border-line-2 bg-paper"
-            >
-              <div className="text-center">
-                <Users size={32} className="mx-auto text-ink-4" />
-                <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-4">Media PARTNERS-M07</p>
-                <p className="mt-1 text-[13px] text-ink-4">Partner-profile carousel</p>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ════════════════════════════════════════════════════════
-            S8 — How the Affiliate Program Works
-        ════════════════════════════════════════════════════════ */}
-        <section className="bg-paper py-20">
-          <div className="mx-auto max-w-5xl px-6 md:px-8">
-            <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
-                How it works
-              </p>
-              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
-                Introduce. Track. Convert. Earn.
-              </h2>
-            </motion.div>
-
-            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {AFFILIATE_STEPS.map((step, i) => (
-                <motion.div
-                  key={step.n}
-                  {...fadeUp}
-                  transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-                  className="rounded-2xl border border-line bg-page p-6"
-                >
-                  <span
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[13px] font-bold text-white"
-                    style={{ background: "linear-gradient(135deg, #b45309, #d97706)" }}
-                  >
-                    {step.n}
-                  </span>
-                  <p className="mt-4 text-[15px] font-semibold text-ink">{step.title}</p>
-                  <p className="mt-1.5 text-[14px] leading-relaxed text-ink-3">{step.copy}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div {...fadeUp} className="mt-8">
-              <button
-                onClick={scrollToApply}
-                className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
-                style={{ background: "linear-gradient(135deg, #b45309, #d97706)" }}
-              >
-                Apply to Become an Affiliate
-              </button>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ════════════════════════════════════════════════════════
             S9 — Why Partner with Classess®
         ════════════════════════════════════════════════════════ */}
         <section className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: ACCENT }}>
                 Why partner with us
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -853,7 +868,7 @@ export default function PartnersPage() {
         <section className="bg-paper py-20" ref={applyRef}>
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: ACCENT }}>
                 Apply
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
@@ -939,7 +954,10 @@ export default function PartnersPage() {
         <section className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <h2 className="text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: ACCENT }}>
+                Questions
+              </p>
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Frequently Asked Questions
               </h2>
             </motion.div>
@@ -981,7 +999,10 @@ export default function PartnersPage() {
               className="relative overflow-hidden rounded-3xl px-8 py-16 text-center md:px-14"
               style={{ background: GRADIENT }}
             >
-              <h2 className="mx-auto max-w-2xl text-3xl font-serif font-medium leading-tight tracking-tight text-white md:text-4xl">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: "#5eead4" }}>
+                Get started
+              </p>
+              <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-serif font-medium leading-tight tracking-tight text-white md:text-4xl">
                 Ready to grow with Classess®?
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-[16px] leading-relaxed text-white/80">
