@@ -181,13 +181,7 @@ export default function AboutPage() {
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className="max-w-3xl"
             >
-              <span
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[12px] font-medium uppercase tracking-[0.18em]"
-                style={{ background: ACCENT_LIGHT, color: ACCENT }}
-              >
-                About Classess.com®
-              </span>
-              <h1 className="mt-5 text-4xl font-serif font-medium leading-[1.08] tracking-tight text-ink md:text-[58px]">
+              <h1 className="text-4xl font-serif font-medium leading-[1.08] tracking-tight text-ink md:text-[58px]">
                 Every student seen, supported, and learning at their best.
               </h1>
               <p className="mt-6 text-[17px] leading-relaxed text-ink-3 md:text-[18px]">
