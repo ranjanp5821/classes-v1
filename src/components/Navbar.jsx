@@ -169,7 +169,7 @@ export default function Navbar({ onOpenAuth }) {
         </a>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex flex-1 items-center justify-evenly mx-6">
+        <ul className="hidden md:flex items-center justify-center gap-1 flex-1 mx-6">
           {links.map((link) => {
             const isActive = isLinkActive(link);
             return (
