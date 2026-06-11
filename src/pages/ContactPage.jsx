@@ -18,6 +18,7 @@ import { useRole } from "../hooks/useRole";
 
 const GRADIENT = "linear-gradient(135deg, #1e293b 0%, #334155 100%)";
 const ACCENT   = "#1e293b";
+const EYEBROW_COLOR = "#0891b2";
 
 const fadeUp = {
   initial:     { opacity: 0, y: 20 },
@@ -118,9 +119,6 @@ export default function ContactPage() {
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className="w-full"
             >
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
-                Get in touch
-              </p>
               <h1 className="mt-3 text-4xl font-serif font-medium leading-[1.08] tracking-tight text-ink md:text-[58px]">
                 Contact Us
               </h1>
@@ -141,7 +139,7 @@ export default function ContactPage() {
 
               {/* ── Left: Contact Form ── */}
               <motion.div {...fadeUp}>
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: EYEBROW_COLOR }}>
                   Send a message
                 </p>
                 <h2 className="mt-2 text-2xl font-serif font-medium tracking-tight text-ink md:text-3xl">
@@ -306,7 +304,7 @@ export default function ContactPage() {
               {/* ── Right: Contact Info ── */}
               <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }} className="flex flex-col gap-6">
                 <div className="rounded-2xl border border-line bg-page p-7">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: EYEBROW_COLOR }}>
                     Other ways to reach us
                   </p>
                   <div className="mt-6 flex flex-col gap-5">
@@ -369,7 +367,7 @@ export default function ContactPage() {
         <section className="py-20">
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em]" style={{ color: EYEBROW_COLOR }}>
                 What we can help with
               </p>
               <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
