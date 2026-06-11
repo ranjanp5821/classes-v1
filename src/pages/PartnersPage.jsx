@@ -219,10 +219,15 @@ function FaqItem({ q, a }) {
         onClick={() => setOpen((v) => !v)}
       >
         <span className="text-[15px] font-medium text-ink">{q}</span>
-        <ChevronDown
-          size={16}
-          className={`mt-0.5 shrink-0 text-ink-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-        />
+        <span
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[18px] font-light leading-none select-none transition-colors duration-200"
+          style={open
+            ? { background: "#3b82f6", color: "#fff" }
+            : { background: "#eff6ff", color: "#3b82f6" }
+          }
+        >
+          {open ? "−" : "+"}
+        </span>
       </button>
       <AnimatePresence initial={false}>
         {open && (
