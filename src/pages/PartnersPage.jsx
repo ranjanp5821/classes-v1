@@ -222,8 +222,8 @@ function FaqItem({ q, a }) {
         <span
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[18px] font-light leading-none select-none transition-colors duration-200"
           style={open
-            ? { background: "#3b82f6", color: "#fff" }
-            : { background: "#eff6ff", color: "#3b82f6" }
+            ? { background: ACCENT, color: "#fff" }
+            : { background: "#f0fdfa", color: ACCENT }
           }
         >
           {open ? "−" : "+"}
