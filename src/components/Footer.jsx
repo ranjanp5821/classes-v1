@@ -240,7 +240,7 @@ export default function Footer() {
     <>
       {/* ── Footer shell (self-blurs when its own auth modal is open) ── */}
       <footer
-        className="bg-paper transition-[filter] duration-200"
+        className="border-t border-line bg-mist transition-[filter] duration-200"
         style={authOpen ? { filter: "blur(4px)" } : undefined}
         aria-label="Site footer"
       >
@@ -277,14 +277,14 @@ export default function Footer() {
                   </button>
                   <button
                     onClick={() => navigate("/")}
-                    className="inline-flex items-center justify-center rounded-xl border border-line-2 px-5 py-2.5 text-[14px] font-medium text-ink-3 transition-colors hover:border-ink-4 hover:text-ink"
+                    className="inline-flex items-center justify-center rounded-xl border border-line-2 bg-paper px-5 py-2.5 text-[14px] font-medium text-ink-3 transition-colors hover:border-ink-4 hover:text-ink"
                   >
                     Contact Us
                   </button>
                 </div>
 
                 {/* Role switcher pill */}
-                <div className="flex items-center gap-0.5 rounded-xl border border-line bg-mist p-1">
+                <div className="flex items-center gap-0.5 rounded-xl border border-line bg-paper p-1">
                   <span className="select-none px-2.5 text-[11.5px] text-ink-4">
                     Viewing as:
                   </span>
