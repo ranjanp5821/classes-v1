@@ -257,11 +257,21 @@ export default function PartnersPage() {
   const [showMoreFaq, setShowMoreFaq] = useState(false);
   const authOpen = authModal !== null;
 
+  const applyRef = useRef(null);
+
   const sectionRefs = {
     growth:     useRef(null),
     academic:   useRef(null),
     technology: useRef(null),
     affiliate:  useRef(null),
+  };
+
+  const scrollToApply = () => {
+    const el = applyRef.current;
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -327,7 +337,7 @@ export default function PartnersPage() {
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <button
-                  onClick={openSignup}
+                  onClick={scrollToApply}
                   className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
                   style={{ background: GRADIENT }}
                 >
@@ -843,7 +853,7 @@ export default function PartnersPage() {
         {/* ════════════════════════════════════════════════════════
             S10 — Partner Application
         ════════════════════════════════════════════════════════ */}
-        <section className="bg-paper py-20">
+        <section className="bg-paper py-20" ref={applyRef}>
           <div className="mx-auto max-w-5xl px-6 md:px-8">
             <motion.div {...fadeUp}>
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
