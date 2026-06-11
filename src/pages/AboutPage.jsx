@@ -179,17 +179,17 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-3xl"
+              className="w-full"
             >
               <h1 className="text-4xl font-serif font-medium leading-[1.08] tracking-tight text-ink md:text-[58px]">
                 Every student seen, supported, and learning at their best.
               </h1>
-              <p className="mt-6 text-[17px] leading-relaxed text-ink-3 md:text-[18px]">
+              <p className="mt-6 w-full text-[17px] leading-relaxed text-ink-3 md:text-[18px]">
                 Classess.com® is an AI-native Academic Intelligence Platform that puts the student
                 at the centre, empowers teachers with intelligent support, and helps institutions
                 make better academic decisions.
               </p>
-              <p className="mt-4 text-[17px] leading-relaxed text-ink-3 md:text-[18px]">
+              <p className="mt-4 w-full text-[17px] leading-relaxed text-ink-3 md:text-[18px]">
                 We connect learning, teaching, assessment, student support, and institutional
                 intelligence in one responsible, education-first ecosystem.
               </p>
@@ -237,16 +237,16 @@ export default function AboutPage() {
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
                 Why we exist
               </p>
-              <h2 className="mt-2 max-w-2xl text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 From disconnected tools to one connected academic journey.
               </h2>
-              <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
                 Lesson plans, assessments, feedback, reports, and student activity often exist in
                 separate systems with no shared thread. Teachers cannot see the full picture.
                 Institutions cannot act on what they do not know. Students receive support that is
                 too late or too general.
               </p>
-              <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-4 text-[16px] leading-relaxed text-ink-3">
                 Classess.com® brings this information together into one connected academic
                 intelligence layer — making the right action visible at the right time.
               </p>
@@ -310,10 +310,10 @@ export default function AboutPage() {
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
                 Our foundation
               </p>
-              <h2 className="mt-2 max-w-2xl text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Built from first principles, not from copies.
               </h2>
-              <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
                 Every product, workflow, and capability at Classess.com® is designed around four
                 core principles. These are not aspirational statements — they are the filter through
                 which every decision is made.
@@ -370,10 +370,10 @@ export default function AboutPage() {
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
                 Our model
               </p>
-              <h2 className="mt-2 max-w-2xl text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 The student at the centre of every decision.
               </h2>
-              <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
                 The Classess.com® model places the student at the centre of the academic system.
                 Teachers work closest to the student's learning. Institutions provide the surrounding
                 structure and resources. Parents and authorised supporters are connected
@@ -434,10 +434,10 @@ export default function AboutPage() {
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
                 Our technology
               </p>
-              <h2 className="mt-2 max-w-2xl text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 From software to Academic Intelligence.
               </h2>
-              <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
                 Classess.com® is not simply a school management system or a set of teaching tools.
                 Value increases as academic information becomes connected and actionable — moving
                 from software through data, intelligence, and workflow support toward institutional
@@ -498,10 +498,10 @@ export default function AboutPage() {
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
                 Our commitment
               </p>
-              <h2 className="mt-2 max-w-2xl text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 Responsible AI, designed for education.
               </h2>
-              <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
                 AI in Classess.com® is always controlled by humans. Every AI-generated suggestion
                 or action passes through academic context, privacy checks, and authorised review
                 before it reaches a student, teacher, or institution. AI supports educators — it
@@ -562,10 +562,10 @@ export default function AboutPage() {
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
                 Our products
               </p>
-              <h2 className="mt-2 max-w-2xl text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 The Classess® Ecosystem.
               </h2>
-              <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
                 Classess.com® is a family of products built around three interconnected areas —
                 learning and academic intelligence, institution operations and engagement, and
                 content and partnerships.
@@ -628,16 +628,16 @@ export default function AboutPage() {
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-4">
                 Our vision
               </p>
-              <h2 className="mt-2 max-w-2xl text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
+              <h2 className="mt-2 text-3xl font-serif font-medium tracking-tight text-ink md:text-4xl">
                 A future where every student has clearer academic direction.
               </h2>
-              <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-5 text-[16px] leading-relaxed text-ink-3">
                 We believe students learn better when they can see what they understand, what they
                 need to work on, and what to do next. Teachers are more effective when they have the
                 right information at the right time. Institutions improve when they can act on
                 academic knowledge rather than administrative reports alone.
               </p>
-              <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-ink-3">
+              <p className="mt-4 text-[16px] leading-relaxed text-ink-3">
                 Classess.com® is working toward a realistic future where responsible intelligence
                 makes this possible — for every student, teacher, and institution, regardless of
                 location, language, or resource level.
