@@ -713,7 +713,7 @@ export default function AboutPage() {
         }}
       />
 
-      <Footer />
+      <Footer hideCta />
     </div>
   );
 }

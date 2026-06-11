@@ -162,7 +162,7 @@ export default function Navbar({ onOpenAuth }) {
           aria-label="Classess Home"
         >
           <img
-            src="/assets/4 Star Logo- Classess.svg"
+            src="/assets/classess logo.svg"
             alt="Classess logo"
             className="h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
           />

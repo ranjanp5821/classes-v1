@@ -173,7 +173,7 @@ function ColumnBlock({ heading, id, openSection, onToggle, children }) {
 
 /* ── Footer (default export) ── */
 
-export default function Footer() {
+export default function Footer({ hideCta = false }) {
   const navigate = useNavigate();
   const { activeRoleId, selectRole } = useRole();
   const [authModal, setAuthModal]   = useState(null);
@@ -199,7 +199,7 @@ export default function Footer() {
       >
 
         {/* ── Row 1: Role-specific CTA band ── */}
-        <div className="border-b border-line px-6 py-12 md:px-12 md:py-14">
+        {!hideCta && <div className="border-b border-line px-6 py-12 md:px-12 md:py-14">
           <div className="mx-auto max-w-7xl">
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
 
@@ -234,7 +234,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
 
         {/* ── Row 2: Brand area + 5 link columns ── */}
         <div className="px-6 py-12 md:px-12">
@@ -244,7 +244,7 @@ export default function Footer() {
               {/* Brand area */}
               <div className="sm:col-span-2 lg:col-span-3 xl:col-span-1">
                 <img
-                  src="/assets/4 Star Logo- Classess.svg"
+                  src="/assets/classess logo with pvt lt.svg"
                   alt="Classess.com®"
                   className="h-auto w-[160px]"
                 />
