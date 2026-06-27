@@ -14,20 +14,85 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mic } from "lucide-react";
-import { askOurModel } from "../lib/ourModel";
+import { askOurModel, synthSpeech } from "../lib/ourModel";
+import { useRole } from "../hooks/useRole";
 
 const IDLE_GIF = "/assets/vidya-idle.gif";
 const TALKING_GIF = "/assets/vidya-talking.gif";
 const LANG_STORAGE_KEY = "vidya-lang";
 
+// Keep usage (and cost) bounded: a single visitor gets up to ~4 minutes of
+// conversation with our model, then it winds down.
+const SESSION_MS = 4 * 60 * 1000;
+
+// ── Navigation: handle "take me to / show / open …" locally (no API call) ──
+// Scrolls to the section on the current page if present, else routes to its page.
+const NAV_TRIGGER =
+  /\b(show|take me|go to|open|navigate|scroll|where is|jump to|i want to see|let'?s see|bring me)\b|दिखा|ले चल|ले जा|जाओ|खोल|कहाँ|कहां|देखना/i;
+
+const NAV_TARGETS = [
+  { label: "Learn",            labelHi: "लर्न",            kw: ["learn", "concept", "understand", "topic", "theory"], khi: ["सीख", "कॉन्सेप्ट", "समझ", "थ्योरी"], ids: ["concepts"], path: "/students/learn" },
+  { label: "Practice",         labelHi: "प्रैक्टिस",        kw: ["practice", "exercise", "drill"],                      khi: ["अभ्यास", "प्रैक्टिस", "एक्सरसाइज"], ids: ["practice"], path: "/students/practice" },
+  { label: "Exam Preparation", labelHi: "परीक्षा तैयारी",   kw: ["exam", "preparation", "test prep", "syllabus"],       khi: ["परीक्षा", "एग्जाम", "तैयारी", "सिलेबस"], ids: ["exam-prep"], path: "/students/exam-preparation" },
+  { label: "Progress",         labelHi: "प्रगति",           kw: ["progress", "tracking", "improvement", "marks"],       khi: ["प्रगति", "प्रोग्रेस", "सुधार"], ids: ["progress"], path: "/students/progress" },
+  { label: "AI Tutor",         labelHi: "एआई ट्यूटर",      kw: ["ai tutor", "tutor", "doubt"],                         khi: ["ट्यूटर", "एआई ट्यूटर", "डाउट"], ids: ["ai-tutor"], path: "/students/ai-tutor" },
+  { label: "How It Helps",     labelHi: "यह कैसे मदद करता है", kw: ["how it helps", "transformation", "benefit"],       khi: ["कैसे मदद", "फायदे", "लाभ"], ids: ["how-it-helps", "teaching-workflow"] },
+  { label: "Overview",         labelHi: "ओवरव्यू",          kw: ["overview", "all features", "features", "everything"], khi: ["ओवरव्यू", "सभी फ़ीचर", "फ़ीचर्स"], ids: ["student-overview", "teacher-overview", "institute-overview"] },
+  { label: "FAQ",              labelHi: "सामान्य प्रश्न",    kw: ["faq", "frequently asked", "common question"],         khi: ["एफएक्यू", "सामान्य प्रश्न"], ids: ["faq"] },
+  { label: "Lesson Planning",  labelHi: "लेसन प्लानिंग",     kw: ["lesson plan", "planning", "prepare lesson"],          khi: ["लेसन", "प्लानिंग", "पाठ योजना"], ids: ["planning"], path: "/teachers/plan-and-create" },
+  { label: "Assessment",       labelHi: "मूल्यांकन",        kw: ["assessment", "grading", "feedback", "marking"],       khi: ["मूल्यांकन", "फीडबैक"], ids: ["assessment"], path: "/teachers/assess-and-support" },
+  { label: "Student Insights", labelHi: "स्टूडेंट इनसाइट्स", kw: ["insight", "who needs help", "struggling"],            khi: ["इनसाइट"], ids: ["insights"] },
+];
+
+function matchNav(transcript) {
+  const lower = transcript.toLowerCase();
+  if (!NAV_TRIGGER.test(transcript)) return null;
+  for (const tgt of NAV_TARGETS) {
+    if (tgt.kw.some((k) => lower.includes(k)) || tgt.khi.some((k) => transcript.includes(k))) return tgt;
+  }
+  return null;
+}
+
+// ── Greeting / wake phrase: "hi", "hii Vidya", "hello", "namaste", etc. ──
+// A bare greeting is answered warmly and instantly (no model call). We only
+// match when the whole utterance is essentially just a greeting, so real
+// questions like "hi, how does practice help me?" still go to the model.
+const GREET_WORDS =
+  /^(hi+|hii+|hey+|heyy+|hello+|helo+|hai+|haai+|haay+|yo|hola|namaste|namaskar|namaskaar|good (morning|afternoon|evening))$/i;
+const GREET_HI = /^(नमस्ते|नमस्कार|हाय|हेलो|हाई|हैलो)$/;
+
+function isGreeting(transcript) {
+  // Drop the name "Vidya", punctuation and filler so "hii vidya!" → "hii".
+  const cleaned = transcript
+    .toLowerCase()
+    .replace(/vidya|विद्या|वीडिया/gi, " ")
+    .replace(/\b(there|please|ji|जी)\b/gi, " ")
+    .replace(/[^a-zऀ-ॿ\s]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!cleaned) return true; // just "Vidya" on its own counts as a greeting
+  return GREET_WORDS.test(cleaned) || GREET_HI.test(cleaned);
+}
+
 const STRINGS = {
-  en: { tap: "Tap to talk", listening: "Listening…", thinking: "Thinking…", speaking: "Speaking…" },
-  hi: { tap: "बात करने के लिए टैप करें", listening: "सुन रही हूँ…", thinking: "सोच रही हूँ…", speaking: "बोल रही हूँ…" },
+  en: {
+    tap: "Tap to talk", listening: "Listening…", thinking: "Thinking…", speaking: "Speaking…",
+    greet: "Hi there! I'm Vidya. How can I help you today?",
+    limit: "That's all the time I have for now. Thanks for chatting — explore the page and tap me anytime later!",
+  },
+  hi: {
+    tap: "बात करने के लिए टैप करें", listening: "सुन रही हूँ…", thinking: "सोच रही हूँ…", speaking: "बोल रही हूँ…",
+    greet: "नमस्ते! मैं विद्या हूँ। बताइए, मैं आपकी कैसे मदद कर सकती हूँ?",
+    limit: "अभी के लिए मेरे पास इतना ही समय है। बात करने के लिए शुक्रिया — पेज देखिए और बाद में मुझे टैप कीजिए!",
+  },
 };
 
 export default function MiniAssistant({ autoStart = false }) {
+  const { activeRoleId } = useRole();
+  const navigate = useNavigate();
   // idle | listening | thinking | talking
   const [state, setState] = useState("idle");
   const [lang] = useState(
@@ -36,8 +101,12 @@ export default function MiniAssistant({ autoStart = false }) {
 
   const recRef    = useRef(null);
   const audioRef  = useRef(null);
+  const speakerRef = useRef(null); // active streaming-speech controller (to cancel)
   const talkTimer = useRef(null);
   const autoTimer = useRef(null);
+  const sessionStarted = useRef(false); // has the visitor started talking to our model
+  const sessionExpired = useRef(false); // flipped true ~4 min after the first turn
+  const voiceRef       = useRef(null);  // chosen female browser voice
   // Hands-free loop is enabled only if Vidya was used (autoStart). Otherwise the
   // user must tap to start; the first tap then enables the loop.
   const autoRef   = useRef(autoStart);
@@ -45,65 +114,194 @@ export default function MiniAssistant({ autoStart = false }) {
   const stateRef  = useRef(state);
   useEffect(() => { stateRef.current = state; }, [state]);
 
+  // Pick a consistent female browser voice (closest free match to the avatar's
+  // voice) for the chosen language. Voices can load asynchronously.
+  useEffect(() => {
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    const want = lang === "hi" ? "hi" : "en";
+    const female = /female|woman|samantha|victoria|karen|moira|tessa|fiona|serena|aria|jenny|zira|hazel|susan|kalpana|swara|neerja|veena|raveena|aditi|priya|heera/i;
+    const pick = () => {
+      const voices = synth.getVoices?.() || [];
+      if (!voices.length) return;
+      const byLang = voices.filter((v) => v.lang?.toLowerCase().startsWith(want));
+      const pool = byLang.length ? byLang : voices;
+      voiceRef.current =
+        pool.find((v) => female.test(v.name)) ||
+        pool.find((v) => /google/i.test(v.name)) ||
+        byLang[0] || voices[0] || null;
+    };
+    pick();
+    synth.addEventListener?.("voiceschanged", pick);
+    return () => synth.removeEventListener?.("voiceschanged", pick);
+  }, [lang]);
+
   const t = STRINGS[lang] || STRINGS.en;
 
-  /* ── Speak the model's reply; the TALKING GIF shows for the whole reply ──
-     The talking state is held for an estimated speech duration so a flaky /
-     instant TTS (or audio) 'end' event can't cut the talking GIF short. Real
-     audio/TTS ending only finishes it early (after it has actually played). */
-  const speak = (text, audioUrl) => {
-    setState("talking");
-    // ~60ms/char, clamped to a sensible 1.8s–12s window.
-    const estMs = Math.min(12000, Math.max(1800, (text?.length || 24) * 60));
+  /* ── Browser-voice fallback (only if neural TTS fails) ──
+     Keeps Vidya from going silent if /api/tts hiccups. Resolves when done. */
+  const fallbackSpeak = (text) => new Promise((resolve) => {
+    try {
+      const synth = window.speechSynthesis;
+      if (!synth) return resolve();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = lang === "hi" ? "hi-IN" : "en-US";
+      if (voiceRef.current) u.voice = voiceRef.current;
+      u.rate = 1; u.pitch = 1.05;
+      u.onend = u.onerror = () => resolve();
+      synth.speak(u);
+    } catch { resolve(); }
+  });
 
+  /* ── Play ONE clip of speech in the clear neural voice ──
+     `audioP` lets the caller pre-start the TTS fetch (so the next sentence is
+     already downloading while the current one plays). Falls back to the browser
+     voice if neural audio isn't available. Resolves when the clip finishes. */
+  const playClip = (text, audioP) => new Promise((resolve) => {
+    const s = (text || "").trim();
+    if (!s) return resolve();
+    let done = false;
+    const fin = () => { if (done) return; done = true; resolve(); };
+    (audioP || synthSpeech(s, lang)).then((url) => {
+      if (!url) return fallbackSpeak(s).then(fin);
+      const a = new Audio(url);
+      audioRef.current = a;
+      a.onended = a.onerror = () => { URL.revokeObjectURL(url); fin(); };
+      a.play().catch(() => { URL.revokeObjectURL(url); fallbackSpeak(s).then(fin); });
+    }).catch(() => fallbackSpeak(s).then(fin));
+  });
+
+  /* ── Speak a one-shot line (nav replies, session limit) in the neural voice ── */
+  const speak = (text) => {
+    setState("talking");
+    clearTimeout(talkTimer.current);
+    talkTimer.current = setTimeout(() => { setState("idle"); autoListen(); }, 20000);
+    playClip(text).then(() => {
+      clearTimeout(talkTimer.current);
+      setState("idle");
+      autoListen();
+    });
+  };
+
+  /* ── Speak the model's reply as it STREAMS in ──
+     Each complete sentence is sent for neural TTS the moment it arrives (fetches
+     run in parallel) and played strictly in order, so Vidya starts talking well
+     before the full answer is generated yet always sounds like one voice. The
+     TALKING GIF shows from the first clip until the last one ends; a generous
+     timer is a failsafe only, in case audio playback never fires its 'end'. */
+  const startStreamingSpeech = () => {
+    let pending = "";        // streamed text not yet split into a full sentence
+    let outstanding = 0;     // sentences queued but not finished playing
+    let chain = Promise.resolve(); // serializes playback into the right order
+    let streamDone = false;
+    let started = false;
     let finished = false;
+
     const finish = () => {
       if (finished) return;
       finished = true;
       clearTimeout(talkTimer.current);
       setState("idle");
-      autoListen(); // hands-free: listen again after each reply
+      autoListen(); // hands-free: listen again after the reply
     };
-    // Only let a real audio/TTS 'end' finish early once it has actually played
-    // for a moment (guards against an instant/empty end event).
-    let canEarlyFinish = false;
-    const playGuard = setTimeout(() => { canEarlyFinish = true; }, 600);
-    const maybeFinish = () => { if (canEarlyFinish) { clearTimeout(playGuard); finish(); } };
+    const settle = () => { if (streamDone && outstanding === 0) finish(); };
+    // Failsafe so the talking GIF can't get stuck if an 'end' event is missed.
+    const armFailsafe = () => {
+      clearTimeout(talkTimer.current);
+      talkTimer.current = setTimeout(finish, 25000);
+    };
 
-    clearTimeout(talkTimer.current);
-    talkTimer.current = setTimeout(finish, estMs);
+    const enqueue = (raw) => {
+      const s = raw.trim();
+      if (!s) return;
+      outstanding++;
+      if (!started) { started = true; setState("talking"); }
+      armFailsafe();
+      const audioP = synthSpeech(s, lang); // start fetching now (parallel)
+      chain = chain
+        .then(() => (finished ? null : playClip(s, audioP)))
+        .then(() => {
+          outstanding -= 1;
+          if (!finished && outstanding > 0) armFailsafe();
+          settle();
+        });
+    };
 
-    if (audioUrl) {
-      const a = new Audio(audioUrl);
-      audioRef.current = a;
-      a.onended = maybeFinish;
-      // If audio fails, keep the talking GIF until the estimate, then idle.
-      a.play().catch(() => {});
-      return;
-    }
+    // Speak any complete sentences sitting in `pending`; keep the trailing
+    // fragment until more text (or the stream's end) completes it.
+    const flush = (force) => {
+      const re = /[^.!?।\n…]*[.!?।\n…]+/g;
+      let m, last = 0;
+      while ((m = re.exec(pending)) !== null) { enqueue(m[0]); last = re.lastIndex; }
+      pending = pending.slice(last);
+      if (force && pending.trim()) { enqueue(pending); pending = ""; }
+    };
 
-    // Placeholder voice: browser speech synthesis (replace when the model
-    // returns its own audioUrl). Talking GIF still shows even if TTS is silent.
-    try {
-      const synth = window.speechSynthesis;
-      if (synth) {
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = lang === "hi" ? "hi-IN" : "en-US";
-        u.onend = maybeFinish;
-        synth.speak(u);
+    return {
+      onDelta: (delta) => { pending += delta; flush(false); },
+      onDone: () => { streamDone = true; flush(true); settle(); },
+      fail: finish,
+      cancel: () => { finished = true; clearTimeout(talkTimer.current); },
+    };
+  };
+
+  // Scroll to a section on the current page, else route to its page.
+  const goTo = (tgt) => {
+    for (const id of tgt.ids || []) {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        return true;
       }
-    } catch { /* talking GIF shows for the estimate, then idle */ }
+    }
+    if (tgt.path) { navigate(tgt.path); window.scrollTo({ top: 0 }); return true; }
+    return false;
   };
 
   /* ── Hand the transcript to our model ── */
   const handleTranscript = async (transcript) => {
     if (!transcript?.trim()) { setState("idle"); return; }
+
+    // A bare greeting ("hi Vidya", "hello", "namaste") gets a warm, instant
+    // reply — no model call — then the hands-free loop keeps listening.
+    if (isGreeting(transcript)) { speak(t.greet); return; }
+
+    // Navigation commands are handled instantly, locally — no model call.
+    const nav = matchNav(transcript);
+    if (nav && goTo(nav)) {
+      const label = lang === "hi" ? nav.labelHi : nav.label;
+      speak(lang === "hi" ? `ज़रूर, आपको ${label} पर ले जा रही हूँ।` : `Sure, taking you to ${label}.`);
+      return;
+    }
+
+    // Per-visitor usage cap (~4 min) to keep model cost low.
+    if (!sessionStarted.current) {
+      sessionStarted.current = true;
+      setTimeout(() => { sessionExpired.current = true; }, SESSION_MS);
+    }
+    if (sessionExpired.current) {
+      autoRef.current = false;          // stop the hands-free loop
+      speak(t.limit);                   // say goodbye, no model call
+      return;
+    }
+
     setState("thinking");
+    const speaker = startStreamingSpeech();
+    speakerRef.current = speaker;
+    let gotDelta = false;
     try {
-      const { text, audioUrl } = await askOurModel(transcript, { lang });
-      speak(text, audioUrl);
+      const { text } = await askOurModel(transcript, {
+        lang,
+        roleId: activeRoleId || "",
+        onDelta: (d, full) => { gotDelta = true; speaker.onDelta(d, full); },
+      });
+      // Streaming spoke the reply sentence-by-sentence; just close it out.
+      // If nothing streamed (error/fallback), speak the returned text in one shot.
+      if (gotDelta) speaker.onDone();
+      else speak(text);
     } catch {
-      setState("idle");
+      speaker.fail();
     }
   };
 
@@ -145,6 +343,8 @@ export default function MiniAssistant({ autoStart = false }) {
   const stopAll = () => {
     clearTimeout(talkTimer.current);
     clearTimeout(autoTimer.current);
+    try { speakerRef.current?.cancel?.(); } catch { /* noop */ }
+    speakerRef.current = null;
     try { recRef.current?.stop(); } catch { /* noop */ }
     try { window.speechSynthesis?.cancel(); } catch { /* noop */ }
     try { audioRef.current?.pause(); } catch { /* noop */ }

@@ -6,10 +6,13 @@ import PracticePage from "./pages/students/PracticePage";
 import ExamPreparationPage from "./pages/students/ExamPreparationPage";
 import ProgressPage from "./pages/students/ProgressPage";
 import AITutorPage from "./pages/students/AITutorPage";
+import HomeworkScannerPage from "./pages/students/HomeworkScannerPage";
+import LiveCheckPage from "./pages/students/LiveCheckPage";
 import HowItHelpsPage from "./pages/teachers/HowItHelpsPage";
 import PlanAndCreatePage from "./pages/teachers/PlanAndCreatePage";
 import AssessAndSupportPage from "./pages/teachers/AssessAndSupportPage";
 import TutorialsPage from "./pages/teachers/TutorialsPage";
+import TeachingAssistantPage from "./pages/teachers/TeachingAssistantPage";
 import PlatformPage from "./pages/institutions/PlatformPage";
 import AcademicIntelligencePage from "./pages/institutions/AcademicIntelligencePage";
 import ImplementationPage from "./pages/institutions/ImplementationPage";
@@ -30,10 +33,13 @@ export default function App() {
         <Route path="/students/exam-preparation" element={<ExamPreparationPage />} />
         <Route path="/students/progress" element={<ProgressPage />} />
         <Route path="/students/ai-tutor" element={<AITutorPage />} />
+        <Route path="/students/homework-scanner" element={<HomeworkScannerPage />} />
+        <Route path="/students/live-check" element={<LiveCheckPage />} />
         <Route path="/teachers/how-it-helps" element={<HowItHelpsPage />} />
         <Route path="/teachers/plan-and-create" element={<PlanAndCreatePage />} />
         <Route path="/teachers/assess-and-support" element={<AssessAndSupportPage />} />
         <Route path="/teachers/tutorials" element={<TutorialsPage />} />
+        <Route path="/teachers/teaching-assistant" element={<TeachingAssistantPage />} />
         <Route path="/institutions/platform" element={<PlatformPage />} />
         <Route path="/institutions/academic-intelligence" element={<AcademicIntelligencePage />} />
         <Route path="/institutions/implementation" element={<ImplementationPage />} />
