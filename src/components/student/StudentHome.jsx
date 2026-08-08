@@ -63,7 +63,6 @@ const GRADIENT = "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)";
  * <MediaFrame> — that always takes priority over the illustration below. */
 const SLOT_IMAGE = {
   "MEDIA 01": "/assets/student/media-01-student-hero.svg",
-  "MEDIA 02": "/assets/student/media-02-learning-journey.svg",
   "MEDIA 03": "/assets/student/media-03-concept-explainer.svg",
   "MEDIA 04": "/assets/student/media-04-practice.svg",
   "MEDIA 05": "/assets/student/media-05-gap-plan.svg",
