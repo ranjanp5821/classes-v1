@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 460" width="1400" height="460">
+  <defs>
+    <linearGradient id="accI3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="460" fill="#FFFFFF"/>
+
+  <path d="M 60 300 C 220 260, 260 380, 420 340 S 620 240, 780 280 S 1000 360, 1340 200"
+        fill="none" stroke="#E2E8F0" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 60 300 C 220 260, 260 380, 420 340 S 620 240, 780 280 S 1000 360, 1340 200"
+        fill="none" stroke="url(#accI3)" stroke-width="4" stroke-dasharray="1 12" stroke-linecap="round"/>
+
+  <g font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="#475569">
+    <!-- Curriculum -->
+    <circle cx="60" cy="300" r="16" fill="url(#accI3)"/>
+    <path d="M 52 300 h 16 M 60 292 v 16" stroke="#fff" stroke-width="2"/>
+    <text x="60" y="332" text-anchor="middle">Curriculum</text>
+
+    <!-- Planning -->
+    <circle cx="330" cy="352" r="16" fill="url(#accI3)"/>
+    <rect x="323" y="345" width="14" height="14" fill="none" stroke="#fff" stroke-width="1.6"/>
+    <text x="330" y="384" text-anchor="middle">Planning</text>
+
+    <!-- Teaching -->
+    <circle cx="600" cy="252" r="16" fill="#fff" stroke="url(#accI3)" stroke-width="3"/>
+    <text x="600" y="228" text-anchor="middle" fill="url(#accI3)">Teaching</text>
+
+    <!-- Assessment -->
+    <circle cx="860" cy="300" r="16" fill="#fff" stroke="url(#accI3)" stroke-width="3"/>
+    <text x="860" y="332" text-anchor="middle">Assessment</text>
+
+    <!-- Feedback -->
+    <circle cx="1080" cy="330" r="16" fill="#fff" stroke="#CBD5E1" stroke-width="3"/>
+    <text x="1080" y="358" text-anchor="middle" fill="#94A3B8">Feedback</text>
+
+    <!-- Progress -->
+    <circle cx="1340" cy="200" r="18" fill="#fff" stroke="#CBD5E1" stroke-width="3"/>
+    <text x="1310" y="172" text-anchor="middle" fill="#94A3B8">Progress</text>
+  </g>
+
+  <g transform="translate(1340,180)">
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#94A3B8" stroke-width="3"/>
+    <path d="M 0 -40 L 26 -32 L 0 -24 Z" fill="url(#accI3)"/>
+  </g>
+</svg>

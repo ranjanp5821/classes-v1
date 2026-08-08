@@ -58,8 +58,44 @@ function FadeIn({ children, delay = 0, className = "" }) {
   );
 }
 
+/* ── Slot artwork ─────────────────────────────────────────────────────
+ * Custom illustration per media slot (bundled in /public/assets/institute),
+ * shown until a real production asset is delivered. */
+const INSTITUTE_SLOT_IMAGE = {
+  "INSTITUTION-HOME-M01": "/assets/institute/media-01-leadership-dashboard.svg",
+  "INSTITUTION-HOME-M02": "/assets/institute/media-02-org-types.svg",
+  "INSTITUTION-HOME-M03": "/assets/institute/media-03-academic-journey.svg",
+  "INSTITUTION-HOME-M04": "/assets/institute/media-04-teacher-support.svg",
+  "INSTITUTION-HOME-M05": "/assets/institute/media-05-gap-intervention.svg",
+  "INSTITUTION-HOME-M06": "/assets/institute/media-06-dashboard-demo.svg",
+  "INSTITUTION-HOME-M07": "/assets/institute/media-07-integration.svg",
+  "INSTITUTION-HOME-M08": "/assets/institute/media-08-governance.svg",
+  "INSTITUTION-HOME-M09": "/assets/institute/media-09-cta.svg",
+};
+
 /* ── Media placeholder (swapped out when real assets arrive) ─────────────── */
 function MediaPlaceholder({ mediaId, description }) {
+  const image = INSTITUTE_SLOT_IMAGE[mediaId];
+
+  if (image) {
+    return (
+      <div
+        className="overflow-hidden"
+        style={{
+          border: "1px solid var(--line)",
+          borderRadius: "var(--r-lg)",
+          boxShadow: "0 12px 40px rgba(14,14,16,0.08)",
+        }}
+      >
+        <img
+          src={image}
+          alt={description}
+          className="w-full block"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className="flex flex-col items-center justify-center gap-3 p-10 min-h-[280px] h-full border-dashed border-2"
@@ -175,10 +211,10 @@ function SecondaryButton({ children, onClick }) {
   );
 }
 
-function Card({ title, body, icon }) {
+function Card({ title, body, icon, className = "" }) {
   return (
     <div
-      className="p-6 flex flex-col gap-3"
+      className={`p-6 flex flex-col gap-3 ${className}`}
       style={{
         background: "var(--page)",
         border: "1px solid var(--line)",
@@ -476,10 +512,12 @@ function InstitutionTypeSection({ selectedType, setSelectedType }) {
             </h3>
             <Lead>{active.copy}</Lead>
           </div>
-          <MediaPlaceholder
-            mediaId="INSTITUTION-HOME-M02"
-            description={active.mediaDesc}
-          />
+          <div className="self-start">
+            <MediaPlaceholder
+              mediaId="INSTITUTION-HOME-M02"
+              description={active.mediaDesc}
+            />
+          </div>
         </motion.div>
       </AnimatePresence>
     </Section>
@@ -564,7 +602,7 @@ function TeacherCapacitySection() {
             Classess.com® helps teachers plan, create, assess, provide feedback, identify student needs, and take corrective action—while institutional leaders gain visibility without interfering in every classroom decision.
           </Lead>
 
-          <div className="flex flex-col gap-4 mb-6">
+          <div className="flex flex-col gap-4">
             {[
               { title: "Reduce repetitive work", body: "Help teachers spend less time preparing routine academic material, organising assessments, and compiling reports.", icon: "⚡" },
               { title: "Strengthen teaching quality", body: "Support curriculum-aligned planning, meaningful classroom activities, appropriate assessments, and actionable feedback.", icon: "🎯" },
@@ -573,12 +611,18 @@ function TeacherCapacitySection() {
               <Card key={card.title} title={card.title} body={card.body} icon={<span className="text-[18px]">{card.icon}</span>} />
             ))}
           </div>
+        </FadeIn>
 
-          <Lead className="mb-6">
+        <FadeIn delay={0.1} className="flex flex-col gap-4">
+          <MediaPlaceholder
+            mediaId="INSTITUTION-HOME-M04"
+            description="Teacher-support and approval workflow animation — institutional academic framework → teacher receives aligned draft → teacher reviews and adapts → classroom activity → learning evidence returns to system."
+          />
+          <Lead>
             AI-supported content remains reviewable and editable. Teachers maintain professional judgement and approval before material reaches students.
           </Lead>
           <HighlightLine>Better systems should support teachers—not control them.</HighlightLine>
-          <div className="mt-6 flex flex-col gap-3">
+          <div className="flex flex-col gap-3">
             <PrimaryButton onClick={() => navigate("/institutions/platform")}>Explore the Platform <ArrowRight size={16} /></PrimaryButton>
             <ReadMoreLink
               href="/institutions/platform"
@@ -586,13 +630,6 @@ function TeacherCapacitySection() {
               ariaLabel="Explore how Classess.com® supports teacher enablement and academic consistency"
             />
           </div>
-        </FadeIn>
-
-        <FadeIn delay={0.1} className="h-full">
-          <MediaPlaceholder
-            mediaId="INSTITUTION-HOME-M04"
-            description="Teacher-support and approval workflow animation — institutional academic framework → teacher receives aligned draft → teacher reviews and adapts → classroom activity → learning evidence returns to system."
-          />
         </FadeIn>
       </div>
     </Section>
@@ -895,6 +932,13 @@ function FinalCTASection() {
       className="w-full py-28 relative overflow-hidden"
       style={{ background: GRADIENT }}
     >
+      {/* INSTITUTION-HOME-M09 — decorative backdrop */}
+      <img
+        src={INSTITUTE_SLOT_IMAGE["INSTITUTION-HOME-M09"]}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.16] mix-blend-overlay pointer-events-none"
+      />
       <div
         className="absolute right-0 top-0 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-20"
         style={{ background: "#fff" }}

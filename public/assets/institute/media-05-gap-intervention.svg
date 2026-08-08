@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 900" width="700" height="900">
+  <defs>
+    <linearGradient id="accI5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="900" fill="#FFFFFF"/>
+
+  <line x1="120" y1="95" x2="120" y2="805" stroke="#E2E8F0" stroke-width="3"/>
+  <line x1="120" y1="95" x2="120" y2="805" stroke="url(#accI5)" stroke-width="2" stroke-dasharray="1 9" opacity="0.7"/>
+
+  <!-- 1. Pattern identified -->
+  <g transform="translate(120,110)">
+    <circle r="24" fill="url(#accI5)"/>
+    <path d="M -10 4 C -4 -10, 4 12, 10 -6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+    <text x="46" y="-6" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E293B">Learning pattern identified</text>
+    <text x="46" y="14" font-family="Arial, sans-serif" font-size="12" fill="#64748B">Repeated mistakes in fractions</text>
+  </g>
+
+  <!-- 2. Affected group -->
+  <g transform="translate(120,225)">
+    <circle r="24" fill="#fff" stroke="url(#accI5)" stroke-width="3"/>
+    <g stroke="#1E293B" stroke-width="1.8" fill="none">
+      <circle cx="-7" cy="-3" r="6"/>
+      <circle cx="7" cy="-3" r="6"/>
+      <circle cx="0" cy="8" r="6"/>
+    </g>
+    <text x="46" y="-6" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E293B">Affected student group</text>
+    <text x="46" y="14" font-family="Arial, sans-serif" font-size="12" fill="#64748B">34 students, Grade 7</text>
+  </g>
+
+  <!-- 3. Likely cause -->
+  <g transform="translate(120,340)">
+    <circle r="24" fill="#fff" stroke="url(#accI5)" stroke-width="3"/>
+    <circle cx="-3" cy="-3" r="9" fill="none" stroke="#1E293B" stroke-width="2"/>
+    <line x1="4" y1="4" x2="11" y2="11" stroke="#1E293B" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="46" y="-6" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E293B">Likely academic cause</text>
+    <text x="46" y="14" font-family="Arial, sans-serif" font-size="12" fill="#64748B">Weak conceptual foundation</text>
+  </g>
+
+  <!-- 4. Recommended support -->
+  <g transform="translate(120,455)">
+    <circle r="24" fill="url(#accI5)"/>
+    <path d="M -10 4 q 10 10 20 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="46" y="-6" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E293B">Recommended support</text>
+    <text x="46" y="14" font-family="Arial, sans-serif" font-size="12" fill="#64748B">Guided practice + revision set</text>
+  </g>
+
+  <!-- 5. Assigned responsibility -->
+  <g transform="translate(120,570)">
+    <circle r="24" fill="#fff" stroke="url(#accI5)" stroke-width="3"/>
+    <circle cx="0" cy="-6" r="7" fill="none" stroke="#1E293B" stroke-width="2"/>
+    <path d="M -10 12 q 10 -12 20 0" fill="none" stroke="#1E293B" stroke-width="2"/>
+    <text x="46" y="-6" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E293B">Assigned responsibility</text>
+    <text x="46" y="14" font-family="Arial, sans-serif" font-size="12" fill="#64748B">Subject teacher, Ms. Rao</text>
+  </g>
+
+  <!-- 6. Follow-up status -->
+  <g transform="translate(120,685)">
+    <circle r="24" fill="#fff" stroke="url(#accI5)" stroke-width="3"/>
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#1E293B" stroke-width="2"/>
+    <line x1="0" y1="0" x2="0" y2="-6" stroke="#1E293B" stroke-width="2"/>
+    <line x1="0" y1="0" x2="5" y2="2" stroke="#1E293B" stroke-width="2"/>
+    <text x="46" y="-6" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E293B">Follow-up status</text>
+    <text x="46" y="14" font-family="Arial, sans-serif" font-size="12" fill="#64748B">Reassessment scheduled</text>
+  </g>
+
+  <!-- 7. Improvement -->
+  <g transform="translate(120,800)">
+    <circle r="24" fill="url(#accI5)"/>
+    <polyline points="-10,6 -2,-4 4,2 12,-10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="46" y="-6" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E293B">Improvement after reassessment</text>
+    <text x="46" y="14" font-family="Arial, sans-serif" font-size="12" fill="#64748B">Accuracy up from 54% to 79%</text>
+  </g>
+</svg>

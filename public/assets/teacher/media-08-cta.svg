@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg08t" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#1CA363"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg08t)"/>
+  <circle cx="640" cy="120" r="170" fill="#ffffff" opacity="0.08"/>
+  <circle cx="110" cy="470" r="210" fill="#ffffff" opacity="0.06"/>
+
+  <!-- whiteboard / lesson board -->
+  <g transform="translate(260,220)">
+    <rect x="0" y="0" width="280" height="180" rx="14" fill="#fff" opacity="0.95"/>
+    <rect x="0" y="0" width="280" height="180" rx="14" fill="none" stroke="#fff" stroke-width="6" opacity="0.5"/>
+    <!-- board content -->
+    <line x1="24" y1="36" x2="150" y2="36" stroke="#1CA363" stroke-width="8" stroke-linecap="round"/>
+    <line x1="24" y1="64" x2="230" y2="64" stroke="#CBD5E1" stroke-width="6" stroke-linecap="round"/>
+    <line x1="24" y1="88" x2="200" y2="88" stroke="#CBD5E1" stroke-width="6" stroke-linecap="round"/>
+    <!-- checklist -->
+    <g>
+      <circle cx="34" cy="122" r="11" fill="#22C55E"/>
+      <path d="M 28 122 l 4 5 l 9 -11" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="52" y1="122" x2="200" y2="122" stroke="#CBD5E1" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <g>
+      <circle cx="34" cy="150" r="11" fill="#22C55E"/>
+      <path d="M 28 150 l 4 5 l 9 -11" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="52" y1="150" x2="170" y2="150" stroke="#CBD5E1" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <!-- stand legs -->
+    <line x1="70" y1="180" x2="40" y2="230" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+    <line x1="210" y1="180" x2="240" y2="230" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+  </g>
+
+  <!-- pointer / wand -->
+  <g transform="translate(120,320) rotate(-30)">
+    <rect x="0" y="0" width="150" height="10" rx="5" fill="#fff" opacity="0.9"/>
+    <circle cx="150" cy="5" r="10" fill="#FBBF24"/>
+  </g>
+
+  <!-- upward growth arrow -->
+  <g transform="translate(600,340)" fill="#fff" opacity="0.95">
+    <polyline points="0,90 60,40 110,70 190,-10" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="190,-10 150,-4 176,26"/>
+  </g>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 900" width="700" height="900">
+  <defs>
+    <linearGradient id="accI4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="900" fill="#FFFFFF"/>
+
+  <!-- Institutional framework -->
+  <g transform="translate(350,90)">
+    <rect x="-90" y="-40" width="180" height="80" rx="12" fill="#fff" stroke="url(#accI4)" stroke-width="2.4"/>
+    <text y="-6" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Institutional</text>
+    <text y="14" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Framework</text>
+  </g>
+  <line x1="350" y1="130" x2="350" y2="190" stroke="url(#accI4)" stroke-width="2.4" stroke-dasharray="1 8"/>
+  <path d="M 342 178 l 8 14 l 8 -14" fill="none" stroke="url(#accI4)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Teacher receives aligned draft -->
+  <g transform="translate(350,250)">
+    <rect x="-110" y="-40" width="220" height="80" rx="12" fill="#fff" stroke="#334155" stroke-width="2.4"/>
+    <rect x="-90" y="-24" width="70" height="48" rx="4" fill="none" stroke="#334155" stroke-width="1.8"/>
+    <line x1="-82" y1="-10" x2="-38" y2="-10" stroke="#94A3B8" stroke-width="2"/>
+    <line x1="-82" y1="2" x2="-46" y2="2" stroke="#94A3B8" stroke-width="2"/>
+    <text x="20" y="-4" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Teacher receives</text>
+    <text x="20" y="16" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">aligned draft</text>
+  </g>
+  <line x1="350" y1="290" x2="350" y2="350" stroke="url(#accI4)" stroke-width="2.4" stroke-dasharray="1 8"/>
+  <path d="M 342 338 l 8 14 l 8 -14" fill="none" stroke="url(#accI4)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Teacher reviews & adapts -->
+  <g transform="translate(350,410)">
+    <rect x="-110" y="-40" width="220" height="80" rx="12" fill="#fff" stroke="#334155" stroke-width="2.4"/>
+    <g transform="translate(-72,0) rotate(-30)" stroke="#334155" stroke-width="2.2" fill="none">
+      <rect x="0" y="0" width="46" height="9" fill="#F59E0B" stroke="none"/>
+      <polygon points="46,0 58,4.5 46,9" fill="#334155"/>
+    </g>
+    <text x="20" y="-4" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Teacher reviews</text>
+    <text x="20" y="16" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">&amp; adapts</text>
+  </g>
+  <line x1="350" y1="450" x2="350" y2="510" stroke="url(#accI4)" stroke-width="2.4" stroke-dasharray="1 8"/>
+  <path d="M 342 498 l 8 14 l 8 -14" fill="none" stroke="url(#accI4)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Classroom activity -->
+  <g transform="translate(350,590)">
+    <rect x="-110" y="-52" width="220" height="104" rx="12" fill="#fff" stroke="url(#accI4)" stroke-width="2.4"/>
+    <g stroke="#1E293B" stroke-width="2" fill="none">
+      <circle cx="-64" cy="-8" r="14"/>
+      <circle cx="-30" cy="-14" r="14"/>
+      <circle cx="4" cy="-8" r="14"/>
+      <circle cx="38" cy="-14" r="14"/>
+    </g>
+    <text y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Classroom Activity</text>
+  </g>
+
+  <!-- loop back: evidence returns to the system -->
+  <path d="M 460 610 C 620 610, 620 90, 460 90" fill="none" stroke="url(#accI4)" stroke-width="2.4" stroke-dasharray="1 9" opacity="0.8"/>
+  <path d="M 448 100 l 14 -14 l 6 18" fill="none" stroke="url(#accI4)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="640" y="350" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="url(#accI4)" transform="rotate(90 640 350)" text-anchor="middle">Learning evidence returns to system</text>
+</svg>

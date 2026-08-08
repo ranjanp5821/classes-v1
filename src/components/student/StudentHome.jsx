@@ -56,12 +56,21 @@ import {
 const ACCENT = "#2563EB";
 const GRADIENT = "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)";
 
-/* ── DEMO media ───────────────────────────────────────────────────────
- * A single placeholder clip (bundled in /public/assets) shown in every media
- * slot the Media Placement Instructions define, so the frames can be previewed
- * before the real assets (media-0X-*.webm) are delivered. Swap a slot for its
- * production file by passing a `src` to the matching <MediaFrame>. */
-const DEMO_VIDEO = "/assets/media-demo.mp4";
+/* ── Slot artwork ─────────────────────────────────────────────────────
+ * A custom illustration per media slot (bundled in /public/assets), shown
+ * until the real production clip (media-0X-*.webm) is delivered. Swap a
+ * slot for its production file by passing a `src` to the matching
+ * <MediaFrame> — that always takes priority over the illustration below. */
+const SLOT_IMAGE = {
+  "MEDIA 01": "/assets/student/media-01-student-hero.svg",
+  "MEDIA 02": "/assets/student/media-02-learning-journey.svg",
+  "MEDIA 03": "/assets/student/media-03-concept-explainer.svg",
+  "MEDIA 04": "/assets/student/media-04-practice.svg",
+  "MEDIA 05": "/assets/student/media-05-gap-plan.svg",
+  "MEDIA 06": "/assets/student/media-06-progress.svg",
+  "MEDIA 07": "/assets/student/media-07-vidya-conversation.svg",
+  "MEDIA 08": "/assets/student/media-08-cta.svg",
+};
 
 /* ── Animation helper ─────────────────────────────────────────────── */
 const fadeUp = {
@@ -204,8 +213,9 @@ function Card({ icon: Icon, title, children, className = "" }) {
  */
 function MediaFrame({ slot, src, poster, frameLabel, className = "", children }) {
   const reduce = useReducedMotion();
-  const resolvedSrc = src ?? DEMO_VIDEO; // DEMO fallback until real assets land
-  const showVideo = resolvedSrc && !reduce;
+  const showVideo = !!src && !reduce;
+  const slotImage = SLOT_IMAGE[slot];
+  const showImage = !showVideo && !!slotImage && !reduce;
 
   return (
     <div
@@ -218,8 +228,8 @@ function MediaFrame({ slot, src, poster, frameLabel, className = "", children })
         boxShadow: "0 12px 40px rgba(14,14,16,0.08)",
       }}
     >
-      {showVideo ? (
-        /* Clip framed as an in-product window — brand chrome */
+      {showVideo || showImage ? (
+        /* Clip/illustration framed as an in-product window — brand chrome */
         <div
           className="flex flex-col flex-1 overflow-hidden"
           style={{ border: "1px solid var(--line-2)", borderRadius: "12px", background: "var(--page)" }}
@@ -242,16 +252,20 @@ function MediaFrame({ slot, src, poster, frameLabel, className = "", children })
             </span>
           </div>
           <div className="flex-1 min-h-0 w-full bg-neutral-900">
-            <video
-              src={resolvedSrc}
-              poster={poster}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-              aria-hidden="true"
-            />
+            {showVideo ? (
+              <video
+                src={src}
+                poster={poster ?? slotImage}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-hidden="true"
+              />
+            ) : (
+              <img src={slotImage} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+            )}
           </div>
         </div>
       ) : (
@@ -1291,22 +1305,16 @@ function IndependentLearningSection() {
    SECTION 08 — FINAL CALL TO ACTION  ·  MEDIA 08 (decorative, optional)
    ════════════════════════════════════════════════════════════════════ */
 function CtaBackdrop() {
-  // MEDIA 08 — subtle decorative backdrop. DEMO clip sits faint behind the
-  // gradient; the journey stages stay overlaid so text remains readable.
-  const reduce = useReducedMotion();
+  // MEDIA 08 — subtle decorative backdrop. Custom illustration sits faint
+  // behind the gradient; the journey stages stay overlaid so text remains readable.
   const stages = ["Learning", "Practice", "Improvement", "Exam Prep", "Progress"];
   return (
     <div data-media-slot="MEDIA 08" aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      {!reduce && (
-        <video
-          src={DEMO_VIDEO}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-[0.18] mix-blend-overlay"
-        />
-      )}
+      <img
+        src={SLOT_IMAGE["MEDIA 08"]}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.18] mix-blend-overlay"
+      />
       <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex items-center justify-between px-[8%] opacity-[0.13]">
         {stages.map((s, i) => (
           <div key={s} className="flex items-center gap-[6vw]">

@@ -56,8 +56,45 @@ function FadeIn({ children, delay = 0, className = "" }) {
   );
 }
 
+/* ── Slot artwork ─────────────────────────────────────────────────────
+ * Delivered illustration per media slot (bundled in /public/assets/teacher).
+ * Slots without an entry (e.g. TEA-HOME-M08) fall back to the dashed
+ * placeholder below until artwork is supplied. */
+const TEACHER_SLOT_IMAGE = {
+  "TEA-HOME-M01": "/assets/teacher/media-01-workspace.svg",
+  "TEA-HOME-M02": "/assets/teacher/media-02-teaching-cycle.jpg",
+  "TEA-HOME-M03": "/assets/teacher/media-03-lesson-planning.png",
+  "TEA-HOME-M04": "/assets/teacher/media-04-classroom-insight.png",
+  "TEA-HOME-M05": "/assets/teacher/media-05-assessment-feedback.svg",
+  "TEA-HOME-M06": "/assets/teacher/media-06-student-insight.jpg",
+  "TEA-HOME-M07": "/assets/teacher/media-07-approval-workflow.jpeg",
+  "TEA-HOME-M08": "/assets/teacher/media-08-cta.svg",
+};
+
 /* ── Media placeholder (swapped out when real assets arrive) ─────────────── */
 function MediaPlaceholder({ mediaId, description }) {
+  const image = TEACHER_SLOT_IMAGE[mediaId];
+
+  if (image) {
+    return (
+      <div
+        className="overflow-hidden h-full"
+        style={{
+          border: "1px solid var(--line)",
+          borderRadius: "var(--r-lg)",
+          boxShadow: "0 12px 40px rgba(14,14,16,0.08)",
+        }}
+      >
+        <img
+          src={image}
+          alt={description}
+          className="w-full h-full object-cover"
+          style={{ display: "block", minHeight: 280 }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className="flex flex-col items-center justify-center gap-3 p-10 min-h-[280px] h-full border-dashed border-2"
@@ -773,6 +810,13 @@ function FinalCTASection({ onOpenAuth }) {
       className="w-full py-28 relative overflow-hidden"
       style={{ background: GRADIENT }}
     >
+      {/* TEA-HOME-M08 — decorative backdrop */}
+      <img
+        src={TEACHER_SLOT_IMAGE["TEA-HOME-M08"]}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.16] mix-blend-overlay pointer-events-none"
+      />
       <div
         className="absolute right-0 top-0 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-20"
         style={{ background: "#fff" }}

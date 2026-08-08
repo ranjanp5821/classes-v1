@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#EEF2FF"/>
+    </linearGradient>
+    <linearGradient id="acc02" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="300" fill="url(#bg02)"/>
+  <!-- winding path -->
+  <path d="M 90 240 C 220 240, 220 187.5, 340 187.5 S 460 127.5, 580 127.5 S 700 82.5, 710 67.5"
+        fill="none" stroke="#D6DCEA" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 90 240 C 220 240, 220 187.5, 340 187.5 S 460 127.5, 580 127.5 S 700 82.5, 710 67.5"
+        fill="none" stroke="url(#acc02)" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round"/>
+  <!-- checkpoints -->
+  <g font-family="Arial, sans-serif" font-size="11" font-weight="700">
+    <circle cx="90" cy="240" r="15" fill="url(#acc02)"/>
+    <text x="90" y="244" text-anchor="middle" fill="#fff">1</text>
+    <text x="90" y="267" text-anchor="middle" fill="#475569">Understand</text>
+
+    <circle cx="300" cy="201" r="15" fill="url(#acc02)"/>
+    <text x="300" y="205" text-anchor="middle" fill="#fff">2</text>
+    <text x="300" y="179" text-anchor="middle" fill="#475569">Practise</text>
+
+    <circle cx="460" cy="142.5" r="15" fill="#fff" stroke="url(#acc02)" stroke-width="3"/>
+    <text x="460" y="146.5" text-anchor="middle" fill="#4F46E5">3</text>
+    <text x="460" y="170" text-anchor="middle" fill="#475569">Improve</text>
+
+    <circle cx="620" cy="105" r="15" fill="#fff" stroke="#C7CEE0" stroke-width="3"/>
+    <text x="620" y="109" text-anchor="middle" fill="#94A3B8">4</text>
+    <text x="620" y="131" text-anchor="middle" fill="#94A3B8">Prepare</text>
+
+    <circle cx="712" cy="60" r="16.5" fill="#fff" stroke="#C7CEE0" stroke-width="3"/>
+    <text x="712" y="64" text-anchor="middle" fill="#94A3B8">5</text>
+    <text x="700" y="35" text-anchor="middle" fill="#94A3B8">Progress</text>
+  </g>
+  <!-- flag at the end -->
+  <g transform="translate(712,43.5)">
+    <line x1="0" y1="0" x2="0" y2="-25.5" stroke="#94A3B8" stroke-width="2"/>
+    <path d="M 0 -25.5 L 16.5 -20.25 L 0 -15 Z" fill="url(#acc02)"/>
+  </g>
+</svg>

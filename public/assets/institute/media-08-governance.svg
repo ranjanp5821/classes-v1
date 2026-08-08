@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 900" width="700" height="900">
+  <defs>
+    <linearGradient id="accI8" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="900" fill="#FFFFFF"/>
+
+  <line x1="350" y1="90" x2="350" y2="810" stroke="url(#accI8)" stroke-width="2" stroke-dasharray="1 9" opacity="0.6"/>
+
+  <!-- 1. Institutional data -->
+  <g transform="translate(350,110)">
+    <rect x="-110" y="-38" width="220" height="76" rx="12" fill="#fff" stroke="url(#accI8)" stroke-width="2.4"/>
+    <g stroke="#334155" stroke-width="2" fill="none" transform="translate(-70,0)">
+      <ellipse cx="0" cy="-10" rx="14" ry="6"/>
+      <path d="M -14 -10 v 20 a 14 6 0 0 0 28 0 v -20"/>
+      <line x1="-14" y1="0" x2="14" y2="0"/>
+    </g>
+    <text x="8" y="2" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Institutional data</text>
+  </g>
+  <path d="M 342 160 l 8 14 l 8 -14" fill="none" stroke="url(#accI8)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 2. Privacy & anonymisation layer -->
+  <g transform="translate(350,230)">
+    <rect x="-110" y="-38" width="220" height="76" rx="12" fill="#fff" stroke="url(#accI8)" stroke-width="2.4"/>
+    <g transform="translate(-70,0)" stroke="url(#accI8)" stroke-width="2.2" fill="none">
+      <path d="M 0 -16 L 14 -10 V 6 C 14 16, 0 20, 0 20 C 0 20, -14 16, -14 6 V -10 Z"/>
+    </g>
+    <text x="8" y="-6" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Privacy &amp;</text>
+    <text x="8" y="12" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">anonymisation layer</text>
+  </g>
+  <path d="M 342 280 l 8 14 l 8 -14" fill="none" stroke="url(#accI8)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 3. Controlled AI processing -->
+  <g transform="translate(350,350)">
+    <rect x="-110" y="-38" width="220" height="76" rx="12" fill="#fff" stroke="url(#accI8)" stroke-width="2.4"/>
+    <g transform="translate(-70,0)" stroke="#334155" stroke-width="2" fill="none">
+      <rect x="-13" y="-13" width="26" height="26" rx="4"/>
+      <line x1="0" y1="-20" x2="0" y2="-13"/>
+      <line x1="0" y1="13" x2="0" y2="20"/>
+      <line x1="-20" y1="0" x2="-13" y2="0"/>
+      <line x1="13" y1="0" x2="20" y2="0"/>
+    </g>
+    <text x="8" y="-6" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Controlled AI</text>
+    <text x="8" y="12" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">processing</text>
+  </g>
+  <path d="M 342 400 l 8 14 l 8 -14" fill="none" stroke="url(#accI8)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 4. Teacher / leader review -->
+  <g transform="translate(350,470)">
+    <rect x="-110" y="-38" width="220" height="76" rx="12" fill="#fff" stroke="url(#accI8)" stroke-width="2.4"/>
+    <g transform="translate(-70,0)" stroke="#334155" stroke-width="2" fill="none">
+      <circle cx="0" cy="-8" r="9"/>
+      <path d="M -14 16 q 14 -16 28 0"/>
+    </g>
+    <text x="8" y="-6" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Teacher / leader</text>
+    <text x="8" y="12" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">review</text>
+  </g>
+  <path d="M 342 520 l 8 14 l 8 -14" fill="none" stroke="url(#accI8)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 5. Approved academic action -->
+  <g transform="translate(350,590)">
+    <rect x="-110" y="-38" width="220" height="76" rx="12" fill="#fff" stroke="url(#accI8)" stroke-width="2.4"/>
+    <circle cx="-70" cy="0" r="16" fill="url(#accI8)"/>
+    <path d="M -77 0 l 5 6 l 10 -12" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="-38" y="-6" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Approved academic</text>
+    <text x="-38" y="12" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">action</text>
+  </g>
+  <path d="M 342 640 l 8 14 l 8 -14" fill="none" stroke="url(#accI8)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 6. Audit record -->
+  <g transform="translate(350,710)">
+    <rect x="-110" y="-38" width="220" height="76" rx="12" fill="#fff" stroke="url(#accI8)" stroke-width="2.4"/>
+    <g transform="translate(-70,0)" stroke="#334155" stroke-width="2" fill="none">
+      <rect x="-11" y="-16" width="22" height="30" rx="3"/>
+      <rect x="-6" y="-19" width="12" height="6" rx="2"/>
+      <line x1="-6" y1="-2" x2="6" y2="-2"/>
+      <line x1="-6" y1="5" x2="6" y2="5"/>
+    </g>
+    <text x="8" y="2" font-family="Arial, sans-serif" font-size="12.5" font-weight="700" fill="#1E293B">Audit record</text>
+  </g>
+</svg>

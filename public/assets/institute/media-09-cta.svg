@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg09i" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg09i)"/>
+  <circle cx="640" cy="120" r="160" fill="#ffffff" opacity="0.08"/>
+  <circle cx="120" cy="480" r="200" fill="#ffffff" opacity="0.06"/>
+
+  <!-- institution glyph -->
+  <g transform="translate(400,280)" fill="#fff" opacity="0.95">
+    <polygon points="0,-70 90,-24 -90,-24"/>
+    <rect x="-70" y="-24" width="140" height="90"/>
+    <rect x="-50" y="-6" width="22" height="50" fill="#6366f1"/>
+    <rect x="-16" y="-6" width="22" height="50" fill="#6366f1"/>
+    <rect x="18" y="-6" width="22" height="50" fill="#6366f1"/>
+  </g>
+
+  <!-- upward trend -->
+  <g transform="translate(400,180)" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <polyline points="-140,40 -80,0 -20,20 60,-40"/>
+    <polygon points="60,-40 20,-32 46,-2" fill="#fff" stroke="none"/>
+  </g>
+</svg>
