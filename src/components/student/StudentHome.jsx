@@ -62,8 +62,8 @@ const GRADIENT = "linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%)";
  * slot for its production file by passing a `src` to the matching
  * <MediaFrame> — that always takes priority over the illustration below. */
 const SLOT_IMAGE = {
-  "MEDIA 01": "/assets/student/media-01-student-hero.svg",
-  "MEDIA 03": "/assets/student/media-03-concept-explainer.svg",
+  "MEDIA 01": "/assets/student/student-01-updated.svg",
+  "MEDIA 03": "/assets/student/student-03-updated.svg",
   "MEDIA 04": "/assets/student/media-04-practice.svg",
   "MEDIA 05": "/assets/student/media-05-gap-plan.svg",
   "MEDIA 06": "/assets/student/media-06-progress.svg",
