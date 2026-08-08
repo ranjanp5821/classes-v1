@@ -61,12 +61,12 @@ function FadeIn({ children, delay = 0, className = "" }) {
  * Slots without an entry (e.g. TEA-HOME-M08) fall back to the dashed
  * placeholder below until artwork is supplied. */
 const TEACHER_SLOT_IMAGE = {
-  "TEA-HOME-M01": "/assets/teacher/media-01-workspace.svg",
+  "TEA-HOME-M01": "/assets/teacher/teacher-01-updated.svg",
   "TEA-HOME-M02": "/assets/teacher/media-02-teaching-cycle.jpg",
   "TEA-HOME-M03": "/assets/teacher/media-03-lesson-planning.png",
   "TEA-HOME-M04": "/assets/teacher/media-04-classroom-insight.png",
-  "TEA-HOME-M05": "/assets/teacher/media-05-assessment-feedback.svg",
-  "TEA-HOME-M06": "/assets/teacher/media-06-student-insight.jpg",
+  "TEA-HOME-M05": "/assets/teacher/teacher-05-updated.svg",
+  "TEA-HOME-M06": "/assets/teacher/teacher-06-updated.svg",
   "TEA-HOME-M07": "/assets/teacher/media-07-approval-workflow.jpeg",
   "TEA-HOME-M08": "/assets/teacher/media-08-cta.svg",
 };

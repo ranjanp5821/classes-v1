@@ -228,8 +228,8 @@ function MediaFrame({ slot, src, poster, frameLabel, className = "", children })
         boxShadow: "0 12px 40px rgba(14,14,16,0.08)",
       }}
     >
-      {showVideo || showImage ? (
-        /* Clip/illustration framed as an in-product window — brand chrome */
+      {showVideo ? (
+        /* Clip framed as an in-product window — brand chrome */
         <div
           className="flex flex-col flex-1 overflow-hidden"
           style={{ border: "1px solid var(--line-2)", borderRadius: "12px", background: "var(--page)" }}
@@ -252,22 +252,23 @@ function MediaFrame({ slot, src, poster, frameLabel, className = "", children })
             </span>
           </div>
           <div className="flex-1 min-h-0 w-full bg-neutral-900">
-            {showVideo ? (
-              <video
-                src={src}
-                poster={poster ?? slotImage}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-                aria-hidden="true"
-              />
-            ) : (
-              <img src={slotImage} alt="" className="w-full h-full object-cover" aria-hidden="true" />
-            )}
+            <video
+              src={src}
+              poster={poster ?? slotImage}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+              aria-hidden="true"
+            />
           </div>
         </div>
+      ) : showImage ? (
+        /* Illustration fills the frame edge-to-edge — matches TeacherHome styling.
+         * Absolutely positioned so it ignores the padding utilities callers pass
+         * in `className` for the mock-UI fallback content. */
+        <img src={slotImage} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ minHeight: 280 }} aria-hidden="true" />
       ) : (
         children
       )}
